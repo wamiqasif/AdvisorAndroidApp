@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-05-24T22:39:58 IST" name="Default suite" finished-at="2026-05-24T22:40:33 IST" duration-ms="35188">
+    <groups>
+    </groups>
+    <test started-at="2026-05-24T22:39:58 IST" name="Default test" finished-at="2026-05-24T22:40:33 IST" duration-ms="35188">
+      <class name="tests.InvestorAccountTest">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.InvestorAccountTest@6771beb3]" started-at="2026-05-24T22:39:58 IST" name="beforeClass" finished-at="2026-05-24T22:40:07 IST" duration-ms="8456" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.InvestorAccountTest@6771beb3]" started-at="2026-05-24T22:40:07 IST" name="setUp" finished-at="2026-05-24T22:40:21 IST" duration-ms="14413" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.InvestorAccountTest.tc_bd_023_verifyMaskedAccountNumber()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_bd_023_verifyMaskedAccountNumber()[pri:0, instance:tests.InvestorAccountTest@6771beb3]" started-at="2026-05-24T22:40:21 IST" name="tc_bd_023_verifyMaskedAccountNumber" description="TC_BD_023 — Account number is masked" finished-at="2026-05-24T22:40:33 IST" duration-ms="11772" status="FAIL">
+          <exception class="org.openqa.selenium.NoSuchElementException">
+            <message>
+              <![CDATA[An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.20.0', revision: '866c76ca80'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.17.0-1020-oem', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [a6163d86-80df-4aae-ba46-a54dea005a44, findElement {value=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains("Bank Account Details")), using=-android uiautomator}]
+Capabilities {appium:appActivity: com.valueresearch.advisor.M..., appium:appPackage: com.valueresearch.advisor, appium:autoGrantPermissions: true, appium:automationName: UiAutomator2, appium:avd: Small_Phone, appium:databaseEnabled: false, appium:desired: {appActivity: com.valueresearch.advisor.M..., appPackage: com.valueresearch.advisor, autoGrantPermissions: true, automationName: UiAutomator2, avd: Small_Phone, deviceName: Small_Phone, disableWindowAnimation: true, ignoreHiddenApiPolicyError: true, isHeadless: false, newCommandTimeout: 120, noReset: true, platformName: ANDROID, platformVersion: 15, systemPort: 8200, udid: emulator-5554}, appium:deviceApiLevel: 35, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 320, appium:deviceScreenSize: 720x1280, appium:deviceUDID: emulator-5554, appium:disableWindowAnimation: true, appium:ignoreHiddenApiPolicyError: true, appium:isHeadless: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 120, appium:noReset: true, appium:pixelRatio: 2, appium:platformVersion: 15, appium:statBarHeight: 48, appium:systemPort: 8200, appium:takesScreenshot: true, appium:udid: emulator-5554, appium:viewportRect: {height: 1232, left: 0, top: 48, width: 720}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: a6163d86-80df-4aae-ba46-a54dea005a44]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters.
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.20.0', revision: '866c76ca80'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.17.0-1020-oem', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [a6163d86-80df-4aae-ba46-a54dea005a44, findElement {value=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains("Bank Account Details")), using=-android uiautomator}]
+Capabilities {appium:appActivity: com.valueresearch.advisor.M..., appium:appPackage: com.valueresearch.advisor, appium:autoGrantPermissions: true, appium:automationName: UiAutomator2, appium:avd: Small_Phone, appium:databaseEnabled: false, appium:desired: {appActivity: com.valueresearch.advisor.M..., appPackage: com.valueresearch.advisor, autoGrantPermissions: true, automationName: UiAutomator2, avd: Small_Phone, deviceName: Small_Phone, disableWindowAnimation: true, ignoreHiddenApiPolicyError: true, isHeadless: false, newCommandTimeout: 120, noReset: true, platformName: ANDROID, platformVersion: 15, systemPort: 8200, udid: emulator-5554}, appium:deviceApiLevel: 35, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 320, appium:deviceScreenSize: 720x1280, appium:deviceUDID: emulator-5554, appium:disableWindowAnimation: true, appium:ignoreHiddenApiPolicyError: true, appium:isHeadless: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 120, appium:noReset: true, appium:pixelRatio: 2, appium:platformVersion: 15, appium:statBarHeight: 48, appium:systemPort: 8200, appium:takesScreenshot: true, appium:udid: emulator-5554, appium:viewportRect: {height: 1232, left: 0, top: 48, width: 720}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: a6163d86-80df-4aae-ba46-a54dea005a44
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:237)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:518)
+at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:349)
+at pages.BasePage.scrollToText(BasePage.java:238)
+at pages.InvestorAccountPage.scrollToBankDetails(InvestorAccountPage.java:845)
+at tests.InvestorAccountTest.tc_bd_023_verifyMaskedAccountNumber(InvestorAccountTest.java:399)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_bd_023_verifyMaskedAccountNumber -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.InvestorAccountTest@6771beb3]" started-at="2026-05-24T22:40:33 IST" name="tearDown" finished-at="2026-05-24T22:40:33 IST" duration-ms="482" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_bd_023_verifyMaskedAccountNumber status=FAILURE method=InvestorAccountTest.tc_bd_023_verifyMaskedAccountNumber()[pri:0, instance:tests.InvestorAccountTest@6771beb3] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.InvestorAccountTest@6771beb3]" started-at="2026-05-24T22:40:33 IST" name="afterSuite" finished-at="2026-05-24T22:40:34 IST" duration-ms="1063" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterSuite -->
+      </class> <!-- tests.InvestorAccountTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
