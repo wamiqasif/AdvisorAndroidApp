@@ -1,116 +1,385 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+<testng-results ignored="0" total="14" passed="14" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-05-24T22:39:58 IST" name="Default suite" finished-at="2026-05-24T22:40:33 IST" duration-ms="35188">
+  <suite started-at="2026-06-03T16:09:11 IST" name="Suite" finished-at="2026-06-03T16:13:20 IST" duration-ms="248799">
     <groups>
     </groups>
-    <test started-at="2026-05-24T22:39:58 IST" name="Default test" finished-at="2026-05-24T22:40:33 IST" duration-ms="35188">
-      <class name="tests.InvestorAccountTest">
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.InvestorAccountTest@6771beb3]" started-at="2026-05-24T22:39:58 IST" name="beforeClass" finished-at="2026-05-24T22:40:07 IST" duration-ms="8456" status="PASS">
+    <test started-at="2026-06-03T16:09:11 IST" name="Test" finished-at="2026-06-03T16:13:20 IST" duration-ms="248799">
+      <class name="tests.FAQTest">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:12 IST" name="beforeClass" finished-at="2026-06-03T16:09:18 IST" duration-ms="6779" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.InvestorAccountTest@6771beb3]" started-at="2026-05-24T22:40:07 IST" name="setUp" finished-at="2026-05-24T22:40:21 IST" duration-ms="14413" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:18 IST" name="setUp" finished-at="2026-06-03T16:09:31 IST" duration-ms="12862" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void tests.InvestorAccountTest.tc_bd_023_verifyMaskedAccountNumber()]]>
+                <![CDATA[public void tests.FAQTest.tc_faq_001_verifyFaqScreenLoads()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_bd_023_verifyMaskedAccountNumber()[pri:0, instance:tests.InvestorAccountTest@6771beb3]" started-at="2026-05-24T22:40:21 IST" name="tc_bd_023_verifyMaskedAccountNumber" description="TC_BD_023 — Account number is masked" finished-at="2026-05-24T22:40:33 IST" duration-ms="11772" status="FAIL">
-          <exception class="org.openqa.selenium.NoSuchElementException">
-            <message>
-              <![CDATA[An element could not be located on the page using the given search parameters.
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Build info: version: '4.20.0', revision: '866c76ca80'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.17.0-1020-oem', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [a6163d86-80df-4aae-ba46-a54dea005a44, findElement {value=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains("Bank Account Details")), using=-android uiautomator}]
-Capabilities {appium:appActivity: com.valueresearch.advisor.M..., appium:appPackage: com.valueresearch.advisor, appium:autoGrantPermissions: true, appium:automationName: UiAutomator2, appium:avd: Small_Phone, appium:databaseEnabled: false, appium:desired: {appActivity: com.valueresearch.advisor.M..., appPackage: com.valueresearch.advisor, autoGrantPermissions: true, automationName: UiAutomator2, avd: Small_Phone, deviceName: Small_Phone, disableWindowAnimation: true, ignoreHiddenApiPolicyError: true, isHeadless: false, newCommandTimeout: 120, noReset: true, platformName: ANDROID, platformVersion: 15, systemPort: 8200, udid: emulator-5554}, appium:deviceApiLevel: 35, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 320, appium:deviceScreenSize: 720x1280, appium:deviceUDID: emulator-5554, appium:disableWindowAnimation: true, appium:ignoreHiddenApiPolicyError: true, appium:isHeadless: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 120, appium:noReset: true, appium:pixelRatio: 2, appium:platformVersion: 15, appium:statBarHeight: 48, appium:systemPort: 8200, appium:takesScreenshot: true, appium:udid: emulator-5554, appium:viewportRect: {height: 1232, left: 0, top: 48, width: 720}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
-Session ID: a6163d86-80df-4aae-ba46-a54dea005a44]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: An element could not be located on the page using the given search parameters.
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Build info: version: '4.20.0', revision: '866c76ca80'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.17.0-1020-oem', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [a6163d86-80df-4aae-ba46-a54dea005a44, findElement {value=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains("Bank Account Details")), using=-android uiautomator}]
-Capabilities {appium:appActivity: com.valueresearch.advisor.M..., appium:appPackage: com.valueresearch.advisor, appium:autoGrantPermissions: true, appium:automationName: UiAutomator2, appium:avd: Small_Phone, appium:databaseEnabled: false, appium:desired: {appActivity: com.valueresearch.advisor.M..., appPackage: com.valueresearch.advisor, autoGrantPermissions: true, automationName: UiAutomator2, avd: Small_Phone, deviceName: Small_Phone, disableWindowAnimation: true, ignoreHiddenApiPolicyError: true, isHeadless: false, newCommandTimeout: 120, noReset: true, platformName: ANDROID, platformVersion: 15, systemPort: 8200, udid: emulator-5554}, appium:deviceApiLevel: 35, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 320, appium:deviceScreenSize: 720x1280, appium:deviceUDID: emulator-5554, appium:disableWindowAnimation: true, appium:ignoreHiddenApiPolicyError: true, appium:isHeadless: false, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:newCommandTimeout: 120, appium:noReset: true, appium:pixelRatio: 2, appium:platformVersion: 15, appium:statBarHeight: 48, appium:systemPort: 8200, appium:takesScreenshot: true, appium:udid: emulator-5554, appium:viewportRect: {height: 1232, left: 0, top: 48, width: 720}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
-Session ID: a6163d86-80df-4aae-ba46-a54dea005a44
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
-at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
-at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
-at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:237)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:518)
-at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:349)
-at pages.BasePage.scrollToText(BasePage.java:238)
-at pages.InvestorAccountPage.scrollToBankDetails(InvestorAccountPage.java:845)
-at tests.InvestorAccountTest.tc_bd_023_verifyMaskedAccountNumber(InvestorAccountTest.java:399)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:739)
-at org.testng.TestRunner.run(TestRunner.java:614)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-at org.testng.TestNG.runSuites(TestNG.java:1112)
-at org.testng.TestNG.run(TestNG.java:1079)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+        <test-method signature="tc_faq_001_verifyFaqScreenLoads()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:31 IST" name="tc_faq_001_verifyFaqScreenLoads" description="TC_FAQ_001 — FAQ screen opens from Hub with heading visible" finished-at="2026-06-03T16:09:31 IST" duration-ms="74" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tc_bd_023_verifyMaskedAccountNumber -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.InvestorAccountTest@6771beb3]" started-at="2026-05-24T22:40:33 IST" name="tearDown" finished-at="2026-05-24T22:40:33 IST" duration-ms="482" status="PASS">
+        </test-method> <!-- tc_faq_001_verifyFaqScreenLoads -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:31 IST" name="tearDown" finished-at="2026-06-03T16:09:31 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_bd_023_verifyMaskedAccountNumber status=FAILURE method=InvestorAccountTest.tc_bd_023_verifyMaskedAccountNumber()[pri:0, instance:tests.InvestorAccountTest@6771beb3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_faq_001_verifyFaqScreenLoads status=SUCCESS method=FAQTest.tc_faq_001_verifyFaqScreenLoads()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.InvestorAccountTest@6771beb3]" started-at="2026-05-24T22:40:33 IST" name="afterSuite" finished-at="2026-05-24T22:40:34 IST" duration-ms="1063" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:31 IST" name="setUp" finished-at="2026-06-03T16:09:48 IST" duration-ms="16288" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_002_verifyBackButtonPresent()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_002_verifyBackButtonPresent()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:48 IST" name="tc_faq_002_verifyBackButtonPresent" description="TC_FAQ_002 — Back button is present on the FAQ screen" finished-at="2026-06-03T16:09:48 IST" duration-ms="48" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_002_verifyBackButtonPresent -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:48 IST" name="tearDown" finished-at="2026-06-03T16:09:48 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_002_verifyBackButtonPresent status=SUCCESS method=FAQTest.tc_faq_002_verifyBackButtonPresent()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:48 IST" name="setUp" finished-at="2026-06-03T16:10:04 IST" duration-ms="16428" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_003_verifyHeaderActionIconPresent()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_003_verifyHeaderActionIconPresent()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:04 IST" name="tc_faq_003_verifyHeaderActionIconPresent" description="TC_FAQ_003 — Header action icon is present on the FAQ screen" finished-at="2026-06-03T16:10:04 IST" duration-ms="35" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_003_verifyHeaderActionIconPresent -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:04 IST" name="tearDown" finished-at="2026-06-03T16:10:04 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_003_verifyHeaderActionIconPresent status=SUCCESS method=FAQTest.tc_faq_003_verifyHeaderActionIconPresent()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:04 IST" name="setUp" finished-at="2026-06-03T16:10:20 IST" duration-ms="15946" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_004_verifyBottomNavigationPresent()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_004_verifyBottomNavigationPresent()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:20 IST" name="tc_faq_004_verifyBottomNavigationPresent" description="TC_FAQ_004 — Bottom navigation is visible on the FAQ screen" finished-at="2026-06-03T16:10:20 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_004_verifyBottomNavigationPresent -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:20 IST" name="tearDown" finished-at="2026-06-03T16:10:20 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_004_verifyBottomNavigationPresent status=SUCCESS method=FAQTest.tc_faq_004_verifyBottomNavigationPresent()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:20 IST" name="setUp" finished-at="2026-06-03T16:10:37 IST" duration-ms="16653" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_005_verifyAllCategoryLinksVisible()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_005_verifyAllCategoryLinksVisible()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:37 IST" name="tc_faq_005_verifyAllCategoryLinksVisible" description="TC_FAQ_005 — All three FAQ category links are visible" finished-at="2026-06-03T16:10:37 IST" duration-ms="129" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_005_verifyAllCategoryLinksVisible -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:37 IST" name="tearDown" finished-at="2026-06-03T16:10:37 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_005_verifyAllCategoryLinksVisible status=SUCCESS method=FAQTest.tc_faq_005_verifyAllCategoryLinksVisible()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:37 IST" name="setUp" finished-at="2026-06-03T16:10:53 IST" duration-ms="16336" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_006_verifyResearchAndAdviceLinkVisible()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_006_verifyResearchAndAdviceLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:53 IST" name="tc_faq_006_verifyResearchAndAdviceLinkVisible" description="TC_FAQ_006 — &#039;Research and Advice&#039; link is visible" finished-at="2026-06-03T16:10:53 IST" duration-ms="22" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_006_verifyResearchAndAdviceLinkVisible -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:53 IST" name="tearDown" finished-at="2026-06-03T16:10:53 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_006_verifyResearchAndAdviceLinkVisible status=SUCCESS method=FAQTest.tc_faq_006_verifyResearchAndAdviceLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:53 IST" name="setUp" finished-at="2026-06-03T16:11:08 IST" duration-ms="15127" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_007_verifyBuyingSellingFundsLinkVisible()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_007_verifyBuyingSellingFundsLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:08 IST" name="tc_faq_007_verifyBuyingSellingFundsLinkVisible" description="TC_FAQ_007 — &#039;Buying and Selling Mutual Funds&#039; link is visible" finished-at="2026-06-03T16:11:08 IST" duration-ms="20" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_007_verifyBuyingSellingFundsLinkVisible -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:08 IST" name="tearDown" finished-at="2026-06-03T16:11:08 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_007_verifyBuyingSellingFundsLinkVisible status=SUCCESS method=FAQTest.tc_faq_007_verifyBuyingSellingFundsLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:08 IST" name="setUp" finished-at="2026-06-03T16:11:24 IST" duration-ms="15904" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_008_verifyFundAdvisorAccountLinkVisible()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_008_verifyFundAdvisorAccountLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:24 IST" name="tc_faq_008_verifyFundAdvisorAccountLinkVisible" description="TC_FAQ_008 — &#039;Fund Advisor Account&#039; link is visible" finished-at="2026-06-03T16:11:24 IST" duration-ms="23" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_008_verifyFundAdvisorAccountLinkVisible -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:24 IST" name="tearDown" finished-at="2026-06-03T16:11:24 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_008_verifyFundAdvisorAccountLinkVisible status=SUCCESS method=FAQTest.tc_faq_008_verifyFundAdvisorAccountLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:24 IST" name="setUp" finished-at="2026-06-03T16:11:40 IST" duration-ms="16228" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_009_verifyResearchAndAdviceLinkNavigation()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_009_verifyResearchAndAdviceLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:40 IST" name="tc_faq_009_verifyResearchAndAdviceLinkNavigation" description="TC_FAQ_009 — Tapping &#039;Research and Advice&#039; expands its questions" finished-at="2026-06-03T16:11:42 IST" duration-ms="1670" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_009_verifyResearchAndAdviceLinkNavigation -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:42 IST" name="tearDown" finished-at="2026-06-03T16:11:42 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_009_verifyResearchAndAdviceLinkNavigation status=SUCCESS method=FAQTest.tc_faq_009_verifyResearchAndAdviceLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:42 IST" name="setUp" finished-at="2026-06-03T16:11:58 IST" duration-ms="15897" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_010_verifyBuyingSellingFundsLinkNavigation()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_010_verifyBuyingSellingFundsLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:58 IST" name="tc_faq_010_verifyBuyingSellingFundsLinkNavigation" description="TC_FAQ_010 — Tapping &#039;Buying and Selling Mutual Funds&#039; expands its questions" finished-at="2026-06-03T16:12:00 IST" duration-ms="2166" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_010_verifyBuyingSellingFundsLinkNavigation -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:00 IST" name="setUp" finished-at="2026-06-03T16:12:16 IST" duration-ms="15405" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_011_verifyFundAdvisorAccountLinkNavigation()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:00 IST" name="tearDown" finished-at="2026-06-03T16:12:00 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_010_verifyBuyingSellingFundsLinkNavigation status=SUCCESS method=FAQTest.tc_faq_010_verifyBuyingSellingFundsLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method signature="tc_faq_011_verifyFundAdvisorAccountLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:16 IST" name="tc_faq_011_verifyFundAdvisorAccountLinkNavigation" description="TC_FAQ_011 — Tapping &#039;Fund Advisor Account&#039; expands its questions" finished-at="2026-06-03T16:12:18 IST" duration-ms="2177" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_011_verifyFundAdvisorAccountLinkNavigation -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:18 IST" name="tearDown" finished-at="2026-06-03T16:12:18 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_011_verifyFundAdvisorAccountLinkNavigation status=SUCCESS method=FAQTest.tc_faq_011_verifyFundAdvisorAccountLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:18 IST" name="setUp" finished-at="2026-06-03T16:12:34 IST" duration-ms="15866" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_012_verifyAllLinksOpenSubScreens()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_012_verifyAllLinksOpenSubScreens()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:34 IST" name="tc_faq_012_verifyAllLinksOpenSubScreens" description="TC_FAQ_012 — Every FAQ category link opens a valid sub-screen" finished-at="2026-06-03T16:12:46 IST" duration-ms="12767" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_012_verifyAllLinksOpenSubScreens -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:46 IST" name="tearDown" finished-at="2026-06-03T16:12:46 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_012_verifyAllLinksOpenSubScreens status=SUCCESS method=FAQTest.tc_faq_012_verifyAllLinksOpenSubScreens()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:46 IST" name="setUp" finished-at="2026-06-03T16:13:02 IST" duration-ms="15352" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_013_verifyCategoryExpandsInline()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_013_verifyCategoryExpandsInline()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:02 IST" name="tc_faq_013_verifyCategoryExpandsInline" description="TC_FAQ_013 — Expanding a category reveals its questions inline (no navigation away)" finished-at="2026-06-03T16:13:04 IST" duration-ms="2193" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_013_verifyCategoryExpandsInline -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:04 IST" name="tearDown" finished-at="2026-06-03T16:13:04 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_013_verifyCategoryExpandsInline status=SUCCESS method=FAQTest.tc_faq_013_verifyCategoryExpandsInline()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:04 IST" name="setUp" finished-at="2026-06-03T16:13:19 IST" duration-ms="14591" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.FAQTest.tc_faq_014_verifyBackButtonNavigation()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_faq_014_verifyBackButtonNavigation()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:19 IST" name="tc_faq_014_verifyBackButtonNavigation" description="TC_FAQ_014 — Back button navigates away from the FAQ screen" finished-at="2026-06-03T16:13:20 IST" duration-ms="1733" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_faq_014_verifyBackButtonNavigation -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:20 IST" name="tearDown" finished-at="2026-06-03T16:13:20 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_faq_014_verifyBackButtonNavigation status=SUCCESS method=FAQTest.tc_faq_014_verifyBackButtonNavigation()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:20 IST" name="afterSuite" finished-at="2026-06-03T16:13:21 IST" duration-ms="445" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuite -->
-      </class> <!-- tests.InvestorAccountTest -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+      </class> <!-- tests.FAQTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>

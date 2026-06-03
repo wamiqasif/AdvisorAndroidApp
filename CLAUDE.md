@@ -22,7 +22,7 @@ Appium server must be running before any test execution: `appium` (default `http
 
 Reports: `reports/ExtentReport.html`. Failure screenshots: `reports/screenshots/`.
 
-`testng.xml` runs `LoginTest`, `PortfolioPlannerTest`, and `PortfolioPlannerInvestorTest` in parallel (thread-count=2, emulator). `PortfolioTest` and `CartingTest` exist but are not wired into the default suite — add them to `testng.xml` to run.
+`testng.xml` runs `LoginTest`, `PortfolioPlannerTest`, and `PortfolioPlannerInvestorTest` in parallel (thread-count=2, emulator). `PortfolioTest`, `CartingTest`, and `InvestorAccountTest` exist but are not wired into the default suite — add them to `testng.xml` to run. `TaxCalculatorPage` exists as a page object but has no test class yet.
 
 ## Architecture
 
@@ -121,6 +121,7 @@ The app uses PIN-only login (after first-time OTP setup). PIN is `1454` (from `c
 | `PortfolioPlannerInvestorTest` | persistent | init page object + navigate + discover investors | navigate to Hub → Planner landing |
 | `CartingTest` | persistent | init page objects | ensure planner or cart/OTP screen ready |
 | `PortfolioTest` | persistent | init page object | navigate to Portfolio tab, assert visible |
+| `InvestorAccountTest` | persistent | init page + dashboard objects | `recoverToDashboard()` → navigate to Basic Details |
 
 `CartingTest` has a multi-step `ensurePlannerReady()` in `recoverAppState()` that can navigate through investor selection → planner options → show plan if the app is not already at a known mid-flow screen (planner, cart, or OTP).
 
