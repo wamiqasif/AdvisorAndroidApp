@@ -1,0 +1,29 @@
+# Maven
+target/
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+.vscode/
+.project
+.classpath
+.settings/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Reports
+test-output/
+allure-results/
+allure-report/
+
+# Environment files
+.env
+
+# Screenshots
+screenshots/
+
