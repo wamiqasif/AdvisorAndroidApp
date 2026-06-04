@@ -2,6 +2,7 @@
 /home/wamik/appium-framework/src/test/java/base/RequiresPinScreen.java
 /home/wamik/appium-framework/src/test/java/base/TestListener.java
 /home/wamik/appium-framework/src/test/java/driver/DriverFactory.java
+/home/wamik/appium-framework/src/test/java/pages/AboutUs_Page.java
 /home/wamik/appium-framework/src/test/java/pages/BasePage.java
 /home/wamik/appium-framework/src/test/java/pages/CartingPage.java
 /home/wamik/appium-framework/src/test/java/pages/DashboardPage.java
@@ -13,6 +14,7 @@
 /home/wamik/appium-framework/src/test/java/pages/PortfolioPage.java
 /home/wamik/appium-framework/src/test/java/pages/PortfolioPlannerPage.java
 /home/wamik/appium-framework/src/test/java/pages/TaxCalculatorPage.java
+/home/wamik/appium-framework/src/test/java/tests/AboutUsTest.java
 /home/wamik/appium-framework/src/test/java/tests/CartingTest.java
 /home/wamik/appium-framework/src/test/java/tests/FAQTest.java
 /home/wamik/appium-framework/src/test/java/tests/InvestorAccountTest.java

@@ -3,15 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.FAQTest">
+      <class name="tests.AboutUsTest">
         <methods>
           <include name="setUp"/>
           <include name="tearDown"/>
-          <include name="tc_faq_012_verifyAllLinksOpenSubScreens"/>
           <include name="afterSuite"/>
+          <include name="tc_about_018_verifyAllLinksOpenValidScreens"/>
           <include name="beforeClass"/>
         </methods>
-      </class> <!-- tests.FAQTest -->
+      </class> <!-- tests.AboutUsTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

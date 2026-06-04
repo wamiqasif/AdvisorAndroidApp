@@ -1,385 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="14" passed="14" failed="0" skipped="0">
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-06-03T16:09:11 IST" name="Suite" finished-at="2026-06-03T16:13:20 IST" duration-ms="248799">
+  <suite started-at="2026-06-04T15:52:04 IST" name="Default suite" finished-at="2026-06-04T15:52:44 IST" duration-ms="39931">
     <groups>
     </groups>
-    <test started-at="2026-06-03T16:09:11 IST" name="Test" finished-at="2026-06-03T16:13:20 IST" duration-ms="248799">
-      <class name="tests.FAQTest">
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:12 IST" name="beforeClass" finished-at="2026-06-03T16:09:18 IST" duration-ms="6779" status="PASS">
+    <test started-at="2026-06-04T15:52:04 IST" name="Default test" finished-at="2026-06-04T15:52:44 IST" duration-ms="39931">
+      <class name="tests.AboutUsTest">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.AboutUsTest@7c7b252e]" started-at="2026-06-04T15:52:04 IST" name="beforeClass" finished-at="2026-06-04T15:52:12 IST" duration-ms="7854" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:18 IST" name="setUp" finished-at="2026-06-03T16:09:31 IST" duration-ms="12862" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.AboutUsTest@7c7b252e]" started-at="2026-06-04T15:52:12 IST" name="setUp" finished-at="2026-06-04T15:52:44 IST" duration-ms="32013" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_001_verifyFaqScreenLoads()]]>
+                <![CDATA[public void tests.AboutUsTest.tc_about_002_verifyBackButtonVisible()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_001_verifyFaqScreenLoads()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:31 IST" name="tc_faq_001_verifyFaqScreenLoads" description="TC_FAQ_001 — FAQ screen opens from Hub with heading visible" finished-at="2026-06-03T16:09:31 IST" duration-ms="74" status="PASS">
+        <test-method signature="tc_about_002_verifyBackButtonVisible()[pri:0, instance:tests.AboutUsTest@7c7b252e]" started-at="2026-06-04T15:52:44 IST" name="tc_about_002_verifyBackButtonVisible" description="TC_ABOUT_002 - Back button is visible on About Us screen" finished-at="2026-06-04T15:52:44 IST" duration-ms="35" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tc_faq_001_verifyFaqScreenLoads -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:31 IST" name="tearDown" finished-at="2026-06-03T16:09:31 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- tc_about_002_verifyBackButtonVisible -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.AboutUsTest@7c7b252e]" started-at="2026-06-04T15:52:44 IST" name="tearDown" finished-at="2026-06-04T15:52:44 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_faq_001_verifyFaqScreenLoads status=SUCCESS method=FAQTest.tc_faq_001_verifyFaqScreenLoads()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
+                <![CDATA[[TestResult name=tc_about_002_verifyBackButtonVisible status=SUCCESS method=AboutUsTest.tc_about_002_verifyBackButtonVisible()[pri:0, instance:tests.AboutUsTest@7c7b252e] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:31 IST" name="setUp" finished-at="2026-06-03T16:09:48 IST" duration-ms="16288" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_002_verifyBackButtonPresent()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_002_verifyBackButtonPresent()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:48 IST" name="tc_faq_002_verifyBackButtonPresent" description="TC_FAQ_002 — Back button is present on the FAQ screen" finished-at="2026-06-03T16:09:48 IST" duration-ms="48" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_002_verifyBackButtonPresent -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:48 IST" name="tearDown" finished-at="2026-06-03T16:09:48 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_002_verifyBackButtonPresent status=SUCCESS method=FAQTest.tc_faq_002_verifyBackButtonPresent()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:09:48 IST" name="setUp" finished-at="2026-06-03T16:10:04 IST" duration-ms="16428" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_003_verifyHeaderActionIconPresent()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_003_verifyHeaderActionIconPresent()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:04 IST" name="tc_faq_003_verifyHeaderActionIconPresent" description="TC_FAQ_003 — Header action icon is present on the FAQ screen" finished-at="2026-06-03T16:10:04 IST" duration-ms="35" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_003_verifyHeaderActionIconPresent -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:04 IST" name="tearDown" finished-at="2026-06-03T16:10:04 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_003_verifyHeaderActionIconPresent status=SUCCESS method=FAQTest.tc_faq_003_verifyHeaderActionIconPresent()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:04 IST" name="setUp" finished-at="2026-06-03T16:10:20 IST" duration-ms="15946" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_004_verifyBottomNavigationPresent()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_004_verifyBottomNavigationPresent()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:20 IST" name="tc_faq_004_verifyBottomNavigationPresent" description="TC_FAQ_004 — Bottom navigation is visible on the FAQ screen" finished-at="2026-06-03T16:10:20 IST" duration-ms="14" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_004_verifyBottomNavigationPresent -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:20 IST" name="tearDown" finished-at="2026-06-03T16:10:20 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_004_verifyBottomNavigationPresent status=SUCCESS method=FAQTest.tc_faq_004_verifyBottomNavigationPresent()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:20 IST" name="setUp" finished-at="2026-06-03T16:10:37 IST" duration-ms="16653" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_005_verifyAllCategoryLinksVisible()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_005_verifyAllCategoryLinksVisible()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:37 IST" name="tc_faq_005_verifyAllCategoryLinksVisible" description="TC_FAQ_005 — All three FAQ category links are visible" finished-at="2026-06-03T16:10:37 IST" duration-ms="129" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_005_verifyAllCategoryLinksVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:37 IST" name="tearDown" finished-at="2026-06-03T16:10:37 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_005_verifyAllCategoryLinksVisible status=SUCCESS method=FAQTest.tc_faq_005_verifyAllCategoryLinksVisible()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:37 IST" name="setUp" finished-at="2026-06-03T16:10:53 IST" duration-ms="16336" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_006_verifyResearchAndAdviceLinkVisible()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_006_verifyResearchAndAdviceLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:53 IST" name="tc_faq_006_verifyResearchAndAdviceLinkVisible" description="TC_FAQ_006 — &#039;Research and Advice&#039; link is visible" finished-at="2026-06-03T16:10:53 IST" duration-ms="22" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_006_verifyResearchAndAdviceLinkVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:53 IST" name="tearDown" finished-at="2026-06-03T16:10:53 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_006_verifyResearchAndAdviceLinkVisible status=SUCCESS method=FAQTest.tc_faq_006_verifyResearchAndAdviceLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:10:53 IST" name="setUp" finished-at="2026-06-03T16:11:08 IST" duration-ms="15127" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_007_verifyBuyingSellingFundsLinkVisible()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_007_verifyBuyingSellingFundsLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:08 IST" name="tc_faq_007_verifyBuyingSellingFundsLinkVisible" description="TC_FAQ_007 — &#039;Buying and Selling Mutual Funds&#039; link is visible" finished-at="2026-06-03T16:11:08 IST" duration-ms="20" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_007_verifyBuyingSellingFundsLinkVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:08 IST" name="tearDown" finished-at="2026-06-03T16:11:08 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_007_verifyBuyingSellingFundsLinkVisible status=SUCCESS method=FAQTest.tc_faq_007_verifyBuyingSellingFundsLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:08 IST" name="setUp" finished-at="2026-06-03T16:11:24 IST" duration-ms="15904" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_008_verifyFundAdvisorAccountLinkVisible()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_008_verifyFundAdvisorAccountLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:24 IST" name="tc_faq_008_verifyFundAdvisorAccountLinkVisible" description="TC_FAQ_008 — &#039;Fund Advisor Account&#039; link is visible" finished-at="2026-06-03T16:11:24 IST" duration-ms="23" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_008_verifyFundAdvisorAccountLinkVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:24 IST" name="tearDown" finished-at="2026-06-03T16:11:24 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_008_verifyFundAdvisorAccountLinkVisible status=SUCCESS method=FAQTest.tc_faq_008_verifyFundAdvisorAccountLinkVisible()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:24 IST" name="setUp" finished-at="2026-06-03T16:11:40 IST" duration-ms="16228" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_009_verifyResearchAndAdviceLinkNavigation()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_009_verifyResearchAndAdviceLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:40 IST" name="tc_faq_009_verifyResearchAndAdviceLinkNavigation" description="TC_FAQ_009 — Tapping &#039;Research and Advice&#039; expands its questions" finished-at="2026-06-03T16:11:42 IST" duration-ms="1670" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_009_verifyResearchAndAdviceLinkNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:42 IST" name="tearDown" finished-at="2026-06-03T16:11:42 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_009_verifyResearchAndAdviceLinkNavigation status=SUCCESS method=FAQTest.tc_faq_009_verifyResearchAndAdviceLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:42 IST" name="setUp" finished-at="2026-06-03T16:11:58 IST" duration-ms="15897" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_010_verifyBuyingSellingFundsLinkNavigation()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_010_verifyBuyingSellingFundsLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:11:58 IST" name="tc_faq_010_verifyBuyingSellingFundsLinkNavigation" description="TC_FAQ_010 — Tapping &#039;Buying and Selling Mutual Funds&#039; expands its questions" finished-at="2026-06-03T16:12:00 IST" duration-ms="2166" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_010_verifyBuyingSellingFundsLinkNavigation -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:00 IST" name="setUp" finished-at="2026-06-03T16:12:16 IST" duration-ms="15405" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_011_verifyFundAdvisorAccountLinkNavigation()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:00 IST" name="tearDown" finished-at="2026-06-03T16:12:00 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_010_verifyBuyingSellingFundsLinkNavigation status=SUCCESS method=FAQTest.tc_faq_010_verifyBuyingSellingFundsLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="tc_faq_011_verifyFundAdvisorAccountLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:16 IST" name="tc_faq_011_verifyFundAdvisorAccountLinkNavigation" description="TC_FAQ_011 — Tapping &#039;Fund Advisor Account&#039; expands its questions" finished-at="2026-06-03T16:12:18 IST" duration-ms="2177" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_011_verifyFundAdvisorAccountLinkNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:18 IST" name="tearDown" finished-at="2026-06-03T16:12:18 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_011_verifyFundAdvisorAccountLinkNavigation status=SUCCESS method=FAQTest.tc_faq_011_verifyFundAdvisorAccountLinkNavigation()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:18 IST" name="setUp" finished-at="2026-06-03T16:12:34 IST" duration-ms="15866" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_012_verifyAllLinksOpenSubScreens()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_012_verifyAllLinksOpenSubScreens()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:34 IST" name="tc_faq_012_verifyAllLinksOpenSubScreens" description="TC_FAQ_012 — Every FAQ category link opens a valid sub-screen" finished-at="2026-06-03T16:12:46 IST" duration-ms="12767" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_012_verifyAllLinksOpenSubScreens -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:46 IST" name="tearDown" finished-at="2026-06-03T16:12:46 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_012_verifyAllLinksOpenSubScreens status=SUCCESS method=FAQTest.tc_faq_012_verifyAllLinksOpenSubScreens()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:12:46 IST" name="setUp" finished-at="2026-06-03T16:13:02 IST" duration-ms="15352" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_013_verifyCategoryExpandsInline()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_013_verifyCategoryExpandsInline()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:02 IST" name="tc_faq_013_verifyCategoryExpandsInline" description="TC_FAQ_013 — Expanding a category reveals its questions inline (no navigation away)" finished-at="2026-06-03T16:13:04 IST" duration-ms="2193" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_013_verifyCategoryExpandsInline -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:04 IST" name="tearDown" finished-at="2026-06-03T16:13:04 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_013_verifyCategoryExpandsInline status=SUCCESS method=FAQTest.tc_faq_013_verifyCategoryExpandsInline()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:04 IST" name="setUp" finished-at="2026-06-03T16:13:19 IST" duration-ms="14591" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[public void tests.FAQTest.tc_faq_014_verifyBackButtonNavigation()]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="tc_faq_014_verifyBackButtonNavigation()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:19 IST" name="tc_faq_014_verifyBackButtonNavigation" description="TC_FAQ_014 — Back button navigates away from the FAQ screen" finished-at="2026-06-03T16:13:20 IST" duration-ms="1733" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_faq_014_verifyBackButtonNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:20 IST" name="tearDown" finished-at="2026-06-03T16:13:20 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_faq_014_verifyBackButtonNavigation status=SUCCESS method=FAQTest.tc_faq_014_verifyBackButtonNavigation()[pri:0, instance:tests.FAQTest@55b699ef] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.FAQTest@55b699ef]" started-at="2026-06-03T16:13:20 IST" name="afterSuite" finished-at="2026-06-03T16:13:21 IST" duration-ms="445" status="PASS">
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.AboutUsTest@7c7b252e]" started-at="2026-06-04T15:52:44 IST" name="afterSuite" finished-at="2026-06-04T15:52:45 IST" duration-ms="617" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuite -->
-      </class> <!-- tests.FAQTest -->
-    </test> <!-- Test -->
-  </suite> <!-- Suite -->
+      </class> <!-- tests.AboutUsTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>
