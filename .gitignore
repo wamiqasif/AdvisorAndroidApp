@@ -1,29 +1,19 @@
-# Maven
-target/
+# Maven# Maven
+target/target/
 
-# Logs
-*.log
-logs/
-
-# IDE
-.idea/
-.vscode/
-.project
-.classpath
-.settings/
-
-# OS Files
-.DS_Store
-Thumbs.db
-
-# Reports
-test-output/
-allure-results/
-allure-report/
-
-# Environment files
-.env
-
+# Logs Reports*.log
+reports/logs/ test-output/ allure-results/# IDE .idea/ .vscode/ .project .classpath .settings/ allure-report/
+# OS Files Logs.DS_Store
+*.logThumbs.db logs/
+# Reports IDEtest-output/
+.idea/allure-results/ allure-report/ .vscode/ .settings/# Environment files .env .project .classpath# Screenshots screenshots/ .factorypath
+# OS
+.DS_Store Thumbs.db
+# Environment / Secrets
+.env *.properties.local
 # Screenshots
-screenshots/
-
+screenshots/ ScreenShot/
+# Appium
+appium.log
+# Extent Reports
+ExtentReports/
