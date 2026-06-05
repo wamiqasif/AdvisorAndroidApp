@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Default_suite" class="navigator-link">
-              <span class="suite-name border-passed">Default suite</span>
+              <span class="suite-name border-skipped">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -92,21 +92,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+                    <span class="method-stats">1 method,  1 skipped,  </span>
                   </li>
                   <li>
-                    <span class="method-list-title passed">Passed methods</span>
-                    <span class="show-or-hide-methods passed">
-                      <a href="#" panel-name="suite-Default_suite" class="hide-methods passed suite-Default_suite"> (hide)</a> <!-- hide-methods passed suite-Default_suite -->
-                      <a href="#" panel-name="suite-Default_suite" class="show-methods passed suite-Default_suite"> (show)</a> <!-- show-methods passed suite-Default_suite -->
+                    <span class="method-list-title skipped">Skipped methods</span>
+                    <span class="show-or-hide-methods skipped">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods skipped suite-Default_suite"> (hide)</a> <!-- hide-methods skipped suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods skipped suite-Default_suite"> (show)</a> <!-- show-methods skipped suite-Default_suite -->
                     </span>
-                    <div class="method-list-content passed suite-Default_suite">
+                    <div class="method-list-content skipped suite-Default_suite">
                       <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="tests.AboutUsTest" class="method navigator-link" hash-for-method="tc_about_002_verifyBackButtonVisible">tc_about_002_verifyBackButtonVisible</a> <!-- method navigator-link -->
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.CartingTest" class="method navigator-link" hash-for-method="verifyNoBackButtonOnProcessingScreen">verifyNoBackButtonOnProcessingScreen</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content passed suite-Default_suite -->
+                    </div> <!-- method-list-content skipped suite-Default_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -118,27 +118,59 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
-          <div class="suite-Default_suite-class-passed">
+          <div class="suite-Default_suite-class-skipped">
             <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">tests.AboutUsTest</span>
+              <img src="skipped.png"/>
+              <span class="class-name">tests.CartingTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="tc_about_002_verifyBackButtonVisible">
-                  </a> <!-- tc_about_002_verifyBackButtonVisible -->
-                  <span class="method-name">tc_about_002_verifyBackButtonVisible</span>
+                  <a name="verifyNoBackButtonOnProcessingScreen">
+                  </a> <!-- verifyNoBackButtonOnProcessingScreen -->
+                  <span class="method-name">verifyNoBackButtonOnProcessingScreen</span>
+                  <div class="stack-trace">org.testng.SkipException: Processing screen skipped quickly
+	at tests.CartingTest.verifyNoBackButtonOnProcessingScreen(CartingTest.java:488)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
                   <em>
-(TC_ABOUT_002 - Back button is visible on About Us screen)                  </em>
+(Back absent on processing screen)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Default_suite-class-passed -->
+          </div> <!-- suite-Default_suite-class-skipped -->
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">/tmp/testng-eclipse-1308083885/testng-customsuite.xml</span>
+            <span class="header-content">/tmp/testng-eclipse-294052640/testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -147,11 +179,11 @@
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;tests.AboutUsTest&quot;&gt;
+      &lt;class name=&quot;tests.CartingTest&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;tc_about_002_verifyBackButtonVisible&quot;/&gt;
+          &lt;include name=&quot;verifyNoBackButtonOnProcessingScreen&quot;/&gt;
         &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- tests.AboutUsTest --&gt;
+      &lt;/class&gt; &lt;!-- tests.CartingTest --&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -193,14 +225,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'tc_about_002_verifyBackButtonVisible')
-data.setCell(0, 2, 'tests.AboutUsTest')
-data.setCell(0, 3, 35);
+data.setCell(0, 1, 'verifyNoBackButtonOnProcessingScreen')
+data.setCell(0, 2, 'tests.CartingTest')
+data.setCell(0, 3, 31107);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 35 ms</span>
+              <span class="suite-total-time">Total running time: 31 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -215,47 +247,35 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">18 ignored methods</span>
+            <span class="header-content">12 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
-              <span class="ignored-class-name">tests.AboutUsTest</span>
+              <span class="ignored-class-name">tests.CartingTest</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">tc_about_012_verifyStockAdvisorLinkNavigation</span>
+                <span class="ignored-method-name">verifyCartScreenLoadsWithCoreElements</span>
                 <br/>
-                <span class="ignored-method-name">tc_about_017_verifyAnalyticsProLinkNavigation</span>
+                <span class="ignored-method-name">verifyAuthorizeButtonInactiveBeforeOtpEntry</span>
                 <br/>
-                <span class="ignored-method-name">tc_about_010_verifyWealthInsightLinkVisible</span>
+                <span class="ignored-method-name">verifyProceedToPayReachesOtpScreen</span>
                 <br/>
-                <span class="ignored-method-name">tc_about_019_verifyBackButtonNavigation</span>
+                <span class="ignored-method-name">verifyAllPaymentOptionsVisibleForSmallCart</span>
                 <br/>
-                <span class="ignored-method-name">tc_about_018_verifyAllLinksOpenValidScreens</span>
+                <span class="ignored-method-name">verifyLeavePopupNoDismissesAndStaysOnOtpScreen</span>
                 <br/>
-                <span class="ignored-method-name">tc_about_001_verifyAboutUsScreenLoads</span>
+                <span class="ignored-method-name">verifyCartSessionRecoversAfterLeaveYes</span>
                 <br/>
-                <span class="ignored-method-name">tc_about_011_verifyAnalyticsProLinkVisible</span>
+                <span class="ignored-method-name">verifyNetbankingWorksForLargeAmmount</span>
                 <br/>
-                <span class="ignored-method-name">tc_about_008_verifyIndependentAdvisorsLinkVisible</span>
+                <span class="ignored-method-name">verifyProceedToPayCtaIsVisibleWithOrders</span>
                 <br/>
-                <span class="ignored-method-name">tc_about_009_verifyMutualFundInsightLinkVisible</span>
+                <span class="ignored-method-name">verifyLeavePopupYesFromOtpReturnsToOrigin</span>
                 <br/>
-                <span class="ignored-method-name">tc_about_004_verifyReliableSourceSectionVisible</span>
+                <span class="ignored-method-name">myCartTest</span>
                 <br/>
-                <span class="ignored-method-name">tc_about_006_verifyStockAdvisorLinkVisible</span>
+                <span class="ignored-method-name">verifyBackOnOtpScreenTriggersLeavePopup</span>
                 <br/>
-                <span class="ignored-method-name">tc_about_003_verifyIndependentAdvisorsSectionVisible</span>
-                <br/>
-                <span class="ignored-method-name">tc_about_013_verifyFundAdvisorLinkNavigation</span>
-                <br/>
-                <span class="ignored-method-name">tc_about_007_verifyFundAdvisorLinkVisible</span>
-                <br/>
-                <span class="ignored-method-name">tc_about_015_verifyMutualFundInsightLinkNavigation</span>
-                <br/>
-                <span class="ignored-method-name">tc_about_016_verifyWealthInsightLinkNavigation</span>
-                <br/>
-                <span class="ignored-method-name">tc_about_005_verifyBrandedProductsSectionVisible</span>
-                <br/>
-                <span class="ignored-method-name">tc_about_014_verifyIndependentAdvisorsLinkNavigation</span>
+                <span class="ignored-method-name">verifyUpiAbsentForLargeCartAmount</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -267,26 +287,26 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">tests.AboutUsTest</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">tests.CartingTest</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">beforeClass</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-method before">
-                <span class="method-name">setUp(public void tests.AboutUsTest.tc_about_002_verifyBackButtonVisible())</span>
-                <span class="method-start">7858 ms</span>
+                <span class="method-name">setUp(public void tests.CartingTest.verifyNoBackButtonOnProcessingScreen())</span>
+                <span class="method-start">7755 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">tc_about_002_verifyBackButtonVisible</span>
-                <span class="method-start">39872 ms</span>
+                <span class="method-name">verifyNoBackButtonOnProcessingScreen</span>
+                <span class="method-start">16446 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">tearDown([TestResult name=tc_about_002_verifyBackButtonVisible status=SUCCESS method=AboutUsTest.tc_about_002...)</span>
-                <span class="method-start">39909 ms</span>
+                <span class="method-name">tearDown([TestResult name=verifyNoBackButtonOnProcessingScreen status=SKIP method=CartingTest.verifyNoBackBut...)</span>
+                <span class="method-start">47556 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-suite after">
                 <span class="method-name">afterSuite</span>
-                <span class="method-start">39930 ms</span>
+                <span class="method-start">47577 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

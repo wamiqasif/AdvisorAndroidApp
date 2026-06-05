@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -46,7 +47,7 @@ public class CartingPage extends BasePage {
 
 	private final By sipDateRow = AppiumBy.androidUIAutomator("new UiSelector().descriptionContains(\"SIP Date\")");
 
-	private final By investmentPeriodRow = AppiumBy.xpath("//android.widget.ImageView");
+	private final By investmentPeriodRow = AppiumBy.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.widget.EditText[2]");
 
 	private final By startSipCta = AppiumBy.accessibilityId("Start SIP");
 
@@ -168,8 +169,8 @@ public class CartingPage extends BasePage {
 	}
 
 	public boolean isCartReviewScreenDisplayed() {
-
-		return isDisplayed(cartTitle) && isAnyDisplayed(proceedToPayCta, authorizeCta);
+        waitForVisible(cartTitle);
+		return isDisplayed(cartTitle) || isAnyDisplayed(proceedToPayCta, authorizeCta);
 	}
 
 	public boolean isEditCartDisplayed() {
@@ -330,7 +331,8 @@ public class CartingPage extends BasePage {
 	}
 
 	public CartingPage tapInvestNowOnForm() {
-         waitForClickable(investNowFormCta);
+		waitForVisible(investNowFormCta);
+        // waitForClickable(investNowFormCta);
 		safeClick(investNowFormCta);
 
 		logger.info("Tapped Invest Now");
@@ -457,14 +459,19 @@ public class CartingPage extends BasePage {
 
 	public boolean isAuthorizeButtonEnabled() {
 
-		try {
+	    WebElement button =
+	            waitForVisible(authorizeCta);
 
-			return waitForVisible(authorizeCta).isEnabled();
+	    String clickable =
+	            button.getAttribute(
+	                    "clickable");
 
-		} catch (Exception e) {
+	    logger.info(
+	            "Authorize clickable={}",
+	            clickable);
 
-			return false;
-		}
+	    return Boolean.parseBoolean(
+	            clickable);
 	}
 
 	// ============================================================

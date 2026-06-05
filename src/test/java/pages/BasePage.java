@@ -3,6 +3,7 @@ package pages;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -74,6 +75,7 @@ public abstract class BasePage {
             waitForVisible(locator).click();
         }
     }
+    
 
     protected void safeSendKeys(By locator, String value) {
         WebElement element = waitForVisible(locator);
@@ -83,6 +85,45 @@ public abstract class BasePage {
         hideKeyboardIfVisible();
     }
 
+    
+
+    protected boolean waitUntilTrue(
+            BooleanSupplier condition,
+            int seconds) {
+
+        long endTime =
+                System.currentTimeMillis()
+                        + (seconds * 1000L);
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                if (condition.getAsBoolean()) {
+
+                    return true;
+                }
+
+            } catch (Exception ignored) {
+            }
+
+            try {
+
+                Thread.sleep(250);
+
+            } catch (InterruptedException e) {
+
+                Thread.currentThread().interrupt();
+
+                return false;
+            }
+        }
+
+        return false;
+    }
+    
+    
+    
     protected String safeGetText(By locator) {
         return waitForVisible(locator).getText();
     }
@@ -133,10 +174,15 @@ public abstract class BasePage {
     }
 
     protected void hideKeyboardIfVisible() {
+
         try {
+
             if (driver.isKeyboardShown()) {
-                driver.hideKeyboard();
+
+                logger.info(
+                        "Keyboard visible - skipping hideKeyboard()");
             }
+
         } catch (Exception ignored) {
         }
     }

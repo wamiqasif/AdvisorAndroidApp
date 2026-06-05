@@ -10,6 +10,7 @@ import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -83,10 +84,10 @@ public class PortfolioPlannerPage extends BasePage {
             AppiumBy.className(
                     "android.widget.EditText");
 
+   
     private final By showInvestmentPlanButton =
             AppiumBy.accessibilityId(
                     "Show investment plan");
-
     // ============================================================
     // PLAN SCREEN
     // ============================================================
@@ -277,57 +278,72 @@ public class PortfolioPlannerPage extends BasePage {
                 "Entered SIP amount '{}'",
                 amount);
     }
+    public boolean isPlannerScreenDisplayed() {
+
+        return !driver.findElements(
+                AppiumBy.accessibilityId(
+                        "Invest for higher returns"))
+                .isEmpty();
+    }
 
     public void enterOneTimeAmount(String amount) {
 
         enterSipAmount(amount);
+        //hideKeyboardIfVisible();
     }
 
     public void enterInvestmentPeriod(String period) {
 
-        hideKeyboardIfVisible();
-
-        List<WebElement> fields =
-                driver.findElements(
-                        AppiumBy.className(
-                                "android.widget.EditText"));
-
-        if (fields.size() < 2) {
-
-            throw new RuntimeException(
-                    "Investment period field not found");
-        }
+       // hideKeyboardIfVisible();
 
         WebElement field =
-                fields.get(fields.size() - 1);
-
+                driver.findElement(
+                        AppiumBy.androidUIAutomator(
+                                "new UiSelector().className(\"android.widget.EditText\").instance(1)"));
+       
         field.click();
 
-        field.clear();
+        //field.clear();
 
         field.sendKeys(period);
 
-        hideKeyboardIfVisible();
-
+     //  hideKeyboardIfVisible();
+        waitForUiToSettle();
+        
         logger.info(
                 "Entered investment period '{}'",
                 period);
+
+        logger.info(
+                "Current activity after period entry: {}",
+                driver.currentActivity());
+
+        logger.info(
+                "Planner page visible after period entry: {}",
+                isPlannerScreenDisplayed());
+       
     }
 
     public void clickShowInvestmentPlan() {
+    	 //hideKeyboardIfVisible();
 
-        hideKeyboardIfVisible();
+    	    waitForUiToSettle();
 
-        scrollToElement(
-                showInvestmentPlanButton,
-                2);
+    	    Assert.assertTrue(
+    	            isPlannerScreenDisplayed(),
+    	            "Planner screen disappeared before clicking Show investment plan");
 
-        safeClick(showInvestmentPlanButton);
-
-        waitForUiToSettle();
-
-        logger.info(
-                "Tapped Show investment plan");
+    	   
+    	    logger.info(
+    	            "Show plan by accessibility count={}",
+    	          driver.findElements(
+    	                    AppiumBy.accessibilityId(
+    	                            "Show investment plan"))
+    	                    .size());
+             safeClick(showInvestmentPlanButton);
+    	   
+    	 
+    	    
     }
 
     public void chooseMonthsOrYears(String durationType) {

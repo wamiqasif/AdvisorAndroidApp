@@ -1,5 +1,6 @@
 utils/ExtentManager.class
 pages/InvestorAccountPage.class
+tests/HomePageTest.class
 pages/DashboardPage.class
 base/RequiresPinScreen.class
 tests/PortfolioTest.class
@@ -11,12 +12,14 @@ pages/TaxCalculatorPage.class
 pages/FAQPage$FaqCategory.class
 base/BaseTest.class
 pages/CartingPage.class
+pages/Home_Page$HomeLink.class
 pages/AboutUs_Page$AboutUsLink.class
 pages/PinPage.class
 pages/PortfolioPage.class
 tests/CartingTest.class
 pages/BasePage.class
 tests/PortfolioPlannerInvestorTest.class
+pages/Home_Page.class
 pages/AboutUs_Page.class
 tests/FAQTest.class
 utils/ConfigReader.class
@@ -27,5 +30,6 @@ base/TestListener.class
 utils/ScreenshotUtil.class
 tests/InvestorAccountTest.class
 tests/PortfolioPlannerTest.class
+pages/Home_Page$LinkResult.class
 pages/FAQPage$LinkResult.class
 pages/LoginPage.class

@@ -1,47 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="1" passed="0" failed="0" skipped="1">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-06-04T15:52:04 IST" name="Default suite" finished-at="2026-06-04T15:52:44 IST" duration-ms="39931">
+  <suite started-at="2026-06-05T10:00:40 IST" name="Default suite" finished-at="2026-06-05T10:01:27 IST" duration-ms="47570">
     <groups>
     </groups>
-    <test started-at="2026-06-04T15:52:04 IST" name="Default test" finished-at="2026-06-04T15:52:44 IST" duration-ms="39931">
-      <class name="tests.AboutUsTest">
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.AboutUsTest@7c7b252e]" started-at="2026-06-04T15:52:04 IST" name="beforeClass" finished-at="2026-06-04T15:52:12 IST" duration-ms="7854" status="PASS">
+    <test started-at="2026-06-05T10:00:40 IST" name="Default test" finished-at="2026-06-05T10:01:27 IST" duration-ms="47570">
+      <class name="tests.CartingTest">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.CartingTest@7cc0cdad]" started-at="2026-06-05T10:00:40 IST" name="beforeClass" finished-at="2026-06-05T10:00:47 IST" duration-ms="7750" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.AboutUsTest@7c7b252e]" started-at="2026-06-04T15:52:12 IST" name="setUp" finished-at="2026-06-04T15:52:44 IST" duration-ms="32013" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.CartingTest@7cc0cdad]" started-at="2026-06-05T10:00:47 IST" name="setUp" finished-at="2026-06-05T10:00:56 IST" duration-ms="8690" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void tests.AboutUsTest.tc_about_002_verifyBackButtonVisible()]]>
+                <![CDATA[public void tests.CartingTest.verifyNoBackButtonOnProcessingScreen()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_about_002_verifyBackButtonVisible()[pri:0, instance:tests.AboutUsTest@7c7b252e]" started-at="2026-06-04T15:52:44 IST" name="tc_about_002_verifyBackButtonVisible" description="TC_ABOUT_002 - Back button is visible on About Us screen" finished-at="2026-06-04T15:52:44 IST" duration-ms="35" status="PASS">
+        <test-method signature="verifyNoBackButtonOnProcessingScreen()[pri:0, instance:tests.CartingTest@7cc0cdad]" started-at="2026-06-05T10:00:56 IST" name="verifyNoBackButtonOnProcessingScreen" description="Back absent on processing screen" finished-at="2026-06-05T10:01:27 IST" duration-ms="31107" status="SKIP">
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Processing screen skipped quickly]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Processing screen skipped quickly
+at tests.CartingTest.verifyNoBackButtonOnProcessingScreen(CartingTest.java:488)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tc_about_002_verifyBackButtonVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.AboutUsTest@7c7b252e]" started-at="2026-06-04T15:52:44 IST" name="tearDown" finished-at="2026-06-04T15:52:44 IST" duration-ms="1" status="PASS">
+        </test-method> <!-- verifyNoBackButtonOnProcessingScreen -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.CartingTest@7cc0cdad]" started-at="2026-06-05T10:01:27 IST" name="tearDown" finished-at="2026-06-05T10:01:27 IST" duration-ms="0" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_about_002_verifyBackButtonVisible status=SUCCESS method=AboutUsTest.tc_about_002_verifyBackButtonVisible()[pri:0, instance:tests.AboutUsTest@7c7b252e] output={null}]]]>
+                <![CDATA[[TestResult name=verifyNoBackButtonOnProcessingScreen status=SKIP method=CartingTest.verifyNoBackButtonOnProcessingScreen()[pri:0, instance:tests.CartingTest@7cc0cdad] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.AboutUsTest@7c7b252e]" started-at="2026-06-04T15:52:44 IST" name="afterSuite" finished-at="2026-06-04T15:52:45 IST" duration-ms="617" status="PASS">
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.CartingTest@7cc0cdad]" started-at="2026-06-05T10:01:27 IST" name="afterSuite" finished-at="2026-06-05T10:01:28 IST" duration-ms="644" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuite -->
-      </class> <!-- tests.AboutUsTest -->
+      </class> <!-- tests.CartingTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

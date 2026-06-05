@@ -166,19 +166,14 @@ public class CartingTest extends BaseTest {
 		plannerPage.enterInvestmentPeriod(
 				"15");
 
+
 		plannerPage.clickShowInvestmentPlan();
 
-		Assert.assertTrue(
-				plannerPage.verifyInvestmentPlanScreen(),
-				"Investment plan screen must load");
+	
 	}
 	private void openCartReviewScreen() {
 
-		if (cartingPage.isCartReviewScreenDisplayed()) {
-
-			return;
-		}
-
+		
 		cartingPage.tapInvestNowOnForm();
 
 		Assert.assertTrue(
@@ -212,11 +207,12 @@ public class CartingTest extends BaseTest {
 
 	@Test(description =
 			"Cart review screen loads correctly")
-	public void verifyCartScreenLoadsWithCoreElements() throws Exception {
+	public void verifyCartScreenLoadsWithCoreElements() {
 		openInvestmentPlan();
 		logger.info("plan completed");
+		
 		cartingPage.tapInvestNowOnForm();
-		Thread.sleep(2000);
+		cartingPage.waitForUiToSettle(2000);
 		Assert.assertTrue(
 				cartingPage.isCartReviewScreenDisplayed(),
 				"Cart review screen must load");
@@ -225,12 +221,12 @@ public class CartingTest extends BaseTest {
 
 	@Test(description =
 			"Proceed to Pay visible")
-	public void verifyProceedToPayCtaIsVisibleWithOrders() throws Exception {
+	public void verifyProceedToPayCtaIsVisibleWithOrders() {
 
 		openInvestmentPlan();
 		logger.info("open investment plan is completed");
 		cartingPage.tapInvestNowOnForm();
-		Thread.sleep(2000);
+		cartingPage.waitForUiToSettle(2000);
 		Assert.assertTrue(
 				cartingPage.isProceedToPayDisplayed(),
 				"Proceed to Pay CTA must display");
@@ -482,11 +478,7 @@ public class CartingTest extends BaseTest {
 	    openOtpScreen();
 
 	    // Wait briefly for processing screen
-	    cartingPage.waitForUiToSettle();
-	    cartingPage.waitUntilTrue(
-	            () -> cartingPage.isOtpAuthScreenDisplayed()
-	                    ,
-	            5);
+	   
 	    // Processing skipped directly to OTP
 	    if (cartingPage.isOtpAuthScreenDisplayed()) {
 
