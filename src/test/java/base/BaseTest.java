@@ -338,6 +338,7 @@ public class BaseTest {
                 waitForUiToSettle();
             }
 
+
             // Direct tab navigation recovery
             boolean recovered =
                     dashboardPage.forceNavigateToHome();

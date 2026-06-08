@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="32" passed="31" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-06-05T16:28:06 IST" name="Default suite" finished-at="2026-06-05T16:40:30 IST" duration-ms="743028">
+  <suite started-at="2026-06-08T17:49:02 IST" name="Default suite" finished-at="2026-06-08T17:59:39 IST" duration-ms="637202">
     <groups>
     </groups>
-    <test started-at="2026-06-05T16:28:06 IST" name="Default test" finished-at="2026-06-05T16:40:30 IST" duration-ms="743028">
+    <test started-at="2026-06-08T17:49:02 IST" name="Default test" finished-at="2026-06-08T17:59:39 IST" duration-ms="637202">
       <class name="tests.HomePageTest">
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:06 IST" name="beforeClass" finished-at="2026-06-05T16:28:13 IST" duration-ms="6654" status="PASS">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:02 IST" name="beforeClass" finished-at="2026-06-08T17:49:09 IST" duration-ms="6858" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:13 IST" name="setUp" finished-at="2026-06-05T16:28:22 IST" duration-ms="8814" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:09 IST" name="setUp" finished-at="2026-06-08T17:49:19 IST" duration-ms="10155" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -22,22 +22,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_001_verifyFundsScreenLoads()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:22 IST" name="tc_home_001_verifyFundsScreenLoads" description="TC_HOME_001 - Funds screen opens from Funds tab" finished-at="2026-06-05T16:28:22 IST" duration-ms="18" status="PASS">
+        <test-method signature="tc_home_001_verifyFundsScreenLoads()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:19 IST" name="tc_home_001_verifyFundsScreenLoads" description="TC_HOME_001 - Funds screen opens from Funds tab" finished-at="2026-06-08T17:49:19 IST" duration-ms="19" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_001_verifyFundsScreenLoads -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:22 IST" name="tearDown" finished-at="2026-06-05T16:28:22 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:19 IST" name="tearDown" finished-at="2026-06-08T17:49:19 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_001_verifyFundsScreenLoads status=SUCCESS method=HomePageTest.tc_home_001_verifyFundsScreenLoads()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_001_verifyFundsScreenLoads status=SUCCESS method=HomePageTest.tc_home_001_verifyFundsScreenLoads()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:22 IST" name="setUp" finished-at="2026-06-05T16:28:31 IST" duration-ms="8688" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:19 IST" name="setUp" finished-at="2026-06-08T17:49:29 IST" duration-ms="10101" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -48,22 +48,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_002_verifyBottomNavigationVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:31 IST" name="tc_home_002_verifyBottomNavigationVisible" description="TC_HOME_002 - Bottom navigation is visible on Funds screen" finished-at="2026-06-05T16:28:31 IST" duration-ms="95" status="PASS">
+        <test-method signature="tc_home_002_verifyBottomNavigationVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:29 IST" name="tc_home_002_verifyBottomNavigationVisible" description="TC_HOME_002 - Bottom navigation is visible on Funds screen" finished-at="2026-06-08T17:49:29 IST" duration-ms="133" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_002_verifyBottomNavigationVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:31 IST" name="tearDown" finished-at="2026-06-05T16:28:31 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:29 IST" name="tearDown" finished-at="2026-06-08T17:49:29 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_002_verifyBottomNavigationVisible status=SUCCESS method=HomePageTest.tc_home_002_verifyBottomNavigationVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_002_verifyBottomNavigationVisible status=SUCCESS method=HomePageTest.tc_home_002_verifyBottomNavigationVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:31 IST" name="setUp" finished-at="2026-06-05T16:28:41 IST" duration-ms="9860" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:29 IST" name="setUp" finished-at="2026-06-08T17:49:39 IST" duration-ms="9954" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -74,22 +74,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_003_verifyRichFutureSectionVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:41 IST" name="tc_home_003_verifyRichFutureSectionVisible" description="TC_HOME_003 - Rich Future section is visible" finished-at="2026-06-05T16:28:43 IST" duration-ms="2087" status="PASS">
+        <test-method signature="tc_home_003_verifyRichFutureSectionVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:39 IST" name="tc_home_003_verifyRichFutureSectionVisible" description="TC_HOME_003 - Rich Future section is visible" finished-at="2026-06-08T17:49:41 IST" duration-ms="2147" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_003_verifyRichFutureSectionVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:43 IST" name="tearDown" finished-at="2026-06-05T16:28:43 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:41 IST" name="tearDown" finished-at="2026-06-08T17:49:41 IST" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_003_verifyRichFutureSectionVisible status=SUCCESS method=HomePageTest.tc_home_003_verifyRichFutureSectionVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_003_verifyRichFutureSectionVisible status=SUCCESS method=HomePageTest.tc_home_003_verifyRichFutureSectionVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:43 IST" name="setUp" finished-at="2026-06-05T16:28:53 IST" duration-ms="9845" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:41 IST" name="setUp" finished-at="2026-06-08T17:49:51 IST" duration-ms="10148" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -100,22 +100,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_004_verifyNavigateToSectionVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:53 IST" name="tc_home_004_verifyNavigateToSectionVisible" description="TC_HOME_004 - Navigate To section is visible" finished-at="2026-06-05T16:28:59 IST" duration-ms="6244" status="PASS">
+        <test-method signature="tc_home_004_verifyNavigateToSectionVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:51 IST" name="tc_home_004_verifyNavigateToSectionVisible" description="TC_HOME_004 - Navigate To section is visible" finished-at="2026-06-08T17:49:58 IST" duration-ms="6287" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_004_verifyNavigateToSectionVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:59 IST" name="tearDown" finished-at="2026-06-05T16:28:59 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:58 IST" name="tearDown" finished-at="2026-06-08T17:49:58 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_004_verifyNavigateToSectionVisible status=SUCCESS method=HomePageTest.tc_home_004_verifyNavigateToSectionVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_004_verifyNavigateToSectionVisible status=SUCCESS method=HomePageTest.tc_home_004_verifyNavigateToSectionVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:28:59 IST" name="setUp" finished-at="2026-06-05T16:29:09 IST" duration-ms="10151" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:49:58 IST" name="setUp" finished-at="2026-06-08T17:50:08 IST" duration-ms="10160" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -126,22 +126,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_005_verifyQuickGuidesSectionVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:09 IST" name="tc_home_005_verifyQuickGuidesSectionVisible" description="TC_HOME_005 - Quick Guides section is visible" finished-at="2026-06-05T16:29:15 IST" duration-ms="6225" status="PASS">
+        <test-method signature="tc_home_005_verifyQuickGuidesSectionVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:08 IST" name="tc_home_005_verifyQuickGuidesSectionVisible" description="TC_HOME_005 - Quick Guides section is visible" finished-at="2026-06-08T17:50:14 IST" duration-ms="6242" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_005_verifyQuickGuidesSectionVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:15 IST" name="tearDown" finished-at="2026-06-05T16:29:15 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:14 IST" name="tearDown" finished-at="2026-06-08T17:50:14 IST" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_005_verifyQuickGuidesSectionVisible status=SUCCESS method=HomePageTest.tc_home_005_verifyQuickGuidesSectionVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_005_verifyQuickGuidesSectionVisible status=SUCCESS method=HomePageTest.tc_home_005_verifyQuickGuidesSectionVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:15 IST" name="setUp" finished-at="2026-06-05T16:29:25 IST" duration-ms="9921" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:14 IST" name="setUp" finished-at="2026-06-08T17:50:24 IST" duration-ms="9835" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -152,22 +152,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_006_verifyAnalystChoiceSectionVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:25 IST" name="tc_home_006_verifyAnalystChoiceSectionVisible" description="TC_HOME_006 - Analyst Choice section is visible" finished-at="2026-06-05T16:29:29 IST" duration-ms="4151" status="PASS">
+        <test-method signature="tc_home_006_verifyAnalystChoiceSectionVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:24 IST" name="tc_home_006_verifyAnalystChoiceSectionVisible" description="TC_HOME_006 - Analyst Choice section is visible" finished-at="2026-06-08T17:50:28 IST" duration-ms="4193" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_006_verifyAnalystChoiceSectionVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:29 IST" name="tearDown" finished-at="2026-06-05T16:29:29 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:28 IST" name="tearDown" finished-at="2026-06-08T17:50:28 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_006_verifyAnalystChoiceSectionVisible status=SUCCESS method=HomePageTest.tc_home_006_verifyAnalystChoiceSectionVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_006_verifyAnalystChoiceSectionVisible status=SUCCESS method=HomePageTest.tc_home_006_verifyAnalystChoiceSectionVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:29 IST" name="setUp" finished-at="2026-06-05T16:29:40 IST" duration-ms="10778" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:28 IST" name="setUp" finished-at="2026-06-08T17:50:38 IST" duration-ms="9863" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -178,22 +178,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_007_verifyFundAdvisorNoteSectionVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:40 IST" name="tc_home_007_verifyFundAdvisorNoteSectionVisible" description="TC_HOME_007 - Fund Advisor Note section is visible" finished-at="2026-06-05T16:29:44 IST" duration-ms="4167" status="PASS">
+        <test-method signature="tc_home_007_verifyFundAdvisorNoteSectionVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:38 IST" name="tc_home_007_verifyFundAdvisorNoteSectionVisible" description="TC_HOME_007 - Fund Advisor Note section is visible" finished-at="2026-06-08T17:50:42 IST" duration-ms="4209" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_007_verifyFundAdvisorNoteSectionVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:44 IST" name="tearDown" finished-at="2026-06-05T16:29:44 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:42 IST" name="tearDown" finished-at="2026-06-08T17:50:42 IST" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_007_verifyFundAdvisorNoteSectionVisible status=SUCCESS method=HomePageTest.tc_home_007_verifyFundAdvisorNoteSectionVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_007_verifyFundAdvisorNoteSectionVisible status=SUCCESS method=HomePageTest.tc_home_007_verifyFundAdvisorNoteSectionVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:44 IST" name="setUp" finished-at="2026-06-05T16:29:54 IST" duration-ms="9883" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:42 IST" name="setUp" finished-at="2026-06-08T17:50:52 IST" duration-ms="10236" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -204,22 +204,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_008_verifyRetirementCardVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:54 IST" name="tc_home_008_verifyRetirementCardVisible" description="TC_HOME_008 - Retirement card is visible" finished-at="2026-06-05T16:29:56 IST" duration-ms="2090" status="PASS">
+        <test-method signature="tc_home_008_verifyRetirementCardVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:52 IST" name="tc_home_008_verifyRetirementCardVisible" description="TC_HOME_008 - Retirement card is visible" finished-at="2026-06-08T17:50:55 IST" duration-ms="2113" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_008_verifyRetirementCardVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:56 IST" name="tearDown" finished-at="2026-06-05T16:29:56 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:55 IST" name="tearDown" finished-at="2026-06-08T17:50:55 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_008_verifyRetirementCardVisible status=SUCCESS method=HomePageTest.tc_home_008_verifyRetirementCardVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_008_verifyRetirementCardVisible status=SUCCESS method=HomePageTest.tc_home_008_verifyRetirementCardVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:29:56 IST" name="setUp" finished-at="2026-06-05T16:30:06 IST" duration-ms="9768" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:50:55 IST" name="setUp" finished-at="2026-06-08T17:51:04 IST" duration-ms="9898" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -230,22 +230,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_009_verifyRegularIncomeCardVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:06 IST" name="tc_home_009_verifyRegularIncomeCardVisible" description="TC_HOME_009 - Regular Income card is visible" finished-at="2026-06-05T16:30:08 IST" duration-ms="2073" status="PASS">
+        <test-method signature="tc_home_009_verifyRegularIncomeCardVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:04 IST" name="tc_home_009_verifyRegularIncomeCardVisible" description="TC_HOME_009 - Regular Income card is visible" finished-at="2026-06-08T17:51:07 IST" duration-ms="2110" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_009_verifyRegularIncomeCardVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:08 IST" name="tearDown" finished-at="2026-06-05T16:30:08 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:07 IST" name="tearDown" finished-at="2026-06-08T17:51:07 IST" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_009_verifyRegularIncomeCardVisible status=SUCCESS method=HomePageTest.tc_home_009_verifyRegularIncomeCardVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_009_verifyRegularIncomeCardVisible status=SUCCESS method=HomePageTest.tc_home_009_verifyRegularIncomeCardVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:08 IST" name="setUp" finished-at="2026-06-05T16:30:17 IST" duration-ms="9136" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:07 IST" name="setUp" finished-at="2026-06-08T17:51:16 IST" duration-ms="9374" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -256,22 +256,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_010_verifyNoGoalStartInvestingCardVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:17 IST" name="tc_home_010_verifyNoGoalStartInvestingCardVisible" description="TC_HOME_010 - No Goal Start Investing card is visible" finished-at="2026-06-05T16:30:19 IST" duration-ms="2077" status="PASS">
+        <test-method signature="tc_home_010_verifyNoGoalStartInvestingCardVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:16 IST" name="tc_home_010_verifyNoGoalStartInvestingCardVisible" description="TC_HOME_010 - No Goal Start Investing card is visible" finished-at="2026-06-08T17:51:18 IST" duration-ms="2129" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_010_verifyNoGoalStartInvestingCardVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:19 IST" name="tearDown" finished-at="2026-06-05T16:30:19 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:18 IST" name="tearDown" finished-at="2026-06-08T17:51:18 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_010_verifyNoGoalStartInvestingCardVisible status=SUCCESS method=HomePageTest.tc_home_010_verifyNoGoalStartInvestingCardVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_010_verifyNoGoalStartInvestingCardVisible status=SUCCESS method=HomePageTest.tc_home_010_verifyNoGoalStartInvestingCardVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:19 IST" name="setUp" finished-at="2026-06-05T16:30:29 IST" duration-ms="9716" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:18 IST" name="setUp" finished-at="2026-06-08T17:51:27 IST" duration-ms="8721" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -282,22 +282,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_011_verifyMfScreenerLinkVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:29 IST" name="tc_home_011_verifyMfScreenerLinkVisible" description="TC_HOME_011 - MF Screener link is visible" finished-at="2026-06-05T16:30:35 IST" duration-ms="6214" status="PASS">
+        <test-method signature="tc_home_011_verifyMfScreenerLinkVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:27 IST" name="tc_home_011_verifyMfScreenerLinkVisible" description="TC_HOME_011 - MF Screener link is visible" finished-at="2026-06-08T17:51:33 IST" duration-ms="6317" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_011_verifyMfScreenerLinkVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:35 IST" name="tearDown" finished-at="2026-06-05T16:30:35 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:33 IST" name="tearDown" finished-at="2026-06-08T17:51:33 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_011_verifyMfScreenerLinkVisible status=SUCCESS method=HomePageTest.tc_home_011_verifyMfScreenerLinkVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_011_verifyMfScreenerLinkVisible status=SUCCESS method=HomePageTest.tc_home_011_verifyMfScreenerLinkVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:35 IST" name="setUp" finished-at="2026-06-05T16:30:45 IST" duration-ms="9857" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:33 IST" name="setUp" finished-at="2026-06-08T17:51:43 IST" duration-ms="9840" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -308,22 +308,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_012_verifySipCalculatorLinkVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:45 IST" name="tc_home_012_verifySipCalculatorLinkVisible" description="TC_HOME_012 - SIP Calculator link is visible" finished-at="2026-06-05T16:30:51 IST" duration-ms="6206" status="PASS">
+        <test-method signature="tc_home_012_verifySipCalculatorLinkVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:43 IST" name="tc_home_012_verifySipCalculatorLinkVisible" description="TC_HOME_012 - SIP Calculator link is visible" finished-at="2026-06-08T17:51:49 IST" duration-ms="6352" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_012_verifySipCalculatorLinkVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:51 IST" name="tearDown" finished-at="2026-06-05T16:30:51 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:49 IST" name="tearDown" finished-at="2026-06-08T17:51:49 IST" duration-ms="0" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_012_verifySipCalculatorLinkVisible status=SUCCESS method=HomePageTest.tc_home_012_verifySipCalculatorLinkVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_012_verifySipCalculatorLinkVisible status=SUCCESS method=HomePageTest.tc_home_012_verifySipCalculatorLinkVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:30:51 IST" name="setUp" finished-at="2026-06-05T16:31:02 IST" duration-ms="10503" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:49 IST" name="setUp" finished-at="2026-06-08T17:51:58 IST" duration-ms="8647" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -334,22 +334,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_013_verifyFundSearchLinkVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:02 IST" name="tc_home_013_verifyFundSearchLinkVisible" description="TC_HOME_013 - Fund Search link is visible" finished-at="2026-06-05T16:31:08 IST" duration-ms="6232" status="PASS">
+        <test-method signature="tc_home_013_verifyFundSearchLinkVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:51:58 IST" name="tc_home_013_verifyFundSearchLinkVisible" description="TC_HOME_013 - Fund Search link is visible" finished-at="2026-06-08T17:52:04 IST" duration-ms="6566" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_013_verifyFundSearchLinkVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:08 IST" name="tearDown" finished-at="2026-06-05T16:31:08 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:52:04 IST" name="tearDown" finished-at="2026-06-08T17:52:04 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_013_verifyFundSearchLinkVisible status=SUCCESS method=HomePageTest.tc_home_013_verifyFundSearchLinkVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_013_verifyFundSearchLinkVisible status=SUCCESS method=HomePageTest.tc_home_013_verifyFundSearchLinkVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:08 IST" name="setUp" finished-at="2026-06-05T16:31:17 IST" duration-ms="9494" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:52:04 IST" name="setUp" finished-at="2026-06-08T17:52:14 IST" duration-ms="9813" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -360,22 +360,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_014_verifyMoreQuickGuidesLinkVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:17 IST" name="tc_home_014_verifyMoreQuickGuidesLinkVisible" description="TC_HOME_014 - More Quick Guides link is visible" finished-at="2026-06-05T16:31:22 IST" duration-ms="4149" status="PASS">
+        <test-method signature="tc_home_014_verifyMoreQuickGuidesLinkVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:52:14 IST" name="tc_home_014_verifyMoreQuickGuidesLinkVisible" description="TC_HOME_014 - More Quick Guides link is visible" finished-at="2026-06-08T17:52:18 IST" duration-ms="4166" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_014_verifyMoreQuickGuidesLinkVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:22 IST" name="tearDown" finished-at="2026-06-05T16:31:22 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:52:18 IST" name="tearDown" finished-at="2026-06-08T17:52:18 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_014_verifyMoreQuickGuidesLinkVisible status=SUCCESS method=HomePageTest.tc_home_014_verifyMoreQuickGuidesLinkVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_014_verifyMoreQuickGuidesLinkVisible status=SUCCESS method=HomePageTest.tc_home_014_verifyMoreQuickGuidesLinkVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:22 IST" name="setUp" finished-at="2026-06-05T16:31:31 IST" duration-ms="9513" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:52:18 IST" name="setUp" finished-at="2026-06-08T17:52:28 IST" duration-ms="9845" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -386,22 +386,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_015_verifyBuildInvestmentPlanGuideVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:31 IST" name="tc_home_015_verifyBuildInvestmentPlanGuideVisible" description="TC_HOME_015 - Build Investment Plan guide is visible" finished-at="2026-06-05T16:31:38 IST" duration-ms="6602" status="PASS">
+        <test-method signature="tc_home_015_verifyBuildInvestmentPlanGuideVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:52:28 IST" name="tc_home_015_verifyBuildInvestmentPlanGuideVisible" description="TC_HOME_015 - Build Investment Plan guide is visible" finished-at="2026-06-08T17:52:35 IST" duration-ms="6248" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_015_verifyBuildInvestmentPlanGuideVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:38 IST" name="tearDown" finished-at="2026-06-05T16:31:38 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:52:35 IST" name="tearDown" finished-at="2026-06-08T17:52:35 IST" duration-ms="0" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_015_verifyBuildInvestmentPlanGuideVisible status=SUCCESS method=HomePageTest.tc_home_015_verifyBuildInvestmentPlanGuideVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_015_verifyBuildInvestmentPlanGuideVisible status=SUCCESS method=HomePageTest.tc_home_015_verifyBuildInvestmentPlanGuideVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:38 IST" name="setUp" finished-at="2026-06-05T16:31:47 IST" duration-ms="9566" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:52:35 IST" name="setUp" finished-at="2026-06-08T17:52:44 IST" duration-ms="9908" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -412,22 +412,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_016_verifyUpgradePortfolioGuideVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:47 IST" name="tc_home_016_verifyUpgradePortfolioGuideVisible" description="TC_HOME_016 - Upgrade Portfolio guide is visible" finished-at="2026-06-05T16:31:54 IST" duration-ms="6205" status="PASS">
+        <test-method signature="tc_home_016_verifyUpgradePortfolioGuideVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:52:44 IST" name="tc_home_016_verifyUpgradePortfolioGuideVisible" description="TC_HOME_016 - Upgrade Portfolio guide is visible" finished-at="2026-06-08T17:52:51 IST" duration-ms="6293" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_016_verifyUpgradePortfolioGuideVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:54 IST" name="tearDown" finished-at="2026-06-05T16:31:54 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:52:51 IST" name="tearDown" finished-at="2026-06-08T17:52:51 IST" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_016_verifyUpgradePortfolioGuideVisible status=SUCCESS method=HomePageTest.tc_home_016_verifyUpgradePortfolioGuideVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_016_verifyUpgradePortfolioGuideVisible status=SUCCESS method=HomePageTest.tc_home_016_verifyUpgradePortfolioGuideVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:31:54 IST" name="setUp" finished-at="2026-06-05T16:32:03 IST" duration-ms="9821" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:52:51 IST" name="setUp" finished-at="2026-06-08T17:53:01 IST" duration-ms="9904" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -438,22 +438,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_017_verifyAnalystPickedFundsGuideVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:03 IST" name="tc_home_017_verifyAnalystPickedFundsGuideVisible" description="TC_HOME_017 - Analyst Picked Funds guide is visible" finished-at="2026-06-05T16:32:12 IST" duration-ms="8280" status="PASS">
+        <test-method signature="tc_home_017_verifyAnalystPickedFundsGuideVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:01 IST" name="tc_home_017_verifyAnalystPickedFundsGuideVisible" description="TC_HOME_017 - Analyst Picked Funds guide is visible" finished-at="2026-06-08T17:53:09 IST" duration-ms="8393" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_017_verifyAnalystPickedFundsGuideVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:12 IST" name="tearDown" finished-at="2026-06-05T16:32:12 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:09 IST" name="tearDown" finished-at="2026-06-08T17:53:09 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_017_verifyAnalystPickedFundsGuideVisible status=SUCCESS method=HomePageTest.tc_home_017_verifyAnalystPickedFundsGuideVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_017_verifyAnalystPickedFundsGuideVisible status=SUCCESS method=HomePageTest.tc_home_017_verifyAnalystPickedFundsGuideVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:12 IST" name="setUp" finished-at="2026-06-05T16:32:21 IST" duration-ms="9742" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:09 IST" name="setUp" finished-at="2026-06-08T17:53:19 IST" duration-ms="10121" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -464,22 +464,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_018_verifyPersonalisedSupportCardVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:21 IST" name="tc_home_018_verifyPersonalisedSupportCardVisible" description="TC_HOME_018 - Personalised Support card is visible" finished-at="2026-06-05T16:32:30 IST" duration-ms="8288" status="PASS">
+        <test-method signature="tc_home_018_verifyPersonalisedSupportCardVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:19 IST" name="tc_home_018_verifyPersonalisedSupportCardVisible" description="TC_HOME_018 - Personalised Support card is visible" finished-at="2026-06-08T17:53:28 IST" duration-ms="8330" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_018_verifyPersonalisedSupportCardVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:30 IST" name="tearDown" finished-at="2026-06-05T16:32:30 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:28 IST" name="tearDown" finished-at="2026-06-08T17:53:28 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_018_verifyPersonalisedSupportCardVisible status=SUCCESS method=HomePageTest.tc_home_018_verifyPersonalisedSupportCardVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_018_verifyPersonalisedSupportCardVisible status=SUCCESS method=HomePageTest.tc_home_018_verifyPersonalisedSupportCardVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:30 IST" name="setUp" finished-at="2026-06-05T16:32:39 IST" duration-ms="9399" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:28 IST" name="setUp" finished-at="2026-06-08T17:53:37 IST" duration-ms="9918" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -490,22 +490,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_019_verifyAggressiveGrowthCardVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:39 IST" name="tc_home_019_verifyAggressiveGrowthCardVisible" description="TC_HOME_019 - Aggressive Growth card is visible" finished-at="2026-06-05T16:32:43 IST" duration-ms="4146" status="PASS">
+        <test-method signature="tc_home_019_verifyAggressiveGrowthCardVisible()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:37 IST" name="tc_home_019_verifyAggressiveGrowthCardVisible" description="TC_HOME_019 - Aggressive Growth card is visible" finished-at="2026-06-08T17:53:42 IST" duration-ms="4183" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_019_verifyAggressiveGrowthCardVisible -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:43 IST" name="tearDown" finished-at="2026-06-05T16:32:43 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:42 IST" name="tearDown" finished-at="2026-06-08T17:53:42 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_019_verifyAggressiveGrowthCardVisible status=SUCCESS method=HomePageTest.tc_home_019_verifyAggressiveGrowthCardVisible()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_019_verifyAggressiveGrowthCardVisible status=SUCCESS method=HomePageTest.tc_home_019_verifyAggressiveGrowthCardVisible()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:43 IST" name="setUp" finished-at="2026-06-05T16:32:53 IST" duration-ms="10205" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:42 IST" name="setUp" finished-at="2026-06-08T17:53:52 IST" duration-ms="10045" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -516,22 +516,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_020_verifyRetirementCardNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:53 IST" name="tc_home_020_verifyRetirementCardNavigation" description="TC_HOME_020 - Retirement card opens a valid screen" finished-at="2026-06-05T16:32:58 IST" duration-ms="4576" status="PASS">
+        <test-method signature="tc_home_020_verifyRetirementCardNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:52 IST" name="tc_home_020_verifyRetirementCardNavigation" description="TC_HOME_020 - Retirement card opens a valid screen" finished-at="2026-06-08T17:53:56 IST" duration-ms="4759" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_020_verifyRetirementCardNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:58 IST" name="tearDown" finished-at="2026-06-05T16:32:58 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:56 IST" name="tearDown" finished-at="2026-06-08T17:53:56 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_020_verifyRetirementCardNavigation status=SUCCESS method=HomePageTest.tc_home_020_verifyRetirementCardNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_020_verifyRetirementCardNavigation status=SUCCESS method=HomePageTest.tc_home_020_verifyRetirementCardNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:32:58 IST" name="setUp" finished-at="2026-06-05T16:33:07 IST" duration-ms="8738" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:53:56 IST" name="setUp" finished-at="2026-06-08T17:54:07 IST" duration-ms="10616" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -542,22 +542,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_021_verifyRegularIncomeCardNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:33:07 IST" name="tc_home_021_verifyRegularIncomeCardNavigation" description="TC_HOME_021 - Regular Income card opens a valid screen" finished-at="2026-06-05T16:33:11 IST" duration-ms="4546" status="PASS">
+        <test-method signature="tc_home_021_verifyRegularIncomeCardNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:54:07 IST" name="tc_home_021_verifyRegularIncomeCardNavigation" description="TC_HOME_021 - Regular Income card opens a valid screen" finished-at="2026-06-08T17:54:13 IST" duration-ms="5599" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_021_verifyRegularIncomeCardNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:33:11 IST" name="tearDown" finished-at="2026-06-05T16:33:11 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:54:13 IST" name="tearDown" finished-at="2026-06-08T17:54:13 IST" duration-ms="0" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_021_verifyRegularIncomeCardNavigation status=SUCCESS method=HomePageTest.tc_home_021_verifyRegularIncomeCardNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_021_verifyRegularIncomeCardNavigation status=SUCCESS method=HomePageTest.tc_home_021_verifyRegularIncomeCardNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:33:11 IST" name="setUp" finished-at="2026-06-05T16:33:21 IST" duration-ms="9940" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:54:13 IST" name="setUp" finished-at="2026-06-08T17:54:23 IST" duration-ms="9988" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -568,22 +568,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_022_verifyNoGoalStartInvestingNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:33:21 IST" name="tc_home_022_verifyNoGoalStartInvestingNavigation" description="TC_HOME_022 - No Goal Start Investing card opens a valid screen" finished-at="2026-06-05T16:33:26 IST" duration-ms="4510" status="PASS">
+        <test-method signature="tc_home_022_verifyNoGoalStartInvestingNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:54:23 IST" name="tc_home_022_verifyNoGoalStartInvestingNavigation" description="TC_HOME_022 - No Goal Start Investing card opens a valid screen" finished-at="2026-06-08T17:54:28 IST" duration-ms="5179" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_022_verifyNoGoalStartInvestingNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:33:26 IST" name="tearDown" finished-at="2026-06-05T16:33:26 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:54:28 IST" name="tearDown" finished-at="2026-06-08T17:54:28 IST" duration-ms="0" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_022_verifyNoGoalStartInvestingNavigation status=SUCCESS method=HomePageTest.tc_home_022_verifyNoGoalStartInvestingNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_022_verifyNoGoalStartInvestingNavigation status=SUCCESS method=HomePageTest.tc_home_022_verifyNoGoalStartInvestingNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:33:26 IST" name="setUp" finished-at="2026-06-05T16:33:36 IST" duration-ms="9934" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:54:28 IST" name="setUp" finished-at="2026-06-08T17:54:38 IST" duration-ms="9853" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -594,22 +594,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_023_verifyMfScreenerNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:33:36 IST" name="tc_home_023_verifyMfScreenerNavigation" description="TC_HOME_023 - MF Screener link opens a valid screen" finished-at="2026-06-05T16:33:45 IST" duration-ms="9098" status="PASS">
+        <test-method signature="tc_home_023_verifyMfScreenerNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:54:38 IST" name="tc_home_023_verifyMfScreenerNavigation" description="TC_HOME_023 - MF Screener link opens a valid screen" finished-at="2026-06-08T17:54:50 IST" duration-ms="11900" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_023_verifyMfScreenerNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:33:45 IST" name="tearDown" finished-at="2026-06-05T16:33:45 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:54:50 IST" name="tearDown" finished-at="2026-06-08T17:54:50 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_023_verifyMfScreenerNavigation status=SUCCESS method=HomePageTest.tc_home_023_verifyMfScreenerNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_023_verifyMfScreenerNavigation status=SUCCESS method=HomePageTest.tc_home_023_verifyMfScreenerNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:33:45 IST" name="setUp" finished-at="2026-06-05T16:33:55 IST" duration-ms="9849" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:54:50 IST" name="setUp" finished-at="2026-06-08T17:55:00 IST" duration-ms="10094" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -620,22 +620,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_024_verifySipCalculatorNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:33:55 IST" name="tc_home_024_verifySipCalculatorNavigation" description="TC_HOME_024 - SIP Calculator link opens a valid screen" finished-at="2026-06-05T16:34:03 IST" duration-ms="8686" status="PASS">
+        <test-method signature="tc_home_024_verifySipCalculatorNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:55:00 IST" name="tc_home_024_verifySipCalculatorNavigation" description="TC_HOME_024 - SIP Calculator link opens a valid screen" finished-at="2026-06-08T17:55:09 IST" duration-ms="8935" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_024_verifySipCalculatorNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:34:03 IST" name="tearDown" finished-at="2026-06-05T16:34:03 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_home_024_verifySipCalculatorNavigation status=SUCCESS method=HomePageTest.tc_home_024_verifySipCalculatorNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:34:03 IST" name="setUp" finished-at="2026-06-05T16:34:13 IST" duration-ms="9952" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:55:09 IST" name="setUp" finished-at="2026-06-08T17:55:19 IST" duration-ms="10153" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -646,22 +635,33 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_025_verifyFundSearchNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:34:13 IST" name="tc_home_025_verifyFundSearchNavigation" description="TC_HOME_025 - Fund Search link opens a valid screen" finished-at="2026-06-05T16:34:22 IST" duration-ms="8653" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_home_025_verifyFundSearchNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:34:22 IST" name="tearDown" finished-at="2026-06-05T16:34:22 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:55:09 IST" name="tearDown" finished-at="2026-06-08T17:55:09 IST" duration-ms="0" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_025_verifyFundSearchNavigation status=SUCCESS method=HomePageTest.tc_home_025_verifyFundSearchNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_024_verifySipCalculatorNavigation status=SUCCESS method=HomePageTest.tc_home_024_verifySipCalculatorNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:34:22 IST" name="setUp" finished-at="2026-06-05T16:34:32 IST" duration-ms="9799" status="PASS">
+        <test-method signature="tc_home_025_verifyFundSearchNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:55:19 IST" name="tc_home_025_verifyFundSearchNavigation" description="TC_HOME_025 - Fund Search link opens a valid screen" finished-at="2026-06-08T17:55:28 IST" duration-ms="8903" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_home_025_verifyFundSearchNavigation -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:55:28 IST" name="tearDown" finished-at="2026-06-08T17:55:28 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_home_025_verifyFundSearchNavigation status=SUCCESS method=HomePageTest.tc_home_025_verifyFundSearchNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:55:28 IST" name="setUp" finished-at="2026-06-08T17:55:38 IST" duration-ms="10336" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -672,22 +672,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_026_verifyMoreQuickGuidesNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:34:32 IST" name="tc_home_026_verifyMoreQuickGuidesNavigation" description="TC_HOME_026 - More Quick Guides link opens a valid screen" finished-at="2026-06-05T16:34:55 IST" duration-ms="23523" status="PASS">
+        <test-method signature="tc_home_026_verifyMoreQuickGuidesNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:55:38 IST" name="tc_home_026_verifyMoreQuickGuidesNavigation" description="TC_HOME_026 - More Quick Guides link opens a valid screen" finished-at="2026-06-08T17:56:02 IST" duration-ms="23730" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_026_verifyMoreQuickGuidesNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:34:55 IST" name="tearDown" finished-at="2026-06-05T16:34:55 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:56:02 IST" name="tearDown" finished-at="2026-06-08T17:56:02 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_026_verifyMoreQuickGuidesNavigation status=SUCCESS method=HomePageTest.tc_home_026_verifyMoreQuickGuidesNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_026_verifyMoreQuickGuidesNavigation status=SUCCESS method=HomePageTest.tc_home_026_verifyMoreQuickGuidesNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:34:55 IST" name="setUp" finished-at="2026-06-05T16:35:05 IST" duration-ms="9966" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:56:02 IST" name="setUp" finished-at="2026-06-08T17:56:11 IST" duration-ms="9739" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -698,22 +698,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_027_verifyBuildInvestmentPlanNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:35:05 IST" name="tc_home_027_verifyBuildInvestmentPlanNavigation" description="TC_HOME_027 - Build Investment Plan guide opens a valid screen" finished-at="2026-06-05T16:35:14 IST" duration-ms="8697" status="PASS">
+        <test-method signature="tc_home_027_verifyBuildInvestmentPlanNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:56:11 IST" name="tc_home_027_verifyBuildInvestmentPlanNavigation" description="TC_HOME_027 - Build Investment Plan guide opens a valid screen" finished-at="2026-06-08T17:56:20 IST" duration-ms="8819" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_027_verifyBuildInvestmentPlanNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:35:14 IST" name="tearDown" finished-at="2026-06-05T16:35:14 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:56:20 IST" name="tearDown" finished-at="2026-06-08T17:56:20 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_027_verifyBuildInvestmentPlanNavigation status=SUCCESS method=HomePageTest.tc_home_027_verifyBuildInvestmentPlanNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_027_verifyBuildInvestmentPlanNavigation status=SUCCESS method=HomePageTest.tc_home_027_verifyBuildInvestmentPlanNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:35:14 IST" name="setUp" finished-at="2026-06-05T16:35:23 IST" duration-ms="8800" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:56:20 IST" name="setUp" finished-at="2026-06-08T17:56:30 IST" duration-ms="9884" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -724,22 +724,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_028_verifyUpgradePortfolioNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:35:23 IST" name="tc_home_028_verifyUpgradePortfolioNavigation" description="TC_HOME_028 - Upgrade Portfolio guide opens a valid screen" finished-at="2026-06-05T16:35:31 IST" duration-ms="8672" status="PASS">
+        <test-method signature="tc_home_028_verifyUpgradePortfolioNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:56:30 IST" name="tc_home_028_verifyUpgradePortfolioNavigation" description="TC_HOME_028 - Upgrade Portfolio guide opens a valid screen" finished-at="2026-06-08T17:56:39 IST" duration-ms="8842" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_028_verifyUpgradePortfolioNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:35:31 IST" name="tearDown" finished-at="2026-06-05T16:35:31 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:56:39 IST" name="tearDown" finished-at="2026-06-08T17:56:39 IST" duration-ms="0" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_028_verifyUpgradePortfolioNavigation status=SUCCESS method=HomePageTest.tc_home_028_verifyUpgradePortfolioNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_028_verifyUpgradePortfolioNavigation status=SUCCESS method=HomePageTest.tc_home_028_verifyUpgradePortfolioNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:35:31 IST" name="setUp" finished-at="2026-06-05T16:35:41 IST" duration-ms="9814" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:56:39 IST" name="setUp" finished-at="2026-06-08T17:56:49 IST" duration-ms="9902" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -750,22 +750,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_029_verifyAnalystPickedFundsNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:35:41 IST" name="tc_home_029_verifyAnalystPickedFundsNavigation" description="TC_HOME_029 - Analyst Picked Funds guide opens a valid screen" finished-at="2026-06-05T16:35:52 IST" duration-ms="10763" status="PASS">
+        <test-method signature="tc_home_029_verifyAnalystPickedFundsNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:56:49 IST" name="tc_home_029_verifyAnalystPickedFundsNavigation" description="TC_HOME_029 - Analyst Picked Funds guide opens a valid screen" finished-at="2026-06-08T17:56:58 IST" duration-ms="8805" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_029_verifyAnalystPickedFundsNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:35:52 IST" name="tearDown" finished-at="2026-06-05T16:35:52 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:56:58 IST" name="tearDown" finished-at="2026-06-08T17:56:58 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_029_verifyAnalystPickedFundsNavigation status=SUCCESS method=HomePageTest.tc_home_029_verifyAnalystPickedFundsNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_029_verifyAnalystPickedFundsNavigation status=SUCCESS method=HomePageTest.tc_home_029_verifyAnalystPickedFundsNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:35:52 IST" name="setUp" finished-at="2026-06-05T16:36:02 IST" duration-ms="10409" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:56:58 IST" name="setUp" finished-at="2026-06-08T17:57:08 IST" duration-ms="9796" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -776,11 +776,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_030_verifyPersonalisedSupportNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:36:02 IST" name="tc_home_030_verifyPersonalisedSupportNavigation" description="TC_HOME_030 - Personalised Support card opens a valid screen" finished-at="2026-06-05T16:36:14 IST" duration-ms="11441" status="PASS">
+        <test-method signature="tc_home_030_verifyPersonalisedSupportNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:57:08 IST" name="tc_home_030_verifyPersonalisedSupportNavigation" description="TC_HOME_030 - Personalised Support card opens a valid screen" finished-at="2026-06-08T17:57:20 IST" duration-ms="12959" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_030_verifyPersonalisedSupportNavigation -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:36:14 IST" name="setUp" finished-at="2026-06-05T16:36:22 IST" duration-ms="8524" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:57:20 IST" name="tearDown" finished-at="2026-06-08T17:57:20 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_home_030_verifyPersonalisedSupportNavigation status=SUCCESS method=HomePageTest.tc_home_030_verifyPersonalisedSupportNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:57:20 IST" name="setUp" finished-at="2026-06-08T17:57:30 IST" duration-ms="9433" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -791,33 +802,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:36:14 IST" name="tearDown" finished-at="2026-06-05T16:36:14 IST" duration-ms="0" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=tc_home_030_verifyPersonalisedSupportNavigation status=SUCCESS method=HomePageTest.tc_home_030_verifyPersonalisedSupportNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method signature="tc_home_031_verifyAggressiveGrowthNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:36:22 IST" name="tc_home_031_verifyAggressiveGrowthNavigation" description="TC_HOME_031 - Aggressive Growth card opens a valid screen" finished-at="2026-06-05T16:36:46 IST" duration-ms="23516" status="PASS">
+        <test-method signature="tc_home_031_verifyAggressiveGrowthNavigation()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:57:30 IST" name="tc_home_031_verifyAggressiveGrowthNavigation" description="TC_HOME_031 - Aggressive Growth card opens a valid screen" finished-at="2026-06-08T17:57:54 IST" duration-ms="23872" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_031_verifyAggressiveGrowthNavigation -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:36:46 IST" name="tearDown" finished-at="2026-06-05T16:36:46 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:57:54 IST" name="tearDown" finished-at="2026-06-08T17:57:54 IST" duration-ms="0" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_031_verifyAggressiveGrowthNavigation status=SUCCESS method=HomePageTest.tc_home_031_verifyAggressiveGrowthNavigation()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_031_verifyAggressiveGrowthNavigation status=SUCCESS method=HomePageTest.tc_home_031_verifyAggressiveGrowthNavigation()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:36:46 IST" name="setUp" finished-at="2026-06-05T16:36:56 IST" duration-ms="9702" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:57:54 IST" name="setUp" finished-at="2026-06-08T17:58:04 IST" duration-ms="10551" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -828,13 +828,13 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_home_032_verifyAllLinksOpenValidScreens()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:36:56 IST" name="tc_home_032_verifyAllLinksOpenValidScreens" description="TC_HOME_032 - Every Funds screen link opens a valid screen" finished-at="2026-06-05T16:40:29 IST" duration-ms="213816" status="FAIL">
+        <test-method signature="tc_home_032_verifyAllLinksOpenValidScreens()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:58:04 IST" name="tc_home_032_verifyAllLinksOpenValidScreens" description="TC_HOME_032 - Every Funds screen link opens a valid screen" finished-at="2026-06-08T17:59:39 IST" duration-ms="94405" status="FAIL">
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Funds screen link must open a valid screen: Fund Search expected [true] but found [false]]]>
+              <![CDATA[Funds screen link must open a valid screen: Aggressive Growth expected [true] but found [false]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Funds screen link must open a valid screen: Fund Search expected [true] but found [false]
+              <![CDATA[java.lang.AssertionError: Funds screen link must open a valid screen: Aggressive Growth expected [true] but found [false]
 at org.testng.Assert.fail(Assert.java:111)
 at org.testng.Assert.failNotEquals(Assert.java:1578)
 at org.testng.Assert.assertTrue(Assert.java:57)
@@ -842,7 +842,7 @@ at tests.HomePageTest.tc_home_032_verifyAllLinksOpenValidScreens(HomePageTest.ja
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at java.base/java.lang.reflect.Method.invoke(Method.java:569)
 at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
 at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
 at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
@@ -873,18 +873,18 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_home_032_verifyAllLinksOpenValidScreens -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:40:29 IST" name="tearDown" finished-at="2026-06-05T16:40:30 IST" duration-ms="150" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:59:39 IST" name="tearDown" finished-at="2026-06-08T17:59:39 IST" duration-ms="238" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_home_032_verifyAllLinksOpenValidScreens status=FAILURE method=HomePageTest.tc_home_032_verifyAllLinksOpenValidScreens()[pri:0, instance:tests.HomePageTest@7b2bbc3] output={null}]]]>
+                <![CDATA[[TestResult name=tc_home_032_verifyAllLinksOpenValidScreens status=FAILURE method=HomePageTest.tc_home_032_verifyAllLinksOpenValidScreens()[pri:0, instance:tests.HomePageTest@1aafa419] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.HomePageTest@7b2bbc3]" started-at="2026-06-05T16:40:30 IST" name="afterSuite" finished-at="2026-06-05T16:40:30 IST" duration-ms="690" status="PASS">
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.HomePageTest@1aafa419]" started-at="2026-06-08T17:59:39 IST" name="afterSuite" finished-at="2026-06-08T17:59:39 IST" duration-ms="387" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuite -->
