@@ -3,6 +3,7 @@ package tests;
 import java.lang.reflect.Method;
 import java.util.List;
 
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -367,4 +368,5 @@ public class HomePageTest extends BaseTest {
 
         logger.info("TC_HOME_032 - All Funds screen link navigation verified: {}", results);
     }
+  
 }

@@ -12,17 +12,28 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class Home_Page extends BasePage {
 
-    private static final int MAX_SCROLLS_TO_FIND_LINK = 8;
+    private static final int MAX_SCROLLS_TO_FIND_LINK = 12;
 
     private final By fundsTab = AppiumBy.accessibilityId("Funds");
     private final By stocksTab = AppiumBy.accessibilityId("Stocks");
     private final By portfolioTab = AppiumBy.accessibilityId("Portfolio");
     private final By hubTab = AppiumBy.accessibilityId("Hub");
 
+    // Invested-state summary carousel shown at the top of the Funds screen once a
+    // portfolio is imported — pushes the marketing sections below the fold.
+    private final By portfolioValueCard = AppiumBy
+            .androidUIAutomator("new UiSelector().descriptionContains(\"Portfolio Value\")");
+    private final By youVsMarketCard = AppiumBy.accessibilityId("You vs Market");
+    private final By assetMixCard = AppiumBy
+            .androidUIAutomator("new UiSelector().descriptionContains(\"Your Asset Mix\")");
+    private final By retirementProjectionCard = AppiumBy
+            .androidUIAutomator("new UiSelector().descriptionContains(\"you will have\")");
+
     private final By richFutureHeading = AppiumBy.accessibilityId("Rich Future Starts Here");
     private final By navigateToHeading = AppiumBy.accessibilityId("Navigate to");
     private final By quickGuidesHeading = AppiumBy.accessibilityId("Quick Guides");
-    private final By analystChoiceHeading = AppiumBy.accessibilityId("Analyst's Choice");
+    // The app renders a curly apostrophe (U+2019) in this heading, not a straight quote
+    private final By analystChoiceHeading = AppiumBy.accessibilityId("Analyst’s Choice");
     private final By fundAdvisorNoteHeading = AppiumBy.accessibilityId("Fund Advisor's Note");
 
     private final By retirementCard = AppiumBy.accessibilityId("Your retirement, your way");
@@ -71,6 +82,19 @@ public class Home_Page extends BasePage {
             return this;
         }
 
+        // A bottom sheet (e.g. Fund Search) or deep screen may hide the tab bar —
+        // unwind one layer at a time until the tab bar or the Funds screen reappears
+        for (int i = 0; i < 4 && !isFundsScreenDisplayed() && !isDisplayed(fundsTab); i++) {
+            logger.info("Funds tab hidden — pressing back to unwind overlay ({}/4)", i + 1);
+            driver.navigate().back();
+            waitForUiToSettle();
+        }
+
+        if (isFundsScreenDisplayed()) {
+            logger.info("Funds screen restored after unwinding overlay");
+            return this;
+        }
+
         safeClick(fundsTab);
         waitForFundsScreen();
         logger.info("Funds screen opened");
@@ -79,6 +103,12 @@ public class Home_Page extends BasePage {
 
     public boolean isFundsScreenDisplayed() {
         return isAnyDisplayed(
+                // invested state — summary carousel above the fold
+                portfolioValueCard,
+                youVsMarketCard,
+                assetMixCard,
+                retirementProjectionCard,
+                // non-invested state — marketing sections above the fold
                 richFutureHeading,
                 navigateToHeading,
                 quickGuidesHeading,
@@ -95,7 +125,7 @@ public class Home_Page extends BasePage {
     }
 
     public boolean isRichFutureSectionDisplayed() {
-        return isDisplayed(richFutureHeading);
+        return scrollDownUntilVisible(richFutureHeading, MAX_SCROLLS_TO_FIND_LINK);
     }
 
     public boolean isNavigateToSectionDisplayed() {
@@ -299,18 +329,23 @@ public class Home_Page extends BasePage {
     }
 
     private boolean returnToFundsScreen() {
+        // Destinations can be full screens, or bottom sheets with an autofocused
+        // keyboard (e.g. Fund Search) — each back press peels off one layer
+        // (keyboard → sheet → screen), so press repeatedly until Funds is back.
+        for (int attempt = 0; attempt < 4; attempt++) {
+            if (isFundsScreenDisplayed()) {
+                return true;
+            }
+            logger.info("Funds screen not visible — pressing back ({}/4)", attempt + 1);
+            driver.navigate().back();
+            waitForUiToSettle();
+        }
+
         if (isFundsScreenDisplayed()) {
             return true;
         }
 
-        try {
-            driver.navigate().back();
-            shortWait(8).until(driver -> isFundsScreenDisplayed());
-            return true;
-        } catch (Exception firstFailure) {
-            logger.info("System back did not restore Funds screen, trying Funds tab");
-        }
-
+        logger.info("System back did not restore Funds screen, trying Funds tab");
         try {
             if (isDisplayed(fundsTab, 3)) {
                 safeClick(fundsTab);

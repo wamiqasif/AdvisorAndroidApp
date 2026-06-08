@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
+    <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
+      <br/>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" title="Collapse/expand all the suites" class="collapse-all-link">
+          <img src="collapseall.gif" class="collapse-all-icon">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" panel-name="suite-Default_suite" class="navigator-link">
+              <span class="suite-name border-failed">Default suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
+                    <span>testng-customsuite.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="testlist-Default_suite" class="navigator-link ">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="group-Default_suite" class="navigator-link ">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="times-Default_suite" class="navigator-link ">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="reporter-Default_suite" class="navigator-link ">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="ignored-methods-Default_suite" class="navigator-link ">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="chronological-Default_suite" class="navigator-link ">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">32 methods, 1 failed,   31 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Default_suite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_032_verifyAllLinksOpenValidScreens">tc_home_032_verifyAllLinksOpenValidScreens</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Default_suite -->
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods passed suite-Default_suite"> (hide)</a> <!-- hide-methods passed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods passed suite-Default_suite"> (show)</a> <!-- show-methods passed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Default_suite">
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_001_verifyFundsScreenLoads">tc_home_001_verifyFundsScreenLoads</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_002_verifyBottomNavigationVisible">tc_home_002_verifyBottomNavigationVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_003_verifyRichFutureSectionVisible">tc_home_003_verifyRichFutureSectionVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_004_verifyNavigateToSectionVisible">tc_home_004_verifyNavigateToSectionVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_005_verifyQuickGuidesSectionVisible">tc_home_005_verifyQuickGuidesSectionVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_006_verifyAnalystChoiceSectionVisible">tc_home_006_verifyAnalystChoiceSectionVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_007_verifyFundAdvisorNoteSectionVisible">tc_home_007_verifyFundAdvisorNoteSectionVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_008_verifyRetirementCardVisible">tc_home_008_verifyRetirementCardVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_009_verifyRegularIncomeCardVisible">tc_home_009_verifyRegularIncomeCardVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_010_verifyNoGoalStartInvestingCardVisible">tc_home_010_verifyNoGoalStartInvestingCardVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_011_verifyMfScreenerLinkVisible">tc_home_011_verifyMfScreenerLinkVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_012_verifySipCalculatorLinkVisible">tc_home_012_verifySipCalculatorLinkVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_013_verifyFundSearchLinkVisible">tc_home_013_verifyFundSearchLinkVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_014_verifyMoreQuickGuidesLinkVisible">tc_home_014_verifyMoreQuickGuidesLinkVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_015_verifyBuildInvestmentPlanGuideVisible">tc_home_015_verifyBuildInvestmentPlanGuideVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_016_verifyUpgradePortfolioGuideVisible">tc_home_016_verifyUpgradePortfolioGuideVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_017_verifyAnalystPickedFundsGuideVisible">tc_home_017_verifyAnalystPickedFundsGuideVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_018_verifyPersonalisedSupportCardVisible">tc_home_018_verifyPersonalisedSupportCardVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_019_verifyAggressiveGrowthCardVisible">tc_home_019_verifyAggressiveGrowthCardVisible</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_020_verifyRetirementCardNavigation">tc_home_020_verifyRetirementCardNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_021_verifyRegularIncomeCardNavigation">tc_home_021_verifyRegularIncomeCardNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_022_verifyNoGoalStartInvestingNavigation">tc_home_022_verifyNoGoalStartInvestingNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_023_verifyMfScreenerNavigation">tc_home_023_verifyMfScreenerNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_024_verifySipCalculatorNavigation">tc_home_024_verifySipCalculatorNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_025_verifyFundSearchNavigation">tc_home_025_verifyFundSearchNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_026_verifyMoreQuickGuidesNavigation">tc_home_026_verifyMoreQuickGuidesNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_027_verifyBuildInvestmentPlanNavigation">tc_home_027_verifyBuildInvestmentPlanNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_028_verifyUpgradePortfolioNavigation">tc_home_028_verifyUpgradePortfolioNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_029_verifyAnalystPickedFundsNavigation">tc_home_029_verifyAnalystPickedFundsNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_030_verifyPersonalisedSupportNavigation">tc_home_030_verifyPersonalisedSupportNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.HomePageTest" class="method navigator-link" hash-for-method="tc_home_031_verifyAggressiveGrowthNavigation">tc_home_031_verifyAggressiveGrowthNavigation</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Default_suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Default_suite" class="panel Default_suite">
+          <div class="suite-Default_suite-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">tests.HomePageTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_032_verifyAllLinksOpenValidScreens">
+                  </a> <!-- tc_home_032_verifyAllLinksOpenValidScreens -->
+                  <span class="method-name">tc_home_032_verifyAllLinksOpenValidScreens</span>
+                  <div class="stack-trace">java.lang.AssertionError: Funds screen link must open a valid screen: Fund Search expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at tests.HomePageTest.tc_home_032_verifyAllLinksOpenValidScreens(HomePageTest.java:364)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
+                  <em>
+(TC_HOME_032 - Every Funds screen link opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-failed -->
+          <div class="suite-Default_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">tests.HomePageTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_001_verifyFundsScreenLoads">
+                  </a> <!-- tc_home_001_verifyFundsScreenLoads -->
+                  <span class="method-name">tc_home_001_verifyFundsScreenLoads</span>
+                  <em>
+(TC_HOME_001 - Funds screen opens from Funds tab)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_002_verifyBottomNavigationVisible">
+                  </a> <!-- tc_home_002_verifyBottomNavigationVisible -->
+                  <span class="method-name">tc_home_002_verifyBottomNavigationVisible</span>
+                  <em>
+(TC_HOME_002 - Bottom navigation is visible on Funds screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_003_verifyRichFutureSectionVisible">
+                  </a> <!-- tc_home_003_verifyRichFutureSectionVisible -->
+                  <span class="method-name">tc_home_003_verifyRichFutureSectionVisible</span>
+                  <em>
+(TC_HOME_003 - Rich Future section is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_004_verifyNavigateToSectionVisible">
+                  </a> <!-- tc_home_004_verifyNavigateToSectionVisible -->
+                  <span class="method-name">tc_home_004_verifyNavigateToSectionVisible</span>
+                  <em>
+(TC_HOME_004 - Navigate To section is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_005_verifyQuickGuidesSectionVisible">
+                  </a> <!-- tc_home_005_verifyQuickGuidesSectionVisible -->
+                  <span class="method-name">tc_home_005_verifyQuickGuidesSectionVisible</span>
+                  <em>
+(TC_HOME_005 - Quick Guides section is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_006_verifyAnalystChoiceSectionVisible">
+                  </a> <!-- tc_home_006_verifyAnalystChoiceSectionVisible -->
+                  <span class="method-name">tc_home_006_verifyAnalystChoiceSectionVisible</span>
+                  <em>
+(TC_HOME_006 - Analyst Choice section is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_007_verifyFundAdvisorNoteSectionVisible">
+                  </a> <!-- tc_home_007_verifyFundAdvisorNoteSectionVisible -->
+                  <span class="method-name">tc_home_007_verifyFundAdvisorNoteSectionVisible</span>
+                  <em>
+(TC_HOME_007 - Fund Advisor Note section is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_008_verifyRetirementCardVisible">
+                  </a> <!-- tc_home_008_verifyRetirementCardVisible -->
+                  <span class="method-name">tc_home_008_verifyRetirementCardVisible</span>
+                  <em>
+(TC_HOME_008 - Retirement card is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_009_verifyRegularIncomeCardVisible">
+                  </a> <!-- tc_home_009_verifyRegularIncomeCardVisible -->
+                  <span class="method-name">tc_home_009_verifyRegularIncomeCardVisible</span>
+                  <em>
+(TC_HOME_009 - Regular Income card is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_010_verifyNoGoalStartInvestingCardVisible">
+                  </a> <!-- tc_home_010_verifyNoGoalStartInvestingCardVisible -->
+                  <span class="method-name">tc_home_010_verifyNoGoalStartInvestingCardVisible</span>
+                  <em>
+(TC_HOME_010 - No Goal Start Investing card is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_011_verifyMfScreenerLinkVisible">
+                  </a> <!-- tc_home_011_verifyMfScreenerLinkVisible -->
+                  <span class="method-name">tc_home_011_verifyMfScreenerLinkVisible</span>
+                  <em>
+(TC_HOME_011 - MF Screener link is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_012_verifySipCalculatorLinkVisible">
+                  </a> <!-- tc_home_012_verifySipCalculatorLinkVisible -->
+                  <span class="method-name">tc_home_012_verifySipCalculatorLinkVisible</span>
+                  <em>
+(TC_HOME_012 - SIP Calculator link is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_013_verifyFundSearchLinkVisible">
+                  </a> <!-- tc_home_013_verifyFundSearchLinkVisible -->
+                  <span class="method-name">tc_home_013_verifyFundSearchLinkVisible</span>
+                  <em>
+(TC_HOME_013 - Fund Search link is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_014_verifyMoreQuickGuidesLinkVisible">
+                  </a> <!-- tc_home_014_verifyMoreQuickGuidesLinkVisible -->
+                  <span class="method-name">tc_home_014_verifyMoreQuickGuidesLinkVisible</span>
+                  <em>
+(TC_HOME_014 - More Quick Guides link is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_015_verifyBuildInvestmentPlanGuideVisible">
+                  </a> <!-- tc_home_015_verifyBuildInvestmentPlanGuideVisible -->
+                  <span class="method-name">tc_home_015_verifyBuildInvestmentPlanGuideVisible</span>
+                  <em>
+(TC_HOME_015 - Build Investment Plan guide is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_016_verifyUpgradePortfolioGuideVisible">
+                  </a> <!-- tc_home_016_verifyUpgradePortfolioGuideVisible -->
+                  <span class="method-name">tc_home_016_verifyUpgradePortfolioGuideVisible</span>
+                  <em>
+(TC_HOME_016 - Upgrade Portfolio guide is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_017_verifyAnalystPickedFundsGuideVisible">
+                  </a> <!-- tc_home_017_verifyAnalystPickedFundsGuideVisible -->
+                  <span class="method-name">tc_home_017_verifyAnalystPickedFundsGuideVisible</span>
+                  <em>
+(TC_HOME_017 - Analyst Picked Funds guide is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_018_verifyPersonalisedSupportCardVisible">
+                  </a> <!-- tc_home_018_verifyPersonalisedSupportCardVisible -->
+                  <span class="method-name">tc_home_018_verifyPersonalisedSupportCardVisible</span>
+                  <em>
+(TC_HOME_018 - Personalised Support card is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_019_verifyAggressiveGrowthCardVisible">
+                  </a> <!-- tc_home_019_verifyAggressiveGrowthCardVisible -->
+                  <span class="method-name">tc_home_019_verifyAggressiveGrowthCardVisible</span>
+                  <em>
+(TC_HOME_019 - Aggressive Growth card is visible)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_020_verifyRetirementCardNavigation">
+                  </a> <!-- tc_home_020_verifyRetirementCardNavigation -->
+                  <span class="method-name">tc_home_020_verifyRetirementCardNavigation</span>
+                  <em>
+(TC_HOME_020 - Retirement card opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_021_verifyRegularIncomeCardNavigation">
+                  </a> <!-- tc_home_021_verifyRegularIncomeCardNavigation -->
+                  <span class="method-name">tc_home_021_verifyRegularIncomeCardNavigation</span>
+                  <em>
+(TC_HOME_021 - Regular Income card opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_022_verifyNoGoalStartInvestingNavigation">
+                  </a> <!-- tc_home_022_verifyNoGoalStartInvestingNavigation -->
+                  <span class="method-name">tc_home_022_verifyNoGoalStartInvestingNavigation</span>
+                  <em>
+(TC_HOME_022 - No Goal Start Investing card opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_023_verifyMfScreenerNavigation">
+                  </a> <!-- tc_home_023_verifyMfScreenerNavigation -->
+                  <span class="method-name">tc_home_023_verifyMfScreenerNavigation</span>
+                  <em>
+(TC_HOME_023 - MF Screener link opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_024_verifySipCalculatorNavigation">
+                  </a> <!-- tc_home_024_verifySipCalculatorNavigation -->
+                  <span class="method-name">tc_home_024_verifySipCalculatorNavigation</span>
+                  <em>
+(TC_HOME_024 - SIP Calculator link opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_025_verifyFundSearchNavigation">
+                  </a> <!-- tc_home_025_verifyFundSearchNavigation -->
+                  <span class="method-name">tc_home_025_verifyFundSearchNavigation</span>
+                  <em>
+(TC_HOME_025 - Fund Search link opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_026_verifyMoreQuickGuidesNavigation">
+                  </a> <!-- tc_home_026_verifyMoreQuickGuidesNavigation -->
+                  <span class="method-name">tc_home_026_verifyMoreQuickGuidesNavigation</span>
+                  <em>
+(TC_HOME_026 - More Quick Guides link opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_027_verifyBuildInvestmentPlanNavigation">
+                  </a> <!-- tc_home_027_verifyBuildInvestmentPlanNavigation -->
+                  <span class="method-name">tc_home_027_verifyBuildInvestmentPlanNavigation</span>
+                  <em>
+(TC_HOME_027 - Build Investment Plan guide opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_028_verifyUpgradePortfolioNavigation">
+                  </a> <!-- tc_home_028_verifyUpgradePortfolioNavigation -->
+                  <span class="method-name">tc_home_028_verifyUpgradePortfolioNavigation</span>
+                  <em>
+(TC_HOME_028 - Upgrade Portfolio guide opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_029_verifyAnalystPickedFundsNavigation">
+                  </a> <!-- tc_home_029_verifyAnalystPickedFundsNavigation -->
+                  <span class="method-name">tc_home_029_verifyAnalystPickedFundsNavigation</span>
+                  <em>
+(TC_HOME_029 - Analyst Picked Funds guide opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_030_verifyPersonalisedSupportNavigation">
+                  </a> <!-- tc_home_030_verifyPersonalisedSupportNavigation -->
+                  <span class="method-name">tc_home_030_verifyPersonalisedSupportNavigation</span>
+                  <em>
+(TC_HOME_030 - Personalised Support card opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="tc_home_031_verifyAggressiveGrowthNavigation">
+                  </a> <!-- tc_home_031_verifyAggressiveGrowthNavigation -->
+                  <span class="method-name">tc_home_031_verifyAggressiveGrowthNavigation</span>
+                  <em>
+(TC_HOME_031 - Aggressive Growth card opens a valid screen)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-passed -->
+        </div> <!-- panel Default_suite -->
+        <div panel-name="test-xml-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">/tmp/testng-eclipse--621541279/testng-customsuite.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;tests.HomePageTest&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Default test --&gt;
+&lt;/suite&gt; &lt;!-- Default suite --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Default test (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Default_suite');
+function tableData_Default_suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(32);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'tc_home_032_verifyAllLinksOpenValidScreens')
+data.setCell(0, 2, 'tests.HomePageTest')
+data.setCell(0, 3, 213816);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'tc_home_026_verifyMoreQuickGuidesNavigation')
+data.setCell(1, 2, 'tests.HomePageTest')
+data.setCell(1, 3, 23523);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'tc_home_031_verifyAggressiveGrowthNavigation')
+data.setCell(2, 2, 'tests.HomePageTest')
+data.setCell(2, 3, 23516);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'tc_home_030_verifyPersonalisedSupportNavigation')
+data.setCell(3, 2, 'tests.HomePageTest')
+data.setCell(3, 3, 11441);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'tc_home_029_verifyAnalystPickedFundsNavigation')
+data.setCell(4, 2, 'tests.HomePageTest')
+data.setCell(4, 3, 10763);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'tc_home_023_verifyMfScreenerNavigation')
+data.setCell(5, 2, 'tests.HomePageTest')
+data.setCell(5, 3, 9098);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'tc_home_027_verifyBuildInvestmentPlanNavigation')
+data.setCell(6, 2, 'tests.HomePageTest')
+data.setCell(6, 3, 8697);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'tc_home_024_verifySipCalculatorNavigation')
+data.setCell(7, 2, 'tests.HomePageTest')
+data.setCell(7, 3, 8686);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'tc_home_028_verifyUpgradePortfolioNavigation')
+data.setCell(8, 2, 'tests.HomePageTest')
+data.setCell(8, 3, 8672);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'tc_home_025_verifyFundSearchNavigation')
+data.setCell(9, 2, 'tests.HomePageTest')
+data.setCell(9, 3, 8653);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'tc_home_018_verifyPersonalisedSupportCardVisible')
+data.setCell(10, 2, 'tests.HomePageTest')
+data.setCell(10, 3, 8288);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'tc_home_017_verifyAnalystPickedFundsGuideVisible')
+data.setCell(11, 2, 'tests.HomePageTest')
+data.setCell(11, 3, 8280);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'tc_home_015_verifyBuildInvestmentPlanGuideVisible')
+data.setCell(12, 2, 'tests.HomePageTest')
+data.setCell(12, 3, 6602);
+data.setCell(13, 0, 13)
+data.setCell(13, 1, 'tc_home_004_verifyNavigateToSectionVisible')
+data.setCell(13, 2, 'tests.HomePageTest')
+data.setCell(13, 3, 6244);
+data.setCell(14, 0, 14)
+data.setCell(14, 1, 'tc_home_013_verifyFundSearchLinkVisible')
+data.setCell(14, 2, 'tests.HomePageTest')
+data.setCell(14, 3, 6232);
+data.setCell(15, 0, 15)
+data.setCell(15, 1, 'tc_home_005_verifyQuickGuidesSectionVisible')
+data.setCell(15, 2, 'tests.HomePageTest')
+data.setCell(15, 3, 6225);
+data.setCell(16, 0, 16)
+data.setCell(16, 1, 'tc_home_011_verifyMfScreenerLinkVisible')
+data.setCell(16, 2, 'tests.HomePageTest')
+data.setCell(16, 3, 6214);
+data.setCell(17, 0, 17)
+data.setCell(17, 1, 'tc_home_012_verifySipCalculatorLinkVisible')
+data.setCell(17, 2, 'tests.HomePageTest')
+data.setCell(17, 3, 6206);
+data.setCell(18, 0, 18)
+data.setCell(18, 1, 'tc_home_016_verifyUpgradePortfolioGuideVisible')
+data.setCell(18, 2, 'tests.HomePageTest')
+data.setCell(18, 3, 6205);
+data.setCell(19, 0, 19)
+data.setCell(19, 1, 'tc_home_020_verifyRetirementCardNavigation')
+data.setCell(19, 2, 'tests.HomePageTest')
+data.setCell(19, 3, 4576);
+data.setCell(20, 0, 20)
+data.setCell(20, 1, 'tc_home_021_verifyRegularIncomeCardNavigation')
+data.setCell(20, 2, 'tests.HomePageTest')
+data.setCell(20, 3, 4546);
+data.setCell(21, 0, 21)
+data.setCell(21, 1, 'tc_home_022_verifyNoGoalStartInvestingNavigation')
+data.setCell(21, 2, 'tests.HomePageTest')
+data.setCell(21, 3, 4510);
+data.setCell(22, 0, 22)
+data.setCell(22, 1, 'tc_home_007_verifyFundAdvisorNoteSectionVisible')
+data.setCell(22, 2, 'tests.HomePageTest')
+data.setCell(22, 3, 4167);
+data.setCell(23, 0, 23)
+data.setCell(23, 1, 'tc_home_006_verifyAnalystChoiceSectionVisible')
+data.setCell(23, 2, 'tests.HomePageTest')
+data.setCell(23, 3, 4151);
+data.setCell(24, 0, 24)
+data.setCell(24, 1, 'tc_home_014_verifyMoreQuickGuidesLinkVisible')
+data.setCell(24, 2, 'tests.HomePageTest')
+data.setCell(24, 3, 4149);
+data.setCell(25, 0, 25)
+data.setCell(25, 1, 'tc_home_019_verifyAggressiveGrowthCardVisible')
+data.setCell(25, 2, 'tests.HomePageTest')
+data.setCell(25, 3, 4146);
+data.setCell(26, 0, 26)
+data.setCell(26, 1, 'tc_home_008_verifyRetirementCardVisible')
+data.setCell(26, 2, 'tests.HomePageTest')
+data.setCell(26, 3, 2090);
+data.setCell(27, 0, 27)
+data.setCell(27, 1, 'tc_home_003_verifyRichFutureSectionVisible')
+data.setCell(27, 2, 'tests.HomePageTest')
+data.setCell(27, 3, 2087);
+data.setCell(28, 0, 28)
+data.setCell(28, 1, 'tc_home_010_verifyNoGoalStartInvestingCardVisible')
+data.setCell(28, 2, 'tests.HomePageTest')
+data.setCell(28, 3, 2077);
+data.setCell(29, 0, 29)
+data.setCell(29, 1, 'tc_home_009_verifyRegularIncomeCardVisible')
+data.setCell(29, 2, 'tests.HomePageTest')
+data.setCell(29, 3, 2073);
+data.setCell(30, 0, 30)
+data.setCell(30, 1, 'tc_home_002_verifyBottomNavigationVisible')
+data.setCell(30, 2, 'tests.HomePageTest')
+data.setCell(30, 3, 95);
+data.setCell(31, 0, 31)
+data.setCell(31, 1, 'tc_home_001_verifyFundsScreenLoads')
+data.setCell(31, 2, 'tests.HomePageTest')
+data.setCell(31, 3, 18);
+window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 7 minutes</span>
+              <div id="times-div-Default_suite">
+              </div> <!-- times-div-Default_suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">tests.HomePageTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">beforeClass</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_001_verifyFundsScreenLoads())</span>
+                <span class="method-start">6660 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_001_verifyFundsScreenLoads</span>
+                <span class="method-start">15474 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_001_verifyFundsScreenLoads status=SUCCESS method=HomePageTest.tc_home_001_v...)</span>
+                <span class="method-start">15493 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_002_verifyBottomNavigationVisible())</span>
+                <span class="method-start">15495 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_002_verifyBottomNavigationVisible</span>
+                <span class="method-start">24183 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_002_verifyBottomNavigationVisible status=SUCCESS method=HomePageTest.tc_hom...)</span>
+                <span class="method-start">24279 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_003_verifyRichFutureSectionVisible())</span>
+                <span class="method-start">24281 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_003_verifyRichFutureSectionVisible</span>
+                <span class="method-start">34142 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_003_verifyRichFutureSectionVisible status=SUCCESS method=HomePageTest.tc_ho...)</span>
+                <span class="method-start">36230 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_004_verifyNavigateToSectionVisible())</span>
+                <span class="method-start">36232 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_004_verifyNavigateToSectionVisible</span>
+                <span class="method-start">46078 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_004_verifyNavigateToSectionVisible status=SUCCESS method=HomePageTest.tc_ho...)</span>
+                <span class="method-start">52323 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_005_verifyQuickGuidesSectionVisible())</span>
+                <span class="method-start">52325 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_005_verifyQuickGuidesSectionVisible</span>
+                <span class="method-start">62476 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_005_verifyQuickGuidesSectionVisible status=SUCCESS method=HomePageTest.tc_h...)</span>
+                <span class="method-start">68703 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_006_verifyAnalystChoiceSectionVisible())</span>
+                <span class="method-start">68704 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_006_verifyAnalystChoiceSectionVisible</span>
+                <span class="method-start">78625 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_006_verifyAnalystChoiceSectionVisible status=SUCCESS method=HomePageTest.tc...)</span>
+                <span class="method-start">82778 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_007_verifyFundAdvisorNoteSectionVisible())</span>
+                <span class="method-start">82779 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_007_verifyFundAdvisorNoteSectionVisible</span>
+                <span class="method-start">93558 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_007_verifyFundAdvisorNoteSectionVisible status=SUCCESS method=HomePageTest....)</span>
+                <span class="method-start">97726 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_008_verifyRetirementCardVisible())</span>
+                <span class="method-start">97727 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_008_verifyRetirementCardVisible</span>
+                <span class="method-start">107610 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_008_verifyRetirementCardVisible status=SUCCESS method=HomePageTest.tc_home_...)</span>
+                <span class="method-start">109700 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_009_verifyRegularIncomeCardVisible())</span>
+                <span class="method-start">109701 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_009_verifyRegularIncomeCardVisible</span>
+                <span class="method-start">119469 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_009_verifyRegularIncomeCardVisible status=SUCCESS method=HomePageTest.tc_ho...)</span>
+                <span class="method-start">121543 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_010_verifyNoGoalStartInvestingCardVisible())</span>
+                <span class="method-start">121544 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_010_verifyNoGoalStartInvestingCardVisible</span>
+                <span class="method-start">130680 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_010_verifyNoGoalStartInvestingCardVisible status=SUCCESS method=HomePageTes...)</span>
+                <span class="method-start">132758 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_011_verifyMfScreenerLinkVisible())</span>
+                <span class="method-start">132759 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_011_verifyMfScreenerLinkVisible</span>
+                <span class="method-start">142475 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_011_verifyMfScreenerLinkVisible status=SUCCESS method=HomePageTest.tc_home_...)</span>
+                <span class="method-start">148690 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_012_verifySipCalculatorLinkVisible())</span>
+                <span class="method-start">148691 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_012_verifySipCalculatorLinkVisible</span>
+                <span class="method-start">158548 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_012_verifySipCalculatorLinkVisible status=SUCCESS method=HomePageTest.tc_ho...)</span>
+                <span class="method-start">164755 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_013_verifyFundSearchLinkVisible())</span>
+                <span class="method-start">164756 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_013_verifyFundSearchLinkVisible</span>
+                <span class="method-start">175259 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_013_verifyFundSearchLinkVisible status=SUCCESS method=HomePageTest.tc_home_...)</span>
+                <span class="method-start">181492 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_014_verifyMoreQuickGuidesLinkVisible())</span>
+                <span class="method-start">181493 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_014_verifyMoreQuickGuidesLinkVisible</span>
+                <span class="method-start">190987 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_014_verifyMoreQuickGuidesLinkVisible status=SUCCESS method=HomePageTest.tc_...)</span>
+                <span class="method-start">195137 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_015_verifyBuildInvestmentPlanGuideVisible())</span>
+                <span class="method-start">195138 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_015_verifyBuildInvestmentPlanGuideVisible</span>
+                <span class="method-start">204651 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_015_verifyBuildInvestmentPlanGuideVisible status=SUCCESS method=HomePageTes...)</span>
+                <span class="method-start">211254 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_016_verifyUpgradePortfolioGuideVisible())</span>
+                <span class="method-start">211255 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_016_verifyUpgradePortfolioGuideVisible</span>
+                <span class="method-start">220821 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_016_verifyUpgradePortfolioGuideVisible status=SUCCESS method=HomePageTest.t...)</span>
+                <span class="method-start">227027 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_017_verifyAnalystPickedFundsGuideVisible())</span>
+                <span class="method-start">227029 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_017_verifyAnalystPickedFundsGuideVisible</span>
+                <span class="method-start">236850 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_017_verifyAnalystPickedFundsGuideVisible status=SUCCESS method=HomePageTest...)</span>
+                <span class="method-start">245131 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_018_verifyPersonalisedSupportCardVisible())</span>
+                <span class="method-start">245131 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_018_verifyPersonalisedSupportCardVisible</span>
+                <span class="method-start">254873 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_018_verifyPersonalisedSupportCardVisible status=SUCCESS method=HomePageTest...)</span>
+                <span class="method-start">263162 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_019_verifyAggressiveGrowthCardVisible())</span>
+                <span class="method-start">263163 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_019_verifyAggressiveGrowthCardVisible</span>
+                <span class="method-start">272562 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_019_verifyAggressiveGrowthCardVisible status=SUCCESS method=HomePageTest.tc...)</span>
+                <span class="method-start">276709 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_020_verifyRetirementCardNavigation())</span>
+                <span class="method-start">276710 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_020_verifyRetirementCardNavigation</span>
+                <span class="method-start">286915 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_020_verifyRetirementCardNavigation status=SUCCESS method=HomePageTest.tc_ho...)</span>
+                <span class="method-start">291492 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_021_verifyRegularIncomeCardNavigation())</span>
+                <span class="method-start">291493 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_021_verifyRegularIncomeCardNavigation</span>
+                <span class="method-start">300231 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_021_verifyRegularIncomeCardNavigation status=SUCCESS method=HomePageTest.tc...)</span>
+                <span class="method-start">304777 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_022_verifyNoGoalStartInvestingNavigation())</span>
+                <span class="method-start">304778 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_022_verifyNoGoalStartInvestingNavigation</span>
+                <span class="method-start">314718 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_022_verifyNoGoalStartInvestingNavigation status=SUCCESS method=HomePageTest...)</span>
+                <span class="method-start">319228 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_023_verifyMfScreenerNavigation())</span>
+                <span class="method-start">319230 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_023_verifyMfScreenerNavigation</span>
+                <span class="method-start">329164 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_023_verifyMfScreenerNavigation status=SUCCESS method=HomePageTest.tc_home_0...)</span>
+                <span class="method-start">338263 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_024_verifySipCalculatorNavigation())</span>
+                <span class="method-start">338264 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_024_verifySipCalculatorNavigation</span>
+                <span class="method-start">348113 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_024_verifySipCalculatorNavigation status=SUCCESS method=HomePageTest.tc_hom...)</span>
+                <span class="method-start">356800 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_025_verifyFundSearchNavigation())</span>
+                <span class="method-start">356801 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_025_verifyFundSearchNavigation</span>
+                <span class="method-start">366753 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_025_verifyFundSearchNavigation status=SUCCESS method=HomePageTest.tc_home_0...)</span>
+                <span class="method-start">375407 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_026_verifyMoreQuickGuidesNavigation())</span>
+                <span class="method-start">375408 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_026_verifyMoreQuickGuidesNavigation</span>
+                <span class="method-start">385207 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_026_verifyMoreQuickGuidesNavigation status=SUCCESS method=HomePageTest.tc_h...)</span>
+                <span class="method-start">408731 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_027_verifyBuildInvestmentPlanNavigation())</span>
+                <span class="method-start">408732 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_027_verifyBuildInvestmentPlanNavigation</span>
+                <span class="method-start">418699 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_027_verifyBuildInvestmentPlanNavigation status=SUCCESS method=HomePageTest....)</span>
+                <span class="method-start">427397 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_028_verifyUpgradePortfolioNavigation())</span>
+                <span class="method-start">427397 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_028_verifyUpgradePortfolioNavigation</span>
+                <span class="method-start">436198 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_028_verifyUpgradePortfolioNavigation status=SUCCESS method=HomePageTest.tc_...)</span>
+                <span class="method-start">444870 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_029_verifyAnalystPickedFundsNavigation())</span>
+                <span class="method-start">444871 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_029_verifyAnalystPickedFundsNavigation</span>
+                <span class="method-start">454685 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_029_verifyAnalystPickedFundsNavigation status=SUCCESS method=HomePageTest.t...)</span>
+                <span class="method-start">465448 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_030_verifyPersonalisedSupportNavigation())</span>
+                <span class="method-start">465449 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">tc_home_030_verifyPersonalisedSupportNavigation</span>
+                <span class="method-start">475858 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_031_verifyAggressiveGrowthNavigation())</span>
+                <span class="method-start">487300 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_030_verifyPersonalisedSupportNavigation status=SUCCESS method=HomePageTest....)</span>
+                <span class="method-start">487300 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">tc_home_031_verifyAggressiveGrowthNavigation</span>
+                <span class="method-start">495824 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp(public void tests.HomePageTest.tc_home_032_verifyAllLinksOpenValidScreens())</span>
+                <span class="method-start">519341 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_031_verifyAggressiveGrowthNavigation status=SUCCESS method=HomePageTest.tc_...)</span>
+                <span class="method-start">519341 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">tc_home_032_verifyAllLinksOpenValidScreens</span>
+                <span class="method-start">529043 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=tc_home_032_verifyAllLinksOpenValidScreens status=FAILURE method=HomePageTest.tc_ho...)</span>
+                <span class="method-start">742861 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-suite after">
+                <span class="method-name">afterSuite</span>
+                <span class="method-start">743032 ms</span>
+              </div> <!-- configuration-suite after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+<script type="text/javascript" src="testng-reports2.js"></script>
+</html>
