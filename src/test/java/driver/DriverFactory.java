@@ -120,7 +120,8 @@ public final class DriverFactory {
         try {
             SessionId sessionId = driver.getSessionId();
             if (sessionId == null) return false;
-            driver.getCurrentPackage();
+            //driver.getCurrentPackage();
+            driver.getPageSource();
             return true;
         } catch (Exception e) {
             return false;
@@ -154,6 +155,8 @@ public final class DriverFactory {
         // Reduce animation jitter during test execution
         options.setDisableWindowAnimation(true);
         options.setIgnoreHiddenApiPolicyError(true);
+        options.setSkipServerInstallation(true);
+        
 
         int systemPort = allocateSystemPort(config);
         options.setSystemPort(systemPort);

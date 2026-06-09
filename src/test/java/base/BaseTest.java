@@ -166,7 +166,25 @@ public class BaseTest {
             return true;
         } catch (Exception e) {
             logger.error("initializeDriver: failed — {}", e.getMessage());
-            return false;
+            try {
+
+                DriverFactory.quitDriver();
+
+                Thread.sleep(5000);
+
+                DriverFactory.initDriver();
+
+                waitForFreshAppLaunch();
+
+                return true;
+
+            } catch (Exception retryException) {
+
+                logger.error("Retry also failed");
+
+                return false;
+            }
+          //  return false;
         }
     }
 
@@ -209,6 +227,9 @@ public class BaseTest {
             logger.warn(
                     "ensureAppIsRunning: unable to activate app — {}",
                     e.getMessage());
+            DriverFactory.restartDriver();
+
+            waitForFreshAppLaunch(); 
         }
     }
 

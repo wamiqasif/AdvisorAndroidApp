@@ -2,7 +2,10 @@ utils/ExtentManager.class
 pages/InvestorAccountPage.class
 tests/HomePageTest.class
 pages/DashboardPage.class
+pages/MyAccount_Page$LinkResult.class
 base/RequiresPinScreen.class
+tests/MyAccountTest.class
+pages/MyAccount_Page.class
 tests/PortfolioTest.class
 tests/LoginTest.class
 pages/OtpPage.class
