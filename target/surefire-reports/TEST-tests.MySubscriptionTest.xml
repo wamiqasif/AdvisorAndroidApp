@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="tests.MySubscriptionTest" time="32.343" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/home/wamik/appium-framework/target/test-classes:/home/wamik/appium-framework/target/classes:/home/wamik/.m2/repository/io/appium/java-client/9.3.0/java-client-9.3.0.jar:/home/wamik/.m2/repository/com/google/code/gson/gson/2.11.0/gson-2.11.0.jar:/home/wamik/.m2/repository/com/google/errorprone/error_prone_annotations/2.27.0/error_prone_annotations-2.27.0.jar:/home/wamik/.m2/repository/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-api/4.20.0/selenium-api-4.20.0.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-remote-driver/4.20.0/selenium-remote-driver-4.20.0.jar:/home/wamik/.m2/repository/com/google/auto/service/auto-service-annotations/1.1.1/auto-service-annotations-1.1.1.jar:/home/wamik/.m2/repository/com/google/guava/guava/33.1.0-jre/guava-33.1.0-jre.jar:/home/wamik/.m2/repository/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.jar:/home/wamik/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/wamik/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/wamik/.m2/repository/org/checkerframework/checker-qual/3.42.0/checker-qual-3.42.0.jar:/home/wamik/.m2/repository/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar:/home/wamik/.m2/repository/io/opentelemetry/semconv/opentelemetry-semconv/1.25.0-alpha/opentelemetry-semconv-1.25.0-alpha.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-api/1.37.0/opentelemetry-api-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-context/1.37.0/opentelemetry-context-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-exporter-logging/1.37.0/opentelemetry-exporter-logging-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-common/1.37.0/opentelemetry-sdk-common-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure-spi/1.37.0/opentelemetry-sdk-extension-autoconfigure-spi-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure/1.37.0/opentelemetry-sdk-extension-autoconfigure-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-api-incubator/1.37.0-alpha/opentelemetry-api-incubator-1.37.0-alpha.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-trace/1.37.0/opentelemetry-sdk-trace-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk/1.37.0/opentelemetry-sdk-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-metrics/1.37.0/opentelemetry-sdk-metrics-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-logs/1.37.0/opentelemetry-sdk-logs-1.37.0.jar:/home/wamik/.m2/repository/net/bytebuddy/byte-buddy/1.14.14/byte-buddy-1.14.14.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-http/4.20.0/selenium-http-4.20.0.jar:/home/wamik/.m2/repository/dev/failsafe/failsafe/3.3.2/failsafe-3.3.2.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-json/4.20.0/selenium-json-4.20.0.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-manager/4.20.0/selenium-manager-4.20.0.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-os/4.20.0/selenium-os-4.20.0.jar:/home/wamik/.m2/repository/org/apache/commons/commons-exec/1.4.0/commons-exec-1.4.0.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-support/4.20.0/selenium-support-4.20.0.jar:/home/wamik/.m2/repository/org/testng/testng/7.10.2/testng-7.10.2.jar:/home/wamik/.m2/repository/com/beust/jcommander/1.82/jcommander-1.82.jar:/home/wamik/.m2/repository/org/webjars/jquery/3.7.1/jquery-3.7.1.jar:/home/wamik/.m2/repository/com/aventstack/extentreports/5.1.2/extentreports-5.1.2.jar:/home/wamik/.m2/repository/io/reactivex/rxjava3/rxjava/3.1.6/rxjava-3.1.6.jar:/home/wamik/.m2/repository/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar:/home/wamik/.m2/repository/org/freemarker/freemarker/2.3.32/freemarker-2.3.32.jar:/home/wamik/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar:/home/wamik/.m2/repository/commons-io/commons-io/2.16.1/commons-io-2.16.1.jar:/home/wamik/.m2/repository/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.jar:"/>
+    <property name="java.vm.vendor" value="Ubuntu"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://ubuntu.com/"/>
+    <property name="user.timezone" value="Asia/Kolkata"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-amd64/lib"/>
+    <property name="sun.java.command" value="/home/wamik/appium-framework/target/surefire/surefirebooter-20260609144840930_3.jar /home/wamik/appium-framework/target/surefire 2026-06-09T14-48-40_856-jvmRun1 surefire-20260609144840930_1tmp surefire_0-20260609144840930_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="test" value="MySubscriptionTest#tc_sub_017_verifyAllLinksRecursively"/>
+    <property name="surefire.test.class.path" value="/home/wamik/appium-framework/target/test-classes:/home/wamik/appium-framework/target/classes:/home/wamik/.m2/repository/io/appium/java-client/9.3.0/java-client-9.3.0.jar:/home/wamik/.m2/repository/com/google/code/gson/gson/2.11.0/gson-2.11.0.jar:/home/wamik/.m2/repository/com/google/errorprone/error_prone_annotations/2.27.0/error_prone_annotations-2.27.0.jar:/home/wamik/.m2/repository/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-api/4.20.0/selenium-api-4.20.0.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-remote-driver/4.20.0/selenium-remote-driver-4.20.0.jar:/home/wamik/.m2/repository/com/google/auto/service/auto-service-annotations/1.1.1/auto-service-annotations-1.1.1.jar:/home/wamik/.m2/repository/com/google/guava/guava/33.1.0-jre/guava-33.1.0-jre.jar:/home/wamik/.m2/repository/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.jar:/home/wamik/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/wamik/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/wamik/.m2/repository/org/checkerframework/checker-qual/3.42.0/checker-qual-3.42.0.jar:/home/wamik/.m2/repository/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar:/home/wamik/.m2/repository/io/opentelemetry/semconv/opentelemetry-semconv/1.25.0-alpha/opentelemetry-semconv-1.25.0-alpha.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-api/1.37.0/opentelemetry-api-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-context/1.37.0/opentelemetry-context-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-exporter-logging/1.37.0/opentelemetry-exporter-logging-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-common/1.37.0/opentelemetry-sdk-common-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure-spi/1.37.0/opentelemetry-sdk-extension-autoconfigure-spi-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure/1.37.0/opentelemetry-sdk-extension-autoconfigure-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-api-incubator/1.37.0-alpha/opentelemetry-api-incubator-1.37.0-alpha.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-trace/1.37.0/opentelemetry-sdk-trace-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk/1.37.0/opentelemetry-sdk-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-metrics/1.37.0/opentelemetry-sdk-metrics-1.37.0.jar:/home/wamik/.m2/repository/io/opentelemetry/opentelemetry-sdk-logs/1.37.0/opentelemetry-sdk-logs-1.37.0.jar:/home/wamik/.m2/repository/net/bytebuddy/byte-buddy/1.14.14/byte-buddy-1.14.14.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-http/4.20.0/selenium-http-4.20.0.jar:/home/wamik/.m2/repository/dev/failsafe/failsafe/3.3.2/failsafe-3.3.2.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-json/4.20.0/selenium-json-4.20.0.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-manager/4.20.0/selenium-manager-4.20.0.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-os/4.20.0/selenium-os-4.20.0.jar:/home/wamik/.m2/repository/org/apache/commons/commons-exec/1.4.0/commons-exec-1.4.0.jar:/home/wamik/.m2/repository/org/seleniumhq/selenium/selenium-support/4.20.0/selenium-support-4.20.0.jar:/home/wamik/.m2/repository/org/testng/testng/7.10.2/testng-7.10.2.jar:/home/wamik/.m2/repository/com/beust/jcommander/1.82/jcommander-1.82.jar:/home/wamik/.m2/repository/org/webjars/jquery/3.7.1/jquery-3.7.1.jar:/home/wamik/.m2/repository/com/aventstack/extentreports/5.1.2/extentreports-5.1.2.jar:/home/wamik/.m2/repository/io/reactivex/rxjava3/rxjava/3.1.6/rxjava-3.1.6.jar:/home/wamik/.m2/repository/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar:/home/wamik/.m2/repository/org/freemarker/freemarker/2.3.32/freemarker-2.3.32.jar:/home/wamik/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar:/home/wamik/.m2/repository/commons-io/commons-io/2.16.1/commons-io-2.16.1.jar:/home/wamik/.m2/repository/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/wamik"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-04-21"/>
+    <property name="java.home" value="/usr/lib/jvm/java-17-openjdk-amd64"/>
+    <property name="testng.dtd.http" value="true"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/home/wamik/appium-framework"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="/home/wamik/appium-framework/target/surefire/surefirebooter-20260609144840930_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.19+10-1-24.04.2-Ubuntu"/>
+    <property name="user.name" value="wamik"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.17.0-1024-oem"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="/home/wamik/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-17"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="17.0.19"/>
+    <property name="user.dir" value="/home/wamik/appium-framework"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Ubuntu"/>
+    <property name="java.vm.version" value="17.0.19+10-1-24.04.2-Ubuntu"/>
+    <property name="java.specification.maintenance.version" value="1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="tc_sub_017_verifyAllLinksRecursively" classname="tests.MySubscriptionTest" time="4.064">
+    <system-err><![CDATA[[main] INFO base.BaseTest - beforeClass: initializing driver for MySubscriptionTest
+[main] INFO base.BaseTest - initializeDriver: no active session — creating driver
+[main] INFO base.BaseTest - initializeDriver: driver created — Flutter stabilization complete
+[main] INFO base.BaseTest - beforeClass: driver ready — running onClassReady()
+[main] INFO base.BaseTest - beforeClass: complete for MySubscriptionTest
+[main] INFO base.BaseTest - === setUp: tc_sub_017_verifyAllLinksRecursively ===
+[main] INFO base.BaseTest - initializeDriver: session alive — reusing
+[main] INFO base.BaseTest - setUp: ensuring app is running
+[main] INFO base.BaseTest - ensureAppIsRunning: app already in foreground
+[main] INFO base.BaseTest - setUp: ensuring dashboard ready
+[main] INFO base.BaseTest - ensureDashboardReady: bottom navigation hidden — starting back-press recovery
+[main] INFO base.BaseTest - ensureDashboardReady: back press 1 / 15
+[main] INFO base.BaseTest - ensureDashboardReady: navigation restored after 1 back press(es) — tapping Hub
+[main] INFO pages.DashboardPage - Tapping Hub tab
+[main] INFO pages.DashboardPage - Hub tab tapped
+[main] INFO base.BaseTest - ensureDashboardReady: Hub tab tapped — dashboard ready
+[main] INFO base.BaseTest - setUp: running recoverAppState()
+[main] INFO pages.DashboardPage - recoverToDashboard: checking current state
+[main] INFO pages.DashboardPage - recoverToDashboard: already on dashboard
+[main] INFO pages.DashboardPage - Tapping Hub tab
+[main] INFO pages.DashboardPage - Hub tab tapped
+[main] INFO pages.MySubscription_Page - Opening My Subscription screen
+[main] INFO pages.MySubscription_Page - My Subscription screen opened
+[main] INFO base.BaseTest - My Subscription screen ready for: tc_sub_017_verifyAllLinksRecursively
+[main] INFO base.BaseTest - setUp: complete — tc_sub_017_verifyAllLinksRecursively ready to execute
+[main] INFO pages.MySubscription_Page - === Recursive link crawl: start ===
+[main] INFO pages.MySubscription_Page - Depth 0: 2 candidate link(s): [Invoice, Active]
+[main] INFO pages.MySubscription_Page - Depth 0: tapping link 'Invoice'
+[main] INFO pages.MySubscription_Page - Depth 1: 0 candidate link(s): []
+[main] INFO pages.MySubscription_Page - === Recursive link crawl: complete - 1 link(s) tapped ===
+[main] INFO base.BaseTest - TC_SUB_017 - recursive link navigation verified: [Invoice=true]
+]]></system-err>
+  </testcase>
+</testsuite>

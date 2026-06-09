@@ -1,4 +1,5 @@
 utils/ExtentManager.class
+tests/MySubscriptionTest.class
 pages/InvestorAccountPage.class
 tests/HomePageTest.class
 pages/DashboardPage.class
@@ -22,6 +23,7 @@ pages/PortfolioPage.class
 tests/CartingTest.class
 pages/BasePage.class
 tests/PortfolioPlannerInvestorTest.class
+pages/MySubscription_Page$LinkResult.class
 pages/Home_Page.class
 pages/AboutUs_Page.class
 tests/FAQTest.class
@@ -34,5 +36,6 @@ utils/ScreenshotUtil.class
 tests/InvestorAccountTest.class
 tests/PortfolioPlannerTest.class
 pages/Home_Page$LinkResult.class
+pages/MySubscription_Page.class
 pages/FAQPage$LinkResult.class
 pages/LoginPage.class

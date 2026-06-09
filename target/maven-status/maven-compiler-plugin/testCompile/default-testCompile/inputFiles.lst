@@ -11,6 +11,7 @@
 /home/wamik/appium-framework/src/test/java/pages/InvestorAccountPage.java
 /home/wamik/appium-framework/src/test/java/pages/LoginPage.java
 /home/wamik/appium-framework/src/test/java/pages/MyAccount_Page.java
+/home/wamik/appium-framework/src/test/java/pages/MySubscription_Page.java
 /home/wamik/appium-framework/src/test/java/pages/OtpPage.java
 /home/wamik/appium-framework/src/test/java/pages/PinPage.java
 /home/wamik/appium-framework/src/test/java/pages/PortfolioPage.java
@@ -23,6 +24,7 @@
 /home/wamik/appium-framework/src/test/java/tests/InvestorAccountTest.java
 /home/wamik/appium-framework/src/test/java/tests/LoginTest.java
 /home/wamik/appium-framework/src/test/java/tests/MyAccountTest.java
+/home/wamik/appium-framework/src/test/java/tests/MySubscriptionTest.java
 /home/wamik/appium-framework/src/test/java/tests/PortfolioPlannerInvestorTest.java
 /home/wamik/appium-framework/src/test/java/tests/PortfolioPlannerTest.java
 /home/wamik/appium-framework/src/test/java/tests/PortfolioTest.java

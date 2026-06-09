@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-06-09T14:48:41 IST" name="Surefire suite" finished-at="2026-06-09T14:49:13 IST" duration-ms="31673">
+    <groups>
+    </groups>
+    <test started-at="2026-06-09T14:48:41 IST" name="Surefire test" finished-at="2026-06-09T14:49:13 IST" duration-ms="31673">
+      <class name="tests.MySubscriptionTest">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.MySubscriptionTest@2f177a4b]" started-at="2026-06-09T14:48:41 IST" name="beforeClass" finished-at="2026-06-09T14:48:48 IST" duration-ms="6847" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.MySubscriptionTest@2f177a4b]" started-at="2026-06-09T14:48:48 IST" name="setUp" finished-at="2026-06-09T14:49:08 IST" duration-ms="20735" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.MySubscriptionTest.tc_sub_017_verifyAllLinksRecursively()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="tc_sub_017_verifyAllLinksRecursively()[pri:0, instance:tests.MySubscriptionTest@2f177a4b]" started-at="2026-06-09T14:49:08 IST" name="tc_sub_017_verifyAllLinksRecursively" description="TC_SUB_017 - Every link opens a valid screen (recursive crawl, follows nested links)" finished-at="2026-06-09T14:49:13 IST" duration-ms="4064" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tc_sub_017_verifyAllLinksRecursively -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.MySubscriptionTest@2f177a4b]" started-at="2026-06-09T14:49:13 IST" name="tearDown" finished-at="2026-06-09T14:49:13 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=tc_sub_017_verifyAllLinksRecursively status=SUCCESS method=MySubscriptionTest.tc_sub_017_verifyAllLinksRecursively()[pri:0, instance:tests.MySubscriptionTest@2f177a4b] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.MySubscriptionTest@2f177a4b]" started-at="2026-06-09T14:49:13 IST" name="afterSuite" finished-at="2026-06-09T14:49:13 IST" duration-ms="372" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterSuite -->
+      </class> <!-- tests.MySubscriptionTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

@@ -3,15 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.MyAccountTest">
+      <class name="tests.MySubscriptionTest">
         <methods>
           <include name="setUp"/>
+          <include name="tc_sub_017_verifyAllLinksRecursively"/>
           <include name="tearDown"/>
-          <include name="tc_myacc_015_verifyAllLinksOpenValidScreens"/>
           <include name="afterSuite"/>
           <include name="beforeClass"/>
         </methods>
-      </class> <!-- tests.MyAccountTest -->
+      </class> <!-- tests.MySubscriptionTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
