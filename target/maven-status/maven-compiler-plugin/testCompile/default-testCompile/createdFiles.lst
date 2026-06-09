@@ -1,5 +1,6 @@
 utils/ExtentManager.class
 tests/MySubscriptionTest.class
+tests/FundScreenerTest.class
 pages/InvestorAccountPage.class
 tests/HomePageTest.class
 pages/DashboardPage.class
@@ -12,6 +13,7 @@ tests/LoginTest.class
 pages/OtpPage.class
 tests/AboutUsTest.class
 pages/FAQPage.class
+pages/FundScreener_Page.class
 pages/TaxCalculatorPage.class
 pages/FAQPage$FaqCategory.class
 base/BaseTest.class
@@ -23,6 +25,7 @@ pages/PortfolioPage.class
 tests/CartingTest.class
 pages/BasePage.class
 tests/PortfolioPlannerInvestorTest.class
+pages/FundScreener_Page$LinkResult.class
 pages/MySubscription_Page$LinkResult.class
 pages/Home_Page.class
 pages/AboutUs_Page.class

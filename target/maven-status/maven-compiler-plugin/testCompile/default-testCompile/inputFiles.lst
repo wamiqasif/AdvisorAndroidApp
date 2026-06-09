@@ -7,6 +7,7 @@
 /home/wamik/appium-framework/src/test/java/pages/CartingPage.java
 /home/wamik/appium-framework/src/test/java/pages/DashboardPage.java
 /home/wamik/appium-framework/src/test/java/pages/FAQPage.java
+/home/wamik/appium-framework/src/test/java/pages/FundScreener_Page.java
 /home/wamik/appium-framework/src/test/java/pages/Home_Page.java
 /home/wamik/appium-framework/src/test/java/pages/InvestorAccountPage.java
 /home/wamik/appium-framework/src/test/java/pages/LoginPage.java
@@ -20,6 +21,7 @@
 /home/wamik/appium-framework/src/test/java/tests/AboutUsTest.java
 /home/wamik/appium-framework/src/test/java/tests/CartingTest.java
 /home/wamik/appium-framework/src/test/java/tests/FAQTest.java
+/home/wamik/appium-framework/src/test/java/tests/FundScreenerTest.java
 /home/wamik/appium-framework/src/test/java/tests/HomePageTest.java
 /home/wamik/appium-framework/src/test/java/tests/InvestorAccountTest.java
 /home/wamik/appium-framework/src/test/java/tests/LoginTest.java
