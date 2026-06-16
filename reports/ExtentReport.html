@@ -35,7 +35,7 @@
 <a href="#"><span class="badge badge-primary">Mobile Automation Suite</span></a>
 </li>
 <li class="m-r-10">
-<a href="#"><span class="badge badge-primary">09-Jun-2026 18:25:29</span></a>
+<a href="#"><span class="badge badge-primary">16-Jun-2026 18:12:10</span></a>
 </li>
 </ul>
 </div>
@@ -66,7 +66,7 @@
 <li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
 <ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
-<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<a class="dropdown-item" status="fail" href="#"><span>Fail</span><span class="status danger"></span></a>
 <div class="dropdown-divider"></div>
 <a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
 </ul>
@@ -74,31 +74,31 @@
 </ul>
 </div>    <div class="test-list-wrapper scrollable">
       <ul class="test-list-item">
-        <li class="test-item"  status="pass" test-id="1"
+        <li class="test-item"  status="fail" test-id="1"
           author=""
           tag=""
           device="">
           <div class="test-detail">
-            <p class="name">tc_fs_019_verifyCustomiseAndApplyFilters</p>
+            <p class="name">tc_backend_001_verifyCategoryCountsAlignWithOpinionData</p>
             <p class="text-sm">
-              <span>6:25:29 pm</span> / <span>00:00:31:300</span>
-              <span class="badge pass-bg log float-right">Pass</span>
+              <span>6:12:10 pm</span> / <span>00:00:22:996</span>
+              <span class="badge fail-bg log float-right">Fail</span>
             </p>
           </div>
           <div class="test-contents d-none">
 <div class="detail-head">
 <div class="p-v-10">
 <div class="info">
-<h5 class="test-status text-pass">tc_fs_019_verifyCustomiseAndApplyFilters</h5>
-<span class='badge badge-success'>06.09.2026 6:25:29 pm</span>
-<span class='badge badge-danger'>06.09.2026 6:26:00 pm</span>
-<span class='badge badge-default'>00:00:31:300</span>
+<h5 class="test-status text-fail">tc_backend_001_verifyCategoryCountsAlignWithOpinionData</h5>
+<span class='badge badge-success'>06.16.2026 6:12:10 pm</span>
+<span class='badge badge-danger'>06.16.2026 6:12:33 pm</span>
+<span class='badge badge-default'>00:00:22:996</span>
 &middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
 <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
 <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
 <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
 </div>
-<div class="m-t-10 m-l-5">TC_FS_019 - Customise a filter on Top Rated Funds and Apply returns a filtered list</div>
+<div class="m-t-10 m-l-5">TC_BACKEND_001 — Fund Review API category counts align with Fund Opinion API data</div>
 </div>
 </div><div class="detail-body mt-4">
 <table class="table table-sm">
@@ -106,16 +106,522 @@
   <tbody>
       <tr class="event-row">
         <td><span class="badge log info-bg">Info</span></td>
-        <td>6:25:29 pm</td>
+        <td>6:12:10 pm</td>
         <td>
-          Starting test: tc_fs_019_verifyCustomiseAndApplyFilters
+          Starting test: tc_backend_001_verifyCategoryCountsAlignWithOpinionData
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:12:21 pm</td>
+        <td>
+          Step 1/2: Fetching Fund Review API data
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:12:31 pm</td>
+        <td>
+          Step 3: Fetching Fund Opinion API data for 53 plan IDs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          ─────────────────────── Per-Fund Processing Log ───────────────────────
         </td>
       </tr>
       <tr class="event-row">
         <td><span class="badge log pass-bg">Pass</span></td>
-        <td>6:26:00 pm</td>
+        <td>6:12:32 pm</td>
         <td>
-          Test passed
+          PLAN_ID=43050 | FUND_NAME=HDFC Long Duration Debt Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Exit | PROVISIONAL_OPINION_NAME=Poor Start | EFFECTIVE_OPINION=Exit | EXPECTED_CATEGORY=EXIT | ACTUAL_CATEGORY=EXIT
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=26990 | FUND_NAME=Nippon India Medium Duration Reg-G | IS_PROVISIONAL=false | OPINION_NAME=Exit | PROVISIONAL_OPINION_NAME=Poor Start | EFFECTIVE_OPINION=Exit | EXPECTED_CATEGORY=EXIT | ACTUAL_CATEGORY=EXIT
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=38439 | FUND_NAME=Shriram ELSS Tax Saver Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Exit | PROVISIONAL_OPINION_NAME=Poor Start | EFFECTIVE_OPINION=Exit | EXPECTED_CATEGORY=EXIT | ACTUAL_CATEGORY=EXIT
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=16957 | FUND_NAME=Tata Children's Dir | IS_PROVISIONAL=false | OPINION_NAME=Exit | PROVISIONAL_OPINION_NAME=Poor Start | EFFECTIVE_OPINION=Exit | EXPECTED_CATEGORY=EXIT | ACTUAL_CATEGORY=EXIT
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=15723 | FUND_NAME=UTI ELSS Tax Saver Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Exit | PROVISIONAL_OPINION_NAME=Poor Start | EFFECTIVE_OPINION=Exit | EXPECTED_CATEGORY=EXIT | ACTUAL_CATEGORY=EXIT
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=15889 | FUND_NAME=ABSL ELSS Tax Saver Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=15748 | FUND_NAME=Axis Liquid Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=34774 | FUND_NAME=Bank of India Midcap Tax Sr 1 Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=15732 | FUND_NAME=Baroda BNP Paribas ELSS Tax Saver Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=28229 | FUND_NAME=Edelweiss Equity Savings Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=16071 | FUND_NAME=HDFC BSE Sensex Index Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=16046 | FUND_NAME=HDFC Gilt Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=16151 | FUND_NAME=HDFC Short Term Debt Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=41245 | FUND_NAME=ICICI Pru Business Cycle Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=16719 | FUND_NAME=Invesco India Contra Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=37843 | FUND_NAME=Invesco India Smallcap Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=44543 | FUND_NAME=Invesco India Technology Dir-G | IS_PROVISIONAL=true | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good Start | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=1171 | FUND_NAME=Nippon India ETF Nifty 50 BeES-IDCW | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=19701 | FUND_NAME=Parag Parikh Flexi Cap Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=30710 | FUND_NAME=SBI Nifty 50 ETF-IDCW | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=44576 | FUND_NAME=WhiteOak Capital Digital Bharat Dir-G | IS_PROVISIONAL=true | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good Start | EXPECTED_CATEGORY=GOOD | ACTUAL_CATEGORY=GOOD
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log warning-bg">Warning</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=45998 | FUND_NAME=Motilal Oswal BSE Clean Environment Index Dir-G | IS_PROVISIONAL=N/A | OPINION_NAME= | PROVISIONAL_OPINION_NAME= | EFFECTIVE_OPINION= | EXPECTED_CATEGORY=SKIPPED | ACTUAL_CATEGORY=NEW-FUND
+  SKIP: Missing field: opinion_name and provisional_opinion_name are both null/blank. Impact: category cannot be calculated.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log warning-bg">Warning</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=46015 | FUND_NAME=WhiteOak Capital Aggressive Hybrid Dir-G | IS_PROVISIONAL=N/A | OPINION_NAME= | PROVISIONAL_OPINION_NAME= | EFFECTIVE_OPINION= | EXPECTED_CATEGORY=SKIPPED | ACTUAL_CATEGORY=NEW-FUND
+  SKIP: Missing field: opinion_name and provisional_opinion_name are both null/blank. Impact: category cannot be calculated.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log warning-bg">Warning</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=46014 | FUND_NAME=WhiteOak Capital Aggressive Hybrid Reg-G | IS_PROVISIONAL=N/A | OPINION_NAME= | PROVISIONAL_OPINION_NAME= | EFFECTIVE_OPINION= | EXPECTED_CATEGORY=SKIPPED | ACTUAL_CATEGORY=NEW-FUND
+  SKIP: Missing field: opinion_name and provisional_opinion_name are both null/blank. Impact: category cannot be calculated.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=2174 | FUND_NAME=ABSL Liquid Reg-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=43125 | FUND_NAME=Axis Business Cycles Dir-IDCW | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=43123 | FUND_NAME=Axis Business Cycles Reg-IDCW | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=42523 | FUND_NAME=Axis Silver FoF Reg-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=44974 | FUND_NAME=Edelweiss CRISIL-IBX AAA Bond NBFC-HFC-Jun 2027 Index Reg-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=219 | FUND_NAME=HDFC Flexi Cap Reg-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=15869 | FUND_NAME=ICICI Pru Large & Mid Cap Dir-IDCW | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=16707 | FUND_NAME=Invesco India Financial Services Dir-IDCW | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=7831 | FUND_NAME=Invesco India Financial Services Reg-IDCW | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=616 | FUND_NAME=LIC MF Medium to Long Duration Reg-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=1773 | FUND_NAME=Nippon India Gilt Inst-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=4111 | FUND_NAME=Quant Large & Mid Cap Reg-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=2812 | FUND_NAME=SBI Comma Reg-G | IS_PROVISIONAL=false | OPINION_NAME=Good | PROVISIONAL_OPINION_NAME=Good Start | EFFECTIVE_OPINION=Good | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=1443 | FUND_NAME=SBI Overnight Reg-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=31366 | FUND_NAME=Tata Digital India Reg-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=OPTIMIZE | ACTUAL_CATEGORY=OPTIMIZE
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=44789 | FUND_NAME=ABSL Conglomerate Dir-IDCW | IS_PROVISIONAL=true | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady Start | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=15688 | FUND_NAME=Axis ELSS Tax Saver Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=15686 | FUND_NAME=Axis Gold Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=44768 | FUND_NAME=Axis Momentum Dir-G | IS_PROVISIONAL=true | OPINION_NAME=Exit | PROVISIONAL_OPINION_NAME=Poor Start | EFFECTIVE_OPINION=Poor Start | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=16493 | FUND_NAME=Bandhan ELSS Tax Saver Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=44976 | FUND_NAME=Edelweiss CRISIL-IBX AAA Bond NBFC-HFC-Jun 2027 Index Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=26133 | FUND_NAME=HSBC Small Cap Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=34952 | FUND_NAME=ICICI Pru Long Term Wealth Enhancement Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=1545 | FUND_NAME=Nippon India ETF Nifty Next 50 Junior BeES-IDCW | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=16100 | FUND_NAME=Nippon India Liquid Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=31167 | FUND_NAME=PGIM India ELSS Tax Saver Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=16713 | FUND_NAME=Taurus ELSS Tax Saver Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=43797 | FUND_NAME=UTI Innovation Reg-G | IS_PROVISIONAL=true | OPINION_NAME=Exit | PROVISIONAL_OPINION_NAME=Poor Start | EFFECTIVE_OPINION=Poor Start | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          PLAN_ID=36491 | FUND_NAME=UTI Nifty Next 50 Index Dir-G | IS_PROVISIONAL=false | OPINION_NAME=Steady | PROVISIONAL_OPINION_NAME=Steady Start | EFFECTIVE_OPINION=Steady | EXPECTED_CATEGORY=STEADY | ACTUAL_CATEGORY=STEADY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          
+EXPECTED COUNTS (PRD Calculator)
+  GOOD       = 16
+  OPTIMIZE   = 15
+  STEADY     = 14
+  EXIT       = 5
+  NEW-FUND   = 0
+
+ACTUAL COUNTS (Fund Review API)
+  GOOD       = 16
+  OPTIMIZE   = 15
+  STEADY     = 14
+  EXIT       = 5
+  NEW-FUND   = 3
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          Category GOOD       | Expected: 16 | API: 16
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          Category OPTIMIZE   | Expected: 15 | API: 15
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          Category STEADY     | Expected: 14 | API: 14
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          Category EXIT       | Expected: 5 | API: 5
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          Category NEW-FUND   | Expected: 0 | API: 3  ← COUNT MISMATCH
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          
+══════════════════════════════════════════════
+ TC_BACKEND_001 DIAGNOSTIC SUMMARY
+══════════════════════════════════════════════
+ Total Funds Processed : 53
+ Total Mismatches      : 0
+ Total Skipped         : 3
+══════════════════════════════════════════════
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log warning-bg">Warning</span></td>
+        <td>6:12:32 pm</td>
+        <td>
+          
+────────────────────────────────────────
+ SKIPPED FUNDS
+────────────────────────────────────────
+ PLAN_ID : 45998
+ FUND    : Motilal Oswal BSE Clean Environment Index Dir-G
+ OPINION : 
+ REASON  : Missing field: opinion_name and provisional_opinion_name are both null/blank. Impact: category cannot be calculated.
+────────────────────────────────────────
+ PLAN_ID : 46015
+ FUND    : WhiteOak Capital Aggressive Hybrid Dir-G
+ OPINION : 
+ REASON  : Missing field: opinion_name and provisional_opinion_name are both null/blank. Impact: category cannot be calculated.
+────────────────────────────────────────
+ PLAN_ID : 46014
+ FUND    : WhiteOak Capital Aggressive Hybrid Reg-G
+ OPINION : 
+ REASON  : Missing field: opinion_name and provisional_opinion_name are both null/blank. Impact: category cannot be calculated.
+────────────────────────────────────────
+
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>6:12:33 pm</td>
+        <td>
+          Category count mismatch between PRD expectation and Fund Review API expected [true] but found [false]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>6:12:33 pm</td>
+        <td>
+          Failure Screenshot
+    <div class="row mb-3"><div class="col-md-3">
+    
+
+<img data-featherlight='/home/wamik/appium-framework/reports/screenshots/tc_backend_001_verifyCategoryCountsAlignWithOpinionData_20260616_181233.png' src="/home/wamik/appium-framework/reports/screenshots/tc_backend_001_verifyCategoryCountsAlignWithOpinionData_20260616_181233.png">
+  
+    
+
+    </div></div>
         </td>
       </tr>
   </tbody>
@@ -137,25 +643,25 @@
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Started</p>
-<h3>09-Jun-2026 18:25:29</h3>
+<h3>16-Jun-2026 18:12:10</h3>
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0">Ended</p>
-<h3>09-Jun-2026 18:26:01</h3>
+<h3>16-Jun-2026 18:12:33</h3>
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0 text-pass">Tests Passed</p>
-<h3>1</h3>
+<h3>0</h3>
 </div></div>
 </div>
 <div class="col-md-3">
 <div class="card"><div class="card-body">
 <p class="m-b-0 text-fail">Tests Failed</p>
-<h3>0</h3>
+<h3>1</h3>
 </div></div>
 </div>
 </div>
@@ -171,12 +677,12 @@
 </div>
 </div>
 <div class="card-footer">
-<div><small data-tooltip='100%'>
-<b>1</b> tests passed
+<div><small data-tooltip='0%'>
+<b>0</b> tests passed
 </small>
 </div>
 <div>
-<small data-tooltip='0%'><b>0</b> tests failed,
+<small data-tooltip='100%'><b>1</b> tests failed,
 <b>0</b> skipped, <b data-tooltip='0%'>0</b> others
 </small>
 </div>
@@ -194,10 +700,10 @@
 </div>
 </div>
 <div class="card-footer">
-<div><small data-tooltip='50%'><b>1</b> events passed</small></div>
+<div><small data-tooltip='80%'><b>54</b> events passed</small></div>
 <div>
-<small data-tooltip='0%'><b>0</b> events failed,
-<b data-tooltip='%'>1</b> others
+<small data-tooltip='4%'><b>3</b> events failed,
+<b data-tooltip='%'>10</b> others
 </small>
 </div>
 </div>
@@ -213,7 +719,7 @@
 </div></div>
 <script>
 var timeline = {
-"tc_fs_019_verifyCustomiseAndApplyFilters":31.3
+"tc_backend_001_verifyCategoryCountsAlignWithOpinionData":22.996
 };
 </script>
 <div class="row">
@@ -248,8 +754,8 @@ var timeline = {
 <script>
 var statusGroup = {
 parentCount: 5,
-passParent: 1,
-failParent: 0,
+passParent: 0,
+failParent: 1,
 warningParent: 0,
 skipParent: 0,
 childCount: 5,
@@ -265,11 +771,11 @@ warningGrandChild: 0,
 skipGrandChild: 0,
 infoGrandChild: 0,
 eventsCount: 5,
-passEvents: 1,
-failEvents: 0,
-warningEvents: 0,
+passEvents: 54,
+failEvents: 3,
+warningEvents: 4,
 skipEvents: 0,
-infoEvents: 1
+infoEvents: 6
 };
 </script>        </div>
       </div>

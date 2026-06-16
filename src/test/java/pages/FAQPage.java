@@ -27,7 +27,7 @@ public class FAQPage extends BasePage {
     // ENTRY POINT (from Hub)
     // ============================================================
 
-    private final By faqsEntry = AppiumBy.accessibilityId("FAQs");
+    private final By faqsEntry = AppiumBy.accessibilityId("View frequently asked questions");
 
     // ============================================================
     // SCREEN ANCHORS / NAVIGATION

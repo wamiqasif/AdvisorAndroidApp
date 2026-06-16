@@ -213,7 +213,7 @@ public abstract class BasePage {
 
         try {
 
-            Thread.sleep(1500);
+            Thread.sleep(8000);
 
         } catch (InterruptedException e) {
 
