@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -15,6 +16,8 @@ import com.aventstack.extentreports.ExtentTest;
 
 import api.FundReviewApiService;
 import api.model.FundItem;
+import api.model.FundReviewItem;
+import api.model.ValidationResult;
 import base.BaseTest;
 import pages.PortfolioAnalysisFundsPage;
 
@@ -38,7 +41,13 @@ public class FundReviewCategoryValidationTest extends BaseTest {
 
     private PortfolioAnalysisFundsPage fundsPage;
     private FundReviewApiService       apiService;
+    private List<FundItem> getFundsForCategory(String category) {
 
+        return apiService.getAllFunds()
+                .stream()
+                .filter(f -> category.equalsIgnoreCase(f.getClassificationType()))
+                .collect(Collectors.toList());
+    }
     // ================================================================
     // LIFECYCLE
     // ================================================================
@@ -52,7 +61,7 @@ public class FundReviewCategoryValidationTest extends BaseTest {
     protected void onClassReady() {
         fundsPage  = new PortfolioAnalysisFundsPage(getDriver());
         apiService = new FundReviewApiService();
-        navigateToFundReview();
+       // navigateToFundReview();
     }
 
     @Override
@@ -70,6 +79,62 @@ public class FundReviewCategoryValidationTest extends BaseTest {
         fundsPage.openPortfolioAnalysis();
         fundsPage.openFundsTab();
         fundsPage.openFundReview();
+    }
+    
+    
+    
+   
+    
+    
+    
+    private void validateCategory(String category) {
+
+        List<FundItem> expectedFunds =
+                getFundsForCategory(category);
+
+        int expectedCount = expectedFunds.size();
+
+        fundsPage.openCategory(category);
+
+        int uiCount =
+                fundsPage.getCategoryCount(category);
+
+        Assert.assertEquals(
+                uiCount,
+                expectedCount,
+                category + " count mismatch");
+
+        for (FundItem fund : expectedFunds) {
+
+            Assert.assertTrue(
+                    fundsPage.findFund(fund.fundName),
+                    "Fund missing: " + fund.fundName);
+        }
+    }
+    
+    @Test
+    public void tc_good() {
+        validateCategory("GOOD");
+    }
+
+    @Test
+    public void tc_optimize() {
+        validateCategory("OPTIMIZE");
+    }
+
+    @Test
+    public void tc_steady() {
+        validateCategory("STEADY");
+    }
+
+    @Test
+    public void tc_exit() {
+        validateCategory("EXIT");
+    }
+
+    @Test
+    public void tc_newFund() {
+        validateCategory("NEW-FUND");
     }
 
     // ================================================================

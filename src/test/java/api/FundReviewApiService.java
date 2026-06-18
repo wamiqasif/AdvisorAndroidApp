@@ -114,7 +114,7 @@ public class FundReviewApiService {
 
     private List<FundItem> fetchFromApi() {
         String url = config.getBaseUrl() + config.getEndpoint()
-                + "?label_id=" + config.getLabelId();
+                + "?label-ids=" + config.getLabelId();
         logger.info("Fetching Fund Review API: {}", url);
 
         try {

@@ -28,4 +28,8 @@ public class FundItem {
         return "FundItem{planId=" + planId + ", name='" + fundName
                 + "', type='" + classificationType + "', lock=" + lockInState + "}";
     }
+
+    public String getClassificationType() {
+        return classificationType;
+    }
 }
