@@ -95,7 +95,79 @@ public final class FundReviewCategoryCalculator {
      * @param fundName          fund name from Fund Review API (for plan type + ETF detection)
      * @return CalculationResult — CALCULATED with category, or SKIPPED with reason
      */
-    public CalculationResult calculateExpectedCategory(String effectiveOpinion, String fundName) {
+//    public CalculationResult calculateExpectedCategory2(String effectiveOpinion, String fundName) {
+//
+//        // Guard: opinion must be present
+//        if (effectiveOpinion == null || effectiveOpinion.isBlank()) {
+//            return CalculationResult.skip(
+//                    "Missing field: opinion_name and provisional_opinion_name are both null/blank. "
+//                    + "Impact: category cannot be calculated.");
+//        }
+//
+//        String opinion = effectiveOpinion.trim();
+//        
+//        
+//        
+//
+//     // =========================
+//     // ETF EXCEPTION
+//     // =========================
+//     if (planTypeResolver.isEtfFund(fundName)) {
+//
+//         switch (opinion.toUpperCase()) {
+//
+//             case "GOOD":
+//                 return CalculationResult.of("GOOD", "ETF");
+//
+//             case "STEADY":
+//                 return CalculationResult.of("STEADY", "ETF");
+//
+//             case "GOOD START":
+//                 return CalculationResult.of("GOOD", "ETF");
+//
+//             case "STEADY START":
+//                 return CalculationResult.of("STEADY", "ETF");
+//
+//             case "POOR START":
+//                 return CalculationResult.of("STEADY", "ETF");
+//
+//             case "EXIT":
+//                 return CalculationResult.of("EXIT", "ETF");
+//
+//             case "NEW FUND":
+//                 return CalculationResult.of("NEW-FUND", "ETF");
+//         }
+//     }
+//
+//     // Existing logic continues here
+//     if ("Exit".equalsIgnoreCase(opinion))
+//         return CalculationResult.of("EXIT", "N/A");
+//
+//        // ── Plan-type-independent opinions ──────────────────────────
+//        if ("Exit".equalsIgnoreCase(opinion))        return CalculationResult.of("EXIT",     "N/A");
+//        if ("New Fund".equalsIgnoreCase(opinion))    return CalculationResult.of("NEW-FUND", "N/A");
+//        if ("Good Start".equalsIgnoreCase(opinion))  return CalculationResult.of("GOOD",     "N/A",
+//                "Good Start opinion maps directly to GOOD regardless of plan type");
+//        if ("Steady Start".equalsIgnoreCase(opinion)) return CalculationResult.of("STEADY",  "N/A",
+//                "Steady Start opinion maps directly to STEADY regardless of plan type");
+//        if ("Poor Start".equalsIgnoreCase(opinion))  return CalculationResult.of("STEADY",   "N/A",
+//                "Poor Start opinion maps directly to STEADY regardless of plan type");
+//
+//        // ── Plan-type-dependent opinions: "Good" and "Steady" ───────
+//        if ("Good".equalsIgnoreCase(opinion))   return applyPlanTypeRules(fundName, "GOOD");
+//        if ("Steady".equalsIgnoreCase(opinion)) return applyPlanTypeRules(fundName, "STEADY");
+//
+//        // ── Unrecognised opinion ─────────────────────────────────────
+//        return CalculationResult.skip(
+//                "Missing rule: opinion '" + opinion + "' has no PRD mapping. "
+//                + "Impact: category cannot be calculated. "
+//                + "Action: add rule to FundReviewCategoryCalculator if client approves.");
+//    }
+   
+    public CalculationResult calculateExpectedCategory(
+            String effectiveOpinion,
+            String fundName,
+            boolean overConcentrated) {
 
         // Guard: opinion must be present
         if (effectiveOpinion == null || effectiveOpinion.isBlank()) {
@@ -105,59 +177,133 @@ public final class FundReviewCategoryCalculator {
         }
 
         String opinion = effectiveOpinion.trim();
+
+        // ============================================================
+        // ETF EXCEPTION
+        // ============================================================
+        if (planTypeResolver.isEtfFund(fundName)) {
+
+            switch (opinion.toUpperCase()) {
+
+                case "GOOD":
+                    return CalculationResult.of("GOOD", "ETF");
+
+                case "STEADY":
+                    return CalculationResult.of("STEADY", "ETF");
+
+                case "GOOD START":
+                    return CalculationResult.of("GOOD", "ETF");
+
+                case "STEADY START":
+                    return CalculationResult.of("STEADY", "ETF");
+
+                case "POOR START":
+                    return CalculationResult.of("STEADY", "ETF");
+
+                case "EXIT":
+                    return CalculationResult.of("EXIT", "ETF");
+
+                case "NEW FUND":
+                    return CalculationResult.of("NEW-FUND", "ETF");
+            }
+        }
+
+        // ============================================================
+        // PLAN-TYPE-INDEPENDENT OPINIONS
+        // ============================================================
+
+//        if ("Exit".equalsIgnoreCase(opinion)) {
+//            return CalculationResult.of("EXIT", "N/A");
+//        }
         
+       
         
+        if ("New Fund".equalsIgnoreCase(opinion)) {
+            return CalculationResult.of("NEW-FUND", "N/A");
+        }
+
+        if ("Good Start".equalsIgnoreCase(opinion)) {
+            return CalculationResult.of(
+                    "GOOD",
+                    "N/A",
+                    "Good Start opinion maps directly to GOOD regardless of plan type");
+        }
+
+        if ("Steady Start".equalsIgnoreCase(opinion)) {
+            return CalculationResult.of(
+                    "STEADY",
+                    "N/A",
+                    "Steady Start opinion maps directly to STEADY regardless of plan type");
+        }
+
+        if ("Poor Start".equalsIgnoreCase(opinion)) {
+            return CalculationResult.of(
+                    "STEADY",
+                    "N/A",
+                    "Poor Start opinion maps directly to STEADY regardless of plan type");
+        }
+
+        // ============================================================
+        // PLAN-TYPE-DEPENDENT OPINIONS
+        // ============================================================
+
+        CalculationResult result = null;
         
+        if ("Exit".equalsIgnoreCase(opinion)) {
+            result = CalculationResult.of("EXIT", "N/A");
+        }
 
-     // =========================
-     // ETF EXCEPTION
-     // =========================
-     if (planTypeResolver.isEtfFund(fundName)) {
+        if ("Good".equalsIgnoreCase(opinion)) {
+            result = applyPlanTypeRules(fundName, "GOOD");
+        }
+        else if ("Steady".equalsIgnoreCase(opinion)) {
+            result = applyPlanTypeRules(fundName, "STEADY");
+        }
 
-         switch (opinion.toUpperCase()) {
+        
+        boolean canApplyOverride =
+                "Good".equalsIgnoreCase(opinion)
+                || "Steady".equalsIgnoreCase(opinion)
+                || "Exit".equalsIgnoreCase(opinion);
 
-             case "GOOD":
-                 return CalculationResult.of("GOOD", "ETF");
+        if (result != null
+                && canApplyOverride
+                && overConcentrated) {
 
-             case "STEADY":
-                 return CalculationResult.of("STEADY", "ETF");
+            return CalculationResult.of(
+                    "OPTIMIZE",
+                    "OVER_CONCENTRATION",
+                    "Over concentration override applied");
+        }
 
-             case "GOOD START":
-                 return CalculationResult.of("GOOD", "ETF");
+        if (result != null) {
+            return result;
+        }
+        // ============================================================
+        // OVER-CONCENTRATION OVERRIDE
+        // Change Request:
+        // GOOD/STEADY -> OPTIMIZE when concentration rule triggers
+        // ============================================================
 
-             case "STEADY START":
-                 return CalculationResult.of("STEADY", "ETF");
+        if (result != null
+                && overConcentrated
+                && ("GOOD".equals(result.expectedCategory)
+                    || "STEADY".equals(result.expectedCategory))) {
 
-             case "POOR START":
-                 return CalculationResult.of("STEADY", "ETF");
+            return CalculationResult.of(
+                    "OPTIMIZE",
+                    "OVER_CONCENTRATION",
+                    "Over concentration override applied");
+        }
 
-             case "EXIT":
-                 return CalculationResult.of("EXIT", "ETF");
+        if (result != null) {
+            return result;
+        }
 
-             case "NEW FUND":
-                 return CalculationResult.of("NEW-FUND", "ETF");
-         }
-     }
+        // ============================================================
+        // UNKNOWN OPINION
+        // ============================================================
 
-     // Existing logic continues here
-     if ("Exit".equalsIgnoreCase(opinion))
-         return CalculationResult.of("EXIT", "N/A");
-
-        // ── Plan-type-independent opinions ──────────────────────────
-        if ("Exit".equalsIgnoreCase(opinion))        return CalculationResult.of("EXIT",     "N/A");
-        if ("New Fund".equalsIgnoreCase(opinion))    return CalculationResult.of("NEW-FUND", "N/A");
-        if ("Good Start".equalsIgnoreCase(opinion))  return CalculationResult.of("GOOD",     "N/A",
-                "Good Start opinion maps directly to GOOD regardless of plan type");
-        if ("Steady Start".equalsIgnoreCase(opinion)) return CalculationResult.of("STEADY",  "N/A",
-                "Steady Start opinion maps directly to STEADY regardless of plan type");
-        if ("Poor Start".equalsIgnoreCase(opinion))  return CalculationResult.of("STEADY",   "N/A",
-                "Poor Start opinion maps directly to STEADY regardless of plan type");
-
-        // ── Plan-type-dependent opinions: "Good" and "Steady" ───────
-        if ("Good".equalsIgnoreCase(opinion))   return applyPlanTypeRules(fundName, "GOOD");
-        if ("Steady".equalsIgnoreCase(opinion)) return applyPlanTypeRules(fundName, "STEADY");
-
-        // ── Unrecognised opinion ─────────────────────────────────────
         return CalculationResult.skip(
                 "Missing rule: opinion '" + opinion + "' has no PRD mapping. "
                 + "Impact: category cannot be calculated. "

@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+<testng-results ignored="0" total="1" passed="0" failed="0" skipped="1">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-06-17T23:19:43 IST" name="Default suite" finished-at="2026-06-17T23:20:04 IST" duration-ms="20769">
+  <suite started-at="2026-06-19T10:35:42 IST" name="Default suite" finished-at="2026-06-19T10:36:50 IST" duration-ms="67926">
     <groups>
     </groups>
-    <test started-at="2026-06-17T23:19:43 IST" name="Default test" finished-at="2026-06-17T23:20:04 IST" duration-ms="20769">
-      <class name="tests.FundReviewBackendValidationTest">
-        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.FundReviewBackendValidationTest@4c371370]" started-at="2026-06-17T23:19:43 IST" name="beforeClass" finished-at="2026-06-17T23:19:52 IST" duration-ms="8503" status="PASS">
+    <test started-at="2026-06-19T10:35:42 IST" name="Default test" finished-at="2026-06-19T10:36:50 IST" duration-ms="67926">
+      <class name="tests.FundReviewCategoryValidationTest">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.FundReviewCategoryValidationTest@48f2bd5b]" started-at="2026-06-19T10:35:42 IST" name="beforeClass" finished-at="2026-06-19T10:35:49 IST" duration-ms="6648" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FundReviewBackendValidationTest@4c371370]" started-at="2026-06-17T23:19:52 IST" name="setUp" finished-at="2026-06-17T23:20:00 IST" duration-ms="7569" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method)[pri:0, instance:tests.FundReviewCategoryValidationTest@48f2bd5b]" started-at="2026-06-19T10:35:49 IST" name="setUp" finished-at="2026-06-19T10:36:43 IST" duration-ms="54725" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void tests.FundReviewBackendValidationTest.tc_backend_001_verifyCategoryCountsAlignWithOpinionData()]]>
+                <![CDATA[public void tests.FundReviewCategoryValidationTest.tc_fr_001_verifyCategoryCountsMatchApi()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="tc_backend_001_verifyCategoryCountsAlignWithOpinionData()[pri:0, instance:tests.FundReviewBackendValidationTest@4c371370]" started-at="2026-06-17T23:20:00 IST" name="tc_backend_001_verifyCategoryCountsAlignWithOpinionData" description="TC_BACKEND_001 — Fund Review API category counts align with Fund Opinion API data" finished-at="2026-06-17T23:20:04 IST" duration-ms="4280" status="FAIL">
-          <exception class="java.lang.AssertionError">
+        <test-method signature="tc_fr_001_verifyCategoryCountsMatchApi()[pri:0, instance:tests.FundReviewCategoryValidationTest@48f2bd5b]" started-at="2026-06-19T10:36:43 IST" name="tc_fr_001_verifyCategoryCountsMatchApi" description="TC_FR_001 — Category counts from API match counts shown on Fund Review tabs" finished-at="2026-06-19T10:36:50 IST" duration-ms="6529" status="SKIP">
+          <exception class="org.testng.SkipException">
             <message>
-              <![CDATA[Category count mismatch between PRD expectation and Fund Review API expected [true] but found [false]]]>
+              <![CDATA[API returned no fund data — cannot validate counts]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Category count mismatch between PRD expectation and Fund Review API expected [true] but found [false]
-at org.testng.Assert.fail(Assert.java:111)
-at org.testng.Assert.failNotEquals(Assert.java:1578)
-at org.testng.Assert.assertTrue(Assert.java:57)
-at tests.FundReviewBackendValidationTest.tc_backend_001_verifyCategoryCountsAlignWithOpinionData(FundReviewBackendValidationTest.java:284)
+              <![CDATA[org.testng.SkipException: API returned no fund data — cannot validate counts
+at tests.FundReviewCategoryValidationTest.tc_fr_001_verifyCategoryCountsMatchApi(FundReviewCategoryValidationTest.java:151)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -63,26 +60,26 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
+          </exception> <!-- org.testng.SkipException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tc_backend_001_verifyCategoryCountsAlignWithOpinionData -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FundReviewBackendValidationTest@4c371370]" started-at="2026-06-17T23:20:04 IST" name="tearDown" finished-at="2026-06-17T23:20:04 IST" duration-ms="356" status="PASS">
+        </test-method> <!-- tc_fr_001_verifyCategoryCountsMatchApi -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.FundReviewCategoryValidationTest@48f2bd5b]" started-at="2026-06-19T10:36:50 IST" name="tearDown" finished-at="2026-06-19T10:36:50 IST" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=tc_backend_001_verifyCategoryCountsAlignWithOpinionData status=FAILURE method=FundReviewBackendValidationTest.tc_backend_001_verifyCategoryCountsAlignWithOpinionData()[pri:0, instance:tests.FundReviewBackendValidationTest@4c371370] output={null}]]]>
+                <![CDATA[[TestResult name=tc_fr_001_verifyCategoryCountsMatchApi status=SKIP method=FundReviewCategoryValidationTest.tc_fr_001_verifyCategoryCountsMatchApi()[pri:0, instance:tests.FundReviewCategoryValidationTest@48f2bd5b] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.FundReviewBackendValidationTest@4c371370]" started-at="2026-06-17T23:20:04 IST" name="afterSuite" finished-at="2026-06-17T23:20:05 IST" duration-ms="777" status="PASS">
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.FundReviewCategoryValidationTest@48f2bd5b]" started-at="2026-06-19T10:36:50 IST" name="afterSuite" finished-at="2026-06-19T10:36:50 IST" duration-ms="407" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuite -->
-      </class> <!-- tests.FundReviewBackendValidationTest -->
+      </class> <!-- tests.FundReviewCategoryValidationTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

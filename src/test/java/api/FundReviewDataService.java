@@ -1,7 +1,7 @@
 package api;
 
 import api.model.FundReviewItem;
-import com.google.gson.JsonArray;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -170,22 +170,44 @@ public class FundReviewDataService {
         }
         return items;
     }
-
     private void parseFundItem(JsonElement el, List<FundReviewItem> items) {
-        if (!el.isJsonObject()) return;
+
+        if (!el.isJsonObject()) {
+            return;
+        }
+
         JsonObject obj = el.getAsJsonObject();
-        int    planId   = 0;
+
+        int planId = 0;
         String fundName = "";
+
         if (obj.has("plan_data") && obj.get("plan_data").isJsonObject()) {
+
             JsonObject pd = obj.getAsJsonObject("plan_data");
-            planId   = intOf(pd, "plan_id");
+
+            planId = intOf(pd, "plan_id");
             fundName = strOf(pd, "name");
         }
+
         String actualCategory = strOf(obj, "classification_type");
+
+        // NEW FIELD
+        String concentrationTrigger =
+                strOf(obj, "concentration_trigger");
+
         if (planId > 0) {
-            items.add(new FundReviewItem(planId, fundName, actualCategory));
+
+            items.add(
+                    new FundReviewItem(
+                            planId,
+                            fundName,
+                            actualCategory,
+                            concentrationTrigger
+                    )
+            );
         }
     }
+   
 
     private String strOf(JsonObject o, String k) {
         JsonElement e = o.get(k);

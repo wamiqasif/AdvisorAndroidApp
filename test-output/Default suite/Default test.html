@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/0/1</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Jun 17 23:19:43 IST 2026</td>
+<td>Started on:</td><td>Fri Jun 19 10:35:42 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>20 seconds (20769 ms)</td>
+<tr><td>Total time:</td><td>67 seconds (67926 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,8 +67,8 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-failed'>
-<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<table width='100%' border='1' class='invocation-skipped'>
+<tr><td colspan='4' align='center'><b>SKIPPED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td><b>Attribute(s)</b></td>
 <td width="30%"><b>Exception</b></td>
@@ -76,12 +76,9 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='tests.FundReviewBackendValidationTest.tc_backend_001_verifyCategoryCountsAlignWithOpinionData()'><b>tc_backend_001_verifyCategoryCountsAlignWithOpinionData</b><br>Test class: tests.FundReviewBackendValidationTest<br>Test method: TC_BACKEND_001 — Fund Review API category counts align with Fund Opinion API data</td>
-<td><div><pre>java.lang.AssertionError: Category count mismatch between PRD expectation and Fund Review API expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertTrue(Assert.java:57)
-	at tests.FundReviewBackendValidationTest.tc_backend_001_verifyCategoryCountsAlignWithOpinionData(FundReviewBackendValidationTest.java:284)
+<td title='tests.FundReviewCategoryValidationTest.tc_fr_001_verifyCategoryCountsMatchApi()'><b>tc_fr_001_verifyCategoryCountsMatchApi</b><br>Test class: tests.FundReviewCategoryValidationTest<br>Test method: TC_FR_001 — Category counts from API match counts shown on Fund Review tabs</td>
+<td><div><pre>org.testng.SkipException: API returned no fund data — cannot validate counts
+	at tests.FundReviewCategoryValidationTest.tc_fr_001_verifyCategoryCountsMatchApi(FundReviewCategoryValidationTest.java:151)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -110,12 +107,9 @@ function toggleAllBoxes() {
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1365197105", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1365197105'><pre>java.lang.AssertionError: Category count mismatch between PRD expectation and Fund Review API expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertTrue(Assert.java:57)
-	at tests.FundReviewBackendValidationTest.tc_backend_001_verifyCategoryCountsAlignWithOpinionData(FundReviewBackendValidationTest.java:284)
+</pre></div><a href='#' onClick='toggleBox("stack-trace9983638", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace9983638'><pre>org.testng.SkipException: API returned no fund data — cannot validate counts
+	at tests.FundReviewCategoryValidationTest.tc_fr_001_verifyCategoryCountsMatchApi(FundReviewCategoryValidationTest.java:151)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -145,8 +139,8 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
 </pre></div></td>
-<td>4</td>
-<td>tests.FundReviewBackendValidationTest@4c371370</td></tr>
+<td>6</td>
+<td>tests.FundReviewCategoryValidationTest@48f2bd5b</td></tr>
 </table><p>
 </body>
 </html>

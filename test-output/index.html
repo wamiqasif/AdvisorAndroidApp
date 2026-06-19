@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Default_suite" class="navigator-link">
-              <span class="suite-name border-failed">Default suite</span>
+              <span class="suite-name border-skipped">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -92,21 +92,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method, 1 failed,   </span>
+                    <span class="method-stats">1 method,  1 skipped,  </span>
                   </li>
                   <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
-                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
+                    <span class="method-list-title skipped">Skipped methods</span>
+                    <span class="show-or-hide-methods skipped">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods skipped suite-Default_suite"> (hide)</a> <!-- hide-methods skipped suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods skipped suite-Default_suite"> (show)</a> <!-- show-methods skipped suite-Default_suite -->
                     </span>
-                    <div class="method-list-content failed suite-Default_suite">
+                    <div class="method-list-content skipped suite-Default_suite">
                       <span>
-                        <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="tests.FundReviewBackendValidationTest" class="method navigator-link" hash-for-method="tc_backend_001_verifyCategoryCountsAlignWithOpinionData">tc_backend_001_verifyCategoryCountsAlignWithOpinionData</a> <!-- method navigator-link -->
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="tests.FundReviewCategoryValidationTest" class="method navigator-link" hash-for-method="tc_fr_001_verifyCategoryCountsMatchApi">tc_fr_001_verifyCategoryCountsMatchApi</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content failed suite-Default_suite -->
+                    </div> <!-- method-list-content skipped suite-Default_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -118,22 +118,19 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
-          <div class="suite-Default_suite-class-failed">
+          <div class="suite-Default_suite-class-skipped">
             <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
-              <span class="class-name">tests.FundReviewBackendValidationTest</span>
+              <img src="skipped.png"/>
+              <span class="class-name">tests.FundReviewCategoryValidationTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="tc_backend_001_verifyCategoryCountsAlignWithOpinionData">
-                  </a> <!-- tc_backend_001_verifyCategoryCountsAlignWithOpinionData -->
-                  <span class="method-name">tc_backend_001_verifyCategoryCountsAlignWithOpinionData</span>
-                  <div class="stack-trace">java.lang.AssertionError: Category count mismatch between PRD expectation and Fund Review API expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertTrue(Assert.java:57)
-	at tests.FundReviewBackendValidationTest.tc_backend_001_verifyCategoryCountsAlignWithOpinionData(FundReviewBackendValidationTest.java:284)
+                  <a name="tc_fr_001_verifyCategoryCountsMatchApi">
+                  </a> <!-- tc_fr_001_verifyCategoryCountsMatchApi -->
+                  <span class="method-name">tc_fr_001_verifyCategoryCountsMatchApi</span>
+                  <div class="stack-trace">org.testng.SkipException: API returned no fund data — cannot validate counts
+	at tests.FundReviewCategoryValidationTest.tc_fr_001_verifyCategoryCountsMatchApi(FundReviewCategoryValidationTest.java:151)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -165,15 +162,15 @@
 
 </div> <!-- stack-trace -->
                   <em>
-(TC_BACKEND_001 — Fund Review API category counts align with Fund Opinion API data)                  </em>
+(TC_FR_001 — Category counts from API match counts shown on Fund Review tabs)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Default_suite-class-failed -->
+          </div> <!-- suite-Default_suite-class-skipped -->
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">/tmp/testng-eclipse-582929253/testng-customsuite.xml</span>
+            <span class="header-content">/tmp/testng-eclipse--698290173/testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -182,11 +179,11 @@
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;tests.FundReviewBackendValidationTest&quot;&gt;
+      &lt;class name=&quot;tests.FundReviewCategoryValidationTest&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;tc_backend_001_verifyCategoryCountsAlignWithOpinionData&quot;/&gt;
+          &lt;include name=&quot;tc_fr_001_verifyCategoryCountsMatchApi&quot;/&gt;
         &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- tests.FundReviewBackendValidationTest --&gt;
+      &lt;/class&gt; &lt;!-- tests.FundReviewCategoryValidationTest --&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -228,14 +225,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'tc_backend_001_verifyCategoryCountsAlignWithOpinionData')
-data.setCell(0, 2, 'tests.FundReviewBackendValidationTest')
-data.setCell(0, 3, 4280);
+data.setCell(0, 1, 'tc_fr_001_verifyCategoryCountsMatchApi')
+data.setCell(0, 2, 'tests.FundReviewCategoryValidationTest')
+data.setCell(0, 3, 6529);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 4 seconds</span>
+              <span class="suite-total-time">Total running time: 6 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -250,13 +247,43 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">1 ignored method</span>
+            <span class="header-content">16 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
-              <span class="ignored-class-name">tests.FundReviewBackendValidationTest</span>
+              <span class="ignored-class-name">tests.FundReviewCategoryValidationTest</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">tc_backend_002_verifyPerFundCategoryMatchesApi</span>
+                <span class="ignored-method-name">tc_fr_004_verifyFundNamesMatchApi</span>
+                <br/>
+                <span class="ignored-method-name">tc_fr_010_verifyOptimizeCategoryHasSwitchButton</span>
+                <br/>
+                <span class="ignored-method-name">tc_fr_008_verifyNewFundCategoryBehavior</span>
+                <br/>
+                <span class="ignored-method-name">tc_newFund</span>
+                <br/>
+                <span class="ignored-method-name">tc_fr_009_verifyExitCategoryHasActionButton</span>
+                <br/>
+                <span class="ignored-method-name">tc_fr_007_verifySteadyCategoryBehavior</span>
+                <br/>
+                <span class="ignored-method-name">tc_fr_006_verifyGoodCategoryBehavior</span>
+                <br/>
+                <span class="ignored-method-name">tc_fr_011_verifyLockInStateIndicator</span>
+                <br/>
+                <span class="ignored-method-name">tc_exit</span>
+                <br/>
+                <span class="ignored-method-name">tc_fr_002_verifyFundPlacementInCorrectCategory</span>
+                <br/>
+                <span class="ignored-method-name">tc_good</span>
+                <br/>
+                <span class="ignored-method-name">tc_fr_012_verifyReasonTextMatchesApi</span>
+                <br/>
+                <span class="ignored-method-name">tc_fr_005_verifyAdviceTextMatchesApi</span>
+                <br/>
+                <span class="ignored-method-name">tc_steady</span>
+                <br/>
+                <span class="ignored-method-name">tc_fr_003_verifyFundNotInWrongCategory</span>
+                <br/>
+                <span class="ignored-method-name">tc_optimize</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -268,28 +295,26 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">tests.FundReviewBackendValidationTest</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">tests.FundReviewCategoryValidationTest</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">beforeClass</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-method before">
-                <span class="method-name">setUp(public void tests.FundReviewBackendValidationTest.tc_backend_001_verifyCategoryCountsAlignWithOpinio...)</span>
-                <span class="method-start">8521 ms</span>
+                <span class="method-name">setUp(public void tests.FundReviewCategoryValidationTest.tc_fr_001_verifyCategoryCountsMatchApi())</span>
+                <span class="method-start">6654 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
-                <span class="method-name">tc_backend_001_verifyCategoryCountsAlignWithOpinionData</span>
-                <span class="method-start">16093 ms</span>
+                <span class="method-name">tc_fr_001_verifyCategoryCountsMatchApi</span>
+                <span class="method-start">61380 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">tearDown([TestResult name=tc_backend_001_verifyCategoryCountsAlignWithOpinionData status=FAILURE method=FundR...)</span>
-                <span class="method-start">20383 ms</span>
+                <span class="method-name">tearDown([TestResult name=tc_fr_001_verifyCategoryCountsMatchApi status=SKIP method=FundReviewCategoryValidat...)</span>
+                <span class="method-start">67911 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-suite after">
                 <span class="method-name">afterSuite</span>
-                <span class="method-start">20783 ms</span>
+                <span class="method-start">67941 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

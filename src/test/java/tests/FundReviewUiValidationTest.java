@@ -118,7 +118,7 @@ public class FundReviewUiValidationTest extends BaseTest {
         for (FundReviewItem fund : funds) {
             FundOpinionItem opinion = opinions.get(fund.planId);
             String effective = opinion != null ? opinion.effectiveOpinion() : "";
-            CalculationResult calc = calculator.calculateExpectedCategory(effective, fund.fundName);
+            CalculationResult calc = calculator.calculateExpectedCategory(effective, fund.fundName,fund.isOverConcentrated());
             if (calc.isCalculated()) {
                 expectedCounts.merge(calc.expectedCategory, 1, Integer::sum);
             } else {
@@ -217,7 +217,7 @@ public class FundReviewUiValidationTest extends BaseTest {
             rb.opinionName(effective)
               .usingProvisional(opinion.usingProvisional());
 
-            calc = calculator.calculateExpectedCategory(effective, fund.fundName);
+            calc = calculator.calculateExpectedCategory(effective, fund.fundName, fund.isOverConcentrated());
             rb.planType(calc.planType);
 
             if (calc.isSkipped()) {

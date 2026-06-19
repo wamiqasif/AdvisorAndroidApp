@@ -9,15 +9,12 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">Default suite</th></tr>
-<tr><td><a href="#t0">Default test</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">20,769</td><td></td><td></td></tr>
+<tr><td><a href="#t0">Default test</a></td><td class="num">0</td><td class="num attn">1</td><td class="num">0</td><td class="num">0</td><td class="num">67,926</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">tests.FundReviewBackendValidationTest</td><td><a href="#m0">tc_backend_001_verifyCategoryCountsAlignWithOpinionData</a></td><td rowspan="1">1781718600005</td><td rowspan="1">4280</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; skipped</th></tr><tr class="skippedeven"><td rowspan="1">tests.FundReviewCategoryValidationTest</td><td><a href="#m0">tc_fr_001_verifyCategoryCountsMatchApi</a></td><td rowspan="1">1781845603864</td><td rowspan="1">6529</td></tr></tbody>
 </table>
-<h2>Default test</h2><h3 id="m0">tests.FundReviewBackendValidationTest#tc_backend_001_verifyCategoryCountsAlignWithOpinionData</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: Category count mismatch between PRD expectation and Fund Review API expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertTrue(Assert.java:57)
-	at tests.FundReviewBackendValidationTest.tc_backend_001_verifyCategoryCountsAlignWithOpinionData(FundReviewBackendValidationTest.java:284)
+<h2>Default test</h2><h3 id="m0">tests.FundReviewCategoryValidationTest#tc_fr_001_verifyCategoryCountsMatchApi</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.testng.SkipException: API returned no fund data — cannot validate counts
+	at tests.FundReviewCategoryValidationTest.tc_fr_001_verifyCategoryCountsMatchApi(FundReviewCategoryValidationTest.java:151)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
