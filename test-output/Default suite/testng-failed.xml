@@ -3,15 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.FundReviewCategoryValidationTest">
+      <class name="tests.AlternativesApiValidationTest">
         <methods>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="afterSuite"/>
-          <include name="tc_fr_001_verifyCategoryCountsMatchApi"/>
-          <include name="beforeClass"/>
+          <include name="setUpApiClients"/>
+          <include name="tc_alt_001_validateAlternativesBusinessRules" invocation-numbers="7 8"/>
         </methods>
-      </class> <!-- tests.FundReviewCategoryValidationTest -->
+      </class> <!-- tests.AlternativesApiValidationTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

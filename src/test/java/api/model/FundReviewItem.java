@@ -6,7 +6,7 @@ public final class FundReviewItem {
     public final String fundName;
     public final String actualCategory;
     public final String concentrationTrigger;
-    
+
 
     public FundReviewItem(
             int planId,

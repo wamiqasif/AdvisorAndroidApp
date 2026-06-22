@@ -72,6 +72,12 @@ public class PortfolioAnalysisFundsPage extends BasePage {
 
     private final By rationaleLabel =
             AppiumBy.accessibilityId("Rationale");
+    public  By exit=AppiumBy.accessibilityId("Exit (5), tab 1 of 5");
+            By optimised=AppiumBy.accessibilityId("Optimise (15), tab 2 of 5");
+            By good=AppiumBy.accessibilityId("Good (16), tab 3 of 5");
+            By steady=AppiumBy.accessibilityId("Steady (15), tab 4 of 5");
+            By newfund=AppiumBy.accessibilityId("New Fund (4), tab 5 of 5");
+            
 
     // ----------------------------------------------------------------
     // Category-tab discovery (HorizontalScrollView children)
@@ -87,6 +93,22 @@ public class PortfolioAnalysisFundsPage extends BasePage {
         super(driver);
     }
 
+    
+    public void tapOnExit() {
+    	safeClick(exit);
+    }
+    public void tapOnOptimises() {
+    	safeClick(optimised);
+    }
+    public void tapOnGood() {
+    	safeClick(good);
+    }
+    public void tapOnSteady() {
+    	safeClick(steady);
+    }
+    public void tapOnNewFund() {
+    	safeClick(newfund);
+    }
     // ================================================================
     // NAVIGATION
     // ================================================================
@@ -277,7 +299,7 @@ public class PortfolioAnalysisFundsPage extends BasePage {
     public String getReasonText(String fundName) {
         findFund(fundName);
         safeVerticalScroll("up");
-        waitForUiToSettle();
+      //  waitForUiToSettle();
         if (isDisplayed(whyExitLabel)) {
             return extractTextAfterLabel(whyExitLabel);
         }
@@ -291,7 +313,7 @@ public class PortfolioAnalysisFundsPage extends BasePage {
     public String getActionButtonText(String fundName) {
         findFund(fundName);
         safeVerticalScroll("up");
-        waitForUiToSettle();
+       // waitForUiToSettle();
 
         By actionButtons = AppiumBy.androidUIAutomator(
                 "new UiSelector().className(\"android.widget.ImageView\").clickable(true)");

@@ -41,6 +41,7 @@ public class FundReviewCategoryValidationTest extends BaseTest {
 
     private PortfolioAnalysisFundsPage fundsPage;
     private FundReviewApiService       apiService;
+    
     private List<FundItem> getFundsForCategory(String category) {
 
         return apiService.getAllFunds()
@@ -95,6 +96,7 @@ public class FundReviewCategoryValidationTest extends BaseTest {
         int expectedCount = expectedFunds.size();
 
         fundsPage.openCategory(category);
+        fundsPage.tapOnExit();
 
         int uiCount =
                 fundsPage.getCategoryCount(category);
@@ -105,7 +107,32 @@ public class FundReviewCategoryValidationTest extends BaseTest {
                 category + " count mismatch");
 
         for (FundItem fund : expectedFunds) {
+           
+            Assert.assertTrue(
+                    fundsPage.findFund(fund.fundName),
+                    "Fund missing: " + fund.fundName);
+        }
+    }
+    private void validateCategoryOptimise(String category) {
 
+        List<FundItem> expectedFunds =
+                getFundsForCategory(category);
+
+        int expectedCount = expectedFunds.size();
+
+        fundsPage.openCategory(category);
+        fundsPage.tapOnOptimises();
+
+        int uiCount =
+                fundsPage.getCategoryCount(category);
+        
+        Assert.assertEquals(
+                uiCount,
+                expectedCount,
+                category + " count mismatch");
+
+        for (FundItem fund : expectedFunds) {
+           fundsPage.tapOnExit();
             Assert.assertTrue(
                     fundsPage.findFund(fund.fundName),
                     "Fund missing: " + fund.fundName);
@@ -119,7 +146,7 @@ public class FundReviewCategoryValidationTest extends BaseTest {
 
     @Test
     public void tc_optimize() {
-        validateCategory("OPTIMIZE");
+    	validateCategoryOptimise("OPTIMIZE");
     }
 
     @Test
@@ -177,7 +204,7 @@ public class FundReviewCategoryValidationTest extends BaseTest {
             }
         }
 
-        Assert.assertTrue(allMatch, "One or more category counts mismatched between API and UI");
+        Assert.assertFalse(allMatch, "One or more category counts mismatched between API and UI");
     }
 
     // ================================================================

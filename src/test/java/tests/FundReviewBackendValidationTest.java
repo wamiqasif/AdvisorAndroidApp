@@ -6,15 +6,15 @@ import api.model.FundOpinionItem;
 import api.model.FundReviewItem;
 import api.model.ValidationResult;
 import base.BaseTest;
+import utils.FundReviewCategoryCalculator;
+import utils.FundReviewCategoryCalculator.CalculationResult;
+
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
-import utils.FundReviewCategoryCalculator;
-import utils.FundReviewCategoryCalculator.CalculationResult;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -122,7 +122,7 @@ public class FundReviewBackendValidationTest extends BaseTest {
 			boolean overConcentrated =
 					fund.concentrationTrigger != null
 					&& !fund.concentrationTrigger.isBlank();
-			// CalculationResult calc = calculator.calculateExpectedCategory(effective, fund.fundName);
+			
 			CalculationResult calc =
 					calculator.calculateExpectedCategory(
 							effectiveOpinion,
