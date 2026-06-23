@@ -1,227 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="20" passed="18" failed="2" skipped="0">
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-06-22T10:19:49 IST" name="Default suite" finished-at="2026-06-22T10:23:38 IST" duration-ms="229264">
+  <suite started-at="2026-06-23T11:06:39 IST" name="Failed suite [Failed suite [Default suite]]" finished-at="2026-06-23T11:07:10 IST" duration-ms="30682">
     <groups>
     </groups>
-    <test started-at="2026-06-22T10:19:49 IST" name="Default test" finished-at="2026-06-22T10:23:38 IST" duration-ms="229264">
+    <test started-at="2026-06-23T11:06:39 IST" name="Default test(failed)(failed)" finished-at="2026-06-23T11:07:10 IST" duration-ms="30682">
       <class name="tests.AlternativesApiValidationTest">
-        <test-method is-config="true" signature="setUpApiClients()[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:19:49 IST" name="setUpApiClients" finished-at="2026-06-22T10:19:55 IST" duration-ms="6189" status="PASS">
+        <test-method is-config="true" signature="setUpApiClients()[pri:0, instance:tests.AlternativesApiValidationTest@5ffead27]" started-at="2026-06-23T11:06:39 IST" name="setUpApiClients" finished-at="2026-06-23T11:07:01 IST" duration-ms="22554" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpApiClients -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:19:55 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:20:19 IST" duration-ms="23779" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=43050, name='HDFC Long Duration Debt Dir-G', actualCategory='EXIT', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:20:19 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:20:32 IST" duration-ms="13360" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=26990, name='Nippon India Medium Duration Reg-G', actualCategory='EXIT', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:20:32 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:20:55 IST" duration-ms="23214" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=38439, name='Shriram ELSS Tax Saver Dir-G', actualCategory='EXIT', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:20:55 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:21:02 IST" duration-ms="6431" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=16957, name='Tata Children's Dir', actualCategory='EXIT', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:21:02 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:21:06 IST" duration-ms="4247" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=15723, name='UTI ELSS Tax Saver Dir-G', actualCategory='EXIT', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:21:06 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:21:18 IST" duration-ms="12019" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=2174, name='ABSL Liquid Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:21:18 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:21:36 IST" duration-ms="17944" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=43125, name='Axis Business Cycles Dir-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:21:36 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:21:43 IST" duration-ms="6853" status="FAIL">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=43123, name='Axis Business Cycles Reg-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <exception class="java.lang.AssertionError">
-            <message>
-              <![CDATA[SOURCE_CATEGORY=OPTIMIZE | SOURCE_PLAN_ID=43123 | SOURCE_FUND_NAME=Axis Business Cycles Reg-IDCW
-HTTP_STATUS=500
-RESPONSE_BODY= | Alternatives API returned HTTP 500]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: SOURCE_CATEGORY=OPTIMIZE | SOURCE_PLAN_ID=43123 | SOURCE_FUND_NAME=Axis Business Cycles Reg-IDCW
-HTTP_STATUS=500
-RESPONSE_BODY= | Alternatives API returned HTTP 500
-at org.testng.Assert.fail(Assert.java:111)
-at tests.AlternativesApiValidationTest.assertHttp200(AlternativesApiValidationTest.java:125)
-at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:67)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:739)
-at org.testng.TestRunner.run(TestRunner.java:614)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-at org.testng.TestNG.runSuites(TestNG.java:1112)
-at org.testng.TestNG.run(TestNG.java:1079)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:21:43 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:21:46 IST" duration-ms="2822" status="FAIL">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=42523, name='Axis Silver FoF Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <exception class="java.lang.AssertionError">
-            <message>
-              <![CDATA[SOURCE_CATEGORY=OPTIMIZE | SOURCE_PLAN_ID=42523 | SOURCE_FUND_NAME=Axis Silver FoF Reg-G
-HTTP_STATUS=200
-RESPONSE_BODY={"data":{"exit_plan_data":{"basic_name":"Axis Silver FoF - Regular Plan","is_etf_plan":false,"plan_id":42523},"exit_transaction_note":null,"heading":"Suitable Alternatives","is_etf_exit":false,"max_amount_allowed":14448.118068,"max_amount_allowed_fmt":"₹ 14,448.12","message":"We have no suitable alternatives to suggest right now.","sub_heading":"In order of our preference"},"status":true} | Alternatives list must not be empty expected [false] but found [true]]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: SOURCE_CATEGORY=OPTIMIZE | SOURCE_PLAN_ID=42523 | SOURCE_FUND_NAME=Axis Silver FoF Reg-G
-HTTP_STATUS=200
-RESPONSE_BODY={"data":{"exit_plan_data":{"basic_name":"Axis Silver FoF - Regular Plan","is_etf_plan":false,"plan_id":42523},"exit_transaction_note":null,"heading":"Suitable Alternatives","is_etf_exit":false,"max_amount_allowed":14448.118068,"max_amount_allowed_fmt":"₹ 14,448.12","message":"We have no suitable alternatives to suggest right now.","sub_heading":"In order of our preference"},"status":true} | Alternatives list must not be empty expected [false] but found [true]
-at org.testng.Assert.fail(Assert.java:111)
-at org.testng.Assert.failNotEquals(Assert.java:1578)
-at org.testng.Assert.assertFalse(Assert.java:79)
-at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:70)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:739)
-at org.testng.TestRunner.run(TestRunner.java:614)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-at org.testng.TestNG.runSuites(TestNG.java:1112)
-at org.testng.TestNG.run(TestNG.java:1079)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:21:46 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:22:04 IST" duration-ms="18354" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=44974, name='Edelweiss CRISIL-IBX AAA Bond NBFC-HFC-Jun 2027 Index Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:22:04 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:22:13 IST" duration-ms="8558" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=219, name='HDFC Flexi Cap Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:22:13 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:22:23 IST" duration-ms="10624" status="PASS">
+        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@5ffead27]" started-at="2026-06-23T11:07:01 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-23T11:07:06 IST" duration-ms="4869" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -232,7 +22,7 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:22:23 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:22:36 IST" duration-ms="12875" status="PASS">
+        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@5ffead27]" started-at="2026-06-23T11:07:06 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-23T11:07:10 IST" duration-ms="3229" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -243,84 +33,7 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:22:36 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:22:40 IST" duration-ms="3329" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=7831, name='Invesco India Financial Services Reg-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:22:40 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:22:46 IST" duration-ms="6653" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=616, name='LIC MF Medium to Long Duration Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:22:46 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:22:58 IST" duration-ms="12203" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=1773, name='Nippon India Gilt Inst-G', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:22:58 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:23:04 IST" duration-ms="6004" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=4111, name='Quant Large & Mid Cap Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:23:04 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:23:21 IST" duration-ms="16817" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=2812, name='SBI Comma Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:23:21 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:23:32 IST" duration-ms="10362" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=1443, name='SBI Overnight Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
-        <test-method signature="tc_alt_001_validateAlternativesBusinessRules(api.model.FundReviewItem)[pri:0, instance:tests.AlternativesApiValidationTest@3e58a80e]" started-at="2026-06-22T10:23:32 IST" name="tc_alt_001_validateAlternativesBusinessRules" description="TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds" data-provider="sourceFunds" finished-at="2026-06-22T10:23:38 IST" duration-ms="6557" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[FundReviewItem{planId=31366, name='Tata Digital India Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tc_alt_001_validateAlternativesBusinessRules -->
       </class> <!-- tests.AlternativesApiValidationTest -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- Default test(failed)(failed) -->
+  </suite> <!-- Failed suite [Failed suite [Default suite]] -->
 </testng-results>

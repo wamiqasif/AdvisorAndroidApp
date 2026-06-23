@@ -4,6 +4,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Singleton ExtentReports manager.
@@ -15,13 +17,26 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 public class ExtentManager {
 
     private ExtentManager() {}
+    
+    static String timeStamp =
+            new SimpleDateFormat("yyyyMMdd_HHmmss")
+                    .format(new Date());
+
+//    String reportPath =
+//            System.getProperty("user.dir")
+//            + "/reports/ExtentReport_"
+//            + timeStamp
+//            + ".html";
 
     private static volatile ExtentReports extentReports;
 
     // One ExtentTest node per thread
     private static final ThreadLocal<ExtentTest> extentTestThreadLocal = new ThreadLocal<>();
 
-    private static final String REPORT_PATH = "reports/ExtentReport.html";
+      public static String REPORT_PATH = System.getProperty("user.dir")
+            + "/reports/ExtentReport_"
+            + timeStamp
+            + ".html";
 
     // ----------------------------------------------------------------
     // ExtentReports singleton

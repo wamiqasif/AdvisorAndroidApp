@@ -6,7 +6,7 @@
       <class name="tests.AlternativesApiValidationTest">
         <methods>
           <include name="setUpApiClients"/>
-          <include name="tc_alt_001_validateAlternativesBusinessRules" invocation-numbers="7 8"/>
+          <include name="tc_alt_001_validateAlternativesBusinessRules" invocation-numbers="11 12"/>
         </methods>
       </class> <!-- tests.AlternativesApiValidationTest -->
     </classes>

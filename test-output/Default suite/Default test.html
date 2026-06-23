@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>18/2/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon Jun 22 10:19:49 IST 2026</td>
+<td>Started on:</td><td>Tue Jun 23 11:01:05 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>229 seconds (229264 ms)</td>
+<tr><td>Total time:</td><td>212 seconds (212379 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,14 +76,10 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=42523, name='Axis Silver FoF Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td><div><pre>java.lang.AssertionError: SOURCE_CATEGORY=OPTIMIZE | SOURCE_PLAN_ID=42523 | SOURCE_FUND_NAME=Axis Silver FoF Reg-G
-HTTP_STATUS=200
-RESPONSE_BODY={&quot;data&quot;:{&quot;exit_plan_data&quot;:{&quot;basic_name&quot;:&quot;Axis Silver FoF - Regular Plan&quot;,&quot;is_etf_plan&quot;:false,&quot;plan_id&quot;:42523},&quot;exit_transaction_note&quot;:null,&quot;heading&quot;:&quot;Suitable Alternatives&quot;,&quot;is_etf_exit&quot;:false,&quot;max_amount_allowed&quot;:14448.118068,&quot;max_amount_allowed_fmt&quot;:&quot;₹ 14,448.12&quot;,&quot;message&quot;:&quot;We have no suitable alternatives to suggest right now.&quot;,&quot;sub_heading&quot;:&quot;In order of our preference&quot;},&quot;status&quot;:true} | Alternatives list must not be empty expected [false] but found [true]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertFalse(Assert.java:79)
-	at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:70)
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=16707, name='Invesco India Financial Services Dir-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td><div><pre>java.lang.NullPointerException: Cannot read field &quot;statusCode&quot; because &quot;response&quot; is null
+	at tests.AlternativesApiValidationTest.assertHttp200(AlternativesApiValidationTest.java:141)
+	at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:67)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -112,14 +108,10 @@ RESPONSE_BODY={&quot;data&quot;:{&quot;exit_plan_data&quot;:{&quot;basic_name&qu
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-</pre></div><a href='#' onClick='toggleBox("stack-trace196732636", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace196732636'><pre>java.lang.AssertionError: SOURCE_CATEGORY=OPTIMIZE | SOURCE_PLAN_ID=42523 | SOURCE_FUND_NAME=Axis Silver FoF Reg-G
-HTTP_STATUS=200
-RESPONSE_BODY={&quot;data&quot;:{&quot;exit_plan_data&quot;:{&quot;basic_name&quot;:&quot;Axis Silver FoF - Regular Plan&quot;,&quot;is_etf_plan&quot;:false,&quot;plan_id&quot;:42523},&quot;exit_transaction_note&quot;:null,&quot;heading&quot;:&quot;Suitable Alternatives&quot;,&quot;is_etf_exit&quot;:false,&quot;max_amount_allowed&quot;:14448.118068,&quot;max_amount_allowed_fmt&quot;:&quot;₹ 14,448.12&quot;,&quot;message&quot;:&quot;We have no suitable alternatives to suggest right now.&quot;,&quot;sub_heading&quot;:&quot;In order of our preference&quot;},&quot;status&quot;:true} | Alternatives list must not be empty expected [false] but found [true]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1578)
-	at org.testng.Assert.assertFalse(Assert.java:79)
-	at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:70)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1856158867", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1856158867'><pre>java.lang.NullPointerException: Cannot read field &quot;statusCode&quot; because &quot;response&quot; is null
+	at tests.AlternativesApiValidationTest.assertHttp200(AlternativesApiValidationTest.java:141)
+	at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:67)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -149,15 +141,12 @@ RESPONSE_BODY={&quot;data&quot;:{&quot;exit_plan_data&quot;:{&quot;basic_name&qu
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
 </pre></div></td>
-<td>2</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>7</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 <tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=43123, name='Axis Business Cycles Reg-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td><div><pre>java.lang.AssertionError: SOURCE_CATEGORY=OPTIMIZE | SOURCE_PLAN_ID=43123 | SOURCE_FUND_NAME=Axis Business Cycles Reg-IDCW
-HTTP_STATUS=500
-RESPONSE_BODY= | Alternatives API returned HTTP 500
-	at org.testng.Assert.fail(Assert.java:111)
-	at tests.AlternativesApiValidationTest.assertHttp200(AlternativesApiValidationTest.java:125)
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=15869, name='ICICI Pru Large & Mid Cap Dir-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td><div><pre>java.lang.NullPointerException: Cannot read field &quot;statusCode&quot; because &quot;response&quot; is null
+	at tests.AlternativesApiValidationTest.assertHttp200(AlternativesApiValidationTest.java:141)
 	at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:67)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -187,12 +176,9 @@ RESPONSE_BODY= | Alternatives API returned HTTP 500
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1692885405", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1692885405'><pre>java.lang.AssertionError: SOURCE_CATEGORY=OPTIMIZE | SOURCE_PLAN_ID=43123 | SOURCE_FUND_NAME=Axis Business Cycles Reg-IDCW
-HTTP_STATUS=500
-RESPONSE_BODY= | Alternatives API returned HTTP 500
-	at org.testng.Assert.fail(Assert.java:111)
-	at tests.AlternativesApiValidationTest.assertHttp200(AlternativesApiValidationTest.java:125)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1230955136", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1230955136'><pre>java.lang.NullPointerException: Cannot read field &quot;statusCode&quot; because &quot;response&quot; is null
+	at tests.AlternativesApiValidationTest.assertHttp200(AlternativesApiValidationTest.java:141)
 	at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:67)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -223,8 +209,8 @@ RESPONSE_BODY= | Alternatives API returned HTTP 500
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
 </pre></div></td>
-<td>6</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>15</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 </table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
@@ -235,95 +221,95 @@ RESPONSE_BODY= | Alternatives API returned HTTP 500
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=26990, name='Nippon India Medium Duration Reg-G', actualCategory='EXIT', concentrationTrigger=''}</td>
-<td></td>
-<td>13</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
-<tr>
 <td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=1443, name='SBI Overnight Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
 <td></td>
-<td>10</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>8</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 <tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=1773, name='Nippon India Gilt Inst-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=7831, name='Invesco India Financial Services Reg-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
 <td></td>
-<td>12</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>14</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 <tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=43050, name='HDFC Long Duration Debt Dir-G', actualCategory='EXIT', concentrationTrigger=''}</td>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=44974, name='Edelweiss CRISIL-IBX AAA Bond NBFC-HFC-Jun 2027 Index Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
 <td></td>
-<td>23</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>15</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 <tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=15869, name='ICICI Pru Large & Mid Cap Dir-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=2812, name='SBI Comma Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
 <td></td>
-<td>10</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>9</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
+<tr>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=15723, name='UTI ELSS Tax Saver Dir-G', actualCategory='EXIT', concentrationTrigger=''}</td>
+<td></td>
+<td>9</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 <tr>
 <td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=2174, name='ABSL Liquid Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
 <td></td>
 <td>12</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 <tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=38439, name='Shriram ELSS Tax Saver Dir-G', actualCategory='EXIT', concentrationTrigger=''}</td>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=26990, name='Nippon India Medium Duration Reg-G', actualCategory='EXIT', concentrationTrigger=''}</td>
 <td></td>
-<td>23</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=16707, name='Invesco India Financial Services Dir-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>12</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>10</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 <tr>
 <td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=43125, name='Axis Business Cycles Dir-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
 <td></td>
-<td>17</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=31366, name='Tata Digital India Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>6</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=7831, name='Invesco India Financial Services Reg-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>3</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=219, name='HDFC Flexi Cap Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>8</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=4111, name='Quant Large & Mid Cap Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>6</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=15723, name='UTI ELSS Tax Saver Dir-G', actualCategory='EXIT', concentrationTrigger=''}</td>
-<td></td>
-<td>4</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>16</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 <tr>
 <td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=616, name='LIC MF Medium to Long Duration Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
 <td></td>
-<td>6</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>3</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
+<tr>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=1773, name='Nippon India Gilt Inst-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td></td>
+<td>4</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 <tr>
 <td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=16957, name='Tata Children's Dir', actualCategory='EXIT', concentrationTrigger=''}</td>
 <td></td>
-<td>6</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>8</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 <tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=44974, name='Edelweiss CRISIL-IBX AAA Bond NBFC-HFC-Jun 2027 Index Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=4111, name='Quant Large & Mid Cap Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td></td>
+<td>4</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
+<tr>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=219, name='HDFC Flexi Cap Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td></td>
+<td>7</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
+<tr>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=38439, name='Shriram ELSS Tax Saver Dir-G', actualCategory='EXIT', concentrationTrigger=''}</td>
 <td></td>
 <td>18</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 <tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=2812, name='SBI Comma Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=42523, name='Axis Silver FoF Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
 <td></td>
-<td>16</td>
-<td>tests.AlternativesApiValidationTest@3e58a80e</td></tr>
+<td>1</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
+<tr>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=43050, name='HDFC Long Duration Debt Dir-G', actualCategory='EXIT', concentrationTrigger=''}</td>
+<td></td>
+<td>20</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
+<tr>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=31366, name='Tata Digital India Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td></td>
+<td>4</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
+<tr>
+<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=43123, name='Axis Business Cycles Reg-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td></td>
+<td>2</td>
+<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
 </table><p>
 </body>
 </html>

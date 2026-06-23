@@ -26,6 +26,7 @@ public class AlternativesApiService {
     private static final String ALTERNATIVES_ENDPOINT = "/api/v1/advisory/alternatives";
     private static final int DIAGNOSTIC_TIMEOUT_SECONDS = 60;
 
+    AlternativesApiResponse lastResponse = null;
     private final AdvisoryApiConfig config;
     private final HttpClient httpClient;
     private final Map<Integer, AlternativesApiResponse> cache = new LinkedHashMap<>();
@@ -38,7 +39,7 @@ public class AlternativesApiService {
     }
 
     public AlternativesApiResponse getAlternativesResponse(int planId) {
-        return cache.computeIfAbsent(planId, this::fetchAlternatives);
+        return cache.computeIfAbsent(planId, this::fetchWithRetry);
     }
 
     public List<AlternativeFund> getAlternatives(int planId) {
@@ -126,6 +127,38 @@ public class AlternativesApiService {
         }
     }
 
+    private AlternativesApiResponse fetchWithRetry(int planId) {
+
+        for (int attempt = 1; attempt <= 3; attempt++) {
+
+            AlternativesApiResponse response =
+                    fetchAlternatives(planId);
+
+            if (response.statusCode == 200) {
+                logger.info(
+                        "SUCCESS_ON_ATTEMPT={} PLAN_ID={}",
+                        attempt,
+                        planId);
+                return response;
+            }
+
+            logger.warn(
+                    "FAILED_ATTEMPT={} PLAN_ID={} STATUS={}",
+                    attempt,
+                    planId,
+                    response.statusCode);
+
+            try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+
+        return lastResponse;
+    }
+    
     private HttpRequest buildPostmanLikeRequest(String url) {
         return HttpRequest.newBuilder()
                 .uri(URI.create(url))

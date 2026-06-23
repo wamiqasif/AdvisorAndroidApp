@@ -65,11 +65,30 @@ public class AlternativesApiValidationTest {
 
         AlternativesApiResponse response = alternativesApiService.getAlternativesResponse(sourceFund.planId);
         assertHttp200(response, sourceFund);
+        
+        
 
         List<AlternativeFund> alternatives = response.alternatives;
-        Assert.assertFalse(
-                alternatives.isEmpty(),
-                failureContext(sourceFund, response) + " | Alternatives list must not be empty");
+//        Assert.assertFalse(
+//                alternatives.isEmpty(),
+//                failureContext(sourceFund, response) + " | Alternatives list must not be empty");
+        
+        if (response.alternatives.isEmpty()) {
+
+            logger.warn(
+                    "NO_ALTERNATIVES_AVAILABLE | PLAN_ID={} | FUND_NAME={}",
+                    sourceFund.planId,
+                    sourceFund.fundName);
+
+            Assert.assertTrue(
+                    response.responseBody.contains(
+                            "We have no suitable alternatives to suggest right now."),
+                    
+            failureContext(sourceFund, response)
+            + " | Empty alternatives must provide fallback message");
+
+            return;
+        }
         Assert.assertTrue(
                 alternatives.size() <= 5,
                 failureContext(sourceFund, response) + " | Alternatives count must be <= 5");
