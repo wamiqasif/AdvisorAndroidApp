@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>18/2/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Tue Jun 23 11:01:05 IST 2026</td>
+<td>Started on:</td><td>Tue Jun 23 16:57:51 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>212 seconds (212379 ms)</td>
+<tr><td>Total time:</td><td>271 seconds (271887 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,151 +67,6 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-failed'>
-<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
-<tr><td><b>Test method</b></td>
-<td><b>Attribute(s)</b></td>
-<td width="30%"><b>Exception</b></td>
-<td width="10%"><b>Time (seconds)</b></td>
-<td><b>Instance</b></td>
-</tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=16707, name='Invesco India Financial Services Dir-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td><div><pre>java.lang.NullPointerException: Cannot read field &quot;statusCode&quot; because &quot;response&quot; is null
-	at tests.AlternativesApiValidationTest.assertHttp200(AlternativesApiValidationTest.java:141)
-	at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:67)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:739)
-	at org.testng.TestRunner.run(TestRunner.java:614)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-	at org.testng.TestNG.runSuites(TestNG.java:1112)
-	at org.testng.TestNG.run(TestNG.java:1079)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1856158867", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1856158867'><pre>java.lang.NullPointerException: Cannot read field &quot;statusCode&quot; because &quot;response&quot; is null
-	at tests.AlternativesApiValidationTest.assertHttp200(AlternativesApiValidationTest.java:141)
-	at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:67)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:739)
-	at org.testng.TestRunner.run(TestRunner.java:614)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-	at org.testng.TestNG.runSuites(TestNG.java:1112)
-	at org.testng.TestNG.run(TestNG.java:1079)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-</pre></div></td>
-<td>7</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=15869, name='ICICI Pru Large & Mid Cap Dir-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td><div><pre>java.lang.NullPointerException: Cannot read field &quot;statusCode&quot; because &quot;response&quot; is null
-	at tests.AlternativesApiValidationTest.assertHttp200(AlternativesApiValidationTest.java:141)
-	at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:67)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:739)
-	at org.testng.TestRunner.run(TestRunner.java:614)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-	at org.testng.TestNG.runSuites(TestNG.java:1112)
-	at org.testng.TestNG.run(TestNG.java:1079)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1230955136", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1230955136'><pre>java.lang.NullPointerException: Cannot read field &quot;statusCode&quot; because &quot;response&quot; is null
-	at tests.AlternativesApiValidationTest.assertHttp200(AlternativesApiValidationTest.java:141)
-	at tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules(AlternativesApiValidationTest.java:67)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:739)
-	at org.testng.TestRunner.run(TestRunner.java:614)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-	at org.testng.TestNG.runSuites(TestNG.java:1112)
-	at org.testng.TestNG.run(TestNG.java:1079)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-</pre></div></td>
-<td>15</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-</table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
@@ -221,95 +76,10 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=1443, name='SBI Overnight Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
+<td title='tests.HubTest.tc_hub_022_verifyAllLinksOpenValidScreens()'><b>tc_hub_022_verifyAllLinksOpenValidScreens</b><br>Test class: tests.HubTest<br>Test method: TC_HUB_022 — Hub → every link (one by one) → validate → back to Hub</td>
 <td></td>
-<td>8</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=7831, name='Invesco India Financial Services Reg-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>14</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=44974, name='Edelweiss CRISIL-IBX AAA Bond NBFC-HFC-Jun 2027 Index Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>15</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=2812, name='SBI Comma Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>9</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=15723, name='UTI ELSS Tax Saver Dir-G', actualCategory='EXIT', concentrationTrigger=''}</td>
-<td></td>
-<td>9</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=2174, name='ABSL Liquid Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>12</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=26990, name='Nippon India Medium Duration Reg-G', actualCategory='EXIT', concentrationTrigger=''}</td>
-<td></td>
-<td>10</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=43125, name='Axis Business Cycles Dir-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>16</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=616, name='LIC MF Medium to Long Duration Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>3</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=1773, name='Nippon India Gilt Inst-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>4</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=16957, name='Tata Children's Dir', actualCategory='EXIT', concentrationTrigger=''}</td>
-<td></td>
-<td>8</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=4111, name='Quant Large & Mid Cap Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>4</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=219, name='HDFC Flexi Cap Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>7</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=38439, name='Shriram ELSS Tax Saver Dir-G', actualCategory='EXIT', concentrationTrigger=''}</td>
-<td></td>
-<td>18</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=42523, name='Axis Silver FoF Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>1</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=43050, name='HDFC Long Duration Debt Dir-G', actualCategory='EXIT', concentrationTrigger=''}</td>
-<td></td>
-<td>20</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=31366, name='Tata Digital India Reg-G', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>4</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
-<tr>
-<td title='tests.AlternativesApiValidationTest.tc_alt_001_validateAlternativesBusinessRules()'><b>tc_alt_001_validateAlternativesBusinessRules</b><br>Test class: tests.AlternativesApiValidationTest<br>Test method: TC_ALT_001 - Alternatives API business rules for EXIT and OPTIMIZE funds<br>Parameters: FundReviewItem{planId=43123, name='Axis Business Cycles Reg-IDCW', actualCategory='OPTIMIZE', concentrationTrigger=''}</td>
-<td></td>
-<td>2</td>
-<td>tests.AlternativesApiValidationTest@4f18837a</td></tr>
+<td>256</td>
+<td>tests.HubTest@48f2bd5b</td></tr>
 </table><p>
 </body>
 </html>

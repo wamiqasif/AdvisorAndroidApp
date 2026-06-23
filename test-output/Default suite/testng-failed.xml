@@ -3,12 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.AlternativesApiValidationTest">
+      <class name="tests.HubTest">
         <methods>
-          <include name="setUpApiClients"/>
-          <include name="tc_alt_001_validateAlternativesBusinessRules" invocation-numbers="11 12"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="tc_hub_001_verifyHubScreenLoads"/>
+          <include name="afterSuite"/>
+          <include name="beforeClass"/>
         </methods>
-      </class> <!-- tests.AlternativesApiValidationTest -->
+      </class> <!-- tests.HubTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
