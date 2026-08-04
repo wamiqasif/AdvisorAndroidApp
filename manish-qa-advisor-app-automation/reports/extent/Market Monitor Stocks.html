@@ -1,0 +1,2660 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Advisor App Automation Report</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report dark">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Advisor App Test Automation Report</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Jul 28, 2026 11:28:39 am</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_001 - Open Market Monitor from Stocks</p>
+            <p class="text-sm">
+              <span>11:28:46 am</span> / <span>00:00:14:403</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_001 - Open Market Monitor from Stocks</h5>
+<span class='badge badge-success'>07.28.2026 11:28:46 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:01 am</span>
+<span class='badge badge-default'>00:00:14:403</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:46 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_001<br><b>Scenario:</b> Open Market Monitor from Stocks<br><b>Validation:</b> Confirm login, open the Stocks bottom tab, and verify Market Monitor loads
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:46 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_001 - Open Market Monitor from Stocks
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:46 am</td>
+        <td>
+          <b>[STEP]</b> Loaded Market Monitor page build: MM_FAST_STABLE_V6_20260728
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:46 am</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:46 am</td>
+        <td>
+          <b>[STEP]</b> Checking app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:46 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for app to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:52 am</td>
+        <td>
+          <b>[STEP]</b> PIN screen indicator found: Enter your Advisor PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:52 am</td>
+        <td>
+          <b>[STEP]</b> PIN screen detected. Entering PIN once.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:52 am</td>
+        <td>
+          <b>[STEP]</b> Entering app PIN using strict keypad locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:53 am</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:54 am</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 9
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:55 am</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 7
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:56 am</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 5
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:28:57 am</td>
+        <td>
+          <b>[PASS]</b> PIN entered successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:57 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for valid logged-in screen after PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:58 am</td>
+        <td>
+          <b>[STEP]</b> Logged-in tab indicator found: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:28:58 am</td>
+        <td>
+          <b>[PASS]</b> Logged-in bottom tabs loaded after PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:28:58 am</td>
+        <td>
+          <b>[PASS]</b> Advisor login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:58 am</td>
+        <td>
+          <b>[STEP]</b> Opening Stocks module and Market Monitor | build=MM_FAST_STABLE_V6_20260728
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:58 am</td>
+        <td>
+          <b>[STEP]</b> Tapping Stocks bottom navigation tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:28:58 am</td>
+        <td>
+          <b>[PASS]</b> Stocks bottom tab tapped using accessibility locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:28:58 am</td>
+        <td>
+          <b>[PASS]</b> Stocks landing page is ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:58 am</td>
+        <td>
+          <b>[STEP]</b> Locating complete Market Monitor interaction area | build=MM_FAST_STABLE_V6_20260728
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:28:58 am</td>
+        <td>
+          <b>[STEP]</b> Scrolling Stocks page towards Market Monitor | attempt=1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:01 am</td>
+        <td>
+          <b>[PASS]</b> Market Monitor interaction area found after scroll attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:01 am</td>
+        <td>
+          <b>[PASS]</b> Market Monitor controls and table are ready | build=MM_FAST_STABLE_V6_20260728
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:01 am</td>
+        <td>
+          <b>[PASS]</b> Stocks Market Monitor opened successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:01 am</td>
+        <td>
+          <b>[PASS]</b> MM_001 - Market Monitor opened successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:01 am</td>
+        <td>
+          <span class='badge white-text green'>MM_001 - Open Market Monitor from Stocks completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:01 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_001_OpenMarketMonitorFromStocks</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_002 - Verify Market Monitor overview</p>
+            <p class="text-sm">
+              <span>11:29:01 am</span> / <span>00:00:01:687</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_002 - Verify Market Monitor overview</h5>
+<span class='badge badge-success'>07.28.2026 11:29:01 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:02 am</span>
+<span class='badge badge-default'>00:00:01:687</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:01 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_002<br><b>Scenario:</b> Verify Market Monitor overview<br><b>Validation:</b> Validate Quick Search, market filters, period tabs, dynamic headers, index rows and numeric returns
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:01 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_002 - Verify Market Monitor overview
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:01 am</td>
+        <td>
+          <b>[STEP]</b> Validating Market Monitor overview and controls
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Market Monitor heading: Market Monitor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Market Monitor heading = Market Monitor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Quick Search heading: Quick Search
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Quick Search heading = Quick Search
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Market filter: All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Market filter = All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Market filter: Indian
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Market filter = Indian
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Market filter: Global
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Market filter = Global
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Period tab = Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Period tab: Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Period tab = Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Period tab: Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Period tab = Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Period tab: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Period tab = Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Market Monitor overview headers: [1 Day, YTD, 1 Week, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Market Monitor overview headers = [1 Day, YTD, 1 Week, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Market Monitor overview visible rows: [BSE Sensex Index, BSE IPO Index, BSE 100 Index, BSE 200 Index, BSE 500 Index, BSE Auto Index, BSE Bankex Index, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99, BSE IPO Index, 1 Day, -0.89, BSE IPO Index, YTD, 11.72, BSE IPO Index, 1 Week, -0.38, BSE 100 Index, 1 Day, 0.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Market Monitor overview visible rows = [BSE Sensex Index, BSE IPO Index, BSE 100 Index, BSE 200 Index, BSE 500 Index, BSE Auto Index, BSE Bankex Index, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99, BSE IPO Index, 1 Day, -0.89, BSE IPO Index, YTD, 11.72, BSE IPO Index, 1 Week, -0.38, BSE 100 Index, 1 Day, 0.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Market Monitor overview numeric values: [100, 200, 500, 1, 0.14, -9.13, -0.99, -0.89, 11.72, -0.38, 0.21, -5.35, -0.53, 0.15, -3.78, -0.63, 0.07, -2.44, -0.75, 0.32, -1.68, 2.32, -0.22, -1.56]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Validated text/value:</b> Market Monitor overview numeric values = [100, 200, 500, 1, 0.14, -9.13, -0.99, -0.89, 11.72, -0.38, 0.21, -5.35, -0.53, 0.15, -3.78, -0.63, 0.07, -2.44, -0.75, 0.32, -1.68, 2.32, -0.22, -1.56]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> Market Monitor overview and controls validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[PASS]</b> MM_002 - Market Monitor overview validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <span class='badge white-text green'>MM_002 - Verify Market Monitor overview completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_002_VerifyMarketMonitorOverview</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_003 - Verify All market filter</p>
+            <p class="text-sm">
+              <span>11:29:02 am</span> / <span>00:00:00:756</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_003 - Verify All market filter</h5>
+<span class='badge badge-success'>07.28.2026 11:29:02 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:03 am</span>
+<span class='badge badge-default'>00:00:00:756</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_003<br><b>Scenario:</b> Verify All market filter<br><b>Validation:</b> Tap All and validate that the dynamic Market Monitor table remains structurally valid
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_003 - Verify All market filter
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:02 am</td>
+        <td>
+          <b>[STEP]</b> Validating Market Monitor filter: All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>[STEP]</b> Tapping market filter: All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>[PASS]</b> Tapped market filter: All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - All filter headers: [1 Day, YTD, 1 Week, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>Validated text/value:</b> All filter headers = [1 Day, YTD, 1 Week, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - All filter visible rows: [BSE Sensex Index, BSE IPO Index, BSE 100 Index, BSE 200 Index, BSE 500 Index, BSE Auto Index, BSE Bankex Index, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99, BSE IPO Index, 1 Day, -0.89, BSE IPO Index, YTD, 11.72, BSE IPO Index, 1 Week, -0.38, BSE 100 Index, 1 Day, 0.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>Validated text/value:</b> All filter visible rows = [BSE Sensex Index, BSE IPO Index, BSE 100 Index, BSE 200 Index, BSE 500 Index, BSE Auto Index, BSE Bankex Index, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99, BSE IPO Index, 1 Day, -0.89, BSE IPO Index, YTD, 11.72, BSE IPO Index, 1 Week, -0.38, BSE 100 Index, 1 Day, 0.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - All filter numeric values: [100, 200, 500, 1, 0.14, -9.13, -0.99, -0.89, 11.72, -0.38, 0.21, -5.35, -0.53, 0.15, -3.78, -0.63, 0.07, -2.44, -0.75, 0.32, -1.68, 2.32, -0.22, -1.56]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>Validated text/value:</b> All filter numeric values = [100, 200, 500, 1, 0.14, -9.13, -0.99, -0.89, 11.72, -0.38, 0.21, -5.35, -0.53, 0.15, -3.78, -0.63, 0.07, -2.44, -0.75, 0.32, -1.68, 2.32, -0.22, -1.56]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>[PASS]</b> Market filter validated successfully: All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>[PASS]</b> MM_003 - All market filter validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <span class='badge white-text green'>MM_003 - Verify All market filter completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_003_VerifyAllMarketFilter</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_004 - Verify Indian market filter</p>
+            <p class="text-sm">
+              <span>11:29:03 am</span> / <span>00:00:00:838</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_004 - Verify Indian market filter</h5>
+<span class='badge badge-success'>07.28.2026 11:29:03 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:04 am</span>
+<span class='badge badge-default'>00:00:00:838</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_004<br><b>Scenario:</b> Verify Indian market filter<br><b>Validation:</b> Tap Indian and validate live index rows and numeric return data without hardcoded values
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_004 - Verify Indian market filter
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>[STEP]</b> Validating Market Monitor filter: Indian
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:03 am</td>
+        <td>
+          <b>[STEP]</b> Tapping market filter: Indian
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>[PASS]</b> Tapped market filter: Indian
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Indian filter headers: [1 Day, YTD, 1 Week, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>Validated text/value:</b> Indian filter headers = [1 Day, YTD, 1 Week, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Indian filter visible rows: [BSE Sensex Index, BSE IPO Index, BSE 100 Index, BSE 200 Index, BSE 500 Index, BSE Auto Index, BSE Bankex Index, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99, BSE IPO Index, 1 Day, -0.89, BSE IPO Index, YTD, 11.72, BSE IPO Index, 1 Week, -0.38, BSE 100 Index, 1 Day, 0.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>Validated text/value:</b> Indian filter visible rows = [BSE Sensex Index, BSE IPO Index, BSE 100 Index, BSE 200 Index, BSE 500 Index, BSE Auto Index, BSE Bankex Index, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99, BSE IPO Index, 1 Day, -0.89, BSE IPO Index, YTD, 11.72, BSE IPO Index, 1 Week, -0.38, BSE 100 Index, 1 Day, 0.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Indian filter numeric values: [100, 200, 500, 1, 0.14, -9.13, -0.99, -0.89, 11.72, -0.38, 0.21, -5.35, -0.53, 0.15, -3.78, -0.63, 0.07, -2.44, -0.75, 0.32, -1.68, 2.32, -0.22, -1.56]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>Validated text/value:</b> Indian filter numeric values = [100, 200, 500, 1, 0.14, -9.13, -0.99, -0.89, 11.72, -0.38, 0.21, -5.35, -0.53, 0.15, -3.78, -0.63, 0.07, -2.44, -0.75, 0.32, -1.68, 2.32, -0.22, -1.56]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>[PASS]</b> Market filter validated successfully: Indian
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>[PASS]</b> MM_004 - Indian market filter validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <span class='badge white-text green'>MM_004 - Verify Indian market filter completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_004_VerifyIndianMarketFilter</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_005 - Verify Global market filter</p>
+            <p class="text-sm">
+              <span>11:29:04 am</span> / <span>00:00:00:836</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_005 - Verify Global market filter</h5>
+<span class='badge badge-success'>07.28.2026 11:29:04 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:05 am</span>
+<span class='badge badge-default'>00:00:00:836</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_005<br><b>Scenario:</b> Verify Global market filter<br><b>Validation:</b> Tap Global and validate live index rows and numeric return data without hardcoded values
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_005 - Verify Global market filter
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>[STEP]</b> Validating Market Monitor filter: Global
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:04 am</td>
+        <td>
+          <b>[STEP]</b> Tapping market filter: Global
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>[PASS]</b> Tapped market filter: Global
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Global filter headers: [1 Day, YTD, 1 Week, AEX Amsterdam Index, 1 Day, -0.82, AEX Amsterdam Index, YTD, 14.85, AEX Amsterdam Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>Validated text/value:</b> Global filter headers = [1 Day, YTD, 1 Week, AEX Amsterdam Index, 1 Day, -0.82, AEX Amsterdam Index, YTD, 14.85, AEX Amsterdam Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Global filter visible rows: [AEX Amsterdam Index, BEL-20 Index, BOVESPA Index, CAC 40 Index, CBOE Volatility Index, DAX Index, Dow Jones Industrial Average Index, AEX Amsterdam Index, 1 Day, -0.82, AEX Amsterdam Index, YTD, 14.85, AEX Amsterdam Index, 1 Week, -0.99, BEL-20 Index, 1 Day, -0.08, BEL-20 Index, YTD, -0.95, BEL-20 Index, 1 Week, 1.44, BOVESPA Index, 1 Day, 0.74]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>Validated text/value:</b> Global filter visible rows = [AEX Amsterdam Index, BEL-20 Index, BOVESPA Index, CAC 40 Index, CBOE Volatility Index, DAX Index, Dow Jones Industrial Average Index, AEX Amsterdam Index, 1 Day, -0.82, AEX Amsterdam Index, YTD, 14.85, AEX Amsterdam Index, 1 Week, -0.99, BEL-20 Index, 1 Day, -0.08, BEL-20 Index, YTD, -0.95, BEL-20 Index, 1 Week, 1.44, BOVESPA Index, 1 Day, 0.74]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Global filter numeric values: [20, 40, 1, -0.82, 14.85, -0.99, -0.08, -0.95, 1.44, 0.74, 8.45, 0.93, 0.40, 2.91, 0.81, 0.48, 30.20, -0.53, 1.04, 3.55, 2.13, 0.51, 7.84, 0.12]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>Validated text/value:</b> Global filter numeric values = [20, 40, 1, -0.82, 14.85, -0.99, -0.08, -0.95, 1.44, 0.74, 8.45, 0.93, 0.40, 2.91, 0.81, 0.48, 30.20, -0.53, 1.04, 3.55, 2.13, 0.51, 7.84, 0.12]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>[PASS]</b> Global filter refreshed the visible table data
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>[PASS]</b> Market filter validated successfully: Global
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>[PASS]</b> MM_005 - Global market filter validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <span class='badge white-text green'>MM_005 - Verify Global market filter completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_005_VerifyGlobalMarketFilter</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_006 - Verify Trailing period tab</p>
+            <p class="text-sm">
+              <span>11:29:05 am</span> / <span>00:00:00:766</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_006 - Verify Trailing period tab</h5>
+<span class='badge badge-success'>07.28.2026 11:29:05 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:06 am</span>
+<span class='badge badge-default'>00:00:00:766</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_006<br><b>Scenario:</b> Verify Trailing period tab<br><b>Validation:</b> Tap Trailing and validate trailing headers plus dynamic rows and return values
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_006 - Verify Trailing period tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>[STEP]</b> Validating Market Monitor period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:05 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Trailing period headers: [1 Day, YTD, 1 Week, AEX Amsterdam Index, 1 Day, -0.82, AEX Amsterdam Index, YTD, 14.85, AEX Amsterdam Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>Validated text/value:</b> Trailing period headers = [1 Day, YTD, 1 Week, AEX Amsterdam Index, 1 Day, -0.82, AEX Amsterdam Index, YTD, 14.85, AEX Amsterdam Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Trailing period visible rows: [AEX Amsterdam Index, BEL-20 Index, BOVESPA Index, CAC 40 Index, CBOE Volatility Index, DAX Index, Dow Jones Industrial Average Index, AEX Amsterdam Index, 1 Day, -0.82, AEX Amsterdam Index, YTD, 14.85, AEX Amsterdam Index, 1 Week, -0.99, BEL-20 Index, 1 Day, -0.08, BEL-20 Index, YTD, -0.95, BEL-20 Index, 1 Week, 1.44, BOVESPA Index, 1 Day, 0.74]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>Validated text/value:</b> Trailing period visible rows = [AEX Amsterdam Index, BEL-20 Index, BOVESPA Index, CAC 40 Index, CBOE Volatility Index, DAX Index, Dow Jones Industrial Average Index, AEX Amsterdam Index, 1 Day, -0.82, AEX Amsterdam Index, YTD, 14.85, AEX Amsterdam Index, 1 Week, -0.99, BEL-20 Index, 1 Day, -0.08, BEL-20 Index, YTD, -0.95, BEL-20 Index, 1 Week, 1.44, BOVESPA Index, 1 Day, 0.74]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Trailing period numeric values: [20, 40, 1, -0.82, 14.85, -0.99, -0.08, -0.95, 1.44, 0.74, 8.45, 0.93, 0.40, 2.91, 0.81, 0.48, 30.20, -0.53, 1.04, 3.55, 2.13, 0.51, 7.84, 0.12]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>Validated text/value:</b> Trailing period numeric values = [20, 40, 1, -0.82, 14.85, -0.99, -0.08, -0.95, 1.44, 0.74, 8.45, 0.93, 0.40, 2.91, 0.81, 0.48, 30.20, -0.53, 1.04, 3.55, 2.13, 0.51, 7.84, 0.12]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> Period tab validated successfully: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> MM_006 - Trailing period validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <span class='badge white-text green'>MM_006 - Verify Trailing period tab completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_006_VerifyTrailingPeriod</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_007 - Verify Annual period tab</p>
+            <p class="text-sm">
+              <span>11:29:06 am</span> / <span>00:00:00:761</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_007 - Verify Annual period tab</h5>
+<span class='badge badge-success'>07.28.2026 11:29:06 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:06 am</span>
+<span class='badge badge-default'>00:00:00:761</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_007<br><b>Scenario:</b> Verify Annual period tab<br><b>Validation:</b> Tap Annual and validate dynamic annual table headers, index rows and return values
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_007 - Verify Annual period tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[STEP]</b> Validating Market Monitor period tab: Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Annual period headers: [FTSE 100 Index, 2025, 21.51, FTSE 100 Index, 2024, 5.64, FTSE 100 Index, 2023, 3.78]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>Validated text/value:</b> Annual period headers = [FTSE 100 Index, 2025, 21.51, FTSE 100 Index, 2024, 5.64, FTSE 100 Index, 2023, 3.78]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Annual period visible rows: [FTSE 100 Index, Nikkei 225 Index, Shanghai Composite Index, S&amp;P 100 Index, S&amp;P 500 Index, S&amp;P Midcap 400 Index, S&amp;P Small-Cap 600 Index, FTSE 100 Index, 2025, 21.51, FTSE 100 Index, 2024, 5.64, FTSE 100 Index, 2023, 3.78, Nikkei 225 Index, 2025, 26.18, Nikkei 225 Index, 2024, 19.10, Nikkei 225 Index, 2023, 28.24, Shanghai Composite Index, 2025, 18.41]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>Validated text/value:</b> Annual period visible rows = [FTSE 100 Index, Nikkei 225 Index, Shanghai Composite Index, S&P 100 Index, S&P 500 Index, S&P Midcap 400 Index, S&P Small-Cap 600 Index, FTSE 100 Index, 2025, 21.51, FTSE 100 Index, 2024, 5.64, FTSE 100 Index, 2023, 3.78, Nikkei 225 Index, 2025, 26.18, Nikkei 225 Index, 2024, 19.10, Nikkei 225 Index, 2023, 28.24, Shanghai Composite Index, 2025, 18.41]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Annual period numeric values: [100, 225, 500, 400, 600, 2025, 21.51, 2024, 5.64, 2023, 3.78, 26.18, 19.10, 28.24, 18.41, 12.56, -3.70, 18.70, 29.04, 30.83, 16.50, 22.99, 24.23, 5.88, 12.12, 14.45, 3.99, 7.01]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>Validated text/value:</b> Annual period numeric values = [100, 225, 500, 400, 600, 2025, 21.51, 2024, 5.64, 2023, 3.78, 26.18, 19.10, 28.24, 18.41, 12.56, -3.70, 18.70, 29.04, 30.83, 16.50, 22.99, 24.23, 5.88, 12.12, 14.45, 3.99, 7.01]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> Annual period refreshed table headers/data
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> Period tab validated successfully: Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[PASS]</b> MM_007 - Annual period validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <span class='badge white-text green'>MM_007 - Verify Annual period tab completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_007_VerifyAnnualPeriod</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="8"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_008 - Verify Quarterly period tab</p>
+            <p class="text-sm">
+              <span>11:29:06 am</span> / <span>00:00:00:732</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_008 - Verify Quarterly period tab</h5>
+<span class='badge badge-success'>07.28.2026 11:29:06 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:07 am</span>
+<span class='badge badge-default'>00:00:00:732</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_008<br><b>Scenario:</b> Verify Quarterly period tab<br><b>Validation:</b> Tap Quarterly and validate dynamic quarter/date headers, index rows and return values
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_008 - Verify Quarterly period tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:06 am</td>
+        <td>
+          <b>[STEP]</b> Validating Market Monitor period tab: Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Quarterly dated headers: [Jun-26, Mar-26, Dec-25, FTSE 100 Index, Jun-26, 3.15, FTSE 100 Index, Mar-26, 2.47, FTSE 100 Index, Dec-25, 6.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>Validated text/value:</b> Quarterly dated headers = [Jun-26, Mar-26, Dec-25, FTSE 100 Index, Jun-26, 3.15, FTSE 100 Index, Mar-26, 2.47, FTSE 100 Index, Dec-25, 6.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Quarterly period headers: [Jun-26, Mar-26, Dec-25, FTSE 100 Index, Jun-26, 3.15, FTSE 100 Index, Mar-26, 2.47, FTSE 100 Index, Dec-25, 6.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>Validated text/value:</b> Quarterly period headers = [Jun-26, Mar-26, Dec-25, FTSE 100 Index, Jun-26, 3.15, FTSE 100 Index, Mar-26, 2.47, FTSE 100 Index, Dec-25, 6.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Quarterly period visible rows: [FTSE 100 Index, Nikkei 225 Index, Shanghai Composite Index, S&amp;P 100 Index, S&amp;P 500 Index, S&amp;P Midcap 400 Index, FTSE 100 Index, Jun-26, 3.15, FTSE 100 Index, Mar-26, 2.47, FTSE 100 Index, Dec-25, 6.21, Nikkei 225 Index, Jun-26, 37.21, Nikkei 225 Index, Mar-26, 1.44, Nikkei 225 Index, Dec-25, 12.03, Shanghai Composite Index, Jun-26, 5.20, Shanghai Composite Index, Mar-26, -1.94]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>Validated text/value:</b> Quarterly period visible rows = [FTSE 100 Index, Nikkei 225 Index, Shanghai Composite Index, S&P 100 Index, S&P 500 Index, S&P Midcap 400 Index, FTSE 100 Index, Jun-26, 3.15, FTSE 100 Index, Mar-26, 2.47, FTSE 100 Index, Dec-25, 6.21, Nikkei 225 Index, Jun-26, 37.21, Nikkei 225 Index, Mar-26, 1.44, Nikkei 225 Index, Dec-25, 12.03, Shanghai Composite Index, Jun-26, 5.20, Shanghai Composite Index, Mar-26, -1.94]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Quarterly period numeric values: [100, 225, 500, 400, 26, 3.15, 2.47, 25, 6.21, 37.21, 1.44, 12.03, 5.20, -1.94, 2.22, 18.43, -10.04, 3.02, 14.61, -4.63, 2.35, 13.86, 2.15, 1.27]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>Validated text/value:</b> Quarterly period numeric values = [100, 225, 500, 400, 26, 3.15, 2.47, 25, 6.21, 37.21, 1.44, 12.03, 5.20, -1.94, 2.22, 18.43, -10.04, 3.02, 14.61, -4.63, 2.35, 13.86, 2.15, 1.27]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[PASS]</b> Quarterly period refreshed table headers/data
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[PASS]</b> Period tab validated successfully: Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[PASS]</b> MM_008 - Quarterly period validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <span class='badge white-text green'>MM_008 - Verify Quarterly period tab completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_008_VerifyQuarterlyPeriod</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="9"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_009 - Verify Monthly period tab</p>
+            <p class="text-sm">
+              <span>11:29:07 am</span> / <span>00:00:00:788</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_009 - Verify Monthly period tab</h5>
+<span class='badge badge-success'>07.28.2026 11:29:07 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:08 am</span>
+<span class='badge badge-default'>00:00:00:788</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=9</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_009<br><b>Scenario:</b> Verify Monthly period tab<br><b>Validation:</b> Tap Monthly and validate dynamic month/date headers, index rows and return values
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_009 - Verify Monthly period tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[STEP]</b> Validating Market Monitor period tab: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:07 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Monthly dated headers: [Jun-26, May-26, Apr-26, FTSE 100 Index, Jun-26, 0.84, FTSE 100 Index, May-26, 0.29, FTSE 100 Index, Apr-26, 1.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>Validated text/value:</b> Monthly dated headers = [Jun-26, May-26, Apr-26, FTSE 100 Index, Jun-26, 0.84, FTSE 100 Index, May-26, 0.29, FTSE 100 Index, Apr-26, 1.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Monthly period headers: [Jun-26, May-26, Apr-26, FTSE 100 Index, Jun-26, 0.84, FTSE 100 Index, May-26, 0.29, FTSE 100 Index, Apr-26, 1.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>Validated text/value:</b> Monthly period headers = [Jun-26, May-26, Apr-26, FTSE 100 Index, Jun-26, 0.84, FTSE 100 Index, May-26, 0.29, FTSE 100 Index, Apr-26, 1.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Monthly period visible rows: [FTSE 100 Index, Shanghai Composite Index, S&amp;P 100 Index, S&amp;P 500 Index, S&amp;P Midcap 400 Index, FTSE 100 Index, Jun-26, 0.84, FTSE 100 Index, May-26, 0.29, FTSE 100 Index, Apr-26, 1.99, Shanghai Composite Index, Jun-26, 0.63, Shanghai Composite Index, May-26, -1.06, Shanghai Composite Index, Apr-26, 5.66, S&amp;P 100 Index, Jun-26, -3.09, S&amp;P 100 Index, May-26, 6.22, S&amp;P 100 Index, Apr-26, 15.06]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>Validated text/value:</b> Monthly period visible rows = [FTSE 100 Index, Shanghai Composite Index, S&P 100 Index, S&P 500 Index, S&P Midcap 400 Index, FTSE 100 Index, Jun-26, 0.84, FTSE 100 Index, May-26, 0.29, FTSE 100 Index, Apr-26, 1.99, Shanghai Composite Index, Jun-26, 0.63, Shanghai Composite Index, May-26, -1.06, Shanghai Composite Index, Apr-26, 5.66, S&P 100 Index, Jun-26, -3.09, S&P 100 Index, May-26, 6.22, S&P 100 Index, Apr-26, 15.06]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Monthly period numeric values: [100, 500, 400, 26, 0.84, 0.29, 1.99, 0.63, -1.06, 5.66, -3.09, 6.22, 15.06, -1.29, 5.15, 10.42, 3.20, 2.34, 7.80]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>Validated text/value:</b> Monthly period numeric values = [100, 500, 400, 26, 0.84, 0.29, 1.99, 0.63, -1.06, 5.66, -3.09, 6.22, 15.06, -1.29, 5.15, 10.42, 3.20, 2.34, 7.80]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[PASS]</b> Monthly period refreshed table headers/data
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[PASS]</b> Period tab validated successfully: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[PASS]</b> MM_009 - Monthly period validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <span class='badge white-text green'>MM_009 - Verify Monthly period tab completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_009_VerifyMonthlyPeriod</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="10"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_010 - Verify vertical table scroll</p>
+            <p class="text-sm">
+              <span>11:29:08 am</span> / <span>00:00:06:314</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_010 - Verify vertical table scroll</h5>
+<span class='badge badge-success'>07.28.2026 11:29:08 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:14 am</span>
+<span class='badge badge-default'>00:00:06:314</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=10</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_010<br><b>Scenario:</b> Verify vertical table scroll<br><b>Validation:</b> Swipe vertically inside Market Monitor and verify that additional/different index rows become visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_010 - Verify vertical table scroll
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[STEP]</b> Validating vertical scrolling in Market Monitor table
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[STEP]</b> Tapping market filter: All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[PASS]</b> Tapped market filter: All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:08 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:09 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:10 am</td>
+        <td>
+          <b>[STEP]</b> Scrolling Market Monitor rows vertically | direction=down | attempt=1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:12 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Rows before vertical scroll: [BSE Sensex Index, BSE IPO Index, BSE 100 Index, BSE 200 Index, BSE 500 Index, BSE Auto Index, BSE Sensex Index, 1 Day, 0.14, BSE IPO Index, 1 Day, -0.89, BSE 100 Index, 1 Day, 0.21, BSE 200 Index, 1 Day, 0.15, BSE 500 Index, 1 Day, 0.07, BSE Auto Index, 1 Day, 0.32, BSE Bankex Index, 1 Day, -0.22]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:12 am</td>
+        <td>
+          <b>Validated text/value:</b> Rows before vertical scroll = [BSE Sensex Index, BSE IPO Index, BSE 100 Index, BSE 200 Index, BSE 500 Index, BSE Auto Index, BSE Sensex Index, 1 Day, 0.14, BSE IPO Index, 1 Day, -0.89, BSE 100 Index, 1 Day, 0.21, BSE 200 Index, 1 Day, 0.15, BSE 500 Index, 1 Day, 0.07, BSE Auto Index, 1 Day, 0.32, BSE Bankex Index, 1 Day, -0.22]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:12 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Rows after vertical scroll: [BSE Sensex Index, BSE IPO Index, BSE 100 Index, BSE 200 Index, BSE 500 Index, BSE Auto Index, BSE Bankex Index, BSE CG Index, BSE Commodities Index, BSE Consumer Discretionary Goods &amp; Service, BSE Consumer Durables Index, BSE DOLLEX-100 Index, BSE DOLLEX-200 Index, BSE DOLLEX-30 Index, BSE Finance Index, BSE FMCG Index]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:12 am</td>
+        <td>
+          <b>Validated text/value:</b> Rows after vertical scroll = [BSE Sensex Index, BSE IPO Index, BSE 100 Index, BSE 200 Index, BSE 500 Index, BSE Auto Index, BSE Bankex Index, BSE CG Index, BSE Commodities Index, BSE Consumer Discretionary Goods & Service, BSE Consumer Durables Index, BSE DOLLEX-100 Index, BSE DOLLEX-200 Index, BSE DOLLEX-30 Index, BSE Finance Index, BSE FMCG Index]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:12 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Vertical row geometry before: BSE Sensex Index@1592|BSE IPO Index@1696|BSE 100 Index@1800|BSE 200 Index@1904|BSE 500 Index@2008|BSE Auto Index@2112|BSE Sensex Index, 1 Day, 0.14@1592|BSE IPO Index, 1 Day, -0.89@1696|BSE 100 Index, 1 Day, 0.21@1800|BSE 200 Index, 1 Day, 0.15@1904|BSE 500 Index, 1 Day, 0.07@2008|BSE Auto Index, 1 Day, 0.32@2112|BSE Bankex Index, 1 Day, -0.22@2184
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:12 am</td>
+        <td>
+          <b>Validated text/value:</b> Vertical row geometry before = BSE Sensex Index@1592|BSE IPO Index@1696|BSE 100 Index@1800|BSE 200 Index@1904|BSE 500 Index@2008|BSE Auto Index@2112|BSE Sensex Index, 1 Day, 0.14@1592|BSE IPO Index, 1 Day, -0.89@1696|BSE 100 Index, 1 Day, 0.21@1800|BSE 200 Index, 1 Day, 0.15@1904|BSE 500 Index, 1 Day, 0.07@2008|BSE Auto Index, 1 Day, 0.32@2112|BSE Bankex Index, 1 Day, -0.22@2184
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:12 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Vertical row geometry after: BSE Sensex Index@496|BSE IPO Index@600|BSE 100 Index@704|BSE 200 Index@808|BSE 500 Index@920|BSE Auto Index@1024|BSE Bankex Index@1128|BSE CG Index@1232|BSE Commodities Index@1336|BSE Consumer Discretionary Goods &amp; Service@1440|BSE Consumer Durables Index@1544|BSE DOLLEX-100 Index@1648|BSE DOLLEX-200 Index@1760|BSE DOLLEX-30 Index@1864|BSE Finance Index@1968|BSE FMCG Index@2072
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:12 am</td>
+        <td>
+          <b>Validated text/value:</b> Vertical row geometry after = BSE Sensex Index@496|BSE IPO Index@600|BSE 100 Index@704|BSE 200 Index@808|BSE 500 Index@920|BSE Auto Index@1024|BSE Bankex Index@1128|BSE CG Index@1232|BSE Commodities Index@1336|BSE Consumer Discretionary Goods & Service@1440|BSE Consumer Durables Index@1544|BSE DOLLEX-100 Index@1648|BSE DOLLEX-200 Index@1760|BSE DOLLEX-30 Index@1864|BSE Finance Index@1968|BSE FMCG Index@2072
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:12 am</td>
+        <td>
+          <b>[STEP]</b> Restoring Market Monitor controls after vertical table scroll
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:12 am</td>
+        <td>
+          <b>[STEP]</b> Scrolling parent Market Monitor viewport upward | attempt=1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:14 am</td>
+        <td>
+          <b>[PASS]</b> Market Monitor control area restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:14 am</td>
+        <td>
+          <b>[PASS]</b> Market Monitor vertical table scrolling validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:14 am</td>
+        <td>
+          <b>[PASS]</b> MM_010 - Vertical table scrolling validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:14 am</td>
+        <td>
+          <span class='badge white-text green'>MM_010 - Verify vertical table scroll completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:14 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_010_VerifyMarketMonitorVerticalScroll</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="11"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_011 - Verify horizontal table scroll</p>
+            <p class="text-sm">
+              <span>11:29:14 am</span> / <span>00:00:02:524</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_011 - Verify horizontal table scroll</h5>
+<span class='badge badge-success'>07.28.2026 11:29:14 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:17 am</span>
+<span class='badge badge-default'>00:00:02:524</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=11</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:14 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_011<br><b>Scenario:</b> Verify horizontal table scroll<br><b>Validation:</b> Swipe horizontally inside the Market Monitor table and verify that columns or visible values change
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:14 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_011 - Verify horizontal table scroll
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:14 am</td>
+        <td>
+          <b>[STEP]</b> Validating horizontal scrolling in Market Monitor table
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:14 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:15 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:16 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Headers before horizontal scroll: [1 Day, YTD, 1 Week, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:16 am</td>
+        <td>
+          <b>Validated text/value:</b> Headers before horizontal scroll = [1 Day, YTD, 1 Week, BSE Sensex Index, 1 Day, 0.14, BSE Sensex Index, YTD, -9.13, BSE Sensex Index, 1 Week, -0.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:16 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Headers after horizontal scroll: [1 Week, 1 Month, 3 Months, BSE Sensex Index, 1 Week, -0.99, BSE Sensex Index, 1 Month, -0.21, BSE Sensex Index, 3 Months, -0.47]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:16 am</td>
+        <td>
+          <b>Validated text/value:</b> Headers after horizontal scroll = [1 Week, 1 Month, 3 Months, BSE Sensex Index, 1 Week, -0.99, BSE Sensex Index, 1 Month, -0.21, BSE Sensex Index, 3 Months, -0.47]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:17 am</td>
+        <td>
+          <b>[PASS]</b> Market Monitor horizontal table scrolling validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:17 am</td>
+        <td>
+          <b>[PASS]</b> MM_011 - Horizontal table scrolling validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:17 am</td>
+        <td>
+          <span class='badge white-text green'>MM_011 - Verify horizontal table scroll completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:17 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_011_VerifyMarketMonitorHorizontalScroll</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="12"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MM_012 - Verify all filter/period combinations</p>
+            <p class="text-sm">
+              <span>11:29:17 am</span> / <span>00:00:13:742</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MM_012 - Verify all filter/period combinations</h5>
+<span class='badge badge-success'>07.28.2026 11:29:17 am</span>
+<span class='badge badge-danger'>07.28.2026 11:29:31 am</span>
+<span class='badge badge-default'>00:00:13:742</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=12</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:17 am</td>
+        <td>
+          <b>Module:</b> Market Monitor<br><b>Case ID:</b> MM_012<br><b>Scenario:</b> Verify all filter/period combinations<br><b>Validation:</b> Validate All, Indian and Global against Trailing, Annual, Quarterly and Monthly using dynamic live data
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:17 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MM_012 - Verify all filter/period combinations
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:17 am</td>
+        <td>
+          <b>[STEP]</b> Validating all Market Monitor filter and period combinations
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:17 am</td>
+        <td>
+          <b>[STEP]</b> Tapping market filter: All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:18 am</td>
+        <td>
+          <b>[PASS]</b> Tapped market filter: All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:18 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:18 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:18 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: All / Trailing | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:18 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = All / Trailing | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:18 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:19 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:19 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: All / Annual | rows=14 | numericCells=26
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:19 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = All / Annual | rows=14 | numericCells=26
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:19 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:20 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:20 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Quarterly dated headers: [Jun-26, Mar-26, Dec-25, BSE Sensex Index, Jun-26, 6.30, BSE Sensex Index, Mar-26, -15.57, BSE Sensex Index, Dec-25, 6.17]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:20 am</td>
+        <td>
+          <b>Validated text/value:</b> Quarterly dated headers = [Jun-26, Mar-26, Dec-25, BSE Sensex Index, Jun-26, 6.30, BSE Sensex Index, Mar-26, -15.57, BSE Sensex Index, Dec-25, 6.17]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:20 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: All / Quarterly | rows=14 | numericCells=25
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:20 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = All / Quarterly | rows=14 | numericCells=25
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:20 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:21 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:21 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Monthly dated headers: [Jun-26, May-26, Apr-26, BSE Sensex Index, Jun-26, 2.28, BSE Sensex Index, May-26, -2.78, BSE Sensex Index, Apr-26, 6.90]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:21 am</td>
+        <td>
+          <b>Validated text/value:</b> Monthly dated headers = [Jun-26, May-26, Apr-26, BSE Sensex Index, Jun-26, 2.28, BSE Sensex Index, May-26, -2.78, BSE Sensex Index, Apr-26, 6.90]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:21 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: All / Monthly | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:21 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = All / Monthly | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:21 am</td>
+        <td>
+          <b>[STEP]</b> Tapping market filter: Indian
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:22 am</td>
+        <td>
+          <b>[PASS]</b> Tapped market filter: Indian
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:22 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:23 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:23 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: Indian / Trailing | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:23 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = Indian / Trailing | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:23 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:23 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: Indian / Annual | rows=14 | numericCells=26
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:24 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = Indian / Annual | rows=14 | numericCells=26
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:24 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:24 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:25 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Quarterly dated headers: [Jun-26, Mar-26, Dec-25, BSE Sensex Index, Jun-26, 6.30, BSE Sensex Index, Mar-26, -15.57, BSE Sensex Index, Dec-25, 6.17]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:25 am</td>
+        <td>
+          <b>Validated text/value:</b> Quarterly dated headers = [Jun-26, Mar-26, Dec-25, BSE Sensex Index, Jun-26, 6.30, BSE Sensex Index, Mar-26, -15.57, BSE Sensex Index, Dec-25, 6.17]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:25 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: Indian / Quarterly | rows=14 | numericCells=25
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:25 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = Indian / Quarterly | rows=14 | numericCells=25
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:25 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:25 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:25 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Monthly dated headers: [Jun-26, May-26, Apr-26, BSE Sensex Index, Jun-26, 2.28, BSE Sensex Index, May-26, -2.78, BSE Sensex Index, Apr-26, 6.90]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:25 am</td>
+        <td>
+          <b>Validated text/value:</b> Monthly dated headers = [Jun-26, May-26, Apr-26, BSE Sensex Index, Jun-26, 2.28, BSE Sensex Index, May-26, -2.78, BSE Sensex Index, Apr-26, 6.90]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:25 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: Indian / Monthly | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:25 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = Indian / Monthly | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:25 am</td>
+        <td>
+          <b>[STEP]</b> Tapping market filter: Global
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:26 am</td>
+        <td>
+          <b>[PASS]</b> Tapped market filter: Global
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:26 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:26 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:27 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: Global / Trailing | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:27 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = Global / Trailing | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:27 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:27 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Annual
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:28 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: Global / Annual | rows=14 | numericCells=28
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:28 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = Global / Annual | rows=14 | numericCells=28
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:28 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:28 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Quarterly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:28 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Quarterly dated headers: [Jun-26, Mar-26, Dec-25, FTSE 100 Index, Jun-26, 3.15, FTSE 100 Index, Mar-26, 2.47, FTSE 100 Index, Dec-25, 6.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:28 am</td>
+        <td>
+          <b>Validated text/value:</b> Quarterly dated headers = [Jun-26, Mar-26, Dec-25, FTSE 100 Index, Jun-26, 3.15, FTSE 100 Index, Mar-26, 2.47, FTSE 100 Index, Dec-25, 6.21]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:28 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: Global / Quarterly | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:28 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = Global / Quarterly | rows=14 | numericCells=24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:28 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:29 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:29 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Monthly dated headers: [Jun-26, May-26, Apr-26, FTSE 100 Index, Jun-26, 0.84, FTSE 100 Index, May-26, 0.29, FTSE 100 Index, Apr-26, 1.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:29 am</td>
+        <td>
+          <b>Validated text/value:</b> Monthly dated headers = [Jun-26, May-26, Apr-26, FTSE 100 Index, Jun-26, 0.84, FTSE 100 Index, May-26, 0.29, FTSE 100 Index, Apr-26, 1.99]
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:29 am</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Validated Market Monitor combination: Global / Monthly | rows=14 | numericCells=19
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:29 am</td>
+        <td>
+          <b>Validated text/value:</b> Validated Market Monitor combination = Global / Monthly | rows=14 | numericCells=19
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:29 am</td>
+        <td>
+          <b>[STEP]</b> Tapping market filter: All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:29 am</td>
+        <td>
+          <b>[PASS]</b> Tapped market filter: All
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:29:29 am</td>
+        <td>
+          <b>[STEP]</b> Tapping period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:30 am</td>
+        <td>
+          <b>[PASS]</b> Tapped period tab: Trailing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:31 am</td>
+        <td>
+          <b>[PASS]</b> All Market Monitor filter/period combinations validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:31 am</td>
+        <td>
+          <b>[PASS]</b> MM_012 - All filter/period combinations validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:31 am</td>
+        <td>
+          <span class='badge white-text green'>MM_012 - Verify all filter/period combinations completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:29:31 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MM_012_VerifyAllMarketAndPeriodCombinations</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Jul 28, 2026 11:28:39 am</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Jul 28, 2026 11:29:31 am</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>12</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>0</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'>
+<b>12</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='0%'><b>0</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='71%'><b>205</b> events passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> events failed,
+<b data-tooltip='%'>82</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"MM_001 - Open Market Monitor from Stocks":14.403,"MM_002 - Verify Market Monitor overview":1.687,"MM_003 - Verify All market filter":0.756,"MM_004 - Verify Indian market filter":0.838,"MM_005 - Verify Global market filter":0.836,"MM_006 - Verify Trailing period tab":0.766,"MM_007 - Verify Annual period tab":0.761,"MM_008 - Verify Quarterly period tab":0.732,"MM_009 - Verify Monthly period tab":0.788,"MM_010 - Verify vertical table scroll":6.314,"MM_011 - Verify horizontal table scroll":2.524,"MM_012 - Verify all filter/period combinations":13.742
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td>Advisor App</td>
+</tr>
+<tr>
+<td>Machine</td>
+<td>Local</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>User</td>
+<td>manishkhatri</td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>Android</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>Appium UiAutomator2</td>
+</tr>
+<tr>
+<td>Framework</td>
+<td>TestNG + Maven + ExtentReports</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 12,
+failParent: 0,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 205,
+failEvents: 0,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 82
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

@@ -1,0 +1,1873 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Advisor App Automation Report</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report dark">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Advisor App Test Automation Report</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Jul 21, 2026 10:16:40 am</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">ONB_001 - Login and validate subscription landing</p>
+            <p class="text-sm">
+              <span>10:16:51 am</span> / <span>00:01:02:850</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">ONB_001 - Login and validate subscription landing</h5>
+<span class='badge badge-success'>07.21.2026 10:16:51 am</span>
+<span class='badge badge-danger'>07.21.2026 10:17:54 am</span>
+<span class='badge badge-default'>00:01:02:850</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:16:51 am</td>
+        <td>
+          Module: Onboarding<br>Case ID: ONB_001<br>Validation: Validate Advisor login/session and confirm the Subscribe Now landing screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:16:51 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: ONB_001 - Login and validate subscription landing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:16:51 am</td>
+        <td>
+          <b>[STEP]</b> ONB_001 STEP 01 - Check Advisor app login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:16:51 am</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor app login/session state before onboarding
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:16:51 am</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor app login/session state before onboarding
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:16:51 am</td>
+        <td>
+          <b>[STEP]</b> Checking app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:16:51 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for app to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:01 am</td>
+        <td>
+          <b>[STEP]</b> Email login screen indicator found: visible element
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:01 am</td>
+        <td>
+          <b>[STEP]</b> Email login screen detected. Starting Email + OTP login.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:01 am</td>
+        <td>
+          <b>[STEP]</b> Starting Email + OTP login flow for: m***9@valueresearch.in
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:01 am</td>
+        <td>
+          <b>[STEP]</b> Entering email
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:01 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for email/phone input field
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:04 am</td>
+        <td>
+          <b>[STEP]</b> Email/Phone entered | Requested: ma***@valueresearch.in | Actual field value: ma***@valueresearch.in
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:05 am</td>
+        <td>
+          <b>[PASS]</b> Email/Phone field filled successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:05 am</td>
+        <td>
+          <b>[STEP]</b> Clicking Next after email entry
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:05 am</td>
+        <td>
+          <b>[STEP]</b> Clicking Next on login screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:06 am</td>
+        <td>
+          <b>[STEP]</b> Next clicked on login screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:08 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for OTP screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:08 am</td>
+        <td>
+          <b>[PASS]</b> OTP screen loaded successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:08 am</td>
+        <td>
+          <b>[STEP]</b> OTP auto-fetch is enabled. Fetching OTP from email.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:08 am</td>
+        <td>
+          <b>[STEP]</b> Connecting to OTP email inbox using IMAP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:11 am</td>
+        <td>
+          <b>[PASS]</b> Connected to OTP email inbox successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:22 am</td>
+        <td>
+          <b>[STEP]</b> OTP email not found yet. Waiting before retry.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:28 am</td>
+        <td>
+          <b>[STEP]</b> Recent OTP email found. Subject: [DEV] One Time Password for Signup
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:29 am</td>
+        <td>
+          <b>[PASS]</b> OTP fetched successfully from email
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:30 am</td>
+        <td>
+          <b>[PASS]</b> OTP auto-fetched successfully from email
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:30 am</td>
+        <td>
+          <b>[STEP]</b> Entering OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:36 am</td>
+        <td>
+          <b>[PASS]</b> OTP entered successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:36 am</td>
+        <td>
+          <b>[STEP]</b> Checking Verify OTP button
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:40 am</td>
+        <td>
+          <b>[STEP]</b> Verify OTP button not found. App may auto-verify OTP.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:40 am</td>
+        <td>
+          <b>[STEP]</b> Waiting briefly after OTP entry
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:45 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for valid post-login screen after OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[STEP]</b> Additional post-login indicator found: Subscribe Now
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[PASS]</b> Onboarding post-login screen loaded after OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[PASS]</b> Email + OTP login flow completed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[PASS]</b> Advisor app login/session confirmed for onboarding
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[PASS]</b> ONB_001 STEP 01 PASSED - Login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[STEP]</b> ONB_001 STEP 02 - Validate subscription landing screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for onboarding subscription landing screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[PASS]</b> Subscription landing screen is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[PASS]</b> ONB_001 STEP 02 PASSED - Subscription landing visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <span class='badge white-text green'>ONB_001 - Login and subscription landing validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: ONB_001 - Login and subscription landing validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: ONB_001_LoginAndValidateSubscriptionLanding</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">ONB_002 - Open and validate plan selection</p>
+            <p class="text-sm">
+              <span>10:17:54 am</span> / <span>00:00:04:656</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">ONB_002 - Open and validate plan selection</h5>
+<span class='badge badge-success'>07.21.2026 10:17:54 am</span>
+<span class='badge badge-danger'>07.21.2026 10:17:59 am</span>
+<span class='badge badge-default'>00:00:04:656</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          Module: Onboarding<br>Case ID: ONB_002<br>Validation: Tap Subscribe Now and validate the Fund Advisor plan selection screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: ONB_002 - Open and validate plan selection
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[STEP]</b> ONB_002 STEP 01 - Tap Subscribe Now
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:54 am</td>
+        <td>
+          <b>[STEP]</b> Tapping Subscribe Now on onboarding landing screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:55 am</td>
+        <td>
+          <b>[PASS]</b> Subscribe Now tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:55 am</td>
+        <td>
+          <b>[PASS]</b> ONB_002 STEP 01 PASSED - Subscribe Now tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:55 am</td>
+        <td>
+          <b>[STEP]</b> ONB_002 STEP 02 - Validate plan selection screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:55 am</td>
+        <td>
+          <b>[STEP]</b> Validating plan selection screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:59 am</td>
+        <td>
+          <b>[PASS]</b> Plan selection screen is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:59 am</td>
+        <td>
+          <b>[PASS]</b> ONB_002 STEP 02 PASSED - Plan selection screen visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:59 am</td>
+        <td>
+          <span class='badge white-text green'>ONB_002 - Plan selection screen validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:59 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: ONB_002 - Plan selection screen validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:17:59 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: ONB_002_OpenAndValidatePlanSelection</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">ONB_003 - Complete identity details</p>
+            <p class="text-sm">
+              <span>10:17:59 am</span> / <span>00:00:37:543</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">ONB_003 - Complete identity details</h5>
+<span class='badge badge-success'>07.21.2026 10:17:59 am</span>
+<span class='badge badge-danger'>07.21.2026 10:18:36 am</span>
+<span class='badge badge-default'>00:00:37:543</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:59 am</td>
+        <td>
+          Module: Onboarding<br>Case ID: ONB_003<br>Validation: Continue from plan selection and fill PAN, date of birth, mobile number and tax residency details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:59 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: ONB_003 - Complete identity details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:59 am</td>
+        <td>
+          <b>[STEP]</b> ONB_003 STEP 01 - Continue from plan selection
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:17:59 am</td>
+        <td>
+          <b>[STEP]</b> Continuing from plan selection to identity/KYC flow
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:02 am</td>
+        <td>
+          <b>[STEP]</b> Plan selection action button found using: AppiumBy.androidUIAutomator: new UiSelector().descriptionContains("Get started").clickable(true)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:03 am</td>
+        <td>
+          <b>[STEP]</b> Plan selection Get started button tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:18:03 am</td>
+        <td>
+          <b>[PASS]</b> Plan selection continued successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:18:03 am</td>
+        <td>
+          <b>[PASS]</b> ONB_003 STEP 01 PASSED - Continued from plan selection
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:03 am</td>
+        <td>
+          <b>[STEP]</b> ONB_003 STEP 02 - Validate identity screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:03 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Confirm your identity / KYC Check screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:18:04 am</td>
+        <td>
+          <b>[PASS]</b> Confirm your identity screen is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:18:04 am</td>
+        <td>
+          <b>[PASS]</b> ONB_003 STEP 02 PASSED - Identity screen visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:04 am</td>
+        <td>
+          <b>[STEP]</b> ONB_003 STEP 03 - Fill identity details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:04 am</td>
+        <td>
+          <b>[STEP]</b> Filling PAN, DOB and mobile on identity screen by label mapping
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:04 am</td>
+        <td>
+          <b>[STEP]</b> Found input field below label: PAN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:07 am</td>
+        <td>
+          <b>[STEP]</b> PAN entered successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:10 am</td>
+        <td>
+          <b>[STEP]</b> Selecting DOB from date picker using direct year selection
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:10 am</td>
+        <td>
+          <b>[STEP]</b> Opening DOB date picker
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:14 am</td>
+        <td>
+          <b>[STEP]</b> DOB field tapped between DATE OF BIRTH and MOBILE NUMBER labels
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:15 am</td>
+        <td>
+          <b>[STEP]</b> DOB date picker opened using label-bounded field location
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:15 am</td>
+        <td>
+          <b>[STEP]</b> DOB calendar date picker is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:15 am</td>
+        <td>
+          <b>[STEP]</b> Opening DOB year picker using right-side year selector
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:18 am</td>
+        <td>
+          <b>[STEP]</b> DOB right-side year selector tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:19 am</td>
+        <td>
+          <b>[STEP]</b> DOB year selected directly: 2004
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:20 am</td>
+        <td>
+          <b>[STEP]</b> DOB picker after year selection. Visible month: 2004-07 | Target month: 2004-03 | Month moves required: -4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:26 am</td>
+        <td>
+          <b>[STEP]</b> Date picker month navigation progress: 4/4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:26 am</td>
+        <td>
+          <b>[STEP]</b> Selecting DOB calendar date: 6, Saturday, March 6, 2004
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:30 am</td>
+        <td>
+          <b>[STEP]</b> DOB selected successfully using direct year picker
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:31 am</td>
+        <td>
+          <b>[STEP]</b> Found input field below label: MOBILE NUMBER
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:34 am</td>
+        <td>
+          <b>[STEP]</b> Mobile number entered successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:18:36 am</td>
+        <td>
+          <b>[PASS]</b> PAN, DOB and mobile filled successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:18:36 am</td>
+        <td>
+          <b>[PASS]</b> ONB_003 STEP 03 PASSED - Identity details filled
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:18:36 am</td>
+        <td>
+          <span class='badge white-text green'>ONB_003 - Identity details completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:18:36 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: ONB_003 - Identity details completed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:18:36 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: ONB_003_CompleteIdentityDetails</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">ONB_004 - Verify PAN and KYC</p>
+            <p class="text-sm">
+              <span>10:18:36 am</span> / <span>00:00:45:763</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">ONB_004 - Verify PAN and KYC</h5>
+<span class='badge badge-success'>07.21.2026 10:18:36 am</span>
+<span class='badge badge-danger'>07.21.2026 10:19:22 am</span>
+<span class='badge badge-default'>00:00:45:763</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:36 am</td>
+        <td>
+          Module: Onboarding<br>Case ID: ONB_004<br>Validation: Select KYC consent, verify PAN/KYC and continue to recurring mandate payment setup
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:36 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: ONB_004 - Verify PAN and KYC
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:36 am</td>
+        <td>
+          <b>[STEP]</b> ONB_004 STEP 01 - Verify PAN and KYC
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:36 am</td>
+        <td>
+          <b>[STEP]</b> Verifying PAN and KYC
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:38 am</td>
+        <td>
+          <b>[STEP]</b> Ensuring KYC consent checkbox is selected
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:40 am</td>
+        <td>
+          <b>[STEP]</b> KYC consent checkbox tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:18:41 am</td>
+        <td>
+          <b>[PASS]</b> KYC consent selected successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:42 am</td>
+        <td>
+          <b>[STEP]</b> Verify PAN and KYC button is clickable
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:18:42 am</td>
+        <td>
+          <b>[PASS]</b> Verify PAN and KYC tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:18:42 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for PAN/KYC verification result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:14 am</td>
+        <td>
+          <b>[PASS]</b> PAN/KYC verification completed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:14 am</td>
+        <td>
+          <b>[PASS]</b> ONB_004 STEP 01 PASSED - PAN and KYC verified
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:14 am</td>
+        <td>
+          <b>[STEP]</b> ONB_004 STEP 02 - Continue to payment setup
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:14 am</td>
+        <td>
+          <b>[STEP]</b> Continuing to payment after PAN/KYC validation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:14 am</td>
+        <td>
+          <b>[PASS]</b> Moved from KYC validation to payment setup
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:14 am</td>
+        <td>
+          <b>[PASS]</b> ONB_004 STEP 02 PASSED - Continued to payment setup
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:14 am</td>
+        <td>
+          <b>[STEP]</b> ONB_004 STEP 03 - Validate recurring mandate setup
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:14 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for recurring mandate setup screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:22 am</td>
+        <td>
+          <b>[PASS]</b> Recurring mandate setup screen is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:22 am</td>
+        <td>
+          <b>[PASS]</b> ONB_004 STEP 03 PASSED - Mandate setup visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:22 am</td>
+        <td>
+          <span class='badge white-text green'>ONB_004 - PAN/KYC verification and payment setup validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:22 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: ONB_004 - PAN/KYC verification and payment setup validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:22 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: ONB_004_VerifyPanKycAndOpenPaymentSetup</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">ONB_005 - Select payment mode and authorise mandate</p>
+            <p class="text-sm">
+              <span>10:19:22 am</span> / <span>00:00:01:322</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">ONB_005 - Select payment mode and authorise mandate</h5>
+<span class='badge badge-success'>07.21.2026 10:19:22 am</span>
+<span class='badge badge-danger'>07.21.2026 10:19:23 am</span>
+<span class='badge badge-default'>00:00:01:322</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:22 am</td>
+        <td>
+          Module: Onboarding<br>Case ID: ONB_005<br>Validation: Select the configured payment mode and tap Authorise mandate
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:22 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: ONB_005 - Select payment mode and authorise mandate
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:22 am</td>
+        <td>
+          <b>[STEP]</b> ONB_005 STEP 01 - Choose payment mode
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:22 am</td>
+        <td>
+          <b>[STEP]</b> Selecting onboarding payment mode: UPI Autopay
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: UPI Autopay
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[PASS]</b> Payment mode selected/confirmed: UPI Autopay
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[PASS]</b> ONB_005 STEP 01 PASSED - Payment mode selected
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[STEP]</b> ONB_005 STEP 02 - Tap Authorise mandate
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[STEP]</b> Tapping Authorise mandate
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[PASS]</b> Authorise mandate tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[PASS]</b> ONB_005 STEP 02 PASSED - Authorise mandate tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <span class='badge white-text green'>ONB_005 - Payment mode and mandate authorisation validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: ONB_005 - Payment mode and mandate authorisation validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: ONB_005_SelectPaymentAndAuthoriseMandate</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">ONB_006 - Complete Razorpay mandate</p>
+            <p class="text-sm">
+              <span>10:19:23 am</span> / <span>00:01:22:148</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">ONB_006 - Complete Razorpay mandate</h5>
+<span class='badge badge-success'>07.21.2026 10:19:23 am</span>
+<span class='badge badge-danger'>07.21.2026 10:20:46 am</span>
+<span class='badge badge-default'>00:01:22:148</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          Module: Onboarding<br>Case ID: ONB_006<br>Validation: Complete the Razorpay mandate flow, validate Mandate authorised and open the KYC OTP screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: ONB_006 - Complete Razorpay mandate
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[STEP]</b> ONB_006 STEP 01 - Complete Razorpay mandate flow
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[STEP]</b> Handling Razorpay payment gateway | mode=auto
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:23 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Razorpay Checkout payment options
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:32 am</td>
+        <td>
+          <b>[PASS]</b> Razorpay payment options are visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:32 am</td>
+        <td>
+          <b>[STEP]</b> Selecting Razorpay UPI app: PhonePe
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:32 am</td>
+        <td>
+          <b>[PASS]</b> Razorpay payment app selected: PhonePe
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:32 am</td>
+        <td>
+          <b>[STEP]</b> Tapping Razorpay Continue button
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:19:33 am</td>
+        <td>
+          <b>[PASS]</b> Razorpay Continue tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:33 am</td>
+        <td>
+          <b>[STEP]</b> Handling payment gateway result after Continue
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:51 am</td>
+        <td>
+          <b>[STEP]</b> PhonePe error visible. Retrying once.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:52 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: PhonePe RETRY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:19:57 am</td>
+        <td>
+          <b>[STEP]</b> PhonePe error visible. Waiting for manual correction/redirect.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:02 am</td>
+        <td>
+          <b>[STEP]</b> PhonePe error visible. Waiting for manual correction/redirect.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:08 am</td>
+        <td>
+          <b>[STEP]</b> PhonePe error visible. Waiting for manual correction/redirect.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:13 am</td>
+        <td>
+          <b>[STEP]</b> PhonePe error visible. Waiting for manual correction/redirect.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:18 am</td>
+        <td>
+          <b>[STEP]</b> Gateway auto handling timeout reached. Activating Advisor app and checking mandate state.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:21 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Mandate authorised screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:20:32 am</td>
+        <td>
+          <b>[PASS]</b> Mandate authorised screen is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:20:32 am</td>
+        <td>
+          <b>[PASS]</b> ONB_006 STEP 01 PASSED - Mandate authorised
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:32 am</td>
+        <td>
+          <b>[STEP]</b> ONB_006 STEP 02 - Continue to Fetch KYC
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:32 am</td>
+        <td>
+          <b>[STEP]</b> Tapping Continue to Fetch KYC
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:20:46 am</td>
+        <td>
+          <b>[PASS]</b> Continue to Fetch KYC tapped and KYC OTP screen is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:20:46 am</td>
+        <td>
+          <b>[PASS]</b> ONB_006 STEP 02 PASSED - KYC OTP screen visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:20:46 am</td>
+        <td>
+          <span class='badge white-text green'>ONB_006 - Razorpay mandate and KYC OTP navigation validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:20:46 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: ONB_006 - Razorpay mandate and KYC OTP navigation validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:20:46 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: ONB_006_CompleteRazorpayMandateAndOpenKycOtp</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">ONB_007 - Verify KYC OTP and contact details</p>
+            <p class="text-sm">
+              <span>10:20:46 am</span> / <span>00:00:52:137</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">ONB_007 - Verify KYC OTP and contact details</h5>
+<span class='badge badge-success'>07.21.2026 10:20:46 am</span>
+<span class='badge badge-danger'>07.21.2026 10:21:38 am</span>
+<span class='badge badge-default'>00:00:52:137</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:46 am</td>
+        <td>
+          Module: Onboarding<br>Case ID: ONB_007<br>Validation: Fetch KYC OTP from the separate email inbox, verify it and continue from Contact Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:46 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: ONB_007 - Verify KYC OTP and complete Contact Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:46 am</td>
+        <td>
+          <b>[STEP]</b> ONB_007 STEP 01 - Fetch and verify KYC OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:46 am</td>
+        <td>
+          <b>[STEP]</b> Completing KYC OTP verification using the separate KYC email inbox
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:46 am</td>
+        <td>
+          <b>[STEP]</b> Connecting to separate KYC OTP email inbox: l***0@gmail.com
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:46 am</td>
+        <td>
+          <b>[STEP]</b> KYC OTP reader is using javax.mail
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:51 am</td>
+        <td>
+          <b>[STEP]</b> Recent KYC OTP email found. Subject: OTP to verify your KYC MANISH KHATRI (staging)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:20:51 am</td>
+        <td>
+          <b>[PASS]</b> KYC OTP fetched successfully from separate email inbox
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:51 am</td>
+        <td>
+          <b>[STEP]</b> Focusing the KYC OTP boxes before entering OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:20:52 am</td>
+        <td>
+          <b>[STEP]</b> First KYC OTP box tapped and focused
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:21:06 am</td>
+        <td>
+          <b>[STEP]</b> Retrying KYC OTP entry using Android digit key events
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:21:07 am</td>
+        <td>
+          <b>[STEP]</b> First KYC OTP box tapped and focused
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:21:21 am</td>
+        <td>
+          <b>[PASS]</b> KYC OTP entered successfully using Android digit key events
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:21:24 am</td>
+        <td>
+          <b>[PASS]</b> KYC OTP auto-verified and Contact Details screen is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:21:24 am</td>
+        <td>
+          <b>[PASS]</b> ONB_007 STEP 01 PASSED - KYC OTP verified
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:21:24 am</td>
+        <td>
+          <b>[STEP]</b> ONB_007 STEP 02 - Continue from Contact Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:21:24 am</td>
+        <td>
+          <b>[STEP]</b> Continuing from Contact Details screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:21:38 am</td>
+        <td>
+          <b>[PASS]</b> Contact Details completed and agreement summary screen is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:21:38 am</td>
+        <td>
+          <b>[PASS]</b> ONB_007 STEP 02 PASSED - Contact Details completed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:21:38 am</td>
+        <td>
+          <span class='badge white-text green'>ONB_007 - KYC OTP and Contact Details validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:21:38 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: ONB_007 - KYC OTP and Contact Details validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:21:38 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: ONB_007_VerifyKycOtpAndCompleteContactDetails</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="8"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">ONB_008 - Open Digio and submit e-sign</p>
+            <p class="text-sm">
+              <span>10:21:38 am</span> / <span>00:00:57:734</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">ONB_008 - Open Digio and submit e-sign</h5>
+<span class='badge badge-success'>07.21.2026 10:21:38 am</span>
+<span class='badge badge-danger'>07.21.2026 10:22:35 am</span>
+<span class='badge badge-default'>00:00:57:734</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:21:38 am</td>
+        <td>
+          Module: Onboarding<br>Case ID: ONB_008<br>Validation: Continue to E-Sign, validate the Digio signing page and submit Sign Now
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:21:38 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: ONB_008 - Open Digio and submit e-sign
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:21:38 am</td>
+        <td>
+          <b>[STEP]</b> ONB_008 STEP 01 - Continue to E-Sign
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:21:38 am</td>
+        <td>
+          <b>[STEP]</b> Tapping Continue to E-Sign
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:21:47 am</td>
+        <td>
+          <b>[PASS]</b> Continue to E-Sign tapped and Digio signing page loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:21:47 am</td>
+        <td>
+          <b>[PASS]</b> ONB_008 STEP 01 PASSED - Digio signing page loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:21:47 am</td>
+        <td>
+          <b>[STEP]</b> ONB_008 STEP 02 - Complete Digio consent and Sign Now
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:21:47 am</td>
+        <td>
+          <b>[STEP]</b> Completing Digio agreement consent and tapping Sign Now
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:22:13 am</td>
+        <td>
+          <b>[STEP]</b> Trying native accessibility locators for Digio Sign Now
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:22:14 am</td>
+        <td>
+          <b>[PASS]</b> Digio Sign Now tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:22:35 am</td>
+        <td>
+          <b>[PASS]</b> Digio Sign Now submitted. Add onboardingFinalSuccessMarker after sharing the final post-sign screen.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:22:35 am</td>
+        <td>
+          <b>[PASS]</b> ONB_008 STEP 02 PASSED - Digio Sign Now submitted
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:22:35 am</td>
+        <td>
+          <span class='badge white-text green'>ONB_008 - Digio e-sign submission validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:22:35 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: ONB_008 - Digio e-sign submission validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:22:35 am</td>
+        <td>
+          <span class='badge white-text green'>Test passed: ONB_008_OpenDigioAndSubmitESign</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Jul 21, 2026 10:16:40 am</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Jul 21, 2026 10:22:37 am</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>8</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>0</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'>
+<b>8</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='0%'><b>0</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='39%'><b>76</b> events passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> events failed,
+<b data-tooltip='%'>118</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"ONB_001 - Login and validate subscription landing":62.85,"ONB_002 - Open and validate plan selection":4.656,"ONB_003 - Complete identity details":37.543,"ONB_004 - Verify PAN and KYC":45.763,"ONB_005 - Select payment mode and authorise mandate":1.322,"ONB_006 - Complete Razorpay mandate":82.148,"ONB_007 - Verify KYC OTP and contact details":52.137,"ONB_008 - Open Digio and submit e-sign":57.734
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td>Advisor App</td>
+</tr>
+<tr>
+<td>Machine</td>
+<td>Local</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>User</td>
+<td>manishkhatri</td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>Android</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>Appium UiAutomator2</td>
+</tr>
+<tr>
+<td>Framework</td>
+<td>TestNG + Maven + ExtentReports</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 8,
+failParent: 0,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 76,
+failEvents: 0,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 118
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

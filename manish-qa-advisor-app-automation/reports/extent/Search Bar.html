@@ -1,0 +1,3371 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Advisor App Automation Report</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report dark">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Advisor App Test Automation Report</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Jul 27, 2026 02:38:58 pm</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">SB_001 - Verify global search bar funds and stocks flow</p>
+            <p class="text-sm">
+              <span>2:39:05 pm</span> / <span>00:01:15:546</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">SB_001 - Verify global search bar funds and stocks flow</h5>
+<span class='badge badge-success'>07.27.2026 2:39:05 pm</span>
+<span class='badge badge-danger'>07.27.2026 2:40:21 pm</span>
+<span class='badge badge-default'>00:01:15:546</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:05 pm</td>
+        <td>
+          Module: Search Bar<br>Case ID: SB_001<br>Validation: Open global search from dashboard, search HDFC, validate tabs, open a mutual fund result, return to search, open a stock result, and validate details pages
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:05 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: SB_001 - Verify global search bar funds and stocks flow
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:05 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 01 - Capture Advisor app package
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:05 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app package captured: com.valueresearch.advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:05 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 01 PASSED - Advisor app package captured
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:05 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 02 - Check Advisor app login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:05 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:08 pm</td>
+        <td>
+          <b>[STEP]</b> PIN screen detected. Entering Advisor PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:08 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:09 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit: 9
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:09 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit: 7
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:10 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit: 5
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:10 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for Advisor app dashboard after PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:12 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app dashboard loaded after PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:12 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app login/session confirmed after PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:12 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 02 PASSED - Advisor app login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:12 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 03 - Open global search from dashboard/home
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:12 pm</td>
+        <td>
+          <b>[STEP]</b> Opening global search from dashboard/home (SUPER_FAST_V2_DIRECT_TAP)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:15 pm</td>
+        <td>
+          <b>[PASS]</b> Dashboard/home assumed ready for direct search tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:15 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:19 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:20 pm</td>
+        <td>
+          <b>[PASS]</b> Global search opened using coordinate fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:20 pm</td>
+        <td>
+          <b>[PASS]</b> Global search screen opened successfully using direct coordinate tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:20 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 03 PASSED - Global search opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:20 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 04 - Validate search screen structure
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:20 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search screen structure (SUPER_FAST_V2_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:22 pm</td>
+        <td>
+          <b>[PASS]</b> Search screen structure validated quickly: input + All + Stocks + Mutual Funds fallback-ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:22 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 04 PASSED - Search screen structure validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:22 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 05 - Enter HDFC search keyword
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:22 pm</td>
+        <td>
+          <b>[STEP]</b> Entering search keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:25 pm</td>
+        <td>
+          <b>[PASS]</b> Search keyword entered: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:25 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 05 PASSED - Search keyword entered
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:25 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 06 - Validate search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:25 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search results are loaded for keyword: hdfc (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:25 pm</td>
+        <td>
+          <b>[PASS]</b> Search results loaded for keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:25 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 06 PASSED - Search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:25 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 07 - Open Mutual Funds/SIPs tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:25 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Mutual Funds/SIPs search tab (SUPER_FAST_V2)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:26 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping Mutual Funds/SIPs tab by fast locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:27 pm</td>
+        <td>
+          <b>[PASS]</b> Mutual Funds/SIPs search tab opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:27 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 07 PASSED - Mutual Funds/SIPs tab opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:27 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 08 - Open fund result from search
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:27 pm</td>
+        <td>
+          <b>[STEP]</b> Opening first visible HDFC mutual fund result from search (ROW_SAFE_V4 - row-safe with stock invalid-id recovery)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:27 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping HDFC mutual fund row fast coordinate V3 attempt 1 | x=540 | y=836
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:33 pm</td>
+        <td>
+          <b>[PASS]</b> Fund row tap moved away from search; treating as fund details navigation: First visible mutual fund result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:33 pm</td>
+        <td>
+          <b>[PASS]</b> Fund details page opened from search: First visible mutual fund result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:33 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 08 PASSED - Fund result opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:33 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 09 - Validate fund details page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:33 pm</td>
+        <td>
+          <b>[STEP]</b> Validating fund details page opened from search (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:34 pm</td>
+        <td>
+          <b>[PASS]</b> Fund details validated from search: First visible mutual fund result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:34 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 09 PASSED - Fund details validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:34 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 10 - Return to search results after fund details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:34 pm</td>
+        <td>
+          <b>[STEP]</b> Returning from fund details to search results
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:36 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to search results after fund details using fast back attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:36 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to search results after fund details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:36 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 10 PASSED - Returned to search results
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:36 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 11 - Open Stocks tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:36 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Stocks search tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:37 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping Stocks tab by exact content-desc locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:37 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks search tab opened and first HDFC stock row is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:37 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 11 PASSED - Stocks tab opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:37 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 12 - Open stock result from search
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:37 pm</td>
+        <td>
+          <b>[STEP]</b> Opening stock result from search using exact row locator: HDFC Bank
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:38 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping first HDFC stock row by exact Appium Inspector locator: new UiSelector().description("IN").instance(0)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:40 pm</td>
+        <td>
+          <b>[PASS]</b> Stock row tap moved away from search; treating as stock details navigation: HDFC Bank Ltd.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:59 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details navigation confirmed because search screen is no longer visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:59 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details page opened from search: HDFC Bank Ltd.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:39:59 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 12 PASSED - Stock result opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:59 pm</td>
+        <td>
+          <b>[STEP]</b> SEARCH STEP 13 - Validate stock details page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:39:59 pm</td>
+        <td>
+          <b>[STEP]</b> Validating stock details page opened from search (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:18 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details navigation confirmed because search screen is no longer visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:18 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details validated from search: HDFC Bank Ltd.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:18 pm</td>
+        <td>
+          <b>[PASS]</b> SEARCH STEP 13 PASSED - Stock details validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:18 pm</td>
+        <td>
+          <span class='badge white-text green'>SB_001 - Global search bar funds and stocks flow validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:18 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: SB_001 - Global search bar funds and stocks flow validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:18 pm</td>
+        <td>
+          <b>[STEP]</b> SB_001 CLEANUP - Return back to Advisor App
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:18 pm</td>
+        <td>
+          <b>[STEP]</b> Returning back to Advisor App after Search Bar validation (FAST_CLEANUP_V3)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor App dashboard/home is visible after fast cleanup
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[PASS]</b> SB_001 CLEANUP COMPLETED - Return flow executed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: SB_001_VerifySearchBarFundsAndStocksFlow</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">SB_002 - Verify search screen structure</p>
+            <p class="text-sm">
+              <span>2:40:21 pm</span> / <span>00:00:07:607</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">SB_002 - Verify search screen structure</h5>
+<span class='badge badge-success'>07.27.2026 2:40:21 pm</span>
+<span class='badge badge-danger'>07.27.2026 2:40:28 pm</span>
+<span class='badge badge-default'>00:00:07:607</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          Module: Search Bar<br>Case ID: SB_002<br>Validation: Open global search and validate search input, All tab, Mutual Funds/SIPs tab, and Stocks tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: SB_002 - Verify search screen structure
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[STEP]</b> SB_002 STEP 01 - Capture Advisor app package
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app package captured: com.valueresearch.advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[PASS]</b> SB_002 STEP 01 PASSED - Advisor app package captured
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[STEP]</b> SB_002 STEP 02 - Check Advisor app login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app session is already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[PASS]</b> SB_002 STEP 02 PASSED - Advisor app login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[STEP]</b> SB_002 STEP 03 - Open global search from dashboard/home
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:21 pm</td>
+        <td>
+          <b>[STEP]</b> Opening global search from dashboard/home (SUPER_FAST_V2_DIRECT_TAP)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:22 pm</td>
+        <td>
+          <b>[PASS]</b> Dashboard/home assumed ready for direct search tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:22 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:25 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:26 pm</td>
+        <td>
+          <b>[PASS]</b> Global search opened using coordinate fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:26 pm</td>
+        <td>
+          <b>[PASS]</b> Global search screen opened successfully using direct coordinate tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:26 pm</td>
+        <td>
+          <b>[PASS]</b> SB_002 STEP 03 PASSED - Global search opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:26 pm</td>
+        <td>
+          <b>[STEP]</b> SB_002 STEP 04 - Validate search screen structure
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:26 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search screen structure (SUPER_FAST_V2_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:26 pm</td>
+        <td>
+          <b>[PASS]</b> Search screen structure validated quickly: input + All + Stocks + Mutual Funds fallback-ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:26 pm</td>
+        <td>
+          <b>[PASS]</b> SB_002 STEP 04 PASSED - Search screen structure validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:26 pm</td>
+        <td>
+          <span class='badge white-text green'>SB_002 - Search screen structure validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:26 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: SB_002 - Search screen structure validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:26 pm</td>
+        <td>
+          <b>[STEP]</b> SB_002 CLEANUP - Return back to Advisor App
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:26 pm</td>
+        <td>
+          <b>[STEP]</b> Returning back to Advisor App after Search Bar validation (FAST_CLEANUP_V3)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:28 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor App dashboard/home is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:28 pm</td>
+        <td>
+          <b>[PASS]</b> SB_002 CLEANUP COMPLETED - Return flow executed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:28 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: SB_002_VerifySearchScreenStructure</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">SB_003 - Verify HDFC search results load on All tab</p>
+            <p class="text-sm">
+              <span>2:40:28 pm</span> / <span>00:00:10:965</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">SB_003 - Verify HDFC search results load on All tab</h5>
+<span class='badge badge-success'>07.27.2026 2:40:28 pm</span>
+<span class='badge badge-danger'>07.27.2026 2:40:39 pm</span>
+<span class='badge badge-default'>00:00:10:965</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:28 pm</td>
+        <td>
+          Module: Search Bar<br>Case ID: SB_003<br>Validation: Open search, enter HDFC keyword, and validate that HDFC related search results are loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:28 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: SB_003 - Verify HDFC search results loaded on All tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:28 pm</td>
+        <td>
+          <b>[STEP]</b> SB_003 STEP 01 - Capture Advisor app package
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:28 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app package captured: com.valueresearch.advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:28 pm</td>
+        <td>
+          <b>[PASS]</b> SB_003 STEP 01 PASSED - Advisor app package captured
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:28 pm</td>
+        <td>
+          <b>[STEP]</b> SB_003 STEP 02 - Check Advisor app login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:28 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:29 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app session is already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:29 pm</td>
+        <td>
+          <b>[PASS]</b> SB_003 STEP 02 PASSED - Advisor app login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:29 pm</td>
+        <td>
+          <b>[STEP]</b> SB_003 STEP 03 - Open global search from dashboard/home
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:29 pm</td>
+        <td>
+          <b>[STEP]</b> Opening global search from dashboard/home (SUPER_FAST_V2_DIRECT_TAP)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:29 pm</td>
+        <td>
+          <b>[PASS]</b> Dashboard/home assumed ready for direct search tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:29 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:33 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:34 pm</td>
+        <td>
+          <b>[PASS]</b> Global search opened using coordinate fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:34 pm</td>
+        <td>
+          <b>[PASS]</b> Global search screen opened successfully using direct coordinate tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:34 pm</td>
+        <td>
+          <b>[PASS]</b> SB_003 STEP 03 PASSED - Global search opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:34 pm</td>
+        <td>
+          <b>[STEP]</b> SB_003 STEP 04 - Validate search screen structure
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:34 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search screen structure (SUPER_FAST_V2_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:35 pm</td>
+        <td>
+          <b>[PASS]</b> Search screen structure validated quickly: input + All + Stocks + Mutual Funds fallback-ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:35 pm</td>
+        <td>
+          <b>[PASS]</b> SB_003 STEP 04 PASSED - Search screen structure validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:35 pm</td>
+        <td>
+          <b>[STEP]</b> SB_003 STEP 05 - Enter HDFC search keyword
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:35 pm</td>
+        <td>
+          <b>[STEP]</b> Entering search keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:38 pm</td>
+        <td>
+          <b>[PASS]</b> Search keyword entered: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:38 pm</td>
+        <td>
+          <b>[PASS]</b> SB_003 STEP 05 PASSED - HDFC search keyword entered
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:38 pm</td>
+        <td>
+          <b>[STEP]</b> SB_003 STEP 06 - Validate HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:38 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search results are loaded for keyword: hdfc (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:38 pm</td>
+        <td>
+          <b>[PASS]</b> Search results loaded for keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:38 pm</td>
+        <td>
+          <b>[PASS]</b> SB_003 STEP 06 PASSED - HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:38 pm</td>
+        <td>
+          <span class='badge white-text green'>SB_003 - HDFC search results loaded successfully on All tab</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:38 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: SB_003 - HDFC search results loaded successfully on All tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:38 pm</td>
+        <td>
+          <b>[STEP]</b> SB_003 CLEANUP - Return back to Advisor App
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:38 pm</td>
+        <td>
+          <b>[STEP]</b> Returning back to Advisor App after Search Bar validation (FAST_CLEANUP_V3)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor App dashboard/home is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[PASS]</b> SB_003 CLEANUP COMPLETED - Return flow executed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: SB_003_VerifyHDFCSearchResultsLoadedOnAllTab</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">SB_004 - Verify Mutual Funds/SIPs tab results</p>
+            <p class="text-sm">
+              <span>2:40:39 pm</span> / <span>00:00:13:911</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">SB_004 - Verify Mutual Funds/SIPs tab results</h5>
+<span class='badge badge-success'>07.27.2026 2:40:39 pm</span>
+<span class='badge badge-danger'>07.27.2026 2:40:53 pm</span>
+<span class='badge badge-default'>00:00:13:911</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          Module: Search Bar<br>Case ID: SB_004<br>Validation: Open search, enter HDFC keyword, switch to Mutual Funds/SIPs tab, and validate fund results are visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: SB_004 - Verify Mutual Funds/SIPs tab results
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[STEP]</b> SB_004 STEP 01 - Capture Advisor app package
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app package captured: com.valueresearch.advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[PASS]</b> SB_004 STEP 01 PASSED - Advisor app package captured
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[STEP]</b> SB_004 STEP 02 - Check Advisor app login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app session is already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[PASS]</b> SB_004 STEP 02 PASSED - Advisor app login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[STEP]</b> SB_004 STEP 03 - Open global search from dashboard/home
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:39 pm</td>
+        <td>
+          <b>[STEP]</b> Opening global search from dashboard/home (SUPER_FAST_V2_DIRECT_TAP)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:40 pm</td>
+        <td>
+          <b>[PASS]</b> Dashboard/home assumed ready for direct search tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:41 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:45 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:46 pm</td>
+        <td>
+          <b>[PASS]</b> Global search opened using coordinate fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:46 pm</td>
+        <td>
+          <b>[PASS]</b> Global search screen opened successfully using direct coordinate tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:46 pm</td>
+        <td>
+          <b>[PASS]</b> SB_004 STEP 03 PASSED - Global search opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:46 pm</td>
+        <td>
+          <b>[STEP]</b> SB_004 STEP 04 - Validate search screen structure
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:46 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search screen structure (SUPER_FAST_V2_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:46 pm</td>
+        <td>
+          <b>[PASS]</b> Search screen structure validated quickly: input + All + Stocks + Mutual Funds fallback-ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:46 pm</td>
+        <td>
+          <b>[PASS]</b> SB_004 STEP 04 PASSED - Search screen structure validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:46 pm</td>
+        <td>
+          <b>[STEP]</b> SB_004 STEP 05 - Enter HDFC search keyword
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:46 pm</td>
+        <td>
+          <b>[STEP]</b> Entering search keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:50 pm</td>
+        <td>
+          <b>[PASS]</b> Search keyword entered: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:50 pm</td>
+        <td>
+          <b>[PASS]</b> SB_004 STEP 05 PASSED - HDFC search keyword entered
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:50 pm</td>
+        <td>
+          <b>[STEP]</b> SB_004 STEP 06 - Validate HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:50 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search results are loaded for keyword: hdfc (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:50 pm</td>
+        <td>
+          <b>[PASS]</b> Search results loaded for keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:50 pm</td>
+        <td>
+          <b>[PASS]</b> SB_004 STEP 06 PASSED - HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:50 pm</td>
+        <td>
+          <b>[STEP]</b> SB_004 STEP 05 - Open Mutual Funds/SIPs tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:50 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Mutual Funds/SIPs search tab (SUPER_FAST_V2)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:52 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping Mutual Funds/SIPs tab by fast locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:52 pm</td>
+        <td>
+          <b>[PASS]</b> Mutual Funds/SIPs search tab opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:52 pm</td>
+        <td>
+          <b>[PASS]</b> SB_004 STEP 05 PASSED - Mutual Funds/SIPs tab opened with HDFC results
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:52 pm</td>
+        <td>
+          <span class='badge white-text green'>SB_004 - Mutual Funds/SIPs search results validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:52 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: SB_004 - Mutual Funds/SIPs search results validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:52 pm</td>
+        <td>
+          <b>[STEP]</b> SB_004 CLEANUP - Return back to Advisor App
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:52 pm</td>
+        <td>
+          <b>[STEP]</b> Returning back to Advisor App after Search Bar validation (FAST_CLEANUP_V3)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor App dashboard/home is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[PASS]</b> SB_004 CLEANUP COMPLETED - Return flow executed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: SB_004_VerifyMutualFundsTabResultsLoaded</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">SB_005 - Verify fund result details and back navigation</p>
+            <p class="text-sm">
+              <span>2:40:53 pm</span> / <span>00:00:21:000</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">SB_005 - Verify fund result details and back navigation</h5>
+<span class='badge badge-success'>07.27.2026 2:40:53 pm</span>
+<span class='badge badge-danger'>07.27.2026 2:41:14 pm</span>
+<span class='badge badge-default'>00:00:21:000</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          Module: Search Bar<br>Case ID: SB_005<br>Validation: Open HDFC fund result from Mutual Funds/SIPs tab, validate fund details, and verify user returns to search results after back
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: SB_005 - Verify fund result details and back navigation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[STEP]</b> SB_005 STEP 01 - Capture Advisor app package
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app package captured: com.valueresearch.advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[PASS]</b> SB_005 STEP 01 PASSED - Advisor app package captured
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[STEP]</b> SB_005 STEP 02 - Check Advisor app login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app session is already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[PASS]</b> SB_005 STEP 02 PASSED - Advisor app login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[STEP]</b> SB_005 STEP 03 - Open global search from dashboard/home
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:53 pm</td>
+        <td>
+          <b>[STEP]</b> Opening global search from dashboard/home (SUPER_FAST_V2_DIRECT_TAP)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:54 pm</td>
+        <td>
+          <b>[PASS]</b> Dashboard/home assumed ready for direct search tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:55 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:58 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:59 pm</td>
+        <td>
+          <b>[PASS]</b> Global search opened using coordinate fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:59 pm</td>
+        <td>
+          <b>[PASS]</b> Global search screen opened successfully using direct coordinate tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:59 pm</td>
+        <td>
+          <b>[PASS]</b> SB_005 STEP 03 PASSED - Global search opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:59 pm</td>
+        <td>
+          <b>[STEP]</b> SB_005 STEP 04 - Validate search screen structure
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:59 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search screen structure (SUPER_FAST_V2_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:59 pm</td>
+        <td>
+          <b>[PASS]</b> Search screen structure validated quickly: input + All + Stocks + Mutual Funds fallback-ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:40:59 pm</td>
+        <td>
+          <b>[PASS]</b> SB_005 STEP 04 PASSED - Search screen structure validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:59 pm</td>
+        <td>
+          <b>[STEP]</b> SB_005 STEP 05 - Enter HDFC search keyword
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:40:59 pm</td>
+        <td>
+          <b>[STEP]</b> Entering search keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:02 pm</td>
+        <td>
+          <b>[PASS]</b> Search keyword entered: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:02 pm</td>
+        <td>
+          <b>[PASS]</b> SB_005 STEP 05 PASSED - HDFC search keyword entered
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:02 pm</td>
+        <td>
+          <b>[STEP]</b> SB_005 STEP 06 - Validate HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:02 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search results are loaded for keyword: hdfc (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:02 pm</td>
+        <td>
+          <b>[PASS]</b> Search results loaded for keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:02 pm</td>
+        <td>
+          <b>[PASS]</b> SB_005 STEP 06 PASSED - HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:02 pm</td>
+        <td>
+          <b>[STEP]</b> SB_005 STEP 05 - Open Mutual Funds/SIPs tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:02 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Mutual Funds/SIPs search tab (SUPER_FAST_V2)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:04 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping Mutual Funds/SIPs tab by fast locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:04 pm</td>
+        <td>
+          <b>[PASS]</b> Mutual Funds/SIPs search tab opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:04 pm</td>
+        <td>
+          <b>[PASS]</b> SB_005 STEP 05 PASSED - Mutual Funds/SIPs tab opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:04 pm</td>
+        <td>
+          <b>[STEP]</b> SB_005 STEP 06 - Open fund result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:04 pm</td>
+        <td>
+          <b>[STEP]</b> Opening first visible HDFC mutual fund result from search (ROW_SAFE_V4 - row-safe with stock invalid-id recovery)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:05 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping HDFC mutual fund row fast coordinate V3 attempt 1 | x=540 | y=836
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:06 pm</td>
+        <td>
+          <b>[PASS]</b> Fund row tap moved away from search; treating as fund details navigation: First visible mutual fund result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:09 pm</td>
+        <td>
+          <b>[PASS]</b> Fund details page opened from search: First visible mutual fund result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:09 pm</td>
+        <td>
+          <b>[PASS]</b> SB_005 STEP 06 PASSED - Fund result opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:09 pm</td>
+        <td>
+          <b>[STEP]</b> SB_005 STEP 07 - Validate fund details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:09 pm</td>
+        <td>
+          <b>[STEP]</b> Validating fund details page opened from search (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:11 pm</td>
+        <td>
+          <b>[PASS]</b> Fund details validated from search: First visible mutual fund result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:11 pm</td>
+        <td>
+          <b>[PASS]</b> SB_005 STEP 07 PASSED - Fund details validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:11 pm</td>
+        <td>
+          <b>[STEP]</b> SB_005 STEP 08 - Return back to search results after fund details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:11 pm</td>
+        <td>
+          <b>[STEP]</b> Returning from fund details to search results
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:12 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to search results after fund details using fast back attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:12 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to search results after fund details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:12 pm</td>
+        <td>
+          <b>[PASS]</b> SB_005 STEP 08 PASSED - Back navigation from fund details returned to search results
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:12 pm</td>
+        <td>
+          <span class='badge white-text green'>SB_005 - Fund details and back navigation validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:12 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: SB_005 - Fund details and back navigation validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:12 pm</td>
+        <td>
+          <b>[STEP]</b> SB_005 CLEANUP - Return back to Advisor App
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:12 pm</td>
+        <td>
+          <b>[STEP]</b> Returning back to Advisor App after Search Bar validation (FAST_CLEANUP_V3)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor App dashboard/home is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[PASS]</b> SB_005 CLEANUP COMPLETED - Return flow executed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: SB_005_VerifyFundResultDetailsAndBackNavigation</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">SB_006 - Verify Stocks tab results</p>
+            <p class="text-sm">
+              <span>2:41:14 pm</span> / <span>00:00:11:445</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">SB_006 - Verify Stocks tab results</h5>
+<span class='badge badge-success'>07.27.2026 2:41:14 pm</span>
+<span class='badge badge-danger'>07.27.2026 2:41:26 pm</span>
+<span class='badge badge-default'>00:00:11:445</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          Module: Search Bar<br>Case ID: SB_006<br>Validation: Open search, enter HDFC keyword, switch to Stocks tab, and validate first HDFC stock row is visible using exact locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: SB_006 - Verify Stocks tab results
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[STEP]</b> SB_006 STEP 01 - Capture Advisor app package
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app package captured: com.valueresearch.advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[PASS]</b> SB_006 STEP 01 PASSED - Advisor app package captured
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[STEP]</b> SB_006 STEP 02 - Check Advisor app login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app session is already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[PASS]</b> SB_006 STEP 02 PASSED - Advisor app login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[STEP]</b> SB_006 STEP 03 - Open global search from dashboard/home
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:14 pm</td>
+        <td>
+          <b>[STEP]</b> Opening global search from dashboard/home (SUPER_FAST_V2_DIRECT_TAP)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:15 pm</td>
+        <td>
+          <b>[PASS]</b> Dashboard/home assumed ready for direct search tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:15 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:19 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:20 pm</td>
+        <td>
+          <b>[PASS]</b> Global search opened using coordinate fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:21 pm</td>
+        <td>
+          <b>[PASS]</b> Global search screen opened successfully using direct coordinate tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:21 pm</td>
+        <td>
+          <b>[PASS]</b> SB_006 STEP 03 PASSED - Global search opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:21 pm</td>
+        <td>
+          <b>[STEP]</b> SB_006 STEP 04 - Validate search screen structure
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:21 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search screen structure (SUPER_FAST_V2_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:21 pm</td>
+        <td>
+          <b>[PASS]</b> Search screen structure validated quickly: input + All + Stocks + Mutual Funds fallback-ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:21 pm</td>
+        <td>
+          <b>[PASS]</b> SB_006 STEP 04 PASSED - Search screen structure validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:21 pm</td>
+        <td>
+          <b>[STEP]</b> SB_006 STEP 05 - Enter HDFC search keyword
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:21 pm</td>
+        <td>
+          <b>[STEP]</b> Entering search keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:24 pm</td>
+        <td>
+          <b>[PASS]</b> Search keyword entered: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:24 pm</td>
+        <td>
+          <b>[PASS]</b> SB_006 STEP 05 PASSED - HDFC search keyword entered
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:24 pm</td>
+        <td>
+          <b>[STEP]</b> SB_006 STEP 06 - Validate HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:24 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search results are loaded for keyword: hdfc (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:24 pm</td>
+        <td>
+          <b>[PASS]</b> Search results loaded for keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:24 pm</td>
+        <td>
+          <b>[PASS]</b> SB_006 STEP 06 PASSED - HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:24 pm</td>
+        <td>
+          <b>[STEP]</b> SB_006 STEP 05 - Open Stocks tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:24 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Stocks search tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:24 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping Stocks tab by exact content-desc locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:25 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks search tab opened and first HDFC stock row is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:25 pm</td>
+        <td>
+          <b>[PASS]</b> SB_006 STEP 05 PASSED - Stocks tab opened with first HDFC stock row visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:25 pm</td>
+        <td>
+          <span class='badge white-text green'>SB_006 - Stocks tab search results validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:25 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: SB_006 - Stocks tab search results validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:25 pm</td>
+        <td>
+          <b>[STEP]</b> SB_006 CLEANUP - Return back to Advisor App
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:25 pm</td>
+        <td>
+          <b>[STEP]</b> Returning back to Advisor App after Search Bar validation (FAST_CLEANUP_V3)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor App dashboard/home is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[PASS]</b> SB_006 CLEANUP COMPLETED - Return flow executed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: SB_006_VerifyStocksTabResultsLoaded</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">SB_007 - Verify stock result details</p>
+            <p class="text-sm">
+              <span>2:41:26 pm</span> / <span>00:00:54:550</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">SB_007 - Verify stock result details</h5>
+<span class='badge badge-success'>07.27.2026 2:41:26 pm</span>
+<span class='badge badge-danger'>07.27.2026 2:42:20 pm</span>
+<span class='badge badge-default'>00:00:54:550</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          Module: Search Bar<br>Case ID: SB_007<br>Validation: Open HDFC Bank result from Stocks tab and validate stock details page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: SB_007 - Verify stock result details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[STEP]</b> SB_007 STEP 01 - Capture Advisor app package
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app package captured: com.valueresearch.advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[PASS]</b> SB_007 STEP 01 PASSED - Advisor app package captured
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[STEP]</b> SB_007 STEP 02 - Check Advisor app login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app session is already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[PASS]</b> SB_007 STEP 02 PASSED - Advisor app login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[STEP]</b> SB_007 STEP 03 - Open global search from dashboard/home
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:26 pm</td>
+        <td>
+          <b>[STEP]</b> Opening global search from dashboard/home (SUPER_FAST_V2_DIRECT_TAP)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:27 pm</td>
+        <td>
+          <b>[PASS]</b> Dashboard/home assumed ready for direct search tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:27 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:31 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:32 pm</td>
+        <td>
+          <b>[PASS]</b> Global search opened using coordinate fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:32 pm</td>
+        <td>
+          <b>[PASS]</b> Global search screen opened successfully using direct coordinate tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:32 pm</td>
+        <td>
+          <b>[PASS]</b> SB_007 STEP 03 PASSED - Global search opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:32 pm</td>
+        <td>
+          <b>[STEP]</b> SB_007 STEP 04 - Validate search screen structure
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:32 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search screen structure (SUPER_FAST_V2_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:32 pm</td>
+        <td>
+          <b>[PASS]</b> Search screen structure validated quickly: input + All + Stocks + Mutual Funds fallback-ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:32 pm</td>
+        <td>
+          <b>[PASS]</b> SB_007 STEP 04 PASSED - Search screen structure validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:32 pm</td>
+        <td>
+          <b>[STEP]</b> SB_007 STEP 05 - Enter HDFC search keyword
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:32 pm</td>
+        <td>
+          <b>[STEP]</b> Entering search keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:36 pm</td>
+        <td>
+          <b>[PASS]</b> Search keyword entered: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:36 pm</td>
+        <td>
+          <b>[PASS]</b> SB_007 STEP 05 PASSED - HDFC search keyword entered
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:36 pm</td>
+        <td>
+          <b>[STEP]</b> SB_007 STEP 06 - Validate HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:36 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search results are loaded for keyword: hdfc (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:36 pm</td>
+        <td>
+          <b>[PASS]</b> Search results loaded for keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:36 pm</td>
+        <td>
+          <b>[PASS]</b> SB_007 STEP 06 PASSED - HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:36 pm</td>
+        <td>
+          <b>[STEP]</b> SB_007 STEP 05 - Open Stocks tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:36 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Stocks search tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:36 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping Stocks tab by exact content-desc locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:37 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks search tab opened and first HDFC stock row is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:37 pm</td>
+        <td>
+          <b>[PASS]</b> SB_007 STEP 05 PASSED - Stocks tab opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:37 pm</td>
+        <td>
+          <b>[STEP]</b> SB_007 STEP 06 - Open stock result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:37 pm</td>
+        <td>
+          <b>[STEP]</b> Opening stock result from search using exact row locator: HDFC Bank
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:37 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping first HDFC stock row by exact Appium Inspector locator: new UiSelector().description("IN").instance(0)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:40 pm</td>
+        <td>
+          <b>[PASS]</b> Stock row tap moved away from search; treating as stock details navigation: HDFC Bank Ltd.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:59 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details navigation confirmed because search screen is no longer visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:59 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details page opened from search: HDFC Bank Ltd.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:41:59 pm</td>
+        <td>
+          <b>[PASS]</b> SB_007 STEP 06 PASSED - Stock result opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:59 pm</td>
+        <td>
+          <b>[STEP]</b> SB_007 STEP 07 - Validate stock details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:41:59 pm</td>
+        <td>
+          <b>[STEP]</b> Validating stock details page opened from search (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:17 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details navigation confirmed because search screen is no longer visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:17 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details validated from search: HDFC Bank Ltd.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:17 pm</td>
+        <td>
+          <b>[PASS]</b> SB_007 STEP 07 PASSED - Stock details validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:17 pm</td>
+        <td>
+          <span class='badge white-text green'>SB_007 - Stock details validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:17 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: SB_007 - Stock details validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:17 pm</td>
+        <td>
+          <b>[STEP]</b> SB_007 CLEANUP - Return back to Advisor App
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:17 pm</td>
+        <td>
+          <b>[STEP]</b> Returning back to Advisor App after Search Bar validation (FAST_CLEANUP_V3)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor App dashboard/home is visible after fast cleanup
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[PASS]</b> SB_007 CLEANUP COMPLETED - Return flow executed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: SB_007_VerifyStockResultDetails</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="8"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">SB_008 - Verify Fund to Stock navigation regression</p>
+            <p class="text-sm">
+              <span>2:42:20 pm</span> / <span>00:01:02:521</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">SB_008 - Verify Fund to Stock navigation regression</h5>
+<span class='badge badge-success'>07.27.2026 2:42:20 pm</span>
+<span class='badge badge-danger'>07.27.2026 2:43:23 pm</span>
+<span class='badge badge-default'>00:01:02:521</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          Module: Search Bar<br>Case ID: SB_008<br>Validation: Open a fund result, return to search results, switch to Stocks tab, open HDFC Bank, and validate stock details without wrong tap or invalid company id
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: SB_008 - Verify Fund to Stock navigation regression
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 01 - Capture Advisor app package
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app package captured: com.valueresearch.advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 01 PASSED - Advisor app package captured
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 02 - Check Advisor app login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor app session is already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 02 PASSED - Advisor app login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 03 - Open global search from dashboard/home
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:20 pm</td>
+        <td>
+          <b>[STEP]</b> Opening global search from dashboard/home (SUPER_FAST_V2_DIRECT_TAP)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:21 pm</td>
+        <td>
+          <b>[PASS]</b> Dashboard/home assumed ready for direct search tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:21 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:25 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping top-right search icon fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:26 pm</td>
+        <td>
+          <b>[PASS]</b> Global search opened using coordinate fallback attempt 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:26 pm</td>
+        <td>
+          <b>[PASS]</b> Global search screen opened successfully using direct coordinate tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:26 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 03 PASSED - Global search opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:26 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 04 - Validate search screen structure
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:26 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search screen structure (SUPER_FAST_V2_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:26 pm</td>
+        <td>
+          <b>[PASS]</b> Search screen structure validated quickly: input + All + Stocks + Mutual Funds fallback-ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:26 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 04 PASSED - Search screen structure validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:26 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 05 - Enter HDFC search keyword
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:26 pm</td>
+        <td>
+          <b>[STEP]</b> Entering search keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:29 pm</td>
+        <td>
+          <b>[PASS]</b> Search keyword entered: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:29 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 05 PASSED - HDFC search keyword entered
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:29 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 06 - Validate HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:29 pm</td>
+        <td>
+          <b>[STEP]</b> Validating search results are loaded for keyword: hdfc (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:29 pm</td>
+        <td>
+          <b>[PASS]</b> Search results loaded for keyword: hdfc
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:29 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 06 PASSED - HDFC search results loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:29 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 05 - Open Mutual Funds/SIPs tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:29 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Mutual Funds/SIPs search tab (SUPER_FAST_V2)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:31 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping Mutual Funds/SIPs tab by fast locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:31 pm</td>
+        <td>
+          <b>[PASS]</b> Mutual Funds/SIPs search tab opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:31 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 05 PASSED - Mutual Funds/SIPs tab opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:31 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 06 - Open fund result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:31 pm</td>
+        <td>
+          <b>[STEP]</b> Opening first visible HDFC mutual fund result from search (ROW_SAFE_V4 - row-safe with stock invalid-id recovery)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:32 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping HDFC mutual fund row fast coordinate V3 attempt 1 | x=540 | y=836
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:34 pm</td>
+        <td>
+          <b>[PASS]</b> Fund row tap moved away from search; treating as fund details navigation: First visible mutual fund result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:37 pm</td>
+        <td>
+          <b>[PASS]</b> Fund details page opened from search: First visible mutual fund result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:37 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 06 PASSED - Fund result opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:37 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 07 - Validate fund details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:37 pm</td>
+        <td>
+          <b>[STEP]</b> Validating fund details page opened from search (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:38 pm</td>
+        <td>
+          <b>[PASS]</b> Fund details validated from search: First visible mutual fund result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:38 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 07 PASSED - Fund details validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:38 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 08 - Return to search results after fund details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:38 pm</td>
+        <td>
+          <b>[STEP]</b> Returning from fund details to search results
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:39 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to search results after fund details using fast back attempt 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:39 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to search results after fund details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:39 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 08 PASSED - Returned to search results
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:39 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 09 - Open Stocks tab after returning from fund details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:39 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Stocks search tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:39 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping Stocks tab by exact content-desc locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:40 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks search tab opened and first HDFC stock row is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:40 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 09 PASSED - Stocks tab opened after fund back navigation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:40 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 10 - Open HDFC Bank stock result
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:40 pm</td>
+        <td>
+          <b>[STEP]</b> Opening stock result from search using exact row locator: HDFC Bank
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:42:40 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping first HDFC stock row by exact Appium Inspector locator: new UiSelector().description("IN").instance(0)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:42:42 pm</td>
+        <td>
+          <b>[PASS]</b> Stock row tap moved away from search; treating as stock details navigation: HDFC Bank Ltd.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:43:01 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details navigation confirmed because search screen is no longer visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:43:01 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details page opened from search: HDFC Bank Ltd.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:43:01 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 10 PASSED - HDFC Bank stock result opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:43:01 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 STEP 11 - Validate stock details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:43:01 pm</td>
+        <td>
+          <b>[STEP]</b> Validating stock details page opened from search (SUPER_FAST_NO_TREE_SCAN)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:43:20 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details navigation confirmed because search screen is no longer visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:43:20 pm</td>
+        <td>
+          <b>[PASS]</b> Stock details validated from search: HDFC Bank Ltd.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:43:20 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 STEP 11 PASSED - Stock details validated after fund to stock navigation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:43:20 pm</td>
+        <td>
+          <span class='badge white-text green'>SB_008 - Fund to Stock navigation regression validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:43:20 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: SB_008 - Fund to Stock navigation regression validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:43:20 pm</td>
+        <td>
+          <b>[STEP]</b> SB_008 CLEANUP - Return back to Advisor App
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:43:20 pm</td>
+        <td>
+          <b>[STEP]</b> Returning back to Advisor App after Search Bar validation (FAST_CLEANUP_V3)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:43:23 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor App dashboard/home is visible after fast cleanup
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:43:23 pm</td>
+        <td>
+          <b>[PASS]</b> SB_008 CLEANUP COMPLETED - Return flow executed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:43:23 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: SB_008_VerifyFundToStockNavigationRegression</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Jul 27, 2026 02:38:58 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Jul 27, 2026 02:43:23 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>8</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>0</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'>
+<b>8</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='0%'><b>0</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='51%'><b>210</b> events passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> events failed,
+<b data-tooltip='%'>198</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"SB_001 - Verify global search bar funds and stocks flow":75.546,"SB_002 - Verify search screen structure":7.607,"SB_003 - Verify HDFC search results load on All tab":10.965,"SB_004 - Verify Mutual Funds/SIPs tab results":13.911,"SB_005 - Verify fund result details and back navigation":21,"SB_006 - Verify Stocks tab results":11.445,"SB_007 - Verify stock result details":54.55,"SB_008 - Verify Fund to Stock navigation regression":62.521
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td>Advisor App</td>
+</tr>
+<tr>
+<td>Machine</td>
+<td>Local</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>User</td>
+<td>manishkhatri</td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>Android</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>Appium UiAutomator2</td>
+</tr>
+<tr>
+<td>Framework</td>
+<td>TestNG + Maven + ExtentReports</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 8,
+failParent: 0,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 210,
+failEvents: 0,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 198
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

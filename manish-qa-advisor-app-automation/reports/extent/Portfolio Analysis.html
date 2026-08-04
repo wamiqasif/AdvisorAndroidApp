@@ -1,0 +1,4430 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Advisor App Automation Report</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report dark">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Advisor App Test Automation Report</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Jul 28, 2026 04:35:52 pm</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<a class="dropdown-item" status="fail" href="#"><span>Fail</span><span class="status danger"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_SUM_001 - Open Portfolio Analysis Summary from Hub</p>
+            <p class="text-sm">
+              <span>4:35:59 pm</span> / <span>00:00:17:102</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_SUM_001 - Open Portfolio Analysis Summary from Hub</h5>
+<span class='badge badge-success'>07.28.2026 4:35:59 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:36:16 pm</span>
+<span class='badge badge-default'>00:00:17:102</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:35:59 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_SUM_001<br><b>Scenario:</b> Open Portfolio Analysis Summary from Hub<br><b>Validation:</b> Validate Portfolio Analysis Summary page opens from Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:35:59 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_SUM_001 - Open Portfolio Analysis Summary from Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:35:59 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:35:59 pm</td>
+        <td>
+          <b>[STEP]</b> Checking app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:35:59 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for app to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:05 pm</td>
+        <td>
+          <b>[STEP]</b> PIN screen indicator found: Enter your Advisor PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:05 pm</td>
+        <td>
+          <b>[STEP]</b> PIN screen detected. Entering PIN once.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:05 pm</td>
+        <td>
+          <b>[STEP]</b> Entering app PIN using strict keypad locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:05 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:07 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 9
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:08 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 7
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:09 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 5
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:10 pm</td>
+        <td>
+          <b>[PASS]</b> PIN entered successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:10 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for valid logged-in screen after PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:11 pm</td>
+        <td>
+          <b>[STEP]</b> Logged-in tab indicator found: Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:11 pm</td>
+        <td>
+          <b>[PASS]</b> Logged-in bottom tabs loaded after PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:11 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:11 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Portfolio Analysis from Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:11 pm</td>
+        <td>
+          <b>[STEP]</b> Hub tab clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:13 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:15 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Portfolio Analysis header
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:15 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Summary tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:15 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Funds tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:15 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Stocks tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:15 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis opened successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:15 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Portfolio Analysis header and tabs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis Summary page is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Portfolio Analysis header
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Summary tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Funds tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Stocks tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis header and tabs validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_SUM_001 - Portfolio Analysis Summary opened successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_SUM_001
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_SUM_001_OpenPortfolioAnalysisSummaryFromHub</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_SUM_002 - Change Investor to Manish Khatri</p>
+            <p class="text-sm">
+              <span>4:36:16 pm</span> / <span>00:00:07:151</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_SUM_002 - Change Investor to Manish Khatri</h5>
+<span class='badge badge-success'>07.28.2026 4:36:16 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:36:24 pm</span>
+<span class='badge badge-default'>00:00:07:151</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_SUM_002<br><b>Scenario:</b> Change Investor to Manish Khatri<br><b>Validation:</b> Change investor from Summary page using same dropdown logic as Funds and Stocks
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_SUM_002 - Change Investor to Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis screen already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:16 pm</td>
+        <td>
+          <b>[STEP]</b> Changing investor to Manish Khatri from Summary page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:17 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:17 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis Summary page is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:17 pm</td>
+        <td>
+          <b>[STEP]</b> Trying to open investor dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:17 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis header is visible for investor dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:20 pm</td>
+        <td>
+          <b>[PASS]</b> Investor dropdown opened by tapping right side of header text: Manish
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:20 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Choose Investor bottom sheet
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:20 pm</td>
+        <td>
+          <b>[PASS]</b> Verified optional text: Multiple investor badge
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:21 pm</td>
+        <td>
+          <b>[STEP]</b> Manish Khatri investor by PAN clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:23 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Portfolio Analysis header after investor selection
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Selected investor Manish in header | Expected/Matched Text: Manish
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Investor changed to Manish Khatri on Summary page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_SUM_002 - Investor changed to Manish Khatri successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_SUM_002
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_SUM_002_ChangeInvestorToManishKhatri</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_SUM_003 - Verify Overall Portfolio Performance Card</p>
+            <p class="text-sm">
+              <span>4:36:24 pm</span> / <span>00:00:00:472</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_SUM_003 - Verify Overall Portfolio Performance Card</h5>
+<span class='badge badge-success'>07.28.2026 4:36:24 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:36:24 pm</span>
+<span class='badge badge-default'>00:00:00:472</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_SUM_003<br><b>Scenario:</b> Verify Overall Portfolio Performance Card<br><b>Validation:</b> Validate You vs Market and benchmark dropdown entry
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_SUM_003 - Verify Overall Portfolio Performance Card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis screen already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Overall Portfolio Performance card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis Summary page is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Overall Portfolio Performance
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: You vs Market
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: BSE Sensex TRI dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Your Portfolio Return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Overall Portfolio Performance card validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_SUM_003 - Overall Portfolio Performance validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_SUM_003
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_SUM_003_VerifyOverallPortfolioPerformanceCard</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_SUM_004 - Verify Benchmark Dropdown Options</p>
+            <p class="text-sm">
+              <span>4:36:24 pm</span> / <span>00:00:05:313</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_SUM_004 - Verify Benchmark Dropdown Options</h5>
+<span class='badge badge-success'>07.28.2026 4:36:24 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:36:29 pm</span>
+<span class='badge badge-default'>00:00:05:313</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_SUM_004<br><b>Scenario:</b> Verify Benchmark Dropdown Options<br><b>Validation:</b> Validate benchmark dropdown options on Summary page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_SUM_004 - Verify Benchmark Dropdown Options
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis screen already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[STEP]</b> Validating benchmark dropdown options
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:24 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis Summary page is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:25 pm</td>
+        <td>
+          <b>[STEP]</b> BSE Sensex TRI dropdown clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:27 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: BSE Sensex TRI option | Expected/Matched Text: BSE Sensex TRI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:27 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: BSE 500 TRI option | Expected/Matched Text: BSE 500 TRI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:27 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: BSE 100 TRI option | Expected/Matched Text: BSE 100 TRI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:27 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: BSE Midcap 150 TRI option | Expected/Matched Text: BSE Midcap 150 TRI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:27 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: BSE Small Cap 250 TRI option | Expected/Matched Text: BSE Small Cap 250 TRI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:27 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Fixed Deposit option | Expected/Matched Text: Fixed Deposit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:27 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Inflation option | Expected/Matched Text: Inflation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:27 pm</td>
+        <td>
+          <b>[STEP]</b> BSE Sensex TRI option clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:29 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Overall Portfolio Performance after dropdown close
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:29 pm</td>
+        <td>
+          <b>[PASS]</b> Benchmark dropdown options validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:29 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_SUM_004 - Benchmark dropdown options validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:29 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_SUM_004
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:29 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_SUM_004_VerifyBenchmarkDropdownOptions</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_SUM_005 - Verify Portfolio Profile Card</p>
+            <p class="text-sm">
+              <span>4:36:29 pm</span> / <span>00:00:00:383</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_SUM_005 - Verify Portfolio Profile Card</h5>
+<span class='badge badge-success'>07.28.2026 4:36:29 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:36:30 pm</span>
+<span class='badge badge-default'>00:00:00:383</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:29 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_SUM_005<br><b>Scenario:</b> Verify Portfolio Profile Card<br><b>Validation:</b> Validate profile suitability statement
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:29 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_SUM_005 - Verify Portfolio Profile Card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:29 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis screen already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:29 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Your Portfolio Profile card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis Summary page is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Your Portfolio Profile
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Portfolio profile recommendation | Expected/Matched Text: Your asset allocation is suitable for long term wealth creation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[PASS]</b> Your Portfolio Profile card validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_SUM_005 - Portfolio Profile card validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_SUM_005
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_SUM_005_VerifyPortfolioProfileCard</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_SUM_006 - Verify Portfolio Profile More Detail Page</p>
+            <p class="text-sm">
+              <span>4:36:30 pm</span> / <span>00:00:05:398</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_SUM_006 - Verify Portfolio Profile More Detail Page</h5>
+<span class='badge badge-success'>07.28.2026 4:36:30 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:36:35 pm</span>
+<span class='badge badge-default'>00:00:05:398</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_SUM_006<br><b>Scenario:</b> Verify Portfolio Profile More Detail Page<br><b>Validation:</b> Validate Portfolio Profile detail page after tapping More
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_SUM_006 - Verify Portfolio Profile More Detail Page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis screen already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Portfolio Profile More detail page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis Summary page is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Your Portfolio Profile
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:30 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Profile More clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:32 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Portfolio Profile detail title
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:32 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Suitable for | Expected/Matched Text: Suitable for
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:32 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Long-term wealth creation | Expected/Matched Text: Long-term wealth creation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:32 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: For fund-specific views | Expected/Matched Text: For fund-specific views
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:32 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: For stock-specific views | Expected/Matched Text: For stock-specific views
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:32 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Plan it here button | Expected/Matched Text: Plan it here
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:32 pm</td>
+        <td>
+          <b>[STEP]</b> Back from Portfolio Profile detail coordinate fallback tapped at x=84, y=149
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Portfolio Analysis header after back
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Profile More detail page validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_SUM_006 - Portfolio Profile More detail validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_SUM_006
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_SUM_006_VerifyPortfolioProfileMoreDetailPage</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_SUM_007 - Verify Retirement Projection Card</p>
+            <p class="text-sm">
+              <span>4:36:35 pm</span> / <span>00:00:05:679</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_SUM_007 - Verify Retirement Projection Card</h5>
+<span class='badge badge-success'>07.28.2026 4:36:35 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:36:41 pm</span>
+<span class='badge badge-default'>00:00:05:679</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_SUM_007<br><b>Scenario:</b> Verify Retirement Projection Card<br><b>Validation:</b> Validate corpus, monthly investment and retirement year controls
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_SUM_007 - Verify Retirement Projection Card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis screen already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <b>[STEP]</b> Validating retirement projection card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis Summary page is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: At 60, you will have
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:35 pm</td>
+        <td>
+          <b>[STEP]</b> Retirement Projection content not visible. Small scroll. Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:37 pm</td>
+        <td>
+          <b>[STEP]</b> Retirement Projection content not visible. Small scroll. Attempt: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:39 pm</td>
+        <td>
+          <b>[STEP]</b> Retirement Projection right-side chevron tap tapped at x=960, y=1276
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Monthly investment till retirement | Expected/Matched Text: Assuming monthly investment till retirement
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: ₹5k step control | Expected/Matched Text: ₹5k
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Year of retirement | Expected/Matched Text: Year of retirement
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: 5Y step control | Expected/Matched Text: 5Y
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[PASS]</b> Retirement projection card validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_SUM_007 - Retirement Projection card validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_SUM_007
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_SUM_007_VerifyRetirementProjectionCard</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="8"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_SUM_008 - Verify Withdrawal Income Card</p>
+            <p class="text-sm">
+              <span>4:36:41 pm</span> / <span>00:00:04:397</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_SUM_008 - Verify Withdrawal Income Card</h5>
+<span class='badge badge-success'>07.28.2026 4:36:41 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:36:45 pm</span>
+<span class='badge badge-default'>00:00:04:397</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_SUM_008<br><b>Scenario:</b> Verify Withdrawal Income Card<br><b>Validation:</b> Validate monthly income support and withdrawal rate section
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_SUM_008 - Verify Withdrawal Income Card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis screen already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[STEP]</b> Validating withdrawal income card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis Summary page is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: which can support income of
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:41 pm</td>
+        <td>
+          <b>[STEP]</b> Withdrawal Income content not visible. Small scroll. Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:42 pm</td>
+        <td>
+          <b>[STEP]</b> Withdrawal Income content not visible. Small scroll. Attempt: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:44 pm</td>
+        <td>
+          <b>[STEP]</b> Withdrawal Income right-side chevron tap tapped at x=960, y=1505
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Withdrawal rate per annum | Expected/Matched Text: Withdrawal rate per annum
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: 1% withdrawal step control | Expected/Matched Text: 1%
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Good withdrawal status | Expected/Matched Text: Good
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>[PASS]</b> Withdrawal income card validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_SUM_008 - Withdrawal Income card validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_SUM_008
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_SUM_008_VerifyWithdrawalIncomeCard</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="9"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_SUM_009 - Verify Risk Profile Card</p>
+            <p class="text-sm">
+              <span>4:36:45 pm</span> / <span>00:00:02:410</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">PA_SUM_009 - Verify Risk Profile Card</h5>
+<span class='badge badge-success'>07.28.2026 4:36:45 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:36:48 pm</span>
+<span class='badge badge-default'>00:00:02:410</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=9</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div>    <div class="row mb-3"><div class="col-md-3">
+<img data-featherlight='screenshots/PA_SUM_009_Risk_Profile_Failure_1785236807386.png' src="screenshots/PA_SUM_009_Risk_Profile_Failure_1785236807386.png">
+    <div class="title">PA_SUM_009_Risk_Profile_Failure</div>
+    </div></div>
+    <div class="row mb-3"><div class="col-md-3">
+<img data-featherlight='screenshots/PA_SUM_009_VerifyRiskProfileCard_FAILED_20260728_163647_847.png' src="screenshots/PA_SUM_009_VerifyRiskProfileCard_FAILED_20260728_163647_847.png">
+    
+    </div></div>
+<div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_SUM_009<br><b>Scenario:</b> Verify Risk Profile Card<br><b>Validation:</b> Validate risk profile details and Update Assessment CTA
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_SUM_009 - Verify Risk Profile Card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis screen already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Your Risk Profile card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis Summary page is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:45 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Your Risk Profile
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:46 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Investor name in risk profile | Expected/Matched Text: Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:47 pm</td>
+        <td>
+          <b>[STEP]</b>screenshots/PA_SUM_009_Risk_Profile_Failure_1785236807386.png
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>4:36:47 pm</td>
+        <td>
+          <b>Test failed:</b> PA_SUM_009_VerifyRiskProfileCard
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>4:36:47 pm</td>
+        <td>
+          <b>Error:</b> Risk Profile card validation failed: Moderate risk profile text not present on current screen. Expected text contains: Moderate
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>4:36:47 pm</td>
+        <td>
+          <pre>java.lang.AssertionError: Risk Profile card validation failed: Moderate risk profile text not present on current screen. Expected text contains: Moderate
+	at com.valueresearch.pages.PortfolioAnalysisPage.verifyRiskProfileCard(PortfolioAnalysisPage.java:347)
+	at com.valueresearch.tests.PortfolioAnalysisTest.PA_SUM_009_VerifyRiskProfileCard(PortfolioAnalysisTest.java:114)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+Caused by: java.lang.RuntimeException: Moderate risk profile text not present on current screen. Expected text contains: Moderate
+	at com.valueresearch.pages.PortfolioAnalysisPage.verifyTextPresentOnCurrentScreen(PortfolioAnalysisPage.java:1450)
+	at com.valueresearch.pages.PortfolioAnalysisPage.verifyRiskProfileCard(PortfolioAnalysisPage.java:333)
+	... 29 more
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:48 pm</td>
+        <td>
+          <b>Failure screenshot attached:</b>screenshots/PA_SUM_009_VerifyRiskProfileCard_FAILED_20260728_163647_847.png
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="10"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_SUM_010 - Verify Asset Mix Card</p>
+            <p class="text-sm">
+              <span>4:36:48 pm</span> / <span>00:00:05:467</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_SUM_010 - Verify Asset Mix Card</h5>
+<span class='badge badge-success'>07.28.2026 4:36:48 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:36:53 pm</span>
+<span class='badge badge-default'>00:00:05:467</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=10</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:48 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_SUM_010<br><b>Scenario:</b> Verify Asset Mix Card<br><b>Validation:</b> Validate Asset Mix total value and asset rows
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:48 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_SUM_010 - Verify Asset Mix Card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:48 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis screen already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:48 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Asset Mix card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:48 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:48 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis Summary page is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:48 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Asset Mix
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:48 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Total Assets Value | Expected: Total Assets Value | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:49 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Total Assets Value | Expected: Total Assets Value | Attempt: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:50 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after small scroll | Label: Total Assets Value | Expected/Matched Text: Total Assets Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:50 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Asset Type | Expected: Asset Type | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:52 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after small scroll | Label: Asset Type | Expected/Matched Text: Asset Type
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:52 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Amount (%) | Expected/Matched Text: Amount (%)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:52 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Equity row | Expected/Matched Text: Equity
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:52 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Debt row | Expected/Matched Text: Debt
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:52 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Others row | Expected: Others | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after small scroll | Label: Others row | Expected/Matched Text: Others
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <b>[PASS]</b> Asset Mix card validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_SUM_010 - Asset Mix card validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_SUM_010
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_SUM_010_VerifyAssetMixCard</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="11"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_SUM_011 - Verify Asset Mix Composition Sections</p>
+            <p class="text-sm">
+              <span>4:36:53 pm</span> / <span>00:00:06:529</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_SUM_011 - Verify Asset Mix Composition Sections</h5>
+<span class='badge badge-success'>07.28.2026 4:36:53 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:37:00 pm</span>
+<span class='badge badge-default'>00:00:06:529</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=11</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_SUM_011<br><b>Scenario:</b> Verify Asset Mix Composition Sections<br><b>Validation:</b> Validate Equity Composition and Debt Composition sections
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_SUM_011 - Verify Asset Mix Composition Sections
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis screen already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Asset Mix composition detail sections
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis Summary page is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:53 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Asset Mix
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:54 pm</td>
+        <td>
+          <b>[STEP]</b> Asset Mix More clicked using More locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:57 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Equity Composition | Expected/Matched Text: Equity Composition
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:36:57 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Debt Composition | Expected/Matched Text: Debt Composition
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:36:57 pm</td>
+        <td>
+          <b>[STEP]</b> Back from Asset Mix detail coordinate fallback tapped at x=84, y=149
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Portfolio Analysis header after back from Asset Mix detail
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <b>[PASS]</b> Asset Mix composition detail sections validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_SUM_011 - Asset Mix composition sections validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_SUM_011
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_SUM_011_VerifyAssetMixCompositionSections</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="12"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_FUN_001 - Navigate to Funds Tab</p>
+            <p class="text-sm">
+              <span>4:37:00 pm</span> / <span>00:00:09:071</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_FUN_001 - Navigate to Funds Tab</h5>
+<span class='badge badge-success'>07.28.2026 4:37:00 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:37:09 pm</span>
+<span class='badge badge-default'>00:00:09:071</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=12</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_FUN_001<br><b>Scenario:</b> Navigate to Funds Tab<br><b>Validation:</b> Navigate from Summary flow to Funds tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_FUN_001 - Navigate to Funds Tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <b>[STEP]</b> Portfolio Analysis screen already active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <b>[STEP]</b> Navigating to Funds tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Funds tab and resetting scroll. Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:00 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:01 pm</td>
+        <td>
+          <b>[STEP]</b> Funds tab clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:06 pm</td>
+        <td>
+          <b>[STEP]</b> Funds header not visible after reset. Single swipe-down fallback.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:07 pm</td>
+        <td>
+          <b>[STEP]</b> Funds ScrollView reset completed using fallback
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Fund Portfolio Performance
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <b>[PASS]</b> Funds tab opened at top: Fund Portfolio Performance
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <b>[PASS]</b> Funds tab opened at top successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_FUN_001 - Funds tab opened successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_FUN_001
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_FUN_001_NavigateToFundsTab</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="13"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_FUN_002 - Change Investor to Lalit Kumar Khatri</p>
+            <p class="text-sm">
+              <span>4:37:09 pm</span> / <span>00:00:07:921</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_FUN_002 - Change Investor to Lalit Kumar Khatri</h5>
+<span class='badge badge-success'>07.28.2026 4:37:09 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:37:17 pm</span>
+<span class='badge badge-default'>00:00:07:921</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=13</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_FUN_002<br><b>Scenario:</b> Change Investor to Lalit Kumar Khatri<br><b>Validation:</b> Change investor from Funds page using investor dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_FUN_002 - Change Investor to Lalit Kumar Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <b>[STEP]</b> Changing investor to Lalit Kumar Khatri from Funds page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <b>[PASS]</b> Funds tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <b>[STEP]</b> Trying to open investor dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:09 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis header is visible for investor dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:12 pm</td>
+        <td>
+          <b>[PASS]</b> Investor dropdown opened by tapping right side of header text: Manish
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:13 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Choose Investor bottom sheet
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:13 pm</td>
+        <td>
+          <b>[STEP]</b> Lalit Kumar Khatri investor by PAN clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:16 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Fund Portfolio Performance after investor switch
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:17 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Selected investor Lalit in header | Expected/Matched Text: Lalit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:17 pm</td>
+        <td>
+          <b>[PASS]</b> Investor changed to Lalit Kumar Khatri on Funds page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:17 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_FUN_002 - Investor changed to Lalit Kumar Khatri successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:17 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_FUN_002
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:17 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_FUN_002_ChangeInvestorToLalitKumarKhatri</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="14"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_FUN_003 - Verify Fund Portfolio Performance Card</p>
+            <p class="text-sm">
+              <span>4:37:17 pm</span> / <span>00:00:02:455</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_FUN_003 - Verify Fund Portfolio Performance Card</h5>
+<span class='badge badge-success'>07.28.2026 4:37:17 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:37:19 pm</span>
+<span class='badge badge-default'>00:00:02:455</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=14</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:17 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_FUN_003<br><b>Scenario:</b> Verify Fund Portfolio Performance Card<br><b>Validation:</b> Validate You vs Market and return comparison on Funds tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:17 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_FUN_003 - Verify Fund Portfolio Performance Card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:17 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Fund Portfolio Performance card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:18 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[PASS]</b> Funds tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Fund Portfolio Performance
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: You vs Market
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: BSE Sensex TRI dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Your Portfolio Return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Benchmark comparison message | Expected/Matched Text: You have beaten BSE Sensex TRI
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[PASS]</b> Fund Portfolio Performance card validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_FUN_003 - Fund Portfolio Performance validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_FUN_003
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_FUN_003_VerifyFundPortfolioPerformanceCard</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="15"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_FUN_004 - Verify Fund Action Cards</p>
+            <p class="text-sm">
+              <span>4:37:19 pm</span> / <span>00:00:05:922</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">PA_FUN_004 - Verify Fund Action Cards</h5>
+<span class='badge badge-success'>07.28.2026 4:37:19 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:37:25 pm</span>
+<span class='badge badge-default'>00:00:05:922</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=15</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div>    <div class="row mb-3"><div class="col-md-3">
+<img data-featherlight='screenshots/PA_FUN_004_Action_Cards_Failure_1785236845030.png' src="screenshots/PA_FUN_004_Action_Cards_Failure_1785236845030.png">
+    <div class="title">PA_FUN_004_Action_Cards_Failure</div>
+    </div></div>
+    <div class="row mb-3"><div class="col-md-3">
+<img data-featherlight='screenshots/PA_FUN_004_VerifyFundActionCards_FAILED_20260728_163725_241.png' src="screenshots/PA_FUN_004_VerifyFundActionCards_FAILED_20260728_163725_241.png">
+    
+    </div></div>
+<div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_FUN_004<br><b>Scenario:</b> Verify Fund Action Cards<br><b>Validation:</b> Validate get-rid-of and sell-off fund cards
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_FUN_004 - Verify Fund Action Cards
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Funds action / attention cards
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[PASS]</b> Funds tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:19 pm</td>
+        <td>
+          <b>[STEP]</b> Scrolling down to find: 1 Fund to get rid of | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:21 pm</td>
+        <td>
+          <b>[STEP]</b> Scrolling down to find: 1 Fund to get rid of | Attempt: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:23 pm</td>
+        <td>
+          <b>[STEP]</b> Scrolling down to find: 1 Fund to get rid of | Attempt: 3
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:25 pm</td>
+        <td>
+          <b>[STEP]</b>screenshots/PA_FUN_004_Action_Cards_Failure_1785236845030.png
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>4:37:25 pm</td>
+        <td>
+          <b>Test failed:</b> PA_FUN_004_VerifyFundActionCards
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>4:37:25 pm</td>
+        <td>
+          <b>Error:</b> Funds action cards validation failed: 1 Fund to get rid of not visible. Reached end of current page.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>4:37:25 pm</td>
+        <td>
+          <pre>java.lang.AssertionError: Funds action cards validation failed: 1 Fund to get rid of not visible. Reached end of current page.
+	at com.valueresearch.pages.PortfolioAnalysisPage.verifyFundActionCards(PortfolioAnalysisPage.java:475)
+	at com.valueresearch.tests.PortfolioAnalysisTest.PA_FUN_004_VerifyFundActionCards(PortfolioAnalysisTest.java:177)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+Caused by: java.lang.RuntimeException: 1 Fund to get rid of not visible. Reached end of current page.
+	at com.valueresearch.pages.PortfolioAnalysisPage.scrollToVisible(PortfolioAnalysisPage.java:1100)
+	at com.valueresearch.pages.PortfolioAnalysisPage.verifyFundActionCards(PortfolioAnalysisPage.java:466)
+	... 29 more
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:25 pm</td>
+        <td>
+          <b>Failure screenshot attached:</b>screenshots/PA_FUN_004_VerifyFundActionCards_FAILED_20260728_163725_241.png
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="16"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_FUN_005 - Verify Funds Portfolio Insights Section</p>
+            <p class="text-sm">
+              <span>4:37:25 pm</span> / <span>00:00:02:921</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">PA_FUN_005 - Verify Funds Portfolio Insights Section</h5>
+<span class='badge badge-success'>07.28.2026 4:37:25 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:37:28 pm</span>
+<span class='badge badge-default'>00:00:02:921</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=16</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div>    <div class="row mb-3"><div class="col-md-3">
+<img data-featherlight='screenshots/PA_FUN_005_Portfolio_Insights_Failure_1785236847903.png' src="screenshots/PA_FUN_005_Portfolio_Insights_Failure_1785236847903.png">
+    <div class="title">PA_FUN_005_Portfolio_Insights_Failure</div>
+    </div></div>
+    <div class="row mb-3"><div class="col-md-3">
+<img data-featherlight='screenshots/PA_FUN_005_VerifyPortfolioInsightsSection_FAILED_20260728_163728_140.png' src="screenshots/PA_FUN_005_VerifyPortfolioInsightsSection_FAILED_20260728_163728_140.png">
+    
+    </div></div>
+<div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:25 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_FUN_005<br><b>Scenario:</b> Verify Funds Portfolio Insights Section<br><b>Validation:</b> Validate regular-plan and IDCW insights on Funds tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:25 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_FUN_005 - Verify Funds Portfolio Insights Section
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:25 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Funds Portfolio Insights section
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:25 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:26 pm</td>
+        <td>
+          <b>[PASS]</b> Funds tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:26 pm</td>
+        <td>
+          <b>[STEP]</b> Scrolling down to find: Portfolio Insights | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>[STEP]</b>screenshots/PA_FUN_005_Portfolio_Insights_Failure_1785236847903.png
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>Test failed:</b> PA_FUN_005_VerifyPortfolioInsightsSection
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>Error:</b> Funds Portfolio Insights validation failed: Portfolio Insights not visible. Reached end of current page.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <pre>java.lang.AssertionError: Funds Portfolio Insights validation failed: Portfolio Insights not visible. Reached end of current page.
+	at com.valueresearch.pages.PortfolioAnalysisPage.verifyFundsPortfolioInsightsSection(PortfolioAnalysisPage.java:493)
+	at com.valueresearch.tests.PortfolioAnalysisTest.PA_FUN_005_VerifyPortfolioInsightsSection(PortfolioAnalysisTest.java:187)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+Caused by: java.lang.RuntimeException: Portfolio Insights not visible. Reached end of current page.
+	at com.valueresearch.pages.PortfolioAnalysisPage.scrollToVisible(PortfolioAnalysisPage.java:1100)
+	at com.valueresearch.pages.PortfolioAnalysisPage.verifyFundsPortfolioInsightsSection(PortfolioAnalysisPage.java:483)
+	... 29 more
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>Failure screenshot attached:</b>screenshots/PA_FUN_005_VerifyPortfolioInsightsSection_FAILED_20260728_163728_140.png
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="17"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_FUN_006 - Verify Funds Liquidity Section</p>
+            <p class="text-sm">
+              <span>4:37:28 pm</span> / <span>00:00:00:697</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_FUN_006 - Verify Funds Liquidity Section</h5>
+<span class='badge badge-success'>07.28.2026 4:37:28 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:37:29 pm</span>
+<span class='badge badge-default'>00:00:00:697</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=17</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_FUN_006<br><b>Scenario:</b> Verify Funds Liquidity Section<br><b>Validation:</b> Validate liquidity, redeemable funds and loan CTA
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_FUN_006 - Verify Funds Liquidity Section
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Funds Liquidity section
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>[PASS]</b> Funds tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Liquidity
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Total Redeemable Funds | Expected/Matched Text: Total Redeemable Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:28 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Redeemable free of exit load | Expected/Matched Text: Redeemable free of exit load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Redeemable with exit load | Expected/Matched Text: Redeemable with exit load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Locked in | Expected/Matched Text: Locked in
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Need quick cash for a short time | Expected/Matched Text: Need quick cash for a short time
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Loan Against Mutual Fund | Expected/Matched Text: Loan Against Mutual Fund
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>[PASS]</b> Funds Liquidity section validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_FUN_006 - Funds Liquidity section validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_FUN_006
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_FUN_006_VerifyLiquiditySection</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="18"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_FUN_007 - Verify Funds Liquidity More Detail Page</p>
+            <p class="text-sm">
+              <span>4:37:29 pm</span> / <span>00:00:24:836</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_FUN_007 - Verify Funds Liquidity More Detail Page</h5>
+<span class='badge badge-success'>07.28.2026 4:37:29 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:37:53 pm</span>
+<span class='badge badge-default'>00:00:24:836</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=18</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_FUN_007<br><b>Scenario:</b> Verify Funds Liquidity More Detail Page<br><b>Validation:</b> Validate Funds Liquidity More page sections, fund rows and Sell CTA
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_FUN_007 - Verify Funds Liquidity More Detail Page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Funds Liquidity More detail page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>[PASS]</b> Funds tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:29 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Liquidity
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:30 pm</td>
+        <td>
+          <b>[STEP]</b> Funds Liquidity More clicked using More locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:33 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Liquidity detail page title
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:33 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Investor name on detail page | Expected/Matched Text: Lalit Kumar Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:33 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Need quick cash text | Expected/Matched Text: Need quick cash for a short time
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:33 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Loan Against Mutual Fund CTA | Expected/Matched Text: Loan Against Mutual Fund
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:33 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Redeemable free of exit load section | Expected/Matched Text: Redeemable free of exit load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:33 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: HDFC Large Cap Fund Reg-G | Expected/Matched Text: HDFC Large Cap Fund Reg-G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:33 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: ICICI Pru Midcap-G | Expected/Matched Text: ICICI Pru Midcap-G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:33 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Aditya Birla SL Value Reg-G | Expected/Matched Text: Aditya Birla SL Value Reg-G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:33 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Redeemable with exit load section | Expected: Redeemable with exit load | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:34 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Redeemable with exit load section | Expected: Redeemable with exit load | Attempt: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:35 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Redeemable with exit load section | Expected: Redeemable with exit load | Attempt: 3
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:37 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Redeemable with exit load section | Expected: Redeemable with exit load | Attempt: 4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:38 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after small scroll | Label: Redeemable with exit load section | Expected/Matched Text: Redeemable with exit load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:38 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: HDFC Defence Reg-G | Expected/Matched Text: HDFC Defence Reg-G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:38 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Estimated exit load | Expected: Estimated exit load | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:39 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Estimated exit load | Expected: Estimated exit load | Attempt: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:40 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after small scroll | Label: Estimated exit load | Expected/Matched Text: Estimated exit load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:40 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Need cash text | Expected/Matched Text: Need cash?
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:40 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Sell CTA | Expected/Matched Text: Sell
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:41 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Locked in section | Expected: Locked in | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:42 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Locked in section | Expected: Locked in | Attempt: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:43 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Locked in section | Expected: Locked in | Attempt: 3
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:44 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Locked in section | Expected: Locked in | Attempt: 4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:45 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Locked in section | Expected: Locked in | Attempt: 5
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:47 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Locked in section | Expected: Locked in | Attempt: 6
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:48 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Locked in section | Expected: Locked in | Attempt: 7
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:49 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after deep scroll | Label: Locked in section | Expected/Matched Text: Locked in
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:49 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: ICICI Pru ELSS Tax Saver-IDCW | Expected: ICICI Pru ELSS Tax Saver-IDCW | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:50 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after deep scroll | Label: ICICI Pru ELSS Tax Saver-IDCW | Expected/Matched Text: ICICI Pru ELSS Tax Saver-IDCW
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:50 pm</td>
+        <td>
+          <b>[STEP]</b> Back from Funds Liquidity detail page coordinate fallback tapped at x=84, y=149
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:53 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Funds tab after back from Liquidity detail
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:53 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Liquidity section after back
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:53 pm</td>
+        <td>
+          <b>[PASS]</b> Funds Liquidity More detail page validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:53 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_FUN_007 - Funds Liquidity More detail page validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:53 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_FUN_007
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:53 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_FUN_007_VerifyLiquidityMoreDetailPage</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="19"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_STK_001 - Prepare Stocks Flow from Funds</p>
+            <p class="text-sm">
+              <span>4:37:53 pm</span> / <span>00:00:22:805</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_STK_001 - Prepare Stocks Flow from Funds</h5>
+<span class='badge badge-success'>07.28.2026 4:37:53 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:38:16 pm</span>
+<span class='badge badge-default'>00:00:22:805</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=19</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:53 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_STK_001<br><b>Scenario:</b> Prepare Stocks Flow from Funds<br><b>Validation:</b> After Funds flow, scroll Funds to top, select Vinit Sharma, then navigate to Stocks tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:53 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_STK_001 - Prepare Stocks Flow from Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:53 pm</td>
+        <td>
+          <b>[STEP]</b> Preparing Stocks flow from Funds page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:54 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Funds tab and resetting scroll. Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:54 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:54 pm</td>
+        <td>
+          <b>[STEP]</b> Funds tab clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:37:57 pm</td>
+        <td>
+          <b>[STEP]</b> Funds ScrollView reset using UiScrollable.scrollToBeginning
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:59 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Fund Portfolio Performance before Vinit investor switch
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:59 pm</td>
+        <td>
+          <b>[PASS]</b> Funds tab opened at top: Fund Portfolio Performance before Vinit investor switch
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:37:59 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:00 pm</td>
+        <td>
+          <b>[PASS]</b> Funds tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:00 pm</td>
+        <td>
+          <b>[STEP]</b> Trying to open investor dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:00 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis header is visible for investor dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:03 pm</td>
+        <td>
+          <b>[PASS]</b> Investor dropdown opened by tapping right side of header text: Lalit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:03 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Choose Investor bottom sheet
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:04 pm</td>
+        <td>
+          <b>[STEP]</b> Vinit Sharma investor by PAN clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:09 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Fund Portfolio Performance after Vinit investor switch
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:09 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Selected investor Vinit on Funds header | Expected/Matched Text: Vinit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:09 pm</td>
+        <td>
+          <b>[STEP]</b> Navigating to Stocks tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:09 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:09 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Stocks tab and resetting scroll. Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:09 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:10 pm</td>
+        <td>
+          <b>[STEP]</b> Stocks tab clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:13 pm</td>
+        <td>
+          <b>[STEP]</b> Stocks header not visible after reset. Single swipe-down fallback.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:15 pm</td>
+        <td>
+          <b>[STEP]</b> Stocks ScrollView reset completed using fallback
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Stock Portfolio Performance
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks tab opened at top: Stock Portfolio Performance
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks tab opened at top successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Selected investor Vinit on Stocks header | Expected/Matched Text: Vinit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks flow prepared successfully from Funds page with Vinit Sharma investor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_STK_001 - Vinit selected from Funds and Stocks tab opened successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_STK_001
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_STK_001_NavigateToStocksTab</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="20"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_STK_002 - Verify Investor Vinit Sharma</p>
+            <p class="text-sm">
+              <span>4:38:16 pm</span> / <span>00:00:00:474</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_STK_002 - Verify Investor Vinit Sharma</h5>
+<span class='badge badge-success'>07.28.2026 4:38:16 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:38:17 pm</span>
+<span class='badge badge-default'>00:00:00:474</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=20</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_STK_002<br><b>Scenario:</b> Verify Investor Vinit Sharma<br><b>Validation:</b> Verify Vinit Sharma investor is selected on Stocks page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_STK_002 - Verify Investor Vinit Sharma
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <b>[STEP]</b> Verifying Vinit Sharma is selected on Stocks page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:16 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Selected investor Vinit in Stocks header | Expected/Matched Text: Vinit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Stock Portfolio Performance
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Vinit Sharma investor verified on Stocks page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_STK_002 - Vinit Sharma investor verified successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_STK_002
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_STK_002_ChangeInvestorToVinitSharma</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="21"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_STK_003 - Verify Stock Portfolio Performance Card</p>
+            <p class="text-sm">
+              <span>4:38:17 pm</span> / <span>00:00:00:518</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_STK_003 - Verify Stock Portfolio Performance Card</h5>
+<span class='badge badge-success'>07.28.2026 4:38:17 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:38:17 pm</span>
+<span class='badge badge-default'>00:00:00:518</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=21</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_STK_003<br><b>Scenario:</b> Verify Stock Portfolio Performance Card<br><b>Validation:</b> Validate You vs Market and return comparison on Stocks tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_STK_003 - Verify Stock Portfolio Performance Card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Stock Portfolio Performance card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Stock Portfolio Performance
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: You vs Market
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: BSE Sensex TRI dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Your Portfolio Return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text: Benchmark comparison message
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Stock Portfolio Performance card validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_STK_003 - Stock Portfolio Performance validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_STK_003
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_STK_003_VerifyStockPortfolioPerformanceCard</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="22"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_STK_004 - Verify Stocks Portfolio Insights Section</p>
+            <p class="text-sm">
+              <span>4:38:17 pm</span> / <span>00:00:00:583</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_STK_004 - Verify Stocks Portfolio Insights Section</h5>
+<span class='badge badge-success'>07.28.2026 4:38:17 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:38:18 pm</span>
+<span class='badge badge-default'>00:00:00:583</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=22</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_STK_004<br><b>Scenario:</b> Verify Stocks Portfolio Insights Section<br><b>Validation:</b> Validate dividend received and reinvest insight on Stocks tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_STK_004 - Verify Stocks Portfolio Insights Section
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Stocks Portfolio Insights section
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:17 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Portfolio Insights
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Dividend received | Expected/Matched Text: Dividend received
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: FY 2023-24 | Expected/Matched Text: FY 2023-24
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: FY 2024-25 | Expected/Matched Text: FY 2024-25
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: FY 2025-26 | Expected/Matched Text: FY 2025-26
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Best stocks to re-invest in | Expected/Matched Text: Best stocks to re-invest in
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks Portfolio Insights section validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_STK_004 - Stocks Portfolio Insights validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_STK_004
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_STK_004_VerifyPortfolioInsightsSection</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="23"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_STK_005 - Verify Stocks Liquidity Section</p>
+            <p class="text-sm">
+              <span>4:38:18 pm</span> / <span>00:00:02:847</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_STK_005 - Verify Stocks Liquidity Section</h5>
+<span class='badge badge-success'>07.28.2026 4:38:18 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:38:21 pm</span>
+<span class='badge badge-default'>00:00:02:847</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=23</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_STK_005<br><b>Scenario:</b> Verify Stocks Liquidity Section<br><b>Validation:</b> Validate sellable stocks and Need Cash CTA
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_STK_005 - Verify Stocks Liquidity Section
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Stocks Liquidity section
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Liquidity
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Sellable in 1 day | Expected/Matched Text: Sellable in 1 day
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:18 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Need Cash CTA | Expected: Need Cash? Know which stocks to sell | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:19 pm</td>
+        <td>
+          <b>[STEP]</b> Small scroll down to find text | Label: Need Cash CTA | Expected: Need Cash? Know which stocks to sell | Attempt: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:21 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after small scroll | Label: Need Cash CTA | Expected/Matched Text: Need Cash? Know which stocks to sell
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:21 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks Liquidity section validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:21 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_STK_005 - Stocks Liquidity section validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:21 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_STK_005
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:21 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_STK_005_VerifyLiquiditySection</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="24"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">PA_STK_006 - Verify Stocks Liquidity More Detail Page</p>
+            <p class="text-sm">
+              <span>4:38:21 pm</span> / <span>00:00:17:574</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">PA_STK_006 - Verify Stocks Liquidity More Detail Page</h5>
+<span class='badge badge-success'>07.28.2026 4:38:21 pm</span>
+<span class='badge badge-danger'>07.28.2026 4:38:38 pm</span>
+<span class='badge badge-default'>00:00:17:574</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=24</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:21 pm</td>
+        <td>
+          <b>Module:</b> Portfolio Analysis<br><b>Case ID:</b> PA_STK_006<br><b>Scenario:</b> Verify Stocks Liquidity More Detail Page<br><b>Validation:</b> Validate Stocks Liquidity More page and stock rows
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:21 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: PA_STK_006 - Verify Stocks Liquidity More Detail Page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:21 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Stocks Liquidity More detail page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:21 pm</td>
+        <td>
+          <b>[PASS]</b> Portfolio Analysis screen is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:21 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks tab is active
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:21 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Liquidity
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:22 pm</td>
+        <td>
+          <b>[STEP]</b> Stocks Liquidity More clicked using More locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Liquidity detail page title
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text on current screen | Label: Investor name on Liquidity detail page | Expected/Matched Text: Vinit Sharma
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Need Cash CTA | Expected/Matched Text: Need Cash? Know which stocks to sell
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Sellable in 1 day section | Expected/Matched Text: Sellable in 1 day
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Zydus Lifesciences | Expected/Matched Text: Zydus Lifesciences
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: HDFC Bank | Expected/Matched Text: HDFC Bank
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Natco Pharma | Expected/Matched Text: Natco Pharma
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Tinna Rubber And Infrastructure | Expected/Matched Text: Tinna Rubber And Infrastructure
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Styrenix Performance Materials | Expected/Matched Text: Styrenix Performance Materials
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Adani Ports and Special Economic Zone | Expected/Matched Text: Adani Ports and Special Economic Zone
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Cipla | Expected/Matched Text: Cipla
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:25 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: NMDC | Expected: NMDC | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:26 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after deep scroll | Label: NMDC | Expected/Matched Text: NMDC
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:26 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Vedant Fashions | Expected: Vedant Fashions | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:27 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Vedant Fashions | Expected: Vedant Fashions | Attempt: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:29 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after deep scroll | Label: Vedant Fashions | Expected/Matched Text: Vedant Fashions
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:29 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Chambal Fertilisers and Chemicals | Expected/Matched Text: Chambal Fertilisers and Chemicals
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:29 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: NTPC | Expected: NTPC | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:30 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after deep scroll | Label: NTPC | Expected/Matched Text: NTPC
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:30 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Andhra Paper | Expected: Andhra Paper | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:31 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after deep scroll | Label: Andhra Paper | Expected/Matched Text: Andhra Paper
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:31 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Dreamfolks Services | Expected/Matched Text: Dreamfolks Services
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:31 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Bandhan Bank | Expected: Bandhan Bank | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:33 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Bandhan Bank | Expected: Bandhan Bank | Attempt: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:34 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after deep scroll | Label: Bandhan Bank | Expected/Matched Text: Bandhan Bank
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:34 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text | Label: Castrol India | Expected/Matched Text: Castrol India
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:34 pm</td>
+        <td>
+          <b>[STEP]</b> Deep scroll down to find text | Label: Kothari Sugars And Chemicals | Expected: Kothari Sugars And Chemicals | Attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:35 pm</td>
+        <td>
+          <b>[PASS]</b> Verified text after deep scroll | Label: Kothari Sugars And Chemicals | Expected/Matched Text: Kothari Sugars And Chemicals
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>4:38:35 pm</td>
+        <td>
+          <b>[STEP]</b> Back from Stocks Liquidity detail page coordinate fallback tapped at x=84, y=149
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:38 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Stocks tab after back from Liquidity detail
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:38 pm</td>
+        <td>
+          <b>[PASS]</b> Verified: Liquidity section after back
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:38 pm</td>
+        <td>
+          <b>[PASS]</b> Stocks Liquidity More detail page validated
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:38 pm</td>
+        <td>
+          <span class='badge white-text green'>PA_STK_006 - Stocks Liquidity More detail page validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:38 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: PA_STK_006
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>4:38:38 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: PA_STK_006_VerifyLiquidityMoreDetailPage</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Jul 28, 2026 04:35:52 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Jul 28, 2026 04:38:39 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>21</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>3</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='87%'>
+<b>21</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='12%'><b>3</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='61%'><b>284</b> events passed</small></div>
+<div>
+<small data-tooltip='1%'><b>9</b> events failed,
+<b data-tooltip='%'>170</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"PA_SUM_001 - Open Portfolio Analysis Summary from Hub":17.102,"PA_SUM_002 - Change Investor to Manish Khatri":7.151,"PA_SUM_003 - Verify Overall Portfolio Performance Card":0.472,"PA_SUM_004 - Verify Benchmark Dropdown Options":5.313,"PA_SUM_005 - Verify Portfolio Profile Card":0.383,"PA_SUM_006 - Verify Portfolio Profile More Detail Page":5.398,"PA_SUM_007 - Verify Retirement Projection Card":5.679,"PA_SUM_008 - Verify Withdrawal Income Card":4.397,"PA_SUM_009 - Verify Risk Profile Card":2.41,"PA_SUM_010 - Verify Asset Mix Card":5.467,"PA_SUM_011 - Verify Asset Mix Composition Sections":6.529,"PA_FUN_001 - Navigate to Funds Tab":9.071,"PA_FUN_002 - Change Investor to Lalit Kumar Khatri":7.921,"PA_FUN_003 - Verify Fund Portfolio Performance Card":2.455,"PA_FUN_004 - Verify Fund Action Cards":5.922,"PA_FUN_005 - Verify Funds Portfolio Insights Section":2.921,"PA_FUN_006 - Verify Funds Liquidity Section":0.697,"PA_FUN_007 - Verify Funds Liquidity More Detail Page":24.836,"PA_STK_001 - Prepare Stocks Flow from Funds":22.805,"PA_STK_002 - Verify Investor Vinit Sharma":0.474,"PA_STK_003 - Verify Stock Portfolio Performance Card":0.518,"PA_STK_004 - Verify Stocks Portfolio Insights Section":0.583,"PA_STK_005 - Verify Stocks Liquidity Section":2.847,"PA_STK_006 - Verify Stocks Liquidity More Detail Page":17.574
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td>Advisor App</td>
+</tr>
+<tr>
+<td>Machine</td>
+<td>Local</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>User</td>
+<td>manishkhatri</td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>Android</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>Appium UiAutomator2</td>
+</tr>
+<tr>
+<td>Framework</td>
+<td>TestNG + Maven + ExtentReports</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 21,
+failParent: 3,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 284,
+failEvents: 9,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 170
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

@@ -1,0 +1,4060 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Advisor App Automation Report</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report dark">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Advisor App Test Automation Report</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Jul 21, 2026 02:28:13 pm</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_001 - Open Manage SIP/SWP from Hub</p>
+            <p class="text-sm">
+              <span>2:28:20 pm</span> / <span>00:01:02:052</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_001 - Open Manage SIP/SWP from Hub</h5>
+<span class='badge badge-success'>07.21.2026 2:28:20 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:29:22 pm</span>
+<span class='badge badge-default'>00:01:02:052</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:20 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_001<br><b>Scenario:</b> Open Manage SIP/SWP from Hub<br><b>Validation:</b> Open Hub, tap Manage SIP/SWP, and verify Your SIPs/SWPs page opens
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:20 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Open Hub, tap Manage SIP/SWP, and verify Your SIPs/SWPs page opens
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:20 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_001 - Open Manage SIP/SWP from Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:20 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Advisor login/session
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:20 pm</td>
+        <td>
+          <b>[STEP]</b> Checking app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:20 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for app to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:26 pm</td>
+        <td>
+          <b>[STEP]</b> Email login screen indicator found: visible element
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:26 pm</td>
+        <td>
+          <b>[STEP]</b> Email login screen detected. Starting Email + OTP login.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:26 pm</td>
+        <td>
+          <b>[STEP]</b> Starting Email + OTP login flow for: l***0@gmail.com
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:26 pm</td>
+        <td>
+          <b>[STEP]</b> Entering email
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:26 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for email/phone input field
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:28 pm</td>
+        <td>
+          <b>[STEP]</b> Email/Phone entered | Requested: la***@gmail.com | Actual field value: la***@gmail.com
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:28:29 pm</td>
+        <td>
+          <b>[PASS]</b> Email/Phone field filled successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:29 pm</td>
+        <td>
+          <b>[STEP]</b> Clicking Next after email entry
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:29 pm</td>
+        <td>
+          <b>[STEP]</b> Clicking Next on login screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:30 pm</td>
+        <td>
+          <b>[STEP]</b> Next clicked on login screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:31 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for OTP screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:28:31 pm</td>
+        <td>
+          <b>[PASS]</b> OTP screen loaded successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:31 pm</td>
+        <td>
+          <b>[STEP]</b> OTP auto-fetch is enabled. Fetching OTP from email.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:31 pm</td>
+        <td>
+          <b>[STEP]</b> Connecting to OTP email inbox using IMAP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:28:34 pm</td>
+        <td>
+          <b>[PASS]</b> Connected to OTP email inbox successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:46 pm</td>
+        <td>
+          <b>[STEP]</b> OTP email not found yet. Waiting before retry.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:52 pm</td>
+        <td>
+          <b>[STEP]</b> Recent OTP email found. Subject: One Time Password for Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:28:53 pm</td>
+        <td>
+          <b>[PASS]</b> OTP fetched successfully from email
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:28:54 pm</td>
+        <td>
+          <b>[PASS]</b> OTP auto-fetched successfully from email
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:54 pm</td>
+        <td>
+          <b>[STEP]</b> Entering OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:28:59 pm</td>
+        <td>
+          <b>[PASS]</b> OTP entered successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:28:59 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Verify OTP button
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:02 pm</td>
+        <td>
+          <b>[STEP]</b> Verify OTP button not found. App may auto-verify OTP.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:02 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting briefly after OTP entry
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:07 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for valid post-login screen after OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:13 pm</td>
+        <td>
+          <b>[STEP]</b> Logged-in tab indicator found: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:13 pm</td>
+        <td>
+          <b>[PASS]</b> Logged-in bottom tabs loaded after OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:13 pm</td>
+        <td>
+          <b>[PASS]</b> Email + OTP login flow completed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:13 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:13 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: openManageSipSwpFromHub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:13 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Manage SIP/SWP from Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:17 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Hub bottom tab (MSS_FAST_V1)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:17 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: Hub bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:18 pm</td>
+        <td>
+          <b>[PASS]</b> Hub bottom tab tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:18 pm</td>
+        <td>
+          <b>[STEP]</b> Finding and opening Manage SIP/SWP tile from Hub (MSS_FAST_V1)
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:18 pm</td>
+        <td>
+          <b>[STEP]</b> Searching Manage SIP/SWP tile on Hub | fastAttempt=1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:21 pm</td>
+        <td>
+          <b>[STEP]</b> Searching Manage SIP/SWP tile on Hub | fastAttempt=2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping Manage SIP/SWP Hub tile using fresh locator | readable=Manage your SIPs and SWPs | x=663 | y=339
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <b>[PASS]</b> Manage SIP/SWP tile opened using fresh locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <b>[PASS]</b> Your SIPs/SWPs listing page is ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <b>[PASS]</b> Manage SIP/SWP listing page opened successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_001 - Manage SIP/SWP opened successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_001 - Open Manage SIP/SWP from Hub completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_001_OpenManageSipSwpFromHub</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_002 - Verify SIP/SWP listing page</p>
+            <p class="text-sm">
+              <span>2:29:22 pm</span> / <span>00:00:01:786</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_002 - Verify SIP/SWP listing page</h5>
+<span class='badge badge-success'>07.21.2026 2:29:22 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:29:24 pm</span>
+<span class='badge badge-default'>00:00:01:786</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_002<br><b>Scenario:</b> Verify SIP/SWP listing page<br><b>Validation:</b> Validate Your SIPs/SWPs title, SIP/SWP tabs, investor dropdown and listing/empty-state data
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Validate Your SIPs/SWPs title, SIP/SWP tabs, investor dropdown and listing/empty-state data
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_002 - Verify SIP/SWP listing page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: verifySipSwpListingPage
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Your SIPs/SWPs listing page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:22 pm</td>
+        <td>
+          <b>[PASS]</b> Your SIPs/SWPs listing page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:23 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Manage SIP/SWP page title: Your SIPs/SWPs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:23 pm</td>
+        <td>
+          <b>Validated text/value:</b> Manage SIP/SWP page title = Your SIPs/SWPs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:23 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SIP tab: SIP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:23 pm</td>
+        <td>
+          <b>Validated text/value:</b> SIP tab = SIP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:23 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SWP tab: SWP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:23 pm</td>
+        <td>
+          <b>Validated text/value:</b> SWP tab = SWP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Investor dropdown/value: Seema Khatri, Shows investor selection list
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>Validated text/value:</b> Investor dropdown/value = Seema Khatri, Shows investor selection list
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>[PASS]</b> Investor dropdown/value visible on Manage SIP/SWP page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>[PASS]</b> Your SIPs/SWPs listing page validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_002 - SIP/SWP listing page validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_002 - Verify SIP/SWP listing page completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_002_VerifySipSwpListingPage</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_003 - Change investor from dropdown</p>
+            <p class="text-sm">
+              <span>2:29:24 pm</span> / <span>00:00:04:472</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_003 - Change investor from dropdown</h5>
+<span class='badge badge-success'>07.21.2026 2:29:24 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:29:29 pm</span>
+<span class='badge badge-default'>00:00:04:472</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_003<br><b>Scenario:</b> Change investor from dropdown<br><b>Validation:</b> Open Choose Investor bottom sheet and select Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Open Choose Investor bottom sheet and select Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_003 - Change investor from dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: changeInvestorFromDropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>[STEP]</b> Changing investor from Manage SIP/SWP dropdown: Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>[PASS]</b> Your SIPs/SWPs listing page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:24 pm</td>
+        <td>
+          <b>[STEP]</b> Opening investor dropdown on Manage SIP/SWP page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:25 pm</td>
+        <td>
+          <b>[STEP]</b> Clicking investor dropdown directly using accessibility locator | readable=Seema Khatri, Shows investor selection list | bounds=org.openqa.selenium.Rectangle@12a80a
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:27 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping investor dropdown hotspot from located accessibility bounds | readable=Seema Khatri, Shows investor selection list | x=842 | y=410
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:28 pm</td>
+        <td>
+          <b>[PASS]</b> Investor dropdown opened using located accessibility hotspot: Seema Khatri, Shows investor selection list
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:28 pm</td>
+        <td>
+          <b>[STEP]</b> Selecting investor from sheet: Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <b>[PASS]</b> Investor tapped from sheet: Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <b>[PASS]</b> Your SIPs/SWPs listing page is ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <b>[PASS]</b> Investor selected from Manage SIP/SWP dropdown: Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Selected investor: Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <b>Validated text/value:</b> Selected investor = Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_003 - Investor dropdown validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_003 - Change investor from dropdown completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_003_ChangeInvestorFromDropdown</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_004 - Verify SIP card data</p>
+            <p class="text-sm">
+              <span>2:29:29 pm</span> / <span>00:00:03:151</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_004 - Verify SIP card data</h5>
+<span class='badge badge-success'>07.21.2026 2:29:29 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:29:32 pm</span>
+<span class='badge badge-default'>00:00:03:151</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_004<br><b>Scenario:</b> Verify SIP card data<br><b>Validation:</b> Validate visible SIP card fund name, amount pattern and tag if exposed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Validate visible SIP card fund name, amount pattern and tag if exposed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_004 - Verify SIP card data
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: verifySipCardData
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:29 pm</td>
+        <td>
+          <b>[STEP]</b> Validating SIP card data on listing page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:30 pm</td>
+        <td>
+          <b>[PASS]</b> Your SIPs/SWPs listing page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:30 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: SIP tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SIP card fund: ICICI Prudential Value Direct-Growth
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>Validated text/value:</b> SIP card fund = ICICI Prudential Value Direct-Growth
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SIP card amount: ₹ 1,000/month
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>Validated text/value:</b> SIP card amount = ₹ 1,000/month
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SIP card schedule: 11th of every month
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>Validated text/value:</b> SIP card schedule = 11th of every month
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SIP card tag: External
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>Validated text/value:</b> SIP card tag = External
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[PASS]</b> SIP card data validated successfully: SipCardData{fundName='ICICI Prudential Value Direct-Growth', amount='₹ 1,000/month', schedule='11th of every month', tag='External'}
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_004 - SIP card data validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_004 - Verify SIP card data completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_004_VerifySipCardData</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_005 - Open SIP details and validate details</p>
+            <p class="text-sm">
+              <span>2:29:32 pm</span> / <span>00:00:04:649</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_005 - Open SIP details and validate details</h5>
+<span class='badge badge-success'>07.21.2026 2:29:32 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:29:37 pm</span>
+<span class='badge badge-default'>00:00:04:649</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_005<br><b>Scenario:</b> Open SIP details and validate details<br><b>Validation:</b> Open first visible SIP card and validate SIP details page with live value capture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Open first visible SIP card and validate SIP details page with live value capture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_005 - Open SIP details and validate details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: openSipDetailsAndValidateDetails
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[STEP]</b> Opening SIP details and validating details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[PASS]</b> Your SIPs/SWPs listing page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: SIP tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:32 pm</td>
+        <td>
+          <b>[STEP]</b> Opening first visible SIP card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:34 pm</td>
+        <td>
+          <b>[PASS]</b> SIP card candidate found using fund title: ICICI Prudential Value Direct-Growth
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>[PASS]</b> SIP details page is ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>[STEP]</b> Validating SIP details page with strict live value mapping
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details fund: ICICI Prudential Value Direct-Growth
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details fund = ICICI Prudential Value Direct-Growth
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details Investor: Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details Investor = Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details Folio No.: 40704864
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details Folio No. = 40704864
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details Amount: ₹ 1,000
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details Amount = ₹ 1,000
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details Frequency: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details Frequency = Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details Instalments: 9/1000 Completed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details Instalments = 9/1000 Completed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - View past instalments link: View past instalments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>Validated text/value:</b> View past instalments link = View past instalments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:36 pm</td>
+        <td>
+          <b>[STEP]</b> Validating action buttons visible only. Cancel SIP will not be tapped.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SIP action button: Invest more visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>Validated text/value:</b> SIP action button = Invest more visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SIP action button: Cancel SIP visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>Validated text/value:</b> SIP action button = Cancel SIP visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[PASS]</b> SIP details page validated with strict live values
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[PASS]</b> SIP details page opened and validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_005 - SIP details validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_005 - Open SIP details and validate details completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_005_OpenSipDetailsAndValidateDetails</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_006 - Open past investments and validate Transaction History</p>
+            <p class="text-sm">
+              <span>2:29:37 pm</span> / <span>00:00:05:255</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_006 - Open past investments and validate Transaction History</h5>
+<span class='badge badge-success'>07.21.2026 2:29:37 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:29:42 pm</span>
+<span class='badge badge-default'>00:00:05:255</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_006<br><b>Scenario:</b> Open past investments and validate Transaction History<br><b>Validation:</b> Tap View past instalments/investments and validate Transaction History tabs/filters
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Tap View past investments and validate Transaction History tabs/filters
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_006 - Open past investments and validate Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: openPastInvestmentsAndValidateTransactionHistory
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[STEP]</b> Opening View past investments and validating Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[PASS]</b> SIP details page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: View past instalments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:37 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: View past instalments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:41 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:41 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction History title: Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:41 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction History title = Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:41 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Your Orders tab: Your Orders
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:41 pm</td>
+        <td>
+          <b>Validated text/value:</b> Your Orders tab = Your Orders
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:41 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - All Transactions tab: All Transactions
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:41 pm</td>
+        <td>
+          <b>Validated text/value:</b> All Transactions tab = All Transactions
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:41 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Funds filter tab: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:41 pm</td>
+        <td>
+          <b>Validated text/value:</b> Funds filter tab = Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Stocks &amp; ETFs filter tab: Stocks &amp; ETFs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>Validated text/value:</b> Stocks & ETFs filter tab = Stocks & ETFs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - NPS filter tab: NPS
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>Validated text/value:</b> NPS filter tab = NPS
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Bonds &amp; FDs filter tab: Bonds &amp; FDs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>Validated text/value:</b> Bonds & FDs filter tab = Bonds & FDs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page opened and validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_006 - Transaction History validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_006 - Open past investments and validate Transaction History completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_006_OpenPastInvestmentsAndValidateTransactionHistory</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_007 - Return back to SIP details</p>
+            <p class="text-sm">
+              <span>2:29:42 pm</span> / <span>00:00:05:517</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_007 - Return back to SIP details</h5>
+<span class='badge badge-success'>07.21.2026 2:29:42 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:29:47 pm</span>
+<span class='badge badge-default'>00:00:05:517</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_007<br><b>Scenario:</b> Return back to SIP details<br><b>Validation:</b> Press back from Transaction History and verify SIP details page is restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Press back from Transaction History and verify SIP details page is restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_007 - Return back to SIP details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: returnBackToSipDetails
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:42 pm</td>
+        <td>
+          <b>[STEP]</b> Returning back to SIP details page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:47 pm</td>
+        <td>
+          <b>[PASS]</b> Returned back to SIP details page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:47 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_007 - Returned back to SIP details successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:47 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_007 - Return back to SIP details completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:47 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_007_ReturnBackToSipDetails</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="8"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_008 - Return back to SIP/SWP listing</p>
+            <p class="text-sm">
+              <span>2:29:47 pm</span> / <span>00:00:01:202</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_008 - Return back to SIP/SWP listing</h5>
+<span class='badge badge-success'>07.21.2026 2:29:47 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:29:49 pm</span>
+<span class='badge badge-default'>00:00:01:202</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:47 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_008<br><b>Scenario:</b> Return back to SIP/SWP listing<br><b>Validation:</b> Press back from SIP details and verify Your SIPs/SWPs listing page is restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:47 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Press back from SIP details and verify Your SIPs/SWPs listing page is restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:47 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_008 - Return back to SIP/SWP listing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:47 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: returnBackToSipSwpListing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:47 pm</td>
+        <td>
+          <b>[STEP]</b> Returning back to Your SIPs/SWPs listing page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <b>[PASS]</b> Returned back to Your SIPs/SWPs listing page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_008 - Returned back to SIP/SWP listing successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_008 - Return back to SIP/SWP listing completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_008_ReturnBackToSipSwpListing</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="9"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_009 - Verify SWP tab switch</p>
+            <p class="text-sm">
+              <span>2:29:49 pm</span> / <span>00:00:02:564</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_009 - Verify SWP tab switch</h5>
+<span class='badge badge-success'>07.21.2026 2:29:49 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:29:51 pm</span>
+<span class='badge badge-default'>00:00:02:564</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=9</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_009<br><b>Scenario:</b> Verify SWP tab switch<br><b>Validation:</b> Tap SWP tab and verify SWP tab/content state without hardcoded data
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Tap SWP tab and verify SWP tab/content state without hardcoded data
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_009 - Verify SWP tab switch
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: verifySwpTabSwitch
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <b>[STEP]</b> Validating SWP tab switch
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <b>[PASS]</b> Your SIPs/SWPs listing page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: SWP tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SWP selected/visible tab: SWP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:49 pm</td>
+        <td>
+          <b>Validated text/value:</b> SWP selected/visible tab = SWP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SWP tab visible content: SWP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <b>Validated text/value:</b> SWP tab visible content = SWP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <b>[PASS]</b> SWP tab switch validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_009 - SWP tab switch validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_009 - Verify SWP tab switch completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_009_VerifySwpTabSwitch</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="10"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_010 - Verify action buttons visible only</p>
+            <p class="text-sm">
+              <span>2:29:51 pm</span> / <span>00:00:06:601</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_010 - Verify action buttons visible only</h5>
+<span class='badge badge-success'>07.21.2026 2:29:51 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:29:58 pm</span>
+<span class='badge badge-default'>00:00:06:601</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=10</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_010<br><b>Scenario:</b> Verify action buttons visible only<br><b>Validation:</b> Open SIP details again and validate Invest more and Cancel SIP buttons are visible only. Cancel SIP is not tapped.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Open SIP details again and validate Invest more and Cancel SIP buttons are visible only. Cancel SIP is not tapped.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_010 - Verify action buttons visible only
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: verifyActionButtonsVisibleOnly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <b>[STEP]</b> Validating SIP action buttons visibility only
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <b>[PASS]</b> Your SIPs/SWPs listing page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:51 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: SIP tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:52 pm</td>
+        <td>
+          <b>[STEP]</b> Opening first visible SIP card
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:53 pm</td>
+        <td>
+          <b>[PASS]</b> SIP card candidate found using fund title: ICICI Prudential Value Direct-Growth
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> SIP details page is ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[STEP]</b> Validating action buttons visible only. Cancel SIP will not be tapped.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SIP action button: Invest more visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Validated text/value:</b> SIP action button = Invest more visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SIP action button: Cancel SIP visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Validated text/value:</b> SIP action button = Cancel SIP visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> SIP action buttons are visible. No destructive action tapped.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_010 - SIP action buttons visibility validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_010 - Verify action buttons visible only completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_010_VerifyActionButtonsVisibleOnly</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="11"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_011 - Verify strict SIP details field mapping</p>
+            <p class="text-sm">
+              <span>2:29:58 pm</span> / <span>00:00:00:054</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_011 - Verify strict SIP details field mapping</h5>
+<span class='badge badge-success'>07.21.2026 2:29:58 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:29:58 pm</span>
+<span class='badge badge-default'>00:00:00:054</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=11</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_011<br><b>Scenario:</b> Verify strict SIP details field mapping<br><b>Validation:</b> Validate Investor, Folio No., Amount, Frequency, No of instalments, View past instalments, Invest more and Cancel SIP with correct value mapping
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Strictly map SIP details labels to their correct values
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_011 - Verify strict SIP details field mapping
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: verifyStrictSipDetailsFieldMapping
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[STEP]</b> Validating strict SIP details field mapping
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> SIP details page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details fund: ICICI Prudential Value Direct-Growth
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details fund = ICICI Prudential Value Direct-Growth
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details Investor: Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details Investor = Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details Folio No.: 40704864
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details Folio No. = 40704864
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details Amount: ₹ 1,000
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details Amount = ₹ 1,000
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details Frequency: Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details Frequency = Monthly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Strict SIP details Instalments: 9/1000 Completed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Validated text/value:</b> Strict SIP details Instalments = 9/1000 Completed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - View past instalments link: View past instalments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Validated text/value:</b> View past instalments link = View past instalments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[STEP]</b> Validating action buttons visible only. Cancel SIP will not be tapped.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SIP action button: Invest more visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Validated text/value:</b> SIP action button = Invest more visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - SIP action button: Cancel SIP visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Validated text/value:</b> SIP action button = Cancel SIP visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Strict SIP details field mapping validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_011 - Strict SIP details field mapping validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_011 - Verify strict SIP details field mapping completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_011_VerifyStrictSipDetailsFieldMapping</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="12"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_012 - Verify past instalments list and applied filter</p>
+            <p class="text-sm">
+              <span>2:29:58 pm</span> / <span>00:00:05:114</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_012 - Verify past instalments list and applied filter</h5>
+<span class='badge badge-success'>07.21.2026 2:29:58 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:30:03 pm</span>
+<span class='badge badge-default'>00:00:05:114</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=12</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_012<br><b>Scenario:</b> Verify past instalments list and applied filter<br><b>Validation:</b> Open View past instalments and verify Transaction History controls, applied SIP/fund/folio filters and first visible SIP transaction row
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Verify past instalments list, applied filters and first visible transaction row
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_012 - Verify past instalments list and applied filter
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: verifyPastInstalmentsListAndAppliedFilter
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[STEP]</b> Validating past instalments list, applied filter and transaction row
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> SIP details page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: View past instalments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:29:58 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: View past instalments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction History title: Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction History title = Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Your Orders tab: Your Orders
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>Validated text/value:</b> Your Orders tab = Your Orders
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - All Transactions tab: All Transactions
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>Validated text/value:</b> All Transactions tab = All Transactions
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Funds filter tab: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>Validated text/value:</b> Funds filter tab = Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Stocks &amp; ETFs filter tab: Stocks &amp; ETFs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>Validated text/value:</b> Stocks & ETFs filter tab = Stocks & ETFs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - NPS filter tab: NPS
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>Validated text/value:</b> NPS filter tab = NPS
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Bonds &amp; FDs filter tab: Bonds &amp; FDs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>Validated text/value:</b> Bonds & FDs filter tab = Bonds & FDs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:00 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction History investor dropdown/value: Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction History investor dropdown/value = Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Update Transactions action: Update Transactions
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>Validated text/value:</b> Update Transactions action = Update Transactions
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Sort action: Sort
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>Validated text/value:</b> Sort action = Sort
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Filters action: Filters
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>Validated text/value:</b> Filters action = Filters
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Applied SIP fund filter: ICICI Pru Value Dir-G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>Validated text/value:</b> Applied SIP fund filter = ICICI Pru Value Dir-G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Past instalment row date: 11 June, 2026
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>Validated text/value:</b> Past instalment row date = 11 June, 2026
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Past instalment row amount: ₹999.95
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>Validated text/value:</b> Past instalment row amount = ₹999.95
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Past instalment row source: Imported
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>Validated text/value:</b> Past instalment row source = Imported
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Past instalment row type: SIP Investment
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>Validated text/value:</b> Past instalment row type = SIP Investment
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Past instalment row fund: ICICI Pru Value Dir-G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>Validated text/value:</b> Past instalment row fund = ICICI Pru Value Dir-G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Past instalments list and applied filter validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_012 - Past instalments list and applied filter validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_012 - Verify past instalments list and applied filter completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_012_VerifyPastInstalmentsListAndAppliedFilter</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="13"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_013 - Open first past instalment and validate transaction details</p>
+            <p class="text-sm">
+              <span>2:30:03 pm</span> / <span>00:00:05:388</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_013 - Open first past instalment and validate transaction details</h5>
+<span class='badge badge-success'>07.21.2026 2:30:03 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:30:08 pm</span>
+<span class='badge badge-default'>00:00:05:388</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=13</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_013<br><b>Scenario:</b> Open first past instalment and validate transaction details<br><b>Validation:</b> Open first visible SIP transaction row and validate amount, investor, transaction type, date, folio, units/source details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Open first past instalment and validate transaction detail page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_013 - Open first past instalment and validate transaction details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: openFirstPastInstalmentAndValidateTransactionDetails
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[STEP]</b> Opening first past instalment and validating transaction details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:03 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:05 pm</td>
+        <td>
+          <b>[PASS]</b> Past instalment transaction row candidate found: 11 June, 2026 Imported ICICI Pru Value Dir-G SIP Investment ₹999.95
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction detail page is ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail amount: ₹999.95
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail amount = ₹999.95
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail type: SIP Investment
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail type = SIP Investment
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail date: 11 June, 2026
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail date = 11 June, 2026
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail investor: Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail investor = Manish Khatri
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail folio: 40704864
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail folio = 40704864
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail price per unit label: Price per unit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail price per unit label = Price per unit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail units: 17.235
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail units = 17.235
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail source: Imported
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail source = Imported
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail action button: Edit visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail action button = Edit visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail action button: Delete visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail action button = Delete visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> First past instalment transaction details validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_013 - First past instalment transaction details validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_013 - Open first past instalment and validate transaction details completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_013_OpenFirstPastInstalmentAndValidateTransactionDetails</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="14"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_014 - Verify transaction detail action buttons visible only</p>
+            <p class="text-sm">
+              <span>2:30:08 pm</span> / <span>00:00:00:101</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_014 - Verify transaction detail action buttons visible only</h5>
+<span class='badge badge-success'>07.21.2026 2:30:08 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:30:08 pm</span>
+<span class='badge badge-default'>00:00:00:101</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=14</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_014<br><b>Scenario:</b> Verify transaction detail action buttons visible only<br><b>Validation:</b> Verify Edit and Delete buttons are visible on transaction detail page but do not tap them
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Verify Edit/Delete visible only. No edit/delete action will be tapped.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_014 - Verify transaction detail action buttons visible only
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: verifyTransactionDetailActionButtonsVisibleOnly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[STEP]</b> Validating transaction detail Edit/Delete buttons visible only
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction detail page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail action button: Edit visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail action button = Edit visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction detail action button: Delete visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction detail action button = Delete visible only - not tapped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction detail action buttons are visible. Edit/Delete were not tapped.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_014 - Transaction detail action buttons visibility validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_014 - Verify transaction detail action buttons visible only completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_014_VerifyTransactionDetailActionButtonsVisibleOnly</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="15"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_015 - Return from transaction detail to SIP details</p>
+            <p class="text-sm">
+              <span>2:30:08 pm</span> / <span>00:00:04:218</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_015 - Return from transaction detail to SIP details</h5>
+<span class='badge badge-success'>07.21.2026 2:30:08 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:30:13 pm</span>
+<span class='badge badge-default'>00:00:04:218</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=15</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_015<br><b>Scenario:</b> Return from transaction detail to SIP details<br><b>Validation:</b> Press back from transaction detail/history and verify SIP details page is restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Return from transaction detail to SIP details page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_015 - Return from transaction detail to SIP details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: returnBackFromTransactionDetailToSipDetails
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[STEP]</b> Returning from transaction detail/history to real SIP details page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:08 pm</td>
+        <td>
+          <b>[STEP]</b> Currently on transaction detail. Pressing back to Transaction History | attempt=1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:11 pm</td>
+        <td>
+          <b>[STEP]</b> Currently on Transaction History. Pressing back to SIP details | attempt=2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <b>[PASS]</b> Real SIP details page is visible after returning from transaction detail/history
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_015 - Returned from transaction detail to SIP details successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_015 - Return from transaction detail to SIP details completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_015_ReturnBackFromTransactionDetailToSipDetails</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="16"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_016 - Verify Transaction History Sort bottom sheet</p>
+            <p class="text-sm">
+              <span>2:30:13 pm</span> / <span>00:00:07:886</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_016 - Verify Transaction History Sort bottom sheet</h5>
+<span class='badge badge-success'>07.21.2026 2:30:13 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:30:20 pm</span>
+<span class='badge badge-default'>00:00:07:886</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=16</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_016<br><b>Scenario:</b> Verify Transaction History Sort bottom sheet<br><b>Validation:</b> Open Sort from Transaction History, validate sort options/actions and close it safely
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Open Sort bottom sheet from Transaction History and close it safely
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_016 - Verify Transaction History Sort bottom sheet
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: verifyTransactionHistorySortBottomSheet
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Transaction History Sort bottom sheet
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <b>[PASS]</b> SIP details page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: View past instalments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:13 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: View past instalments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:14 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:14 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Sort control from Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:16 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:17 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: Transaction History Sort control | accessibilityId=Sort
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:19 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History Sort UI is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:19 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction History Sort header: Sort By
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:19 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction History Sort header = Sort By
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:19 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction History Sort option: Date
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:19 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction History Sort option = Date
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:19 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction History Sort action: Apply
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:19 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction History Sort action = Apply
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:19 pm</td>
+        <td>
+          <b>[STEP]</b> Closing Sort bottom sheet safely and verifying Transaction History is restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:19 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: Sort bottom sheet close/apply action | accessibilityId=Apply
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:20 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History restored after closing Sort bottom sheet
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:20 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History Sort bottom sheet validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:20 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_016 - Transaction History Sort bottom sheet validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:20 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_016 - Verify Transaction History Sort bottom sheet completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:20 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_016_VerifyTransactionHistorySortBottomSheet</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="17"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_017 - Verify Transaction History Filters screen</p>
+            <p class="text-sm">
+              <span>2:30:20 pm</span> / <span>00:00:13:763</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_017 - Verify Transaction History Filters screen</h5>
+<span class='badge badge-success'>07.21.2026 2:30:20 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:30:34 pm</span>
+<span class='badge badge-default'>00:00:13:763</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=17</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:20 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_017<br><b>Scenario:</b> Verify Transaction History Filters screen<br><b>Validation:</b> Open Filters/Add Filter from Transaction History, validate filter categories/actions and return safely
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:20 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Open Filters screen from Transaction History and verify filter controls
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:20 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_017 - Verify Transaction History Filters screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:20 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: verifyTransactionHistoryFiltersScreen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:20 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Transaction History Filters/Add Filter screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:23 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:23 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Filters control from Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:23 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:23 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: Transaction History Filters control | accessibilityId=Filters
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:31 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History Filters/Add Filter screen is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:31 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction History Filters title: Add Filter
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:31 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction History Filters title = Add Filter
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:31 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction History Filters category: Date
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:31 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction History Filters category = Date
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:31 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Transaction History Filters action: Apply Filters
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:31 pm</td>
+        <td>
+          <b>Validated text/value:</b> Transaction History Filters action = Apply Filters
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:31 pm</td>
+        <td>
+          <b>[STEP]</b> Returning from Filters screen to Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History is visible after returning from Filters screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History Filters screen validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_017 - Transaction History Filters screen validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_017 - Verify Transaction History Filters screen completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_017_VerifyTransactionHistoryFiltersScreen</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="18"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_018 - Verify Update Transactions page and return</p>
+            <p class="text-sm">
+              <span>2:30:34 pm</span> / <span>00:00:06:413</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_018 - Verify Update Transactions page and return</h5>
+<span class='badge badge-success'>07.21.2026 2:30:34 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:30:41 pm</span>
+<span class='badge badge-default'>00:00:06:413</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=18</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_018<br><b>Scenario:</b> Verify Update Transactions page and return<br><b>Validation:</b> Open Update Transactions from Transaction History, validate update/import page and return without starting import
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Open Update Transactions page and return without starting import
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_018 - Verify Update Transactions page and return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: verifyUpdateTransactionsPageAndReturn
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Update Transactions page and safe return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Update Transactions from Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:34 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: Transaction History Update Transactions control | accessibilityId=Update Transactions
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:38 pm</td>
+        <td>
+          <b>[PASS]</b> Update Transactions page is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:38 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Update Transactions page title: Update Transactions
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:38 pm</td>
+        <td>
+          <b>Validated text/value:</b> Update Transactions page title = Update Transactions
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:38 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Update Transactions visible option: Import your funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:38 pm</td>
+        <td>
+          <b>Validated text/value:</b> Update Transactions visible option = Import your funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:38 pm</td>
+        <td>
+          <b>[STEP]</b> Returning from Update Transactions page to Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History is visible after returning from Update Transactions page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>[PASS]</b> Update Transactions page validated successfully without starting import/update action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_018 - Update Transactions page validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_018 - Verify Update Transactions page and return completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_018_VerifyUpdateTransactionsPageAndReturn</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="19"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">MSS_019 - Verify Transaction History Sort apply</p>
+            <p class="text-sm">
+              <span>2:30:41 pm</span> / <span>00:00:05:730</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">MSS_019 - Verify Transaction History Sort apply</h5>
+<span class='badge badge-success'>07.21.2026 2:30:41 pm</span>
+<span class='badge badge-danger'>07.21.2026 2:30:46 pm</span>
+<span class='badge badge-default'>00:00:05:730</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=19</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>Module:</b> Manage SIP/SWP<br><b>Case ID:</b> MSS_019<br><b>Scenario:</b> Verify Transaction History Sort apply<br><b>Validation:</b> Open Sort, select a safe visible sort option when exposed, apply/done and verify transaction list remains valid
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>[STEP]</b> Validation: Apply a safe Sort option and verify Transaction History remains valid
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: MSS_019 - Verify Transaction History Sort apply
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>[STEP]</b> Executing page method: verifyTransactionHistorySortApply
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Transaction History Sort apply flow
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Sort control from Transaction History
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is already visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:41 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: Transaction History Sort control | accessibilityId=Sort
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:42 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History Sort UI is visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>2:30:42 pm</td>
+        <td>
+          <b>[STEP]</b> Selecting first safe Sort option if exposed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:43 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Selected Sort option: Date
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:43 pm</td>
+        <td>
+          <b>Validated text/value:</b> Selected Sort option = Date
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:43 pm</td>
+        <td>
+          <b>[PASS]</b> Tapped: Sort Done/Apply action | accessibilityId=Apply
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:44 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History page is ready
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Past instalment row date: 11 June, 2026
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>Validated text/value:</b> Past instalment row date = 11 June, 2026
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Past instalment row amount: ₹999.95
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>Validated text/value:</b> Past instalment row amount = ₹999.95
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Past instalment row source: Imported
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>Validated text/value:</b> Past instalment row source = Imported
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Past instalment row type: SIP Investment
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>Validated text/value:</b> Past instalment row type = SIP Investment
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text/value - Past instalment row fund: ICICI Pru Value Dir-G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>Validated text/value:</b> Past instalment row fund = ICICI Pru Value Dir-G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>[PASS]</b> Transaction History Sort apply flow validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <b>[PASS]</b> MSS_019 - Transaction History Sort apply validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <span class='badge white-text green'>MSS_019 - Verify Transaction History Sort apply completed successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>2:30:46 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: MSS_019_VerifyTransactionHistorySortApply</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Jul 21, 2026 02:28:13 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Jul 21, 2026 02:30:47 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>19</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>0</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'>
+<b>19</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='0%'><b>0</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='68%'><b>310</b> events passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> events failed,
+<b data-tooltip='%'>143</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"MSS_001 - Open Manage SIP/SWP from Hub":62.052,"MSS_002 - Verify SIP/SWP listing page":1.786,"MSS_003 - Change investor from dropdown":4.472,"MSS_004 - Verify SIP card data":3.151,"MSS_005 - Open SIP details and validate details":4.649,"MSS_006 - Open past investments and validate Transaction History":5.255,"MSS_007 - Return back to SIP details":5.517,"MSS_008 - Return back to SIP/SWP listing":1.202,"MSS_009 - Verify SWP tab switch":2.564,"MSS_010 - Verify action buttons visible only":6.601,"MSS_011 - Verify strict SIP details field mapping":0.054,"MSS_012 - Verify past instalments list and applied filter":5.114,"MSS_013 - Open first past instalment and validate transaction details":5.388,"MSS_014 - Verify transaction detail action buttons visible only":0.101,"MSS_015 - Return from transaction detail to SIP details":4.218,"MSS_016 - Verify Transaction History Sort bottom sheet":7.886,"MSS_017 - Verify Transaction History Filters screen":13.763,"MSS_018 - Verify Update Transactions page and return":6.413,"MSS_019 - Verify Transaction History Sort apply":5.73
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td>Advisor App</td>
+</tr>
+<tr>
+<td>Machine</td>
+<td>Local</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>User</td>
+<td>manishkhatri</td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>Android</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>Appium UiAutomator2</td>
+</tr>
+<tr>
+<td>Framework</td>
+<td>TestNG + Maven + ExtentReports</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 19,
+failParent: 0,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 310,
+failEvents: 0,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 143
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

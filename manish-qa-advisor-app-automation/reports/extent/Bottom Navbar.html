@@ -1,0 +1,2802 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Advisor App Automation Report</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report dark">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Advisor App Test Automation Report</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Jun 03, 2026 10:08:48 am</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">BN_001 - Verify Funds bottom tab opens</p>
+            <p class="text-sm">
+              <span>10:09:01 am</span> / <span>00:00:23:595</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">BN_001 - Verify Funds bottom tab opens</h5>
+<span class='badge badge-success'>06.03.2026 10:09:01 am</span>
+<span class='badge badge-danger'>06.03.2026 10:09:24 am</span>
+<span class='badge badge-default'>00:00:23:595</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:01 am</td>
+        <td>
+          Module: Bottom Nav Bar<br>Case ID: BN_001<br>Validation: Login/session check, tap Funds bottom tab, and validate Funds screen markers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:01 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: BN_001 - Verify Funds bottom tab opens
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:01 am</td>
+        <td>
+          <b>[STEP]</b> Checking app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:01 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for app to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:09 am</td>
+        <td>
+          <b>[STEP]</b> PIN screen indicator found: Enter your Advisor PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:09 am</td>
+        <td>
+          <b>[STEP]</b> PIN screen detected. Entering PIN once.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:09 am</td>
+        <td>
+          <b>[STEP]</b> Entering app PIN using strict keypad locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:10 am</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:12 am</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 9
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:13 am</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 7
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:15 am</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 5
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:15 am</td>
+        <td>
+          <b>[PASS]</b> PIN entered successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:15 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for logged-in bottom tabs after PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:17 am</td>
+        <td>
+          <b>[STEP]</b> Logged-in tab indicator found: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:17 am</td>
+        <td>
+          <b>[PASS]</b> Logged-in bottom tabs loaded after PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:17 am</td>
+        <td>
+          <b>[PASS]</b> Advisor login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:17 am</td>
+        <td>
+          <b>[STEP]</b> Validating Funds bottom tab navigation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:17 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:22 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Funds bottom tab by xpath contains
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:23 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Funds screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <b>[PASS]</b> Funds screen loaded | matchedMarkers=4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Outdated Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Update Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Rich Future Starts Here
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <b>[PASS]</b> Bottom nav labels are visible/present: Funds, Stocks, Portfolio, Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <b>[PASS]</b> Funds tab opened and screen markers validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <span class='badge white-text green'>BN_001 - Funds bottom tab validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: BN_001 - Funds bottom tab validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <span class='badge white-text green'>Test Passed: BN_001_VerifyFundsTabOpens</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">BN_002 - Verify Stocks bottom tab opens</p>
+            <p class="text-sm">
+              <span>10:09:24 am</span> / <span>00:00:03:658</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">BN_002 - Verify Stocks bottom tab opens</h5>
+<span class='badge badge-success'>06.03.2026 10:09:24 am</span>
+<span class='badge badge-danger'>06.03.2026 10:09:28 am</span>
+<span class='badge badge-default'>00:00:03:658</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          Module: Bottom Nav Bar<br>Case ID: BN_002<br>Validation: Tap Stocks bottom tab and validate Stock Advisor screen markers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: BN_002 - Verify Stocks bottom tab opens
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <b>[STEP]</b> Validating Stocks bottom tab navigation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:24 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Stocks
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:26 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Stocks bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:27 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Stocks screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <b>[PASS]</b> Stocks screen loaded | matchedMarkers=3
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Stock Advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Quick Search
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Search for a stock
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <b>[PASS]</b> Bottom nav labels are visible/present: Funds, Stocks, Portfolio, Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <b>[PASS]</b> Stocks tab opened and screen markers validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <span class='badge white-text green'>BN_002 - Stocks bottom tab validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: BN_002 - Stocks bottom tab validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <span class='badge white-text green'>Test Passed: BN_002_VerifyStocksTabOpens</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">BN_003 - Verify Portfolio bottom tab opens</p>
+            <p class="text-sm">
+              <span>10:09:28 am</span> / <span>00:00:04:877</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">BN_003 - Verify Portfolio bottom tab opens</h5>
+<span class='badge badge-success'>06.03.2026 10:09:28 am</span>
+<span class='badge badge-danger'>06.03.2026 10:09:33 am</span>
+<span class='badge badge-default'>00:00:04:877</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          Module: Bottom Nav Bar<br>Case ID: BN_003<br>Validation: Tap Portfolio bottom tab and validate portfolio summary screen markers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: BN_003 - Verify Portfolio bottom tab opens
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <b>[STEP]</b> Validating Portfolio bottom tab navigation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:28 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:30 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Portfolio bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:31 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Portfolio screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:32 am</td>
+        <td>
+          <b>[PASS]</b> Portfolio screen loaded | matchedMarkers=6
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:32 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Summary
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:32 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Stocks &amp; ETFs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:32 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: NPS
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:32 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Analysis
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:32 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Your Investments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:32 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:33 am</td>
+        <td>
+          <b>[PASS]</b> Bottom nav labels are visible/present: Funds, Stocks, Portfolio, Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:33 am</td>
+        <td>
+          <b>[PASS]</b> Portfolio tab opened and screen markers validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:33 am</td>
+        <td>
+          <span class='badge white-text green'>BN_003 - Portfolio bottom tab validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:33 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: BN_003 - Portfolio bottom tab validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:33 am</td>
+        <td>
+          <span class='badge white-text green'>Test Passed: BN_003_VerifyPortfolioTabOpens</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">BN_004 - Verify Hub bottom tab opens</p>
+            <p class="text-sm">
+              <span>10:09:33 am</span> / <span>00:00:02:449</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">BN_004 - Verify Hub bottom tab opens</h5>
+<span class='badge badge-success'>06.03.2026 10:09:33 am</span>
+<span class='badge badge-danger'>06.03.2026 10:09:35 am</span>
+<span class='badge badge-default'>00:00:02:449</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:33 am</td>
+        <td>
+          Module: Bottom Nav Bar<br>Case ID: BN_004<br>Validation: Tap Hub bottom tab and validate Hub/Profile/Mutual Funds markers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:33 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: BN_004 - Verify Hub bottom tab opens
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:33 am</td>
+        <td>
+          <b>[STEP]</b> Validating Hub bottom tab navigation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:33 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:34 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Hub bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Hub screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[PASS]</b> Hub screen loaded | matchedMarkers=7
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Profile
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Account Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Subscription Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Portfolio Settings
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: App Settings
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Investor Accounts
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Mutual Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[PASS]</b> Bottom nav labels are visible/present: Funds, Stocks, Portfolio, Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[PASS]</b> Hub tab opened and screen markers validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <span class='badge white-text green'>BN_004 - Hub bottom tab validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: BN_004 - Hub bottom tab validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <span class='badge white-text green'>Test Passed: BN_004_VerifyHubTabOpens</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">BN_005 - Verify all bottom nav labels are visible</p>
+            <p class="text-sm">
+              <span>10:09:35 am</span> / <span>00:00:05:984</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">BN_005 - Verify all bottom nav labels are visible</h5>
+<span class='badge badge-success'>06.03.2026 10:09:35 am</span>
+<span class='badge badge-danger'>06.03.2026 10:09:41 am</span>
+<span class='badge badge-default'>00:00:05:984</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          Module: Bottom Nav Bar<br>Case ID: BN_005<br>Validation: Validate bottom navigation labels: Funds, Stocks, Portfolio, Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: BN_005 - Verify all bottom nav labels are visible
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[STEP]</b> Validating all bottom navigation labels are visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:35 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:36 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Funds bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:37 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Funds screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:39 am</td>
+        <td>
+          <b>[PASS]</b> Funds screen loaded | matchedMarkers=4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:39 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:39 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Outdated Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:39 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Update Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:39 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Rich Future Starts Here
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:40 am</td>
+        <td>
+          <b>[PASS]</b> Validated text - Bottom nav label - Funds: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:40 am</td>
+        <td>
+          <b>[PASS]</b> Validated text - Bottom nav label - Stocks: Stocks
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:41 am</td>
+        <td>
+          <b>[PASS]</b> Validated text - Bottom nav label - Portfolio: Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:41 am</td>
+        <td>
+          <b>[PASS]</b> Validated text - Bottom nav label - Hub: Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:41 am</td>
+        <td>
+          <b>[PASS]</b> All bottom navigation labels validated successfully: Funds, Stocks, Portfolio, Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:41 am</td>
+        <td>
+          <span class='badge white-text green'>BN_005 - All bottom nav labels validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:41 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: BN_005 - All bottom nav labels validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:41 am</td>
+        <td>
+          <span class='badge white-text green'>Test Passed: BN_005_VerifyAllBottomNavLabelsVisible</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">BN_006 - Verify active tab/content changes after each tap</p>
+            <p class="text-sm">
+              <span>10:09:41 am</span> / <span>00:00:12:492</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">BN_006 - Verify active tab/content changes after each tap</h5>
+<span class='badge badge-success'>06.03.2026 10:09:41 am</span>
+<span class='badge badge-danger'>06.03.2026 10:09:54 am</span>
+<span class='badge badge-default'>00:00:12:492</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:41 am</td>
+        <td>
+          Module: Bottom Nav Bar<br>Case ID: BN_006<br>Validation: Tap Funds, Stocks, Portfolio, and Hub; validate content changes and correct screen markers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:41 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: BN_006 - Verify active tab/content changes after each tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:41 am</td>
+        <td>
+          <b>[STEP]</b> Validating screen/content changes after each bottom tab tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:41 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:42 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Funds bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:44 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Funds screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:44 am</td>
+        <td>
+          <b>[PASS]</b> Funds screen loaded | matchedMarkers=4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:44 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:44 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Outdated Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:44 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Update Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:44 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Rich Future Starts Here
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:45 am</td>
+        <td>
+          <b>[PASS]</b> Active tab validation checkpoint: Funds screen markers detected
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:45 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Stocks
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:46 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Stocks bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:48 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Stocks screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:48 am</td>
+        <td>
+          <b>[PASS]</b> Stocks screen loaded | matchedMarkers=3
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:48 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Stock Advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:48 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Quick Search
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:48 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Search for a stock
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:48 am</td>
+        <td>
+          <b>[PASS]</b> Page source/content changed after action: Funds -&gt; Stocks
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:48 am</td>
+        <td>
+          <b>[PASS]</b> Active tab changed successfully: Funds -&gt; Stocks
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:48 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:49 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Portfolio bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:50 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Portfolio screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:51 am</td>
+        <td>
+          <b>[PASS]</b> Portfolio screen loaded | matchedMarkers=6
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:51 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Summary
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:51 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Stocks &amp; ETFs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:51 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: NPS
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:51 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Analysis
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:51 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Your Investments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:51 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:51 am</td>
+        <td>
+          <b>[PASS]</b> Page source/content changed after action: Stocks -&gt; Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:51 am</td>
+        <td>
+          <b>[PASS]</b> Active tab changed successfully: Stocks -&gt; Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:51 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:52 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Hub bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:53 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Hub screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:53 am</td>
+        <td>
+          <b>[PASS]</b> Hub screen loaded | matchedMarkers=7
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:53 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Profile
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:53 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Account Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:53 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Subscription Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:53 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Portfolio Settings
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:53 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: App Settings
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:53 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Investor Accounts
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:53 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Mutual Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:54 am</td>
+        <td>
+          <b>[PASS]</b> Page source/content changed after action: Portfolio -&gt; Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:54 am</td>
+        <td>
+          <b>[PASS]</b> Active tab changed successfully: Portfolio -&gt; Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:54 am</td>
+        <td>
+          <b>[PASS]</b> Bottom nav active-tab/content change validation completed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:54 am</td>
+        <td>
+          <span class='badge white-text green'>BN_006 - Active tab/content change validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:54 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: BN_006 - Active tab/content change validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:54 am</td>
+        <td>
+          <span class='badge white-text green'>Test Passed: BN_006_VerifyActiveTabChangesAfterEachTap</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">BN_007 - Negative: verify selected Funds tab re-tap does not crash</p>
+            <p class="text-sm">
+              <span>10:09:54 am</span> / <span>00:00:08:988</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">BN_007 - Negative: verify selected Funds tab re-tap does not crash</h5>
+<span class='badge badge-success'>06.03.2026 10:09:54 am</span>
+<span class='badge badge-danger'>06.03.2026 10:10:03 am</span>
+<span class='badge badge-default'>00:00:08:988</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:54 am</td>
+        <td>
+          Module: Bottom Nav Bar<br>Case ID: BN_007<br>Validation: Re-tap selected Funds tab and validate user remains on Funds screen without crash/ANR
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:54 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: BN_007 - Negative selected Funds tab re-tap validation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:54 am</td>
+        <td>
+          <b>[STEP]</b> Negative validation: re-tapping selected Funds tab should not crash or navigate unexpectedly
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:54 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:54 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Funds bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:55 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Funds screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:57 am</td>
+        <td>
+          <b>[PASS]</b> Funds screen loaded | matchedMarkers=4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:57 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:57 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Outdated Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:57 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Update Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:09:57 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Rich Future Starts Here
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:58 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:09:59 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Funds bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:01 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Funds screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:02 am</td>
+        <td>
+          <b>[PASS]</b> Funds screen loaded | matchedMarkers=4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Outdated Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Update Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:02 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Rich Future Starts Here
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:03 am</td>
+        <td>
+          <b>[PASS]</b> Selected Funds tab re-tap kept user on Funds screen | sourceChanged=false
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:03 am</td>
+        <td>
+          <span class='badge white-text green'>BN_007 - Selected Funds tab re-tap validation passed</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:03 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: BN_007 - Selected Funds tab re-tap validation passed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:03 am</td>
+        <td>
+          <span class='badge white-text green'>Test Passed: BN_007_VerifySelectedFundsTabRetapDoesNotCrash</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="8"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">BN_008 - Verify rapid bottom tab switching stability</p>
+            <p class="text-sm">
+              <span>10:10:03 am</span> / <span>00:00:34:263</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">BN_008 - Verify rapid bottom tab switching stability</h5>
+<span class='badge badge-success'>06.03.2026 10:10:03 am</span>
+<span class='badge badge-danger'>06.03.2026 10:10:37 am</span>
+<span class='badge badge-default'>00:00:34:263</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:03 am</td>
+        <td>
+          Module: Bottom Nav Bar<br>Case ID: BN_008<br>Validation: Rapidly switch across Funds, Stocks, Portfolio, and Hub and validate no crash/ANR
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:03 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: BN_008 - Verify rapid bottom tab switching stability
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:03 am</td>
+        <td>
+          <b>[STEP]</b> Stability validation: rapid switching across bottom nav tabs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:03 am</td>
+        <td>
+          <b>[STEP]</b> Bottom nav rapid switch cycle: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:03 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:04 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Funds bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:05 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Funds screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:06 am</td>
+        <td>
+          <b>[PASS]</b> Funds screen loaded | matchedMarkers=4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:06 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:06 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Outdated Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:06 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Update Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:06 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Rich Future Starts Here
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:06 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Stocks
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:07 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Stocks bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:08 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Stocks screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:09 am</td>
+        <td>
+          <b>[PASS]</b> Stocks screen loaded | matchedMarkers=3
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:09 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Stock Advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:09 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Quick Search
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:09 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Search for a stock
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:09 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:09 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Portfolio bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:11 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Portfolio screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:11 am</td>
+        <td>
+          <b>[PASS]</b> Portfolio screen loaded | matchedMarkers=6
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:11 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Summary
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:11 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Stocks &amp; ETFs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:11 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: NPS
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:11 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Analysis
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:11 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Your Investments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:11 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:11 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:12 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Hub bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:13 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Hub screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:14 am</td>
+        <td>
+          <b>[PASS]</b> Hub screen loaded | matchedMarkers=7
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:14 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Profile
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:14 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Account Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:14 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Subscription Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:14 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Portfolio Settings
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:14 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: App Settings
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:14 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Investor Accounts
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:14 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Mutual Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:14 am</td>
+        <td>
+          <b>[STEP]</b> Bottom nav rapid switch cycle: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:14 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:14 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Funds bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:16 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Funds screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:16 am</td>
+        <td>
+          <b>[PASS]</b> Funds screen loaded | matchedMarkers=4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:16 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:16 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Outdated Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:16 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Update Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:16 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Rich Future Starts Here
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:16 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Stocks
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:18 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Stocks bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:19 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Stocks screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:19 am</td>
+        <td>
+          <b>[PASS]</b> Stocks screen loaded | matchedMarkers=3
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:19 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Stock Advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:19 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Quick Search
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:19 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Search for a stock
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:19 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:20 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Portfolio bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:21 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Portfolio screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:22 am</td>
+        <td>
+          <b>[PASS]</b> Portfolio screen loaded | matchedMarkers=6
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:22 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Summary
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:22 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Stocks &amp; ETFs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:22 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: NPS
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:22 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Analysis
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:22 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Your Investments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:22 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:22 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:22 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Hub bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:24 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Hub screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:24 am</td>
+        <td>
+          <b>[PASS]</b> Hub screen loaded | matchedMarkers=7
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Profile
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Account Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Subscription Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Portfolio Settings
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: App Settings
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Investor Accounts
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:24 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Mutual Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:24 am</td>
+        <td>
+          <b>[STEP]</b> Bottom nav rapid switch cycle: 3
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:24 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:27 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Funds bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:28 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Funds screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:28 am</td>
+        <td>
+          <b>[PASS]</b> Funds screen loaded | matchedMarkers=4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:28 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:28 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Outdated Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:28 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Update Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:28 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Rich Future Starts Here
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:29 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Stocks
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:30 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Stocks bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:31 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Stocks screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:31 am</td>
+        <td>
+          <b>[PASS]</b> Stocks screen loaded | matchedMarkers=3
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:31 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Stock Advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:31 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Quick Search
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:31 am</td>
+        <td>
+          <b>[PASS]</b> Validated Stocks marker: Search for a stock
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:32 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:32 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Portfolio bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:33 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Portfolio screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:34 am</td>
+        <td>
+          <b>[PASS]</b> Portfolio screen loaded | matchedMarkers=6
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:34 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Summary
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:34 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Stocks &amp; ETFs
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:34 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: NPS
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:34 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Analysis
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:34 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Your Investments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:34 am</td>
+        <td>
+          <b>[PASS]</b> Validated Portfolio marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:34 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:35 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Hub bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:36 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Hub screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:36 am</td>
+        <td>
+          <b>[PASS]</b> Hub screen loaded | matchedMarkers=7
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:36 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Profile
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:36 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Account Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:36 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Subscription Details
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:36 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Portfolio Settings
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:36 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: App Settings
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:36 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Investor Accounts
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:36 am</td>
+        <td>
+          <b>[PASS]</b> Validated Hub marker: Mutual Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:37 am</td>
+        <td>
+          <b>[PASS]</b> Bottom nav labels are visible/present: Funds, Stocks, Portfolio, Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:37 am</td>
+        <td>
+          <b>[PASS]</b> Rapid bottom nav switching stability validation passed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:37 am</td>
+        <td>
+          <span class='badge white-text green'>BN_008 - Rapid bottom tab switching stability validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:37 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: BN_008 - Rapid bottom tab switching stability validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:37 am</td>
+        <td>
+          <span class='badge white-text green'>Test Passed: BN_008_VerifyRapidBottomTabSwitchingStability</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="9"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">BN_009 - Verify no crash/ANR after bottom nav switching</p>
+            <p class="text-sm">
+              <span>10:10:37 am</span> / <span>00:00:00:821</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">BN_009 - Verify no crash/ANR after bottom nav switching</h5>
+<span class='badge badge-success'>06.03.2026 10:10:37 am</span>
+<span class='badge badge-danger'>06.03.2026 10:10:38 am</span>
+<span class='badge badge-default'>00:00:00:821</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=9</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:37 am</td>
+        <td>
+          Module: Bottom Nav Bar<br>Case ID: BN_009<br>Validation: Validate app does not show crash or ANR markers after bottom navigation switching
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:37 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: BN_009 - Verify no crash/ANR after bottom nav switching
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:37 am</td>
+        <td>
+          <b>[STEP]</b> Validating no crash/ANR after bottom nav switching
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:38 am</td>
+        <td>
+          <b>[PASS]</b> Bottom nav labels are visible/present: Funds, Stocks, Portfolio, Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:38 am</td>
+        <td>
+          <b>[PASS]</b> No crash/ANR marker found after bottom nav switching
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:38 am</td>
+        <td>
+          <span class='badge white-text green'>BN_009 - No crash/ANR after bottom nav switching validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:38 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: BN_009 - No crash/ANR after bottom nav switching validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:38 am</td>
+        <td>
+          <span class='badge white-text green'>Test Passed: BN_009_VerifyNoCrashOrAnrAfterBottomNavSwitching</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="10"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">BN_010 - Verify final navigation returns to Funds tab</p>
+            <p class="text-sm">
+              <span>10:10:38 am</span> / <span>00:00:02:478</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">BN_010 - Verify final navigation returns to Funds tab</h5>
+<span class='badge badge-success'>06.03.2026 10:10:38 am</span>
+<span class='badge badge-danger'>06.03.2026 10:10:40 am</span>
+<span class='badge badge-default'>00:00:02:478</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=10</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:38 am</td>
+        <td>
+          Module: Bottom Nav Bar<br>Case ID: BN_010<br>Validation: Tap Funds bottom tab at the end and validate Funds screen markers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:38 am</td>
+        <td>
+          <b>[STEP]</b> Starting test case: BN_010 - Verify final navigation returns to Funds tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:38 am</td>
+        <td>
+          <b>[STEP]</b> Validating final navigation returns to Funds tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:38 am</td>
+        <td>
+          <b>[STEP]</b> Tapping bottom nav tab: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:39 am</td>
+        <td>
+          <b>[STEP]</b> Tapped: Funds bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>10:10:40 am</td>
+        <td>
+          <b>[STEP]</b> Waiting for Funds screen markers to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:40 am</td>
+        <td>
+          <b>[PASS]</b> Funds screen loaded | matchedMarkers=4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:40 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Portfolio Value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:40 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Outdated Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:40 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Update Portfolio
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:40 am</td>
+        <td>
+          <b>[PASS]</b> Validated Funds marker: Rich Future Starts Here
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:40 am</td>
+        <td>
+          <b>[PASS]</b> Bottom nav labels are visible/present: Funds, Stocks, Portfolio, Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:40 am</td>
+        <td>
+          <b>[PASS]</b> Final navigation returned to Funds tab successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:40 am</td>
+        <td>
+          <span class='badge white-text green'>BN_010 - Final navigation to Funds tab validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:40 am</td>
+        <td>
+          <b>[PASS]</b> Completed test case: BN_010 - Final navigation to Funds tab validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>10:10:40 am</td>
+        <td>
+          <span class='badge white-text green'>Test Passed: BN_010_VerifyReturnToFundsTab</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Jun 03, 2026 10:08:48 am</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Jun 03, 2026 10:10:41 am</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>10</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>0</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'>
+<b>10</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='0%'><b>0</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='63%'><b>201</b> events passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> events failed,
+<b data-tooltip='%'>116</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"BN_001 - Verify Funds bottom tab opens":23.595,"BN_002 - Verify Stocks bottom tab opens":3.658,"BN_003 - Verify Portfolio bottom tab opens":4.877,"BN_004 - Verify Hub bottom tab opens":2.449,"BN_005 - Verify all bottom nav labels are visible":5.984,"BN_006 - Verify active tab/content changes after each tap":12.492,"BN_007 - Negative: verify selected Funds tab re-tap does not crash":8.988,"BN_008 - Verify rapid bottom tab switching stability":34.263,"BN_009 - Verify no crash/ANR after bottom nav switching":0.821,"BN_010 - Verify final navigation returns to Funds tab":2.478
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td>Advisor App</td>
+</tr>
+<tr>
+<td>Machine</td>
+<td>Local</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>User</td>
+<td>manishkhatri</td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>Android</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>Appium UiAutomator2</td>
+</tr>
+<tr>
+<td>Framework</td>
+<td>TestNG + Maven + ExtentReports</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 10,
+failParent: 0,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 201,
+failEvents: 0,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 116
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>
