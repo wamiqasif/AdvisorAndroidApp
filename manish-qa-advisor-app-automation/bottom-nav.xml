@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Bottom Nav Bar Module Suite" verbose="1" preserve-order="true" parallel="false">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Bottom Nav Bar Test Cases">
+        <classes>
+            <class name="com.valueresearch.tests.BottomNavBarTest">
+                <methods>
+                    <include name="BN_001_VerifyFundsTabOpens"/>
+                    <include name="BN_002_VerifyStocksTabOpens"/>
+                    <include name="BN_003_VerifyPortfolioTabOpens"/>
+                    <include name="BN_004_VerifyHubTabOpens"/>
+                    <include name="BN_005_VerifyAllBottomNavLabelsVisible"/>
+                    <include name="BN_006_VerifyActiveTabChangesAfterEachTap"/>
+                    <include name="BN_007_VerifySelectedFundsTabRetapDoesNotCrash"/>
+                    <include name="BN_008_VerifyRapidBottomTabSwitchingStability"/>
+                    <include name="BN_009_VerifyNoCrashOrAnrAfterBottomNavSwitching"/>
+                    <include name="BN_010_VerifyReturnToFundsTab"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

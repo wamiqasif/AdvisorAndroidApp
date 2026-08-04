@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Stories and Videos Module Suite" verbose="1" preserve-order="true" parallel="false">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Stories and Videos Test Cases">
+        <classes>
+            <class name="com.valueresearch.tests.StoriesVideosTest">
+                <methods>
+                    <include name="SV_001_OpenStoriesAndVideosFromHub"/>
+                    <include name="SV_002_VerifyLandingStaticContent"/>
+                    <include name="SV_003_VerifyFundAdvisorNotesStoryList"/>
+                    <include name="SV_004_VerifyOpenFirstStoryDetail"/>
+                    <include name="SV_005_VerifyFirstStoryDetailTopContent"/>
+                    <include name="SV_006_VerifyFirstStoryDetailScrollContent"/>
+                    <include name="SV_007_VerifyBackFromStoryDetailToList"/>
+                    <include name="SV_008_VerifyQuickGuidesTabSwitch"/>
+                    <include name="SV_009_VerifyQuickGuidesVideoList"/>
+                    <include name="SV_010_VerifyOpenFirstQuickGuideVideo"/>
+                    <include name="SV_011_VerifyBackFromVideoToQuickGuidesList"/>
+                    <include name="SV_012_VerifySelectedTabRetapDoesNotNavigateAway"/>
+                    <include name="SV_013_VerifyRapidTabSwitchDoesNotCrash"/>
+                    <include name="SV_014_VerifyStoriesVideosScreenStability"/>
+                    <include name="SV_015_VerifyStoryInternalHyperlinksPresent"/>
+                    <include name="SV_016_VerifyStoryInternalHyperlinksOpen"/>
+                    <include name="SV_017_VerifyBackNavigationToHub"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

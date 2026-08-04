@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Tax Calculator Tests" verbose="1" preserve-order="true">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Tax Calculator Flow">
+        <classes>
+            <class name="com.valueresearch.tests.TaxCalculatorTest"/>
+        </classes>
+    </test>
+
+</suite>

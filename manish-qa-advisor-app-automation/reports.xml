@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Portfolio Reports Module Suite"
+       verbose="1"
+       preserve-order="true"
+       parallel="false">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Portfolio Reports Test Cases">
+        <classes>
+            <class name="com.valueresearch.tests.ReportsTest">
+                <methods>
+                    <include name="RPT_001_OpenReportsFromPortfolio"/>
+                    <include name="RPT_002_VerifyReportsHeaderAndPrimarySections"/>
+                    <include name="RPT_003_VerifyTaxReportCard"/>
+                    <include name="RPT_004_VerifyTaxInvestorSelector"/>
+                    <include name="RPT_005_VerifyFinancialYearSelector"/>
+                    <include name="RPT_006_VerifyTaxDownloadAction"/>
+                    <include name="RPT_008_VerifyHoldingsInvestorSelector"/>
+                    <include name="RPT_010_VerifyHoldingsDownloadAction"/>
+                    <include name="RPT_011_VerifyTransactionHistorySection"/>
+                    <include name="RPT_012_VerifyTransactionHistoryControls"/>
+                    <include name="RPT_013_VerifyTransactionHistoryInvestorSelector"/>
+                    <include name="RPT_014_VerifyTransactionHistoryDownloadAction"/>
+                    <include name="RPT_015_VerifyAllReportSectionsAndDownloads"/>
+                    <include name="RPT_016_VerifyBackNavigationAndReopen"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Advisor App Stable Regression Suite"
+       verbose="1"
+       preserve-order="true"
+       parallel="false"
+       configfailurepolicy="continue">
+
+    <suite-files>
+        <suite-file path="sip.xml"/>
+        <suite-file path="risk.xml"/>
+        <suite-file path="tax.xml"/>
+        <suite-file path="portfolio-analysis.xml"/>
+
+        <suite-file path="searchbar-testing.xml"/>
+        <suite-file path="bottom-nav.xml"/>
+
+        <suite-file path="fund-details.xml"/>
+        <suite-file path="stock-details-testng.xml"/>
+        <suite-file path="MarketMonitor.xml"/>
+        <suite-file path="stories-videos.xml"/>
+        <suite-file path="manage-sip-swp.xml"/>
+
+        <suite-file path="investor-charter.xml"/>
+        <suite-file path="investor-complaint.xml"/>
+        <suite-file path="contact-us.xml"/>
+        <suite-file path="privacy-policy.xml"/>
+        <suite-file path="refund-policy.xml"/>
+        <suite-file path="user-agreement.xml"/>
+        <suite-file path="audit-status.xml"/>
+        <suite-file path="odr-portal.xml"/>
+    </suite-files>
+
+</suite>

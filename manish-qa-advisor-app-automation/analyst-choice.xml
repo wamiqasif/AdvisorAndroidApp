@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Analyst Choice Complete Suite" verbose="1" preserve-order="true" parallel="false">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Analyst Choice All Test Cases">
+        <classes>
+            <class name="com.valueresearch.tests.AnalystChoiceTest">
+                <methods>
+
+                    <!-- Listing -->
+                    <include name="AC_001_OpenAnalystChoiceFromHub"/>
+                    <include name="AC_002_VerifyAllRecommendationCards"/>
+                    <include name="AC_003_VerifyPortfolioPlannerCTA"/>
+
+                    <!-- Aggressive Growth -->
+                    <include name="AC_004_OpenAggressiveGrowthDetail"/>
+                    <include name="AC_005_VerifyAggressiveGrowthDetailHeader"/>
+                    <include name="AC_006_VerifyAggressiveGrowthInitialTable"/>
+                    <include name="AC_007_VerifyAggressiveGrowthCompleteTableCoverage"/>
+                    <include name="AC_008_VerifyAggressiveGrowthHiddenTableColumnsCurrentState"/>
+                    <include name="AC_009_VerifyAggressiveGrowthCompareInScreenerButton"/>
+
+                    <!-- Growth -->
+                    <include name="AC_010_OpenGrowthDetail"/>
+                    <include name="AC_011_VerifyGrowthDetailHeader"/>
+                    <include name="AC_012_VerifyGrowthInitialTable"/>
+                    <include name="AC_013_VerifyGrowthCompleteTableCoverage"/>
+                    <include name="AC_014_VerifyGrowthHiddenTableColumnsCurrentState"/>
+                    <include name="AC_015_VerifyGrowthCompareInScreenerButton"/>
+
+                    <!-- Tax Planning -->
+                    <include name="AC_016_OpenTaxPlanningDetail"/>
+                    <include name="AC_017_VerifyTaxPlanningDetailHeader"/>
+                    <include name="AC_018_VerifyTaxPlanningInitialTable"/>
+                    <include name="AC_019_VerifyTaxPlanningCompleteTableCoverage"/>
+                    <include name="AC_020_VerifyTaxPlanningHiddenTableColumnsCurrentState"/>
+                    <include name="AC_021_VerifyTaxPlanningCompareInScreenerButton"/>
+
+                    <!-- Growth International -->
+                    <include name="AC_022_OpenGrowthInternationalDetail"/>
+                    <include name="AC_023_VerifyGrowthInternationalDetailHeader"/>
+                    <include name="AC_024_VerifyGrowthInternationalEmptyState"/>
+
+                    <!-- Conservative Growth -->
+                    <include name="AC_025_OpenConservativeGrowthDetail"/>
+                    <include name="AC_026_VerifyConservativeGrowthDetailHeader"/>
+                    <include name="AC_027_VerifyConservativeGrowthInitialTable"/>
+                    <include name="AC_028A_VerifyConservativeGrowthHybridFundsTableCoverage"/>
+                    <include name="AC_028B_VerifyConservativeGrowthLargeCapFundsTableCoverage"/>
+                    <include name="AC_028C_VerifyConservativeGrowthEtfIndexFundsTableCoverage"/>
+                    <include name="AC_029_VerifyConservativeGrowthHiddenTableColumnsCurrentState"/>
+                    <include name="AC_030_VerifyConservativeGrowthCompareInScreenerButton"/>
+
+                    <!-- Conservative Growth & Income -->
+                    <include name="AC_031_OpenConservativeGrowthIncomeDetail"/>
+                    <include name="AC_032_VerifyConservativeGrowthIncomeDetailHeader"/>
+                    <include name="AC_033_VerifyConservativeGrowthIncomeInitialTable"/>
+                    <include name="AC_034_VerifyConservativeGrowthIncomeCompleteTableCoverage"/>
+                    <include name="AC_035_VerifyConservativeGrowthIncomeHiddenTableColumnsCurrentState"/>
+                    <include name="AC_036_VerifyConservativeGrowthIncomeCompareInScreenerButton"/>
+
+                    <!-- Core Fixed Income -->
+                    <include name="AC_037_OpenCoreFixedIncomeDetail"/>
+                    <include name="AC_038_VerifyCoreFixedIncomeDetailHeader"/>
+                    <include name="AC_039_VerifyCoreFixedIncomeInitialTable"/>
+                    <include name="AC_040_VerifyCoreFixedIncomeCompleteTableCoverage"/>
+                    <include name="AC_041_VerifyCoreFixedIncomeHiddenTableColumnsCurrentState"/>
+                    <include name="AC_042_VerifyCoreFixedIncomeCompareInScreenerButton"/>
+
+                    <!-- Capital Preservation -->
+                    <include name="AC_043_OpenCapitalPreservationDetail"/>
+                    <include name="AC_044_VerifyCapitalPreservationDetailHeader"/>
+                    <include name="AC_045_VerifyCapitalPreservationInitialTable"/>
+                    <include name="AC_046_VerifyCapitalPreservationCompleteTableCoverage"/>
+                    <include name="AC_047_VerifyCapitalPreservationHiddenTableColumnsCurrentState"/>
+                    <include name="AC_048_VerifyCapitalPreservationCompareInScreenerButton"/>
+
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

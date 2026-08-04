@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Fund Details Complete Stable Suite" verbose="1" preserve-order="true" parallel="false">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <!--
+        Main Fund Details flow.
+        These test cases use the same HDFC Flexi Cap Fund Details journey.
+    -->
+    <test name="Fund Details HDFC Main Test Cases">
+        <classes>
+            <class name="com.valueresearch.tests.FundDetailsTest">
+                <methods>
+                    <include name="FD_001_OpenFundDetailsFromSearch"/>
+                    <include name="FD_002_VerifyFundHeader"/>
+                    <include name="FD_003_VerifyInvestmentDetails"/>
+                    <include name="FD_004_VerifyPortfolioOverlap"/>
+                    <include name="FD_005_VerifyReturns"/>
+                    <include name="FD_006_VerifyRisk"/>
+                    <include name="FD_007_VerifyWhoShouldInvest"/>
+                    <include name="FD_008_VerifyWhereDoesItInvest"/>
+                    <include name="FD_009_VerifyFundManager"/>
+                    <include name="FD_010_VerifyMoreDetails"/>
+                    <include name="FD_011_VerifyNews"/>
+                    <include name="FD_012_VerifyConsistencyScore"/>
+                    <include name="FD_013_VerifyWorstOneYearReturnsFootnote"/>
+                    <include name="FD_014_VerifyTransactionButtonsVisible"/>
+                    <include name="FD_015_VerifyFundStyleDescription"/>
+                    <include name="FD_016_VerifyOverlapWithBenchmark"/>
+                    <include name="FD_017_VerifyConcentrationSection"/>
+                    <include name="FD_018_VerifySectorAllocationSection"/>
+                    <include name="FD_019_VerifyTopEquityHoldingsSection"/>
+                    <include name="FD_020_VerifyKeyLegendSection"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!--
+        Separate Portfolio flow.
+        Keep this separate because it starts from Portfolio tab, not Fund Details page.
+    -->
+    <test name="Portfolio Fund Redeem Invest More Buttons">
+        <classes>
+            <class name="com.valueresearch.tests.FundDetailsTest">
+                <methods>
+                    <include name="FD_021_VerifyRedeemInvestButtonsFromPortfolioFunds"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!--
+        Separate WhiteOak Premium Coverage flow.
+        Keep this separate because it searches a different fund.
+    -->
+    <test name="Fund Details WhiteOak Premium Coverage">
+        <classes>
+            <class name="com.valueresearch.tests.FundDetailsTest">
+                <methods>
+                    <include name="FD_022_VerifyPremiumCoverageForWhiteOakMidCapFund"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

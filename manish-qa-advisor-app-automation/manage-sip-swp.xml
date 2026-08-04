@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Manage SIP SWP Extended Suite" verbose="1" preserve-order="true" parallel="false">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Manage SIP SWP Extended Test Cases">
+        <classes>
+            <class name="com.valueresearch.tests.ManageSipSwpTest">
+                <methods>
+                    <include name="MSS_001_OpenManageSipSwpFromHub"/>
+                    <include name="MSS_002_VerifySipSwpListingPage"/>
+                    <include name="MSS_003_ChangeInvestorFromDropdown"/>
+                    <include name="MSS_004_VerifySipCardData"/>
+                    <include name="MSS_005_OpenSipDetailsAndValidateDetails"/>
+                    <include name="MSS_006_OpenPastInvestmentsAndValidateTransactionHistory"/>
+                    <include name="MSS_007_ReturnBackToSipDetails"/>
+                    <include name="MSS_008_ReturnBackToSipSwpListing"/>
+                    <include name="MSS_009_VerifySwpTabSwitch"/>
+                    <include name="MSS_010_VerifyActionButtonsVisibleOnly"/>
+                    <include name="MSS_011_VerifyStrictSipDetailsFieldMapping"/>
+                    <include name="MSS_012_VerifyPastInstalmentsListAndAppliedFilter"/>
+                    <include name="MSS_013_OpenFirstPastInstalmentAndValidateTransactionDetails"/>
+                    <include name="MSS_014_VerifyTransactionDetailActionButtonsVisibleOnly"/>
+                    <include name="MSS_015_ReturnBackFromTransactionDetailToSipDetails"/>
+                    <include name="MSS_016_VerifyTransactionHistorySortBottomSheet"/>
+                    <include name="MSS_017_VerifyTransactionHistoryFiltersScreen"/>
+                    <include name="MSS_018_VerifyUpdateTransactionsPageAndReturn"/>
+                    <include name="MSS_019_VerifyTransactionHistorySortApply"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

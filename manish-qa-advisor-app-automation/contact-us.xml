@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Contact Us Module Suite" verbose="1" preserve-order="true" parallel="false">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Contact Us Test Cases">
+        <classes>
+            <class name="com.valueresearch.tests.ContactUsTest">
+                <methods>
+                    <include name="CU_001_OpenContactUsFromHub"/>
+                    <include name="CU_002_VerifyTitleAndMessageBox"/>
+                    <include name="CU_003_VerifyChooseFileAndEscalationMatrixStaticText"/>
+                    <include name="CU_004_VerifyPhoneAndWorkingHours"/>
+                    <include name="CU_005_VerifyPostalAddress"/>
+                    <include name="CU_006_VerifyGrievanceAndScoresInfo"/>
+                    <include name="CU_007_VerifyAndroidAndIosAppLinksStaticText"/>
+                    <include name="CU_008_VerifySubmitButtonStaticText"/>
+                    <include name="CU_009_VerifyContactUsScreenStability"/>
+                    <include name="CU_010_VerifyPositiveMessageTyping"/>
+                    <include name="CU_011_VerifySpecialCharacterMessageTyping"/>
+                    <include name="CU_012_VerifyInputCanBeCleared"/>
+                    <include name="CU_013_VerifyEmptySubmitNegativeValidation"/>
+                    <include name="CU_014_VerifyWhitespaceSubmitNegativeValidation"/>
+                    <include name="CU_015_VerifySubmitButtonStateForEmptyMessage"/>
+                    <include name="CU_016_VerifyChooseFileFunctionalTap"/>
+                    <include name="CU_017_VerifyEscalationMatrixFunctionalTap"/>
+                    <include name="CU_018_VerifyPhoneFunctionalTap"/>
+                    <include name="CU_019_VerifyGrievanceEmailFunctionalTap"/>
+                    <include name="CU_020_VerifyScoresLinkFunctionalTap"/>
+                    <include name="CU_021_VerifyAndroidAppFunctionalTap"/>
+                    <include name="CU_022_VerifyIosAppFunctionalTap"/>
+                    <include name="CU_023_VerifyBackNavigationToHub"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
+
+
+
+
+
+
+
+
+
+
+
+

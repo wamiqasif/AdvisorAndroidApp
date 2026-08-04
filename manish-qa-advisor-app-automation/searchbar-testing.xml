@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Search Bar Funds And Stocks Extended Suite" verbose="1" preserve-order="true" parallel="false">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Search Bar Extended Test Cases">
+        <classes>
+            <class name="com.valueresearch.tests.SearchBarTest">
+                <methods>
+                    <include name="SB_001_VerifySearchBarFundsAndStocksFlow"/>
+                    <include name="SB_002_VerifySearchScreenStructure"/>
+                    <include name="SB_003_VerifyHDFCSearchResultsLoadedOnAllTab"/>
+                    <include name="SB_004_VerifyMutualFundsTabResultsLoaded"/>
+                    <include name="SB_005_VerifyFundResultDetailsAndBackNavigation"/>
+                    <include name="SB_006_VerifyStocksTabResultsLoaded"/>
+                    <include name="SB_007_VerifyStockResultDetails"/>
+                    <include name="SB_008_VerifyFundToStockNavigationRegression"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

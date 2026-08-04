@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Stock Details Full Suite"
+       verbose="1"
+       preserve-order="true"
+       parallel="false"
+       configfailurepolicy="continue">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Stock Details Module - SD_001 to SD_016"
+          preserve-order="true">
+
+        <classes>
+            <class name="com.valueresearch.tests.StockDetailsTest">
+                <methods>
+                    <include name="SD_001_OpenStockDetailsFromSearch"/>
+                    <include name="SD_002_VerifyStockHeader"/>
+                    <include name="SD_003_VerifyStockRatingAndRange"/>
+                    <include name="SD_004_VerifyFundamentals"/>
+                    <include name="SD_005_VerifyTenYearsAggregate"/>
+                    <include name="SD_006_VerifyStockPerformance"/>
+                    <include name="SD_007_VerifyEssentialChecks"/>
+                    <include name="SD_008_VerifyFinancials"/>
+                    <include name="SD_009_VerifyKeyRatios"/>
+                    <include name="SD_010_VerifyKeyRatiosMoreDetails"/>
+                    <include name="SD_011_VerifyPeers"/>
+                    <include name="SD_012_VerifyPeersMoreDetails"/>
+                    <include name="SD_013_VerifyShareholding"/>
+                    <include name="SD_014_VerifyCompanyProfile"/>
+                    <include name="SD_015_VerifyNewsSection"/>
+                    <include name="SD_016_VerifyAnalysisSection"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+</suite>

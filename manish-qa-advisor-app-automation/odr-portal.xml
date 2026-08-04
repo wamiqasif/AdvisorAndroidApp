@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="ODR Portal Suite" verbose="1" preserve-order="true" parallel="false">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="ODR Portal Test">
+        <classes>
+            <class name="com.valueresearch.tests.ODRPortalTest">
+                <methods>
+                    <include name="ODR_001_VerifyODRPortalRedirectionFromHub"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

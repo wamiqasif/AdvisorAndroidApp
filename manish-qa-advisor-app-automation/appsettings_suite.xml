@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="App Settings Suite" verbose="1" preserve-order="true" parallel="false">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="App Settings Test Cases">
+        <classes>
+            <class name="com.valueresearch.tests.AppSettingsTest">
+                <methods>
+                    <include name="AS_001_VerifyCompleteAppSettingsFlow"/>
+                    <include name="AS_002_VerifyAppSettingsScreenStructure"/>
+                    <include name="AS_003_VerifyCheckForUpdatesFlow"/>
+                    <include name="AS_004_VerifyChangePinSameExistingPinValidation"/>
+                    <include name="AS_005_VerifyStorageSettingsScreen"/>
+                    <include name="AS_006_VerifyPortfolioSettingsAndSave"/>
+                    <include name="AS_007_VerifyActualChangePinWithEmailOtp"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
