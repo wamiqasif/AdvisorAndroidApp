@@ -1,5 +1,6 @@
 package com.valueresearch.pages;
 
+import com.valueresearch.utils.AuthHelper;
 import com.valueresearch.utils.ReportLogger;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.AppiumBy;
@@ -16,6 +17,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class UserAgreementPage {
+
+    private static final By HUB_TAB = AppiumBy.accessibilityId("Hub");
+    private static final By HUB_READY_MARKER =
+            AppiumBy.accessibilityId("Manage your app settings");
 
     private final AndroidDriver driver;
     private String advisorAppPackage = "";
@@ -36,55 +41,62 @@ public class UserAgreementPage {
     public void ensureAdvisorAppLoggedInForUserAgreement() {
         ReportLogger.step("Checking Advisor app login/session state");
 
-        waitForAppToBeInteractive();
+        AuthHelper authHelper = new AuthHelper(driver);
+        authHelper.ensureLoggedIn();
 
-        if (isMainAppLoaded()) {
-            ReportLogger.pass("Advisor app session is already active");
-            return;
-        }
-
-        if (isPinScreenVisible()) {
-            ReportLogger.step("PIN screen detected. Entering Advisor PIN");
-
-            enterAdvisorPin();
-            waitForMainAppAfterPin();
-
-            ReportLogger.pass("Advisor app login/session confirmed after PIN");
-            return;
-        }
-
-        throw new AssertionError("Unable to confirm Advisor app login/session state"
-                + " | visibleValues=" + collectVisibleStrings());
+        ReportLogger.pass("Advisor app login/session confirmed");
     }
+
 
     public void openHubFromBottomNavigationForUserAgreement() {
         ReportLogger.step("Opening Hub from bottom navigation");
 
-        waitForAppToBeInteractive();
-
-        if (isVisibleByAnyText("Hub") && isLikelyOnHubPage()) {
+        if (isHubReadyForUserAgreement()) {
             ReportLogger.pass("Hub page is already visible");
             return;
         }
 
-        WebElement hubBottomTab = findVisibleTextElementNearBottom("Hub");
+        WebElement hub = findVisibleElement(HUB_TAB);
 
-        if (hubBottomTab != null) {
-            tapElementCenter(hubBottomTab);
-            sleep(1800);
-            ReportLogger.pass("Tapped Hub bottom navigation tab");
-        } else if (tapAnyVisibleText("Hub")) {
-            sleep(1800);
-            ReportLogger.pass("Tapped Hub tab by visible text");
-        } else {
-            throw new AssertionError("Unable to find/tap Hub tab"
+        if (hub == null) {
+            long locatorDeadline = System.currentTimeMillis() + 10_000L;
+
+            while (System.currentTimeMillis() < locatorDeadline) {
+                hub = findVisibleElement(HUB_TAB);
+
+                if (hub != null) {
+                    break;
+                }
+
+                sleep(400);
+            }
+        }
+
+        if (hub == null) {
+            throw new AssertionError("Hub bottom navigation tab not found"
+                    + " | currentPackage=" + getCurrentPackageSafely()
                     + " | visibleValues=" + collectVisibleStrings());
         }
 
-        waitUntilTextVisible("Hub", 10);
+        ReportLogger.step("Tapping Hub using accessibility id");
+        tapElementCenter(hub);
 
-        ReportLogger.pass("Hub page opened successfully");
+        long readyDeadline = System.currentTimeMillis() + 12_000L;
+
+        while (System.currentTimeMillis() < readyDeadline) {
+            if (isHubReadyForUserAgreement()) {
+                ReportLogger.pass("Hub page opened successfully");
+                return;
+            }
+
+            sleep(400);
+        }
+
+        throw new AssertionError("Hub page did not become ready after tapping Hub"
+                + " | currentPackage=" + getCurrentPackageSafely()
+                + " | visibleValues=" + collectVisibleStrings());
     }
+
 
     public void scrollToUserAgreementInHubForUserAgreement() {
         ReportLogger.step("Scrolling Hub page to User Agreement option");
@@ -335,78 +347,11 @@ public class UserAgreementPage {
     }
 
     // =========================================================
-    // LOGIN / SESSION HELPERS
+    // LOGIN / SESSION
     // =========================================================
-
-    private boolean isPinScreenVisible() {
-        List<String> values = collectVisibleStrings();
-
-        return containsAny(values,
-                "Enter your Advisor PIN",
-                "Advisor PIN",
-                "PIN",
-                "Hi,"
-        );
-    }
-
-    private boolean isMainAppLoaded() {
-        List<String> values = collectVisibleStrings();
-
-        return containsAny(values,
-                "Funds",
-                "Portfolio",
-                "Hub",
-                "Clients",
-                "Reports",
-                "Search"
-        );
-    }
-
-    private void enterAdvisorPin() {
-        String pin = "1975";
-
-        for (char digit : pin.toCharArray()) {
-            tapPinDigit(String.valueOf(digit));
-            sleep(450);
-        }
-    }
-
-    private void tapPinDigit(String digit) {
-        WebElement digitElement = findVisibleExactTextElement(digit);
-
-        if (digitElement != null) {
-            tapElementCenter(digitElement);
-            ReportLogger.step("Tapped PIN digit: " + digit);
-            return;
-        }
-
-        digitElement = findVisibleTextElement(digit);
-
-        if (digitElement != null) {
-            tapElementCenter(digitElement);
-            ReportLogger.step("Tapped PIN digit by fallback: " + digit);
-            return;
-        }
-
-        throw new AssertionError("Unable to tap PIN digit: " + digit
-                + " | visibleValues=" + collectVisibleStrings());
-    }
-
-    private void waitForMainAppAfterPin() {
-        ReportLogger.step("Waiting for Advisor app dashboard after PIN");
-
-        for (int i = 1; i <= 25; i++) {
-            if (isMainAppLoaded()) {
-                ReportLogger.pass("Advisor app dashboard loaded after PIN");
-                return;
-            }
-
-            sleep(1000);
-        }
-
-        throw new AssertionError("Advisor app dashboard did not load after PIN"
-                + " | visibleValues=" + collectVisibleStrings());
-    }
+    //
+    // Authentication is centralized in AuthHelper.
+    // Do not keep a User Agreement-specific PIN or startup timeout here.
 
     // =========================================================
     // HUB / PDF HELPERS
@@ -429,6 +374,13 @@ public class UserAgreementPage {
         }
 
         return false;
+    }
+
+    private boolean isHubReadyForUserAgreement() {
+        return findVisibleElement(HUB_READY_MARKER) != null
+                || isVisible(userAgreementExactLocator())
+                || isVisible(userAgreementContainsLocator())
+                || isLikelyOnHubPage();
     }
 
     private void waitForPdfViewerForUserAgreement() {
@@ -723,17 +675,6 @@ public class UserAgreementPage {
         return findVisibleTextElement(text) != null;
     }
 
-    private void waitForAppToBeInteractive() {
-        for (int i = 1; i <= 12; i++) {
-            List<String> values = collectVisibleStrings();
-
-            if (!values.isEmpty()) {
-                return;
-            }
-
-            sleep(700);
-        }
-    }
 
     private void waitUntilTextVisible(String text, int timeoutSeconds) {
         for (int i = 1; i <= timeoutSeconds; i++) {

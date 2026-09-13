@@ -21,6 +21,7 @@ public class AuditStatusTest extends BaseTest {
         ReportLogger.step("Starting test case: AS_001 - Verify Audit Status module from Hub");
 
         AuditStatusPage auditStatusPage = new AuditStatusPage(driver);
+        boolean hubWasOpened = false;
 
         try {
             ReportLogger.step("AUDIT STEP 01 - Capture Advisor app package");
@@ -33,6 +34,7 @@ public class AuditStatusTest extends BaseTest {
 
             ReportLogger.step("AUDIT STEP 03 - Open Hub from bottom navigation");
             auditStatusPage.openHubFromBottomNavigationForAudit();
+            hubWasOpened = true;
             ReportLogger.pass("AUDIT STEP 03 PASSED - Hub page opened");
 
             ReportLogger.step("AUDIT STEP 04 - Scroll Hub page to Audit Status option");
@@ -58,10 +60,37 @@ public class AuditStatusTest extends BaseTest {
             markPassed("AS_001 - Audit Status module validated successfully");
 
         } finally {
-            ReportLogger.step("AUDIT STEP 09 - Return back to Hub");
-            auditStatusPage.returnBackToHubSafelyForAudit();
-            ReportLogger.pass("AUDIT STEP 09 COMPLETED - Return flow executed");
+            if (hubWasOpened) {
+                ReportLogger.step("AUDIT STEP 09 - Return back to Hub");
+
+                try {
+                    auditStatusPage.returnBackToHubSafelyForAudit();
+                    ReportLogger.pass("AUDIT STEP 09 COMPLETED - Return flow executed");
+                } catch (AssertionError e) {
+                    ReportLogger.debug("AUDIT STEP 09 cleanup assertion skipped/failed: "
+                            + safeMessage(e));
+                } catch (Exception e) {
+                    ReportLogger.debug("AUDIT STEP 09 cleanup skipped/failed: "
+                            + safeMessage(e));
+                }
+            } else {
+                ReportLogger.debug("AUDIT STEP 09 SKIPPED - Hub was never opened because test failed earlier");
+            }
         }
+    }
+
+    private String safeMessage(Throwable throwable) {
+        if (throwable == null) {
+            return "";
+        }
+
+        String message = throwable.getMessage();
+
+        if (message == null || message.trim().isEmpty()) {
+            return throwable.getClass().getSimpleName();
+        }
+
+        return message;
     }
 
     private void createExtentTest(String caseId, String title, String validation) {

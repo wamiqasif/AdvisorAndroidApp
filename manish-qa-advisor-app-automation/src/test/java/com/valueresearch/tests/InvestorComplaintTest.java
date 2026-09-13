@@ -15,52 +15,119 @@ public class InvestorComplaintTest extends BaseTest {
         createExtentTest(
                 "IC_001",
                 "Verify Investor Complaint module from Hub",
-                "Open Hub tab, locate More section, tap Investor Complaint, verify complaint summary page, validate summary and trend table data, and return to Hub"
+                "Open Hub tab, locate More section, tap Investor Complaint, "
+                        + "verify complaint summary page, validate summary and trend table data, "
+                        + "and return to Hub"
         );
 
-        ReportLogger.step("Starting test case: IC_001 - Verify Investor Complaint module from Hub");
+        ReportLogger.step(
+                "Starting test case: IC_001 - Verify Investor Complaint module from Hub"
+        );
 
-        InvestorComplaintPage investorComplaintPage = new InvestorComplaintPage(driver);
+        InvestorComplaintPage investorComplaintPage =
+                new InvestorComplaintPage(driver);
+
+        boolean hubWasOpened = false;
 
         try {
-            ReportLogger.step("INVESTOR COMPLAINT STEP 01 - Capture Advisor app package");
+            ReportLogger.step(
+                    "INVESTOR COMPLAINT STEP 01 - Capture Advisor app package"
+            );
             investorComplaintPage.captureAdvisorAppPackageForInvestorComplaint();
-            ReportLogger.pass("INVESTOR COMPLAINT STEP 01 PASSED - Advisor app package captured");
+            ReportLogger.pass(
+                    "INVESTOR COMPLAINT STEP 01 PASSED - Advisor app package captured"
+            );
 
-            ReportLogger.step("INVESTOR COMPLAINT STEP 02 - Check Advisor app login/session");
+            ReportLogger.step(
+                    "INVESTOR COMPLAINT STEP 02 - Check Advisor app login/session"
+            );
             investorComplaintPage.ensureAdvisorAppLoggedInForInvestorComplaint();
-            ReportLogger.pass("INVESTOR COMPLAINT STEP 02 PASSED - Advisor app login/session confirmed");
+            ReportLogger.pass(
+                    "INVESTOR COMPLAINT STEP 02 PASSED - Advisor app login/session confirmed"
+            );
 
-            ReportLogger.step("INVESTOR COMPLAINT STEP 03 - Open Hub from bottom navigation");
+            ReportLogger.step(
+                    "INVESTOR COMPLAINT STEP 03 - Open Hub from bottom navigation"
+            );
             investorComplaintPage.openHubFromBottomNavigationForInvestorComplaint();
-            ReportLogger.pass("INVESTOR COMPLAINT STEP 03 PASSED - Hub page opened");
+            hubWasOpened = true;
+            ReportLogger.pass(
+                    "INVESTOR COMPLAINT STEP 03 PASSED - Hub page opened"
+            );
 
-            ReportLogger.step("INVESTOR COMPLAINT STEP 04 - Scroll Hub page to Investor Complaint option");
+            ReportLogger.step(
+                    "INVESTOR COMPLAINT STEP 04 - Scroll Hub page to Investor Complaint option"
+            );
             investorComplaintPage.scrollToInvestorComplaintInHubForInvestorComplaint();
-            ReportLogger.pass("INVESTOR COMPLAINT STEP 04 PASSED - Investor Complaint option is visible");
+            ReportLogger.pass(
+                    "INVESTOR COMPLAINT STEP 04 PASSED - Investor Complaint option is visible"
+            );
 
-            ReportLogger.step("INVESTOR COMPLAINT STEP 05 - Tap Investor Complaint option");
+            ReportLogger.step(
+                    "INVESTOR COMPLAINT STEP 05 - Tap Investor Complaint option"
+            );
             investorComplaintPage.tapInvestorComplaintForInvestorComplaint();
-            ReportLogger.pass("INVESTOR COMPLAINT STEP 05 PASSED - Investor Complaint option tapped");
+            ReportLogger.pass(
+                    "INVESTOR COMPLAINT STEP 05 PASSED - Investor Complaint option tapped"
+            );
 
-            ReportLogger.step("INVESTOR COMPLAINT STEP 06 - Wait for Investor Complaint page");
+            ReportLogger.step(
+                    "INVESTOR COMPLAINT STEP 06 - Wait for Investor Complaint page"
+            );
             investorComplaintPage.waitForInvestorComplaintPageForInvestorComplaint();
-            ReportLogger.pass("INVESTOR COMPLAINT STEP 06 PASSED - Investor Complaint page loaded");
+            ReportLogger.pass(
+                    "INVESTOR COMPLAINT STEP 06 PASSED - Investor Complaint page loaded"
+            );
 
-            ReportLogger.step("INVESTOR COMPLAINT STEP 07 - Validate Investor Complaint page content");
+            ReportLogger.step(
+                    "INVESTOR COMPLAINT STEP 07 - Validate Investor Complaint page content"
+            );
             investorComplaintPage.validateInvestorComplaintPageContentForInvestorComplaint();
-            ReportLogger.pass("INVESTOR COMPLAINT STEP 07 PASSED - Investor Complaint title, summary and headers validated");
+            ReportLogger.pass(
+                    "INVESTOR COMPLAINT STEP 07 PASSED - "
+                            + "Investor Complaint title, summary and headers validated"
+            );
 
-            ReportLogger.step("INVESTOR COMPLAINT STEP 08 - Validate Investor Complaint data");
+            ReportLogger.step(
+                    "INVESTOR COMPLAINT STEP 08 - Validate Investor Complaint data"
+            );
             investorComplaintPage.validateInvestorComplaintDataForInvestorComplaint();
-            ReportLogger.pass("INVESTOR COMPLAINT STEP 08 PASSED - Investor Complaint data validated");
+            ReportLogger.pass(
+                    "INVESTOR COMPLAINT STEP 08 PASSED - Investor Complaint data validated"
+            );
 
-            markPassed("IC_001 - Investor Complaint module validated successfully");
+            markPassed(
+                    "IC_001 - Investor Complaint module validated successfully"
+            );
 
         } finally {
-            ReportLogger.step("INVESTOR COMPLAINT STEP 09 - Return back to Hub");
-            investorComplaintPage.returnBackToHubSafelyForInvestorComplaint();
-            ReportLogger.pass("INVESTOR COMPLAINT STEP 09 COMPLETED - Return flow executed");
+            if (hubWasOpened) {
+                ReportLogger.step(
+                        "INVESTOR COMPLAINT STEP 09 - Return back to Hub"
+                );
+
+                try {
+                    investorComplaintPage.returnBackToHubSafelyForInvestorComplaint();
+                    ReportLogger.pass(
+                            "INVESTOR COMPLAINT STEP 09 COMPLETED - Return flow executed"
+                    );
+                } catch (AssertionError e) {
+                    ReportLogger.debug(
+                            "INVESTOR COMPLAINT STEP 09 cleanup assertion skipped/failed: "
+                                    + safeMessage(e)
+                    );
+                } catch (Exception e) {
+                    ReportLogger.debug(
+                            "INVESTOR COMPLAINT STEP 09 cleanup skipped/failed: "
+                                    + safeMessage(e)
+                    );
+                }
+            } else {
+                ReportLogger.debug(
+                        "INVESTOR COMPLAINT STEP 09 SKIPPED - "
+                                + "Hub was never opened because the test failed earlier"
+                );
+            }
         }
     }
 
@@ -82,4 +149,19 @@ public class InvestorComplaintTest extends BaseTest {
         );
         ReportLogger.pass("Completed test case: " + message);
     }
+
+    private String safeMessage(Throwable throwable) {
+        if (throwable == null) {
+            return "";
+        }
+
+        String message = throwable.getMessage();
+
+        if (message == null || message.trim().isEmpty()) {
+            return throwable.getClass().getSimpleName();
+        }
+
+        return message;
+    }
+
 }

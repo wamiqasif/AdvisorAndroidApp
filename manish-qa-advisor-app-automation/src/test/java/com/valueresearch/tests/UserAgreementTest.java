@@ -21,6 +21,7 @@ public class UserAgreementTest extends BaseTest {
         ReportLogger.step("Starting test case: UA_001 - Verify User Agreement PDF flow from Hub");
 
         UserAgreementPage userAgreementPage = new UserAgreementPage(driver);
+        boolean hubWasOpened = false;
 
         try {
             ReportLogger.step("UA STEP 01 - Capture Advisor app package");
@@ -33,6 +34,7 @@ public class UserAgreementTest extends BaseTest {
 
             ReportLogger.step("UA STEP 03 - Open Hub from bottom navigation");
             userAgreementPage.openHubFromBottomNavigationForUserAgreement();
+            hubWasOpened = true;
             ReportLogger.pass("UA STEP 03 PASSED - Hub page opened");
 
             ReportLogger.step("UA STEP 04 - Scroll Hub page to User Agreement option");
@@ -58,9 +60,21 @@ public class UserAgreementTest extends BaseTest {
             markPassed("UA_001 - User Agreement PDF flow validated successfully");
 
         } finally {
-            ReportLogger.step("UA STEP 09 - Return back to Advisor App");
-            userAgreementPage.returnBackToAdvisorAppSafely();
-            ReportLogger.pass("UA STEP 09 COMPLETED - Return flow executed");
+            if (hubWasOpened) {
+                try {
+                    ReportLogger.step("UA STEP 09 - Return back to Advisor App");
+                    userAgreementPage.returnBackToAdvisorAppSafely();
+                    ReportLogger.pass("UA STEP 09 COMPLETED - Return flow executed");
+                } catch (AssertionError e) {
+                    ReportLogger.debug("UA STEP 09 cleanup assertion ignored so original testcase result is preserved: "
+                            + e.getMessage());
+                } catch (Exception e) {
+                    ReportLogger.debug("UA STEP 09 cleanup error ignored so original testcase result is preserved: "
+                            + e.getMessage());
+                }
+            } else {
+                ReportLogger.debug("UA STEP 09 SKIPPED - Hub was never opened because the test failed earlier");
+            }
         }
     }
 

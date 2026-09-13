@@ -1,5 +1,6 @@
 package com.valueresearch.pages;
 
+import com.valueresearch.utils.AuthHelper;
 import com.valueresearch.utils.ReportLogger;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -22,6 +23,17 @@ import java.util.regex.Pattern;
 
 public class InvestorComplaintPage {
 
+    /*
+     * Stable navigation locators confirmed from the Advisor app hierarchy.
+     * Hub itself is a bottom-navigation accessibility element.
+     * The App Settings profile tile is used only as a strong Hub-page marker.
+     */
+    private static final By HUB_TAB =
+            AppiumBy.accessibilityId("Hub");
+
+    private static final By HUB_READY_MARKER =
+            AppiumBy.accessibilityId("Manage your app settings");
+
     private final AndroidDriver driver;
     private String advisorAppPackage = "";
 
@@ -41,63 +53,57 @@ public class InvestorComplaintPage {
     public void ensureAdvisorAppLoggedInForInvestorComplaint() {
         ReportLogger.step("Checking Advisor app login/session state");
 
-        waitForAppToBeInteractive();
+        /*
+         * Authentication is centralized in AuthHelper.
+         *
+         * This is important after a fresh UiAutomator2 session because the
+         * Advisor PIN screen can take several seconds to become available.
+         * The old module-specific implementation made its own early decision
+         * and could fail before the PIN screen finished loading.
+         */
+        AuthHelper authHelper = new AuthHelper(driver);
+        authHelper.ensureLoggedIn();
 
-        if (isMainAppLoaded()) {
-            ReportLogger.pass("Advisor app session is already active");
-            return;
-        }
-
-        if (isPinScreenVisible()) {
-            ReportLogger.step("PIN screen detected. Entering Advisor PIN");
-
-            enterAdvisorPin();
-            waitForMainAppAfterPin();
-
-            ReportLogger.pass("Advisor app login/session confirmed after PIN");
-            return;
-        }
-
-        throw new AssertionError("Unable to confirm Advisor app login/session state"
-                + " | visibleValues=" + collectVisibleStrings());
+        ReportLogger.pass("Advisor app login/session confirmed");
     }
 
     public void openHubFromBottomNavigationForInvestorComplaint() {
         ReportLogger.step("Opening Hub from bottom navigation");
 
-        waitForAppToBeInteractive();
-
-        if (isVisibleByAnyText("Hub") && isLikelyOnHubPage()) {
+        if (isHubPageVisibleStable()) {
             ReportLogger.pass("Hub page is already visible");
             return;
         }
 
-        WebElement hubBottomTab = findVisibleTextElementNearBottom("Hub");
+        WebElement hubTab = waitForVisibleElement(HUB_TAB, 10);
 
-        if (hubBottomTab != null) {
-            tapElementCenter(hubBottomTab);
-            sleep(1800);
-            ReportLogger.pass("Tapped Hub bottom navigation tab");
-        } else if (tapAnyVisibleText("Hub")) {
-            sleep(1800);
-            ReportLogger.pass("Tapped Hub tab by visible text");
-        } else {
-            pressBackSilently();
-            sleep(1000);
-
-            hubBottomTab = findVisibleTextElementNearBottom("Hub");
-            if (hubBottomTab != null) {
-                tapElementCenter(hubBottomTab);
-                sleep(1800);
-                ReportLogger.pass("Tapped Hub bottom navigation tab after back recovery");
-            } else {
-                throw new AssertionError("Unable to find/tap Hub tab"
-                        + " | visibleValues=" + collectVisibleStrings());
-            }
+        if (hubTab == null) {
+            throw new AssertionError(
+                    "Hub bottom navigation tab not found"
+                            + " | currentPackage=" + getCurrentPackageSafely()
+                            + " | visibleValues=" + collectVisibleStrings()
+            );
         }
 
-        waitUntilTextVisible("Hub", 10);
-        ReportLogger.pass("Hub page opened successfully");
+        ReportLogger.step("Tapping Hub using accessibility id");
+        tapElementCenter(hubTab);
+
+        long endTime = System.currentTimeMillis() + 12000L;
+
+        while (System.currentTimeMillis() < endTime) {
+            if (isHubPageVisibleStable()) {
+                ReportLogger.pass("Hub page opened successfully");
+                return;
+            }
+
+            sleep(400);
+        }
+
+        throw new AssertionError(
+                "Hub page did not become ready after tapping Hub"
+                        + " | currentPackage=" + getCurrentPackageSafely()
+                        + " | visibleValues=" + collectVisibleStrings()
+        );
     }
 
     public void scrollToInvestorComplaintInHubForInvestorComplaint() {
@@ -340,46 +346,69 @@ public class InvestorComplaintPage {
         ReportLogger.step("Returning back to Hub after Investor Complaint validation");
 
         for (int attempt = 1; attempt <= 5; attempt++) {
-            if (isLikelyOnHubPage() && isVisibleByAnyText("Hub")) {
+            if (isHubPageVisibleStable()) {
                 ReportLogger.pass("Already back on Hub page");
                 return;
             }
 
             if (isInvestorComplaintPageVisible()) {
                 if (tapCloseOrBackButtonIfVisible()) {
-                    sleep(1500);
+                    sleep(1200);
                 } else {
                     pressBackSilently();
-                    sleep(1500);
+                    sleep(1200);
                 }
             } else {
                 pressBackSilently();
-                sleep(1500);
+                sleep(1200);
             }
 
-            if (isLikelyOnHubPage() && isVisibleByAnyText("Hub")) {
+            if (isHubPageVisibleStable()) {
                 ReportLogger.pass("Returned to Hub after back attempt " + attempt);
                 return;
             }
         }
 
+        /*
+         * Last recovery is still module-local and bounded.
+         * We do not recreate the global driver here.
+         */
         try {
             if (advisorAppPackage != null && !advisorAppPackage.trim().isEmpty()) {
                 driver.activateApp(advisorAppPackage);
-                sleep(1800);
+                sleep(1500);
 
-                if (isLikelyOnHubPage() && isVisibleByAnyText("Hub")) {
+                if (isHubPageVisibleStable()) {
                     ReportLogger.pass("Returned to Hub using app activate fallback");
                     return;
                 }
+
+                WebElement hubTab = waitForVisibleElement(HUB_TAB, 5);
+
+                if (hubTab != null) {
+                    tapElementCenter(hubTab);
+
+                    long endTime = System.currentTimeMillis() + 8000L;
+
+                    while (System.currentTimeMillis() < endTime) {
+                        if (isHubPageVisibleStable()) {
+                            ReportLogger.pass("Returned to Hub using app activation + Hub tap");
+                            return;
+                        }
+
+                        sleep(400);
+                    }
+                }
             }
         } catch (Exception e) {
-            ReportLogger.debug("activateApp fallback failed: " + cleanError(e.getMessage()));
+            ReportLogger.debug("activateApp/Hub fallback failed: " + cleanError(e.getMessage()));
         }
 
-        ReportLogger.debug("Could not confirm Hub return after Investor Complaint flow"
-                + " | currentPackage=" + getCurrentPackageSafely()
-                + " | visibleValues=" + collectVisibleStrings());
+        ReportLogger.debug(
+                "Could not confirm Hub return after Investor Complaint flow"
+                        + " | currentPackage=" + getCurrentPackageSafely()
+                        + " | visibleValues=" + collectVisibleStrings()
+        );
     }
 
     // =========================================================
@@ -402,82 +431,49 @@ public class InvestorComplaintPage {
     }
 
     // =========================================================
-    // LOGIN / SESSION HELPERS
+    // LOGIN / SESSION
     // =========================================================
-
-    private boolean isPinScreenVisible() {
-        List<String> values = collectVisibleStrings();
-
-        return containsAny(values,
-                "Enter your Advisor PIN",
-                "Advisor PIN",
-                "PIN",
-                "Hi,"
-        );
-    }
-
-    private boolean isMainAppLoaded() {
-        List<String> values = collectVisibleStrings();
-
-        return containsAny(values,
-                "Funds",
-                "Portfolio",
-                "Hub",
-                "Clients",
-                "Reports",
-                "Search"
-        );
-    }
-
-    private void enterAdvisorPin() {
-        String pin = "1975";
-
-        for (char digit : pin.toCharArray()) {
-            tapPinDigit(String.valueOf(digit));
-            sleep(450);
-        }
-    }
-
-    private void tapPinDigit(String digit) {
-        WebElement digitElement = findVisibleExactTextElement(digit);
-
-        if (digitElement != null) {
-            tapElementCenter(digitElement);
-            ReportLogger.step("Tapped PIN digit: " + digit);
-            return;
-        }
-
-        digitElement = findVisibleTextElement(digit);
-
-        if (digitElement != null) {
-            tapElementCenter(digitElement);
-            ReportLogger.step("Tapped PIN digit by fallback: " + digit);
-            return;
-        }
-
-        throw new AssertionError("Unable to tap PIN digit: " + digit
-                + " | visibleValues=" + collectVisibleStrings());
-    }
-
-    private void waitForMainAppAfterPin() {
-        ReportLogger.step("Waiting for Advisor app dashboard after PIN");
-
-        for (int i = 1; i <= 25; i++) {
-            if (isMainAppLoaded()) {
-                ReportLogger.pass("Advisor app dashboard loaded after PIN");
-                return;
-            }
-
-            sleep(1000);
-        }
-
-        throw new AssertionError("Advisor app dashboard did not load after PIN"
-                + " | visibleValues=" + collectVisibleStrings());
-    }
+    //
+    // Login/PIN handling is intentionally centralized in AuthHelper.
+    // Do not add a module-specific PIN or short startup wait here.
+    //
 
     // =========================================================
     // HUB / INVESTOR COMPLAINT HELPERS
     // =========================================================
+
+
+    private boolean isHubPageVisibleStable() {
+        /*
+         * Strong top-of-Hub marker.
+         */
+        if (isVisible(HUB_READY_MARKER)) {
+            return true;
+        }
+
+        /*
+         * If Hub is already scrolled down to More, the top marker may no
+         * longer be exposed. Existing Hub-specific content remains a safe
+         * secondary signal.
+         */
+        return isLikelyOnHubPage();
+    }
+
+    private WebElement waitForVisibleElement(By locator, int timeoutSeconds) {
+        long endTime = System.currentTimeMillis() + timeoutSeconds * 1000L;
+
+        while (System.currentTimeMillis() < endTime) {
+            WebElement element = findVisibleElement(locator);
+
+            if (element != null) {
+                return element;
+            }
+
+            sleep(300);
+        }
+
+        return null;
+    }
 
     private boolean isLikelyOnHubPage() {
         List<String> values = collectVisibleStrings();

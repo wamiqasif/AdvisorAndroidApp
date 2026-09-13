@@ -8,16 +8,20 @@ import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ContactUsPage {
 
@@ -25,6 +29,7 @@ public class ContactUsPage {
     private final WebDriverWait wait;
 
     private static final String TEST_MESSAGE = "Automation test message. Please ignore.";
+    private static final String ADVISOR_APP_PACKAGE = "com.valueresearch.advisor";
 
     // Exact Contact us screen text values used for detailed Extent report logging.
     private static final String TXT_CONTACT_US_TITLE = "Contact us";
@@ -52,33 +57,20 @@ public class ContactUsPage {
     // Bottom navigation
     private final By hubTab = AppiumBy.accessibilityId("Hub");
 
-    // Hub -> More -> Contact Us menu item. Keep multiple variants because Hub tile semantics can differ by build.
-    private final By contactUsMenuExact = AppiumBy.accessibilityId("Contact Us");
-    private final By contactUsMenuLower = AppiumBy.accessibilityId("Contact us");
-    private final By contactUsMenuNoSpace = AppiumBy.accessibilityId("ContactUs");
-    private final By contactUsMenuDescContains = AppiumBy.androidUIAutomator(
-            "new UiSelector().descriptionContains(\"Contact\")"
-    );
-    private final By contactUsMenuTextContains = AppiumBy.androidUIAutomator(
-            "new UiSelector().textContains(\"Contact\")"
-    );
-    private final By contactUsMenuXpath = AppiumBy.xpath(
-            "//*[contains(@content-desc,'Contact') or contains(@text,'Contact')]"
-    );
+    // Hub -> More -> Contact Us.
+    // Confirmed from Appium Inspector: visible label is "Contact Us", but Android semantics expose
+    // content-desc="Get in touch with us". Always automate the semantic value, not the visual text.
+    private static final String HUB_CONTACT_US_DESC = "Get in touch with us";
 
-    // Hub More-section labels used only to confirm we are on the correct grid before coordinate fallback.
-    private final By moreLabelDesc = AppiumBy.androidUIAutomator(
-            "new UiSelector().descriptionContains(\"More\")"
-    );
-    private final By faqsDesc = AppiumBy.androidUIAutomator(
-            "new UiSelector().descriptionContains(\"FAQs\")"
-    );
-    private final By aboutUsDesc = AppiumBy.androidUIAutomator(
-            "new UiSelector().descriptionContains(\"About Us\")"
-    );
-    private final By privacyPolicyDesc = AppiumBy.androidUIAutomator(
-            "new UiSelector().descriptionContains(\"Privacy Policy\")"
-    );
+    // Fast primary locator: accessibility id/content-desc.
+    private final By contactUsHubTile = AppiumBy.accessibilityId(HUB_CONTACT_US_DESC);
+
+    // Current Hub semantic labels confirmed from the same Inspector hierarchy.
+    private final By hubStocksSection = AppiumBy.accessibilityId("Stocks");
+    private final By moreLabelDesc = AppiumBy.accessibilityId("More");
+    private final By faqsDesc = AppiumBy.accessibilityId("View frequently asked questions");
+    private final By aboutUsDesc = AppiumBy.accessibilityId("Learn about Value Research");
+    private final By privacyPolicyDesc = AppiumBy.accessibilityId("Read our privacy policy");
 
     // Contact us screen locators confirmed from Appium Inspector.
     private final By pageTitle = AppiumBy.accessibilityId("Contact us");
@@ -118,7 +110,7 @@ public class ContactUsPage {
 
     public ContactUsPage(AndroidDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(12));
     }
 
     // =====================================================================
@@ -148,8 +140,32 @@ public class ContactUsPage {
 
     public void recoverContactUsIfNeeded() {
         try {
-            if (isContactUsPageVisible()) {
+            if (isAdvisorAppForeground() && isContactUsPageVisible()) {
                 ReportLogger.pass("Contact us page is already active");
+                return;
+            }
+
+            // Functional tests can leave Chrome, Dialer, Gmail, Files, Play Store, etc. in the
+            // foreground. Never try to use Advisor bottom navigation while another package is active.
+            if (!isAdvisorAppForeground()) {
+                ReportLogger.step(
+                        "Advisor app is not foreground during Contact us recovery. "
+                                + "Current package=" + safeCurrentPackage() + ". Activating Advisor app."
+                );
+
+                try {
+                    driver.activateApp(ADVISOR_APP_PACKAGE);
+                    sleep(900);
+                } catch (Exception activateError) {
+                    ReportLogger.debug(
+                            "Advisor activateApp failed during Contact us recovery: "
+                                    + cleanError(activateError.getMessage())
+                    );
+                }
+            }
+
+            if (isAdvisorAppForeground() && waitForContactUsPageVisible(1500)) {
+                ReportLogger.pass("Contact us page restored after activating Advisor app");
                 return;
             }
 
@@ -164,140 +180,191 @@ public class ContactUsPage {
     private void openHubTab() {
         ReportLogger.step("Opening Hub bottom tab");
 
-        for (int attempt = 1; attempt <= 4; attempt++) {
+        // Two controlled attempts are enough. The previous implementation used repeated BACK + long
+        // sleeps, which made navigation slower and could move the app into the wrong state.
+        for (int attempt = 1; attempt <= 2; attempt++) {
             if (tapElementIfPresent(hubTab, "Hub tab")) {
-                sleep(1800);
-                ReportLogger.pass("Hub tab opened");
-                return;
+                if (waitForHubContent(3500)) {
+                    ReportLogger.pass("Hub tab opened");
+                    return;
+                }
+
+                ReportLogger.debug("Hub tab was tapped but Hub content was not detected yet. Attempt: " + attempt);
             }
 
-            pressBackSafely();
-            sleep(900);
+            // Only recover with BACK when the Hub tab itself cannot be used. Never press BACK after a
+            // failed Contact Us tile tap because that tile tap may have left us on Hub already.
+            if (attempt < 2) {
+                pressBackSafely();
+                sleep(350);
+            }
         }
 
-        throw new RuntimeException("Hub tab was not visible after recovery attempts.");
+        throw new RuntimeException("Hub tab did not become ready after controlled recovery attempts.");
+    }
+
+    private boolean waitForHubContent(long timeoutMillis) {
+        long deadline = System.currentTimeMillis() + timeoutMillis;
+
+        while (System.currentTimeMillis() < deadline) {
+            // Prevent stale Advisor hierarchy from being accepted while another app is foreground.
+            if (!isAdvisorAppForeground()) {
+                sleep(200);
+                continue;
+            }
+
+            if (isElementPresent(hubStocksSection)
+                    || isElementPresent(moreLabelDesc)
+                    || isElementPresent(contactUsHubTile)
+                    || isElementPresent(faqsDesc)) {
+                return true;
+            }
+
+            sleep(200);
+        }
+
+        return false;
     }
 
     private void tapContactUsFromHubMoreSection() {
         ReportLogger.step("Finding Contact Us inside Hub More section");
 
-        // Important: in your current app state, More section is already visible after Hub opens.
-        // Do direct locator + coordinate fallback before any scrolling; otherwise the test scrolls away from Contact Us.
-        if (tapContactUsMenuIfVisible()) {
-            ReportLogger.pass("Contact Us menu tapped using locator");
+        // FAST PATH: try the exact semantic locator before doing any gesture.
+        if (tapVisibleContactUsTile("accessibility id on current Hub viewport")) {
             return;
         }
 
-        if (tapContactUsTileByMoreGridFallback()) {
-            return;
-        }
-
-        // If Hub opens at top, scroll down until More grid is visible.
-        for (int attempt = 1; attempt <= 8; attempt++) {
-            ReportLogger.step("Contact Us menu not tapped yet. Scrolling Hub down. Attempt: " + attempt);
+        // Controlled, device-independent fallback. We intentionally avoid UiScrollable here because
+        // Flutter can expose the scrollable parent as the result of scrollIntoView(), producing a
+        // full-screen semantic container instead of the actual Contact Us tile.
+        for (int attempt = 1; attempt <= 3; attempt++) {
+            ReportLogger.step("Contact Us not visible. Controlled Hub scroll attempt: " + attempt);
             swipeUpW3C();
-            sleep(900);
+            sleep(400);
 
-            if (tapContactUsMenuIfVisible()) {
-                ReportLogger.pass("Contact Us menu found and tapped after scrolling");
-                return;
-            }
-
-            if (tapContactUsTileByMoreGridFallback()) {
+            if (tapVisibleContactUsTile("accessibility id after controlled scroll " + attempt)) {
                 return;
             }
         }
 
         captureScreenshot("CU_Contact_Us_Menu_Not_Found_In_Hub");
-        throw new RuntimeException("Contact Us menu was not found/tapped in Hub More section after locator and coordinate fallback.");
+        throw new RuntimeException(
+                "Contact Us Hub tile was not found/opened. Expected content-desc: " + HUB_CONTACT_US_DESC
+        );
     }
 
-    private boolean tapContactUsMenuIfVisible() {
-        return tapElementIfPresent(contactUsMenuExact, "Contact Us menu")
-                || tapElementIfPresent(contactUsMenuLower, "Contact Us menu")
-                || tapElementIfPresent(contactUsMenuNoSpace, "Contact Us menu")
-                || tapElementIfPresent(contactUsMenuDescContains, "Contact Us menu")
-                || tapElementIfPresent(contactUsMenuTextContains, "Contact Us menu")
-                || tapElementIfPresent(contactUsMenuXpath, "Contact Us menu");
+    private boolean tapVisibleContactUsTile(String strategy) {
+        try {
+            List<WebElement> elements = driver.findElements(contactUsHubTile);
+            return openContactUsFromElements(elements, strategy);
+        } catch (Exception e) {
+            ReportLogger.debug("Contact Us semantic lookup failed: " + cleanError(e.getMessage()));
+            return false;
+        }
     }
 
-    private boolean tapContactUsTileByMoreGridFallback() {
-        if (!isHubMoreGridVisible()) {
+    private boolean openContactUsFromElements(List<WebElement> elements, String strategy) {
+        if (elements == null || elements.isEmpty()) {
             return false;
         }
 
-        ReportLogger.step("More grid is visible. Using Contact Us tile coordinate fallback.");
+        for (WebElement element : elements) {
+            if (element == null) {
+                continue;
+            }
 
-        Dimension size = driver.manage().window().getSize();
+            try {
+                if (!element.isDisplayed()) {
+                    continue;
+                }
+            } catch (Exception ignored) {
+                continue;
+            }
 
-        // Hub More grid layout observed from the current app:
-        // Row: FAQs | About Us | Contact Us | Privacy Policy
-        // Contact Us is the 3rd tile. The coordinate is intentionally used only after More-grid confirmation.
-        int contactUsX = (int) (size.width * 0.53);
-        int contactUsY = calculateContactUsTileY(size);
-
-        tapAt(contactUsX, contactUsY, "Contact Us tile coordinate fallback");
-        sleep(1800);
-
-        if (isContactUsPageVisible()) {
-            ReportLogger.pass("Contact Us opened using More grid coordinate fallback");
-            return true;
+            if (clickContactUsElement(element, strategy)) {
+                return true;
+            }
         }
 
-        // If coordinate hit something else, recover back to Hub and continue controlled scrolling.
-        ReportLogger.debug("Coordinate fallback did not open Contact us page. Returning to Hub and continuing search.");
-        pressBackSafely();
-        sleep(1000);
         return false;
     }
 
-    private int calculateContactUsTileY(Dimension size) {
-        // Try to calculate from More label position first. If that fails, use stable fallback ratio.
+    private boolean clickContactUsElement(WebElement element, String strategy) {
+        Rectangle rect;
+        Dimension screen;
+
         try {
-            List<WebElement> labels = driver.findElements(moreLabelDesc);
-            for (WebElement label : labels) {
-                if (label != null) {
-                    Rectangle rect = label.getRect();
-                    if (rect != null && rect.getY() > 0) {
-                        return rect.getY() + (int) (size.height * 0.055);
-                    }
-                }
+            rect = element.getRect();
+            screen = driver.manage().window().getSize();
+
+            if (rect.getWidth() <= 0 || rect.getHeight() <= 0) {
+                ReportLogger.debug("Ignoring Contact Us semantic node with invalid bounds.");
+                return false;
             }
-        } catch (Exception ignored) {
-            // Use ratio fallback below.
+
+            // Flutter may return a scrollable/full-screen parent for semantic searches. Never tap a
+            // node that occupies most of the viewport; a real Hub tile is much smaller.
+            if (rect.getWidth() >= (int) (screen.width * 0.80)
+                    || rect.getHeight() >= (int) (screen.height * 0.50)) {
+                ReportLogger.debug(
+                        "Ignoring oversized Contact Us semantic container"
+                                + " | x=" + rect.getX()
+                                + " | y=" + rect.getY()
+                                + " | width=" + rect.getWidth()
+                                + " | height=" + rect.getHeight()
+                );
+                return false;
+            }
+
+            ReportLogger.step(
+                    "Contact Us tile found using " + strategy
+                            + " | x=" + rect.getX()
+                            + " | y=" + rect.getY()
+                            + " | width=" + rect.getWidth()
+                            + " | height=" + rect.getHeight()
+            );
+        } catch (Exception e) {
+            ReportLogger.debug("Unable to read Contact Us element bounds: " + cleanError(e.getMessage()));
+            return false;
         }
 
-        return (int) (size.height * 0.54);
+        // PRIMARY: element-based UiAutomator2 gesture. This is reliable for Flutter semantic nodes
+        // even when Inspector reports clickable=false.
+        if (tapWithMobileClickGesture(element, "Contact Us")) {
+            if (waitForContactUsPageVisible(2200)) {
+                ReportLogger.pass("Contact Us opened using element-based mobile: clickGesture");
+                return true;
+            }
+
+            ReportLogger.debug("Contact Us clickGesture completed but the page did not open.");
+        }
+
+        // FINAL FALLBACK: tap the runtime center of the located element. These coordinates are
+        // calculated fresh on every device and are never hardcoded.
+        if (tapDynamicElementCenter(element, "Contact Us dynamic element-center fallback")) {
+            if (waitForContactUsPageVisible(2200)) {
+                ReportLogger.pass("Contact Us opened using dynamic element-center fallback");
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    private boolean isHubMoreGridVisible() {
-        if (isElementPresent(faqsDesc) || isElementPresent(aboutUsDesc) || isElementPresent(privacyPolicyDesc)) {
-            return true;
+    private boolean waitForContactUsPageVisible(long timeoutMillis) {
+        long deadline = System.currentTimeMillis() + timeoutMillis;
+
+        while (System.currentTimeMillis() < deadline) {
+            // pageTitle is the strongest marker; Your Message is an additional fast marker for builds
+            // where the title semantic node appears a fraction later.
+            if (isElementPresent(pageTitle) || isElementPresent(yourMessageLabel)) {
+                return true;
+            }
+
+            sleep(200);
         }
 
-        String source = safePageSource();
-        int matchCount = 0;
-
-        if (containsIgnoreCase(source, "FAQs")) {
-            matchCount++;
-        }
-        if (containsIgnoreCase(source, "About Us")) {
-            matchCount++;
-        }
-        if (containsIgnoreCase(source, "Privacy Policy")) {
-            matchCount++;
-        }
-        if (containsIgnoreCase(source, "Refund Policy")) {
-            matchCount++;
-        }
-        if (containsIgnoreCase(source, "Investor Charter")) {
-            matchCount++;
-        }
-        if (containsIgnoreCase(source, "ODR Portal")) {
-            matchCount++;
-        }
-
-        return matchCount >= 2;
+        return false;
     }
 
     private void waitForContactUsPage() {
@@ -439,17 +506,44 @@ public class ContactUsPage {
     public void verifyAppLinks() {
         try {
             ReportLogger.step("Validating Android App and iOS App links");
-            // These links are inside the same lower paragraph area. On Flutter/semantic views,
-            // the exact iOS App node is sometimes not returned by Appium even when it is visibly rendered.
-            // So we scroll to the Link for SCORES area once and validate with both locator and page-source fallbacks.
-            scrollToScoresLinksArea();
 
-            assertExpectedTextPresent(TXT_LINK_FOR_SCORES, "Link for SCORES label", 7);
+            /*
+             * IMPORTANT FOR QA/LIVE LAYOUT DIFFERENCES:
+             *
+             * Flutter can expose lower semantic nodes before they are actually visible to the user.
+             * Do not stop just because "Link for SCORES" exists in page source. Align each real target
+             * into a safe visible area above the sticky Submit region, then validate it.
+             */
+            WebElement androidTarget = alignFirstTargetAboveSubmit(
+                    "Android App link",
+                    6,
+                    androidAppLink,
+                    androidAppLinkContains
+            );
+
+            if (androidTarget == null) {
+                throw new RuntimeException("Android App link could not be aligned into the visible viewport.");
+            }
+
+            assertExpectedTextPresent(TXT_LINK_FOR_SCORES, "Link for SCORES label", 2);
             assertAndroidAppLinkPresent();
-            assertExpectedTextPresent(TXT_ANDROID_APP, "Android App link text", 7);
+            assertExpectedTextPresent(TXT_ANDROID_APP, "Android App link text", 2);
+
+            WebElement iosTarget = alignFirstTargetAboveSubmit(
+                    "iOS App link",
+                    5,
+                    iosAppLink,
+                    iosAppLinkUpper,
+                    iosAppLinkContainsLowerI,
+                    iosAppLinkContainsUpperI
+            );
+
+            if (iosTarget == null) {
+                throw new RuntimeException("iOS App link could not be aligned into the visible viewport.");
+            }
 
             assertIosAppLinkPresent();
-            assertExpectedTextPresentEither(TXT_IOS_APP, "IOS App", "iOS App link text", 7);
+            assertExpectedTextPresentEither(TXT_IOS_APP, "IOS App", "iOS App link text", 2);
 
             ReportLogger.pass("Android App and iOS App exact link text validated successfully");
         } catch (Exception e) {
@@ -603,47 +697,118 @@ public class ContactUsPage {
                 recoverContactUsIfNeeded();
             }
 
-            scrollToScoresLinksArea();
+            WebElement element = alignFirstTargetAboveSubmit(
+                    "SEBI SCORES link",
+                    6,
+                    scoresLink
+            );
 
-            By exactScoresLink = AppiumBy.accessibilityId("https://scores.sebi.gov.in");
-            By scoresXpath = AppiumBy.xpath("//android.widget.Button[@content-desc=\"https://scores.sebi.gov.in\"]");
+            if (element == null) {
+                throw new RuntimeException(
+                        "SEBI SCORES link was found semantically but could not be aligned into the visible viewport."
+                );
+            }
+
+            Rectangle rect = element.getRect();
+            ReportLogger.step(
+                    "SEBI SCORES link found"
+                            + " | x=" + rect.getX()
+                            + " | y=" + rect.getY()
+                            + " | width=" + rect.getWidth()
+                            + " | height=" + rect.getHeight()
+                            + " | clickable=" + safeAttribute(element, "clickable")
+                            + " | enabled=" + safeAttribute(element, "enabled")
+            );
 
             String beforePackage = safeCurrentPackage();
             String beforeSource = normalizeForSearch(safePageSource());
 
-            boolean tapped = false;
-
-            if (tapElementIfPresent(exactScoresLink, "SEBI SCORES link by accessibility id")) {
-                tapped = true;
-            } else if (tapElementIfPresent(scoresXpath, "SEBI SCORES link by exact xpath")) {
-                tapped = true;
-            } else if (tapElementIfPresent(scoresLink, "SEBI SCORES link fallback locator")) {
-                tapped = true;
-            } else {
-                ReportLogger.step("SEBI SCORES locator tap failed. Trying Appium Inspector coordinate fallback.");
-                tapAt(412, 1977, "SEBI SCORES link coordinate fallback");
-                tapped = true;
+            // =============================================================
+            // ATTEMPT 1 - Runtime visible URL text-area tap (PRIMARY)
+            // =============================================================
+            // This is the proven working interaction for this Flutter link.
+            // Appium exposes a semantic rectangle wider than the rendered URL,
+            // so center-oriented semantic clicks can land in blank space.
+            //
+            // The tap point is derived from the element's live runtime bounds,
+            // therefore there are no fixed emulator/device coordinates.
+            if (tapScoresVisibleTextArea(element)) {
+                if (waitForScoresNavigation(
+                        beforePackage,
+                        beforeSource,
+                        2200,
+                        "SEBI SCORES link - visible URL text area")) {
+                    ReportLogger.pass(
+                            "SEBI SCORES link opened successfully using runtime visible-text-area tap"
+                    );
+                    return;
+                }
             }
 
-            if (!tapped) {
-                throw new RuntimeException("Unable to tap SEBI SCORES link using locator or coordinate fallback.");
-            }
-
-            if (isScoresTapResponseDetected(beforePackage, beforeSource, "SEBI SCORES link")) {
+            // If navigation completed just after the short polling window,
+            // never send a second tap into Chrome/chooser/external UI.
+            if (!isContactUsPageVisible()) {
+                ReportLogger.pass(
+                        "SEBI SCORES navigation detected after runtime visible-text-area tap"
+                );
                 return;
             }
 
-            ReportLogger.step("SEBI SCORES normal tap did not show response. Trying coordinate fallback from Appium Inspector.");
-            tapAt(412, 1977, "SEBI SCORES link coordinate fallback retry");
+            // Re-fetch after the physical tap because Flutter may rebuild the
+            // semantics tree and stale the original element reference.
+            element = findFirstDisplayedElement(scoresLink);
+            if (element == null) {
+                throw new RuntimeException(
+                        "SEBI SCORES link disappeared before semantic click fallback could be attempted."
+                );
+            }
 
-            if (isScoresTapResponseDetected(beforePackage, beforeSource, "SEBI SCORES link after coordinate fallback")) {
+            // =============================================================
+            // ATTEMPT 2 - Native WebElement.click() (FALLBACK ONLY)
+            // =============================================================
+            try {
+                element.click();
+                ReportLogger.step(
+                        "Fallback: tapped SEBI SCORES link using WebElement.click()"
+                );
+
+                if (waitForScoresNavigation(
+                        beforePackage,
+                        beforeSource,
+                        2200,
+                        "SEBI SCORES link - WebElement.click() fallback")) {
+                    ReportLogger.pass(
+                            "SEBI SCORES link opened successfully using WebElement.click() fallback"
+                    );
+                    return;
+                }
+            } catch (Exception clickException) {
+                ReportLogger.debug(
+                        "WebElement.click() fallback failed for SEBI SCORES link: "
+                                + cleanError(clickException.getMessage())
+                );
+            }
+
+            if (!isContactUsPageVisible()) {
+                ReportLogger.pass(
+                        "SEBI SCORES navigation detected after WebElement.click() fallback"
+                );
                 return;
             }
 
-            throw new RuntimeException("SEBI SCORES link tap did not open browser/chooser and did not change UI state.");
+            captureScreenshot("CU_020_SCORES_Link_No_Navigation");
+            throw new RuntimeException(
+                    "SEBI SCORES link is present and clickable, but runtime visible URL text-area tap "
+                            + "and semantic click fallback produced no browser, chooser, WebView, package, "
+                            + "or screen transition."
+            );
 
         } catch (Exception e) {
-            throw new RuntimeException("SEBI SCORES link functional tap validation failed: " + cleanError(e.getMessage()), e);
+            captureScreenshot("CU_020_SCORES_Functional_Tap_Failure");
+            throw new RuntimeException(
+                    "SEBI SCORES link functional tap validation failed: " + cleanError(e.getMessage()),
+                    e
+            );
         } finally {
             returnToContactUsAfterExternalAction();
         }
@@ -657,77 +822,296 @@ public class ContactUsPage {
         verifyIosAppLinkFunctionalTap();
     }
 
+    private boolean waitForScoresNavigation(
+            String beforePackage,
+            String beforeSource,
+            long timeoutMillis,
+            String actionName) {
 
-    private boolean isScoresTapResponseDetected(String beforePackage, String beforeSource, String actionName) {
-        sleep(7000);
+        long deadline = System.currentTimeMillis() + timeoutMillis;
+        String lastPackage = beforePackage;
+        String lastSource = beforeSource;
 
-        String afterPackage = safeCurrentPackage();
-        String afterSourceRaw = safePageSource();
-        String afterSource = normalizeForSearch(afterSourceRaw);
+        while (System.currentTimeMillis() < deadline) {
+            String afterPackage = safeCurrentPackage();
 
-        boolean packageChanged = beforePackage != null
-                && afterPackage != null
-                && !beforePackage.isEmpty()
-                && !afterPackage.isEmpty()
-                && !beforePackage.equalsIgnoreCase(afterPackage);
+            boolean packageChanged = beforePackage != null
+                    && afterPackage != null
+                    && !beforePackage.isEmpty()
+                    && !afterPackage.isEmpty()
+                    && !beforePackage.equalsIgnoreCase(afterPackage);
 
-        boolean browserMarkerFound =
-                containsIgnoreCase(afterPackage, "chrome")
-                        || containsIgnoreCase(afterPackage, "browser")
-                        || containsIgnoreCase(afterSourceRaw, "Chrome")
-                        || containsIgnoreCase(afterSourceRaw, "Browser")
-                        || containsIgnoreCase(afterSourceRaw, "Open with")
-                        || containsIgnoreCase(afterSourceRaw, "scores.sebi.gov.in")
-                        || containsIgnoreCase(afterSourceRaw, "SEBI")
-                        || containsIgnoreCase(afterSourceRaw, "SCORES");
+            // Once Android reports another foreground package, we have definitely left Advisor.
+            // Do not trust a stale Flutter/UiAutomator2 hierarchy from the previous frame.
+            boolean leftContactUs = packageChanged || !isContactUsPageVisible();
+
+            // Package change or leaving the Contact Us screen is strong proof of navigation and is
+            // much safer than treating the words "SEBI" or "SCORES" as success markers because
+            // those words already exist on the Contact Us page before the click.
+            if (packageChanged || leftContactUs) {
+                ReportLogger.pass(
+                        "Functional navigation detected for " + actionName
+                                + " | packageChanged=" + packageChanged
+                                + " | leftContactUs=" + leftContactUs
+                                + " | currentPackage=" + afterPackage
+                );
+                return true;
+            }
+
+            String afterSourceRaw = safePageSource();
+            String afterSource = normalizeForSearch(afterSourceRaw);
+            lastPackage = afterPackage;
+            lastSource = afterSource;
+
+            boolean newExternalMarker = containsNewExternalMarker(beforeSource, afterSource);
+            if (newExternalMarker) {
+                ReportLogger.pass(
+                        "External chooser/browser marker appeared for " + actionName
+                                + " | currentPackage=" + afterPackage
+                );
+                return true;
+            }
+
+            sleep(250);
+        }
 
         boolean sourceChanged = beforeSource != null
-                && afterSource != null
-                && !beforeSource.equals(afterSource);
+                && lastSource != null
+                && !beforeSource.equals(lastSource);
 
-        boolean leftContactUs = !isContactUsPageVisible();
+        ReportLogger.debug(
+                "No valid navigation response detected for " + actionName
+                        + " | currentPackage=" + lastPackage
+                        + " | sourceChanged=" + sourceChanged
+                        + " | ContactUsStillVisible=" + isContactUsPageVisible()
+        );
 
-        if (packageChanged || browserMarkerFound || sourceChanged || leftContactUs) {
-            ReportLogger.pass(
-                    "Functional tap response detected for " + actionName
-                            + " | packageChanged=" + packageChanged
-                            + " | currentPackage=" + afterPackage
-                            + " | browserMarkerFound=" + browserMarkerFound
-                            + " | sourceChanged=" + sourceChanged
-                            + " | leftContactUs=" + leftContactUs
-            );
-            return true;
+        return false;
+    }
+
+    private boolean containsNewExternalMarker(String beforeSource, String afterSource) {
+        if (afterSource == null || afterSource.isEmpty()) {
+            return false;
+        }
+
+        String before = beforeSource == null ? "" : beforeSource;
+        String[] markers = new String[]{
+                "chrome",
+                "browser",
+                "open with",
+                "complete action using",
+                "just once",
+                "always"
+        };
+
+        for (String marker : markers) {
+            String normalizedMarker = normalizeForSearch(marker);
+            if (afterSource.contains(normalizedMarker) && !before.contains(normalizedMarker)) {
+                return true;
+            }
         }
 
         return false;
     }
 
+    private WebElement findFirstDisplayedElement(By locator) {
+        try {
+            List<WebElement> elements = driver.findElements(locator);
+            if (elements == null) {
+                return null;
+            }
+
+            for (WebElement element : elements) {
+                if (element == null) {
+                    continue;
+                }
+
+                try {
+                    if (element.isDisplayed()) {
+                        return element;
+                    }
+                } catch (Exception ignored) {
+                    // Try the next semantic node.
+                }
+            }
+        } catch (Exception e) {
+            ReportLogger.debug("Element lookup failed: " + cleanError(e.getMessage()));
+        }
+
+        return null;
+    }
+
+    private boolean tapWithMobileClickGesture(WebElement element, String elementName) {
+        try {
+            if (!(element instanceof RemoteWebElement)) {
+                return false;
+            }
+
+            Map<String, Object> args = new HashMap<>();
+            args.put("elementId", ((RemoteWebElement) element).getId());
+
+            ((JavascriptExecutor) driver).executeScript("mobile: clickGesture", args);
+            ReportLogger.step("Tapped " + elementName + " using element-based mobile: clickGesture");
+            return true;
+        } catch (Exception e) {
+            ReportLogger.debug(
+                    "mobile: clickGesture failed for " + elementName + ": " + cleanError(e.getMessage())
+            );
+            return false;
+        }
+    }
+
+    private boolean tapDynamicElementCenter(WebElement element, String elementName) {
+        try {
+            Rectangle rect = element.getRect();
+            Dimension screen = driver.manage().window().getSize();
+
+            if (rect.getWidth() <= 0 || rect.getHeight() <= 0) {
+                return false;
+            }
+
+            // Reject full-screen/parent semantic nodes. This protects all dynamic-center fallbacks
+            // from accidentally tapping a Flutter scroll container.
+            if (rect.getWidth() >= (int) (screen.width * 0.80)
+                    || rect.getHeight() >= (int) (screen.height * 0.50)) {
+                ReportLogger.debug(
+                        "Skipped dynamic center tap for oversized semantic node: " + elementName
+                                + " | width=" + rect.getWidth()
+                                + " | height=" + rect.getHeight()
+                );
+                return false;
+            }
+
+            int centerX = rect.getX() + (rect.getWidth() / 2);
+            int centerY = rect.getY() + (rect.getHeight() / 2);
+
+            // Keep the runtime-calculated point inside the current viewport.
+            centerX = Math.max(1, Math.min(screen.width - 2, centerX));
+            centerY = Math.max(1, Math.min(screen.height - 2, centerY));
+
+            tapAt(centerX, centerY, elementName);
+            return true;
+        } catch (Exception e) {
+            ReportLogger.debug(
+                    "Dynamic center tap failed for " + elementName + ": " + cleanError(e.getMessage())
+            );
+            return false;
+        }
+    }
+
+    private boolean tapScoresVisibleTextArea(WebElement element) {
+        try {
+            Rectangle rect = element.getRect();
+            Dimension screen = driver.manage().window().getSize();
+
+            if (rect.getWidth() <= 0 || rect.getHeight() <= 0) {
+                ReportLogger.debug("SEBI SCORES element has invalid bounds for visible-text tap.");
+                return false;
+            }
+
+            // Protect against accidentally receiving a Flutter parent/scroll
+            // container instead of the actual URL semantic node.
+            if (rect.getWidth() >= (int) (screen.width * 0.90)
+                    || rect.getHeight() >= (int) (screen.height * 0.50)) {
+                ReportLogger.debug(
+                        "Skipped SCORES visible-text tap for oversized semantic node"
+                                + " | width=" + rect.getWidth()
+                                + " | height=" + rect.getHeight()
+                );
+                return false;
+            }
+
+            /*
+             * Flutter exposes the SCORES URL semantic box wider than the
+             * rendered hyperlink text. Tap 18% from the element's left edge
+             * and vertically centered so the hit lands on the visible URL.
+             *
+             * The tap point is recalculated from the current element bounds on every
+             * device/build, so there are no fixed emulator or QA coordinates here.
+             */
+            int tapX = rect.getX() + (int) Math.round(rect.getWidth() * 0.18d);
+            int tapY = rect.getY() + (rect.getHeight() / 2);
+
+            tapX = Math.max(1, Math.min(screen.width - 2, tapX));
+            tapY = Math.max(1, Math.min(screen.height - 2, tapY));
+
+            ReportLogger.step(
+                    "Tapping visible SEBI SCORES URL text area"
+                            + " | elementX=" + rect.getX()
+                            + " | elementY=" + rect.getY()
+                            + " | width=" + rect.getWidth()
+                            + " | height=" + rect.getHeight()
+                            + " | tapX=" + tapX
+                            + " | tapY=" + tapY
+            );
+
+            tapAt(tapX, tapY, "SEBI SCORES visible URL text area");
+            return true;
+        } catch (Exception e) {
+            ReportLogger.debug(
+                    "SEBI SCORES visible-text-area tap failed: " + cleanError(e.getMessage())
+            );
+            return false;
+        }
+    }
+
     public void verifyAndroidAppLinkFunctionalTap() {
-        scrollToScoresLinksArea();
-        assertTapOpensExternalOrChooserAndReturn(
-                androidAppLink,
+        WebElement aligned = alignFirstTargetAboveSubmit(
                 "Android App link",
-                7,
+                6,
+                androidAppLink,
+                androidAppLinkContains
+        );
+
+        if (aligned == null) {
+            throw new RuntimeException(
+                    "Android App link could not be aligned into the visible viewport before functional tap."
+            );
+        }
+
+        By functionalLocator = findFirstDisplayedElement(androidAppLink) != null
+                ? androidAppLink
+                : androidAppLinkContains;
+
+        assertTapOpensExternalOrChooserAndReturn(
+                functionalLocator,
+                "Android App link",
+                3,
                 "Android App", "Play Store", "Chrome", "Browser", "Open with", "SCORES"
         );
     }
 
     public void verifyIosAppLinkFunctionalTap() {
-        scrollToScoresLinksArea();
-        if (isElementPresent(iosAppLink)) {
-            assertTapOpensExternalOrChooserAndReturn(
-                    iosAppLink,
-                    "iOS App link",
-                    7,
-                    "iOS App", "App Store", "Chrome", "Browser", "Open with", "SCORES"
+        WebElement aligned = alignFirstTargetAboveSubmit(
+                "iOS App link",
+                6,
+                iosAppLink,
+                iosAppLinkUpper,
+                iosAppLinkContainsLowerI,
+                iosAppLinkContainsUpperI
+        );
+
+        if (aligned == null) {
+            throw new RuntimeException(
+                    "iOS App link could not be aligned into the visible viewport before functional tap."
             );
-            return;
+        }
+
+        By functionalLocator;
+        if (findFirstDisplayedElement(iosAppLink) != null) {
+            functionalLocator = iosAppLink;
+        } else if (findFirstDisplayedElement(iosAppLinkUpper) != null) {
+            functionalLocator = iosAppLinkUpper;
+        } else if (findFirstDisplayedElement(iosAppLinkContainsLowerI) != null) {
+            functionalLocator = iosAppLinkContainsLowerI;
+        } else {
+            functionalLocator = iosAppLinkContainsUpperI;
         }
 
         assertTapOpensExternalOrChooserAndReturn(
-                iosAppLinkContainsLowerI,
+                functionalLocator,
                 "iOS App link",
-                7,
+                3,
                 "iOS App", "IOS App", "App Store", "Chrome", "Browser", "Open with", "SCORES"
         );
     }
@@ -817,23 +1201,60 @@ public class ContactUsPage {
     // =====================================================================
 
     public boolean isContactUsPageVisible() {
-        if (isElementPresent(pageTitle)) {
+        /*
+         * PACKAGE GATE - REQUIRED FOR EXTERNAL APP TESTS
+         *
+         * After opening Chrome, Dialer, Gmail, Files, Play Store, etc., UiAutomator2 can briefly
+         * expose semantic nodes from the previous Flutter frame. Without this package check the
+         * framework can falsely report that Contact us is still visible even though another app is
+         * actually foreground.
+         */
+        if (!isAdvisorAppForeground()) {
+            return false;
+        }
+
+        // Avoid getPageSource() here. This method is called frequently by recovery and functional
+        // tests, and XML hierarchy generation is expensive on Flutter screens. Detect the page from
+        // strong semantic markers that can appear at different scroll positions instead.
+        return isElementPresent(pageTitle)
+                || isElementPresent(yourMessageLabel)
+                || isElementPresent(chooseFile)
+                || isElementPresent(escalationMatrix)
+                || isElementPresent(phoneLabel)
+                || isElementPresent(phoneNumber)
+                || isElementPresent(workingHours)
+                || isElementPresent(postalAddressLabel)
+                || isElementPresent(postalAddress)
+                || isElementPresent(grievanceEmail)
+                || isElementPresent(scoresLink)
+                || isElementPresent(androidAppLink)
+                || isElementPresent(androidAppLinkContains)
+                || isElementPresent(iosAppLink)
+                || isElementPresent(iosAppLinkUpper)
+                || isElementPresent(submitButton);
+    }
+
+    private boolean isHubAreaVisible() {
+        if (!isAdvisorAppForeground()) {
+            return false;
+        }
+
+        // Do not treat the bottom-nav Hub button alone as proof that the Hub content is open; the
+        // bottom navigation can remain visible on other screens. Prefer Hub-specific semantic nodes.
+        if (isElementPresent(hubStocksSection)
+                || isElementPresent(moreLabelDesc)
+                || isElementPresent(contactUsHubTile)
+                || isElementPresent(faqsDesc)
+                || isElementPresent(aboutUsDesc)
+                || isElementPresent(privacyPolicyDesc)) {
             return true;
         }
 
         String source = safePageSource();
-        return containsIgnoreCase(source, "Contact us")
-                && containsIgnoreCase(source, "Your Message")
-                && containsIgnoreCase(source, "Submit");
-    }
-
-    private boolean isHubAreaVisible() {
-        return isElementPresent(hubTab)
-                || isElementPresent(faqsDesc)
-                || isElementPresent(aboutUsDesc)
-                || isElementPresent(privacyPolicyDesc)
-                || containsIgnoreCase(safePageSource(), "FAQs")
-                || containsIgnoreCase(safePageSource(), "Hub");
+        return containsIgnoreCase(source, "View frequently asked questions")
+                || containsIgnoreCase(source, "Learn about Value Research")
+                || containsIgnoreCase(source, "Get in touch with us")
+                || containsIgnoreCase(source, "Read our privacy policy");
     }
 
     private void assertPresentOnCurrentScreen(By locator, String elementName) {
@@ -1022,23 +1443,121 @@ public class ContactUsPage {
                 + " | Note: placeholder may be visual-only and not exposed in Appium source.");
     }
 
-    private void scrollToScoresLinksArea() {
-        for (int attempt = 0; attempt <= 7; attempt++) {
-            String source = safePageSource();
-
-            if (containsIgnoreCase(source, "Link for SCORES")
-                    || containsIgnoreCase(source, "Android App")
-                    || containsIgnoreCase(source, "iOS App")
-                    || containsIgnoreCase(source, "IOS App")) {
-                ReportLogger.step("SCORES app-links area is visible/present");
-                return;
-            }
-
-            swipeUpW3C();
-            sleep(550);
+    private WebElement alignFirstTargetAboveSubmit(String targetName, int maxSwipes, By... locators) {
+        if (locators == null || locators.length == 0) {
+            return null;
         }
 
-        ReportLogger.debug("SCORES app-links area was not confirmed before link validation. Continuing with direct locator checks.");
+        for (int attempt = 0; attempt <= maxSwipes; attempt++) {
+            WebElement target = findFirstDisplayedFromLocators(locators);
+
+            if (target != null) {
+                try {
+                    Rectangle targetRect = target.getRect();
+                    Dimension screen = driver.manage().window().getSize();
+
+                    if (targetRect != null
+                            && targetRect.getWidth() > 0
+                            && targetRect.getHeight() > 0) {
+
+                        int targetBottom = targetRect.getY() + targetRect.getHeight();
+
+                        // Keep the lower links away from the bottom navigation / clipped viewport.
+                        int safeBottom = (int) Math.round(screen.height * 0.90d);
+                        int safetyMargin = Math.max(24, (int) Math.round(screen.height * 0.015d));
+
+                        // The QA layout has a sticky Submit region at the bottom. Use it as an
+                        // additional runtime obstruction boundary only while it is actually sitting
+                        // in the lower part of the viewport.
+                        WebElement submit = findFirstDisplayedElement(submitButton);
+                        int submitTop = -1;
+
+                        if (submit != null) {
+                            try {
+                                Rectangle submitRect = submit.getRect();
+                                if (submitRect != null) {
+                                    submitTop = submitRect.getY();
+
+                                    if (submitTop >= (int) Math.round(screen.height * 0.72d)) {
+                                        safeBottom = Math.min(
+                                                safeBottom,
+                                                submitTop - safetyMargin
+                                        );
+                                    }
+                                }
+                            } catch (Exception ignored) {
+                                // Fall back to the screen-based safe-bottom boundary.
+                            }
+                        }
+
+                        boolean fullyVisibleInSafeZone = targetRect.getY() >= 0
+                                && targetBottom <= safeBottom;
+
+                        if (fullyVisibleInSafeZone) {
+                            ReportLogger.step(
+                                    targetName + " aligned in safe viewport"
+                                            + " | attempt=" + attempt
+                                            + " | x=" + targetRect.getX()
+                                            + " | y=" + targetRect.getY()
+                                            + " | width=" + targetRect.getWidth()
+                                            + " | height=" + targetRect.getHeight()
+                                            + " | targetBottom=" + targetBottom
+                                            + " | safeBottom=" + safeBottom
+                                            + (submitTop >= 0 ? " | submitTop=" + submitTop : "")
+                            );
+                            return target;
+                        }
+
+                        ReportLogger.step(
+                                targetName + " is semantically present but not safely visible yet"
+                                        + " | attempt=" + attempt
+                                        + " | y=" + targetRect.getY()
+                                        + " | height=" + targetRect.getHeight()
+                                        + " | targetBottom=" + targetBottom
+                                        + " | safeBottom=" + safeBottom
+                                        + (submitTop >= 0 ? " | submitTop=" + submitTop : "")
+                        );
+                    }
+                } catch (Exception e) {
+                    ReportLogger.debug(
+                            "Unable to inspect viewport bounds for " + targetName + ": "
+                                    + cleanError(e.getMessage())
+                    );
+                }
+            } else {
+                ReportLogger.step(
+                        targetName + " is not displayed in the current viewport"
+                                + " | alignment attempt=" + attempt
+                );
+            }
+
+            if (attempt < maxSwipes) {
+                swipeUpSmall();
+                sleep(400);
+            }
+        }
+
+        captureScreenshot("CU_Target_Alignment_Failure_" + cleanFileName(targetName));
+        return null;
+    }
+
+    private WebElement findFirstDisplayedFromLocators(By... locators) {
+        if (locators == null) {
+            return null;
+        }
+
+        for (By locator : locators) {
+            if (locator == null) {
+                continue;
+            }
+
+            WebElement element = findFirstDisplayedElement(locator);
+            if (element != null) {
+                return element;
+            }
+        }
+
+        return null;
     }
 
     private void assertAndroidAppLinkPresent() {
@@ -1340,27 +1859,76 @@ public class ContactUsPage {
     }
 
     private void returnToContactUsAfterExternalAction() {
-        for (int attempt = 1; attempt <= 5; attempt++) {
-            if (isContactUsPageVisible()) {
-                ReportLogger.pass("Returned to Contact us page after functional action");
-                return;
-            }
+        ReportLogger.step("Restoring Advisor Contact us page after functional action");
+
+        // Fast path: only accept Contact us when the Advisor package itself is foreground.
+        if (isAdvisorAppForeground() && isContactUsPageVisible()) {
+            ReportLogger.step("Contact us page is already active after functional action/recovery check");
+            return;
+        }
+
+        // Preferred recovery for browser/chooser/dialer/email/file-picker actions: Android BACK.
+        // Keep it controlled. Most external actions return in one Back press; a few chooser flows may
+        // need two or three. Every attempt verifies both package and Contact us semantics.
+        for (int attempt = 1; attempt <= 4; attempt++) {
+            String currentPackage = safeCurrentPackage();
+
+            ReportLogger.step(
+                    "External-action recovery attempt: " + attempt
+                            + " | currentPackage=" + currentPackage
+            );
 
             pressBackSafely();
-            sleep(900);
+            sleep(700);
+
+            if (isAdvisorAppForeground() && waitForContactUsPageVisible(1200)) {
+                ReportLogger.pass("Returned to Contact us page after external action");
+                return;
+            }
         }
 
+        // If BACK did not restore Advisor, explicitly bring the app to foreground. This is safe for
+        // real devices and emulators and avoids trying Hub navigation while Chrome/Dialer/etc. is active.
         try {
-            ReportLogger.step("Back navigation did not restore Contact us. Activating Advisor app.");
-            driver.activateApp("com.valueresearch.advisor");
-            sleep(1200);
+            ReportLogger.step("Back recovery did not restore Contact us. Activating Advisor app.");
+            driver.activateApp(ADVISOR_APP_PACKAGE);
+            sleep(900);
         } catch (Exception e) {
-            ReportLogger.debug("activateApp failed while recovering Contact us: " + cleanError(e.getMessage()));
+            ReportLogger.debug(
+                    "activateApp failed while recovering Contact us: " + cleanError(e.getMessage())
+            );
         }
 
-        if (!isContactUsPageVisible()) {
-            recoverContactUsIfNeeded();
+        // Advisor often resumes exactly where it left off. Accept that immediately when confirmed.
+        if (isAdvisorAppForeground() && waitForContactUsPageVisible(1800)) {
+            ReportLogger.pass("Contact us restored after activating Advisor app");
+            return;
         }
+
+        // Advisor resumed elsewhere. Navigate through Hub only after Advisor is confirmed foreground.
+        if (!isAdvisorAppForeground()) {
+            throw new RuntimeException(
+                    "Unable to restore Advisor app after external functional action. "
+                            + "Current package=" + safeCurrentPackage()
+            );
+        }
+
+        ReportLogger.step("Advisor app restored but Contact us is not active. Reopening through Hub.");
+        openContactUsFromHub();
+
+        if (!isAdvisorAppForeground() || !isContactUsPageVisible()) {
+            throw new RuntimeException(
+                    "Unable to restore Contact us page after external application action."
+            );
+        }
+
+        ReportLogger.pass("Contact us page restored through Hub");
+    }
+
+    private boolean isAdvisorAppForeground() {
+        String currentPackage = safeCurrentPackage();
+        return currentPackage != null
+                && ADVISOR_APP_PACKAGE.equalsIgnoreCase(currentPackage.trim());
     }
 
     private String safeCurrentPackage() {
@@ -1406,6 +1974,12 @@ public class ContactUsPage {
 
     private void swipeUpW3C() {
         performVerticalSwipe(0.78, 0.28, 650);
+    }
+
+    private void swipeUpSmall() {
+        // Small controlled movement for lower inline links. A full-page swipe can overshoot
+        // Android/iOS/SCORES targets on compact layouts, while this keeps them in context.
+        performVerticalSwipe(0.74, 0.56, 350);
     }
 
     private void swipeDownW3C() {

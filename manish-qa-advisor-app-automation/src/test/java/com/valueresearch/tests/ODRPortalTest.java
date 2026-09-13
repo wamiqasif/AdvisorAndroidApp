@@ -21,6 +21,7 @@ public class ODRPortalTest extends BaseTest {
         ReportLogger.step("Starting test case: ODR_001 - Verify ODR Portal redirection from Hub");
 
         ODRPortalPage odrPortalPage = new ODRPortalPage(driver);
+        boolean hubWasOpened = false;
 
         try {
             ReportLogger.step("ODR STEP 01 - Capture Advisor app package");
@@ -33,6 +34,7 @@ public class ODRPortalTest extends BaseTest {
 
             ReportLogger.step("ODR STEP 03 - Open Hub from bottom navigation");
             odrPortalPage.openHubFromBottomNavigationForODR();
+            hubWasOpened = true;
             ReportLogger.pass("ODR STEP 03 PASSED - Hub page opened");
 
             ReportLogger.step("ODR STEP 04 - Scroll Hub page to ODR Portal option");
@@ -54,9 +56,21 @@ public class ODRPortalTest extends BaseTest {
             markPassed("ODR_001 - ODR Portal redirection validated successfully");
 
         } finally {
-            ReportLogger.step("ODR STEP 08 - Return back to Advisor App");
-            odrPortalPage.returnBackToAdvisorAppSafely();
-            ReportLogger.pass("ODR STEP 08 COMPLETED - Return flow executed");
+            if (hubWasOpened) {
+                try {
+                    ReportLogger.step("ODR STEP 08 - Return back to Advisor App");
+                    odrPortalPage.returnBackToAdvisorAppSafely();
+                    ReportLogger.pass("ODR STEP 08 COMPLETED - Return flow executed");
+                } catch (AssertionError e) {
+                    ReportLogger.debug("ODR STEP 08 cleanup assertion ignored so original test result is preserved: "
+                            + e.getMessage());
+                } catch (Exception e) {
+                    ReportLogger.debug("ODR STEP 08 cleanup error ignored so original test result is preserved: "
+                            + e.getMessage());
+                }
+            } else {
+                ReportLogger.debug("ODR STEP 08 SKIPPED - Hub was never opened because the test failed earlier");
+            }
         }
     }
 

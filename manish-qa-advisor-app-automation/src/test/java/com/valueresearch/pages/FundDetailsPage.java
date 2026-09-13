@@ -1246,24 +1246,90 @@ public class FundDetailsPage {
     }
 
     private void scrollToTrailingReturnsSectionMandatory() {
-        if (isVisible(byDesc("Trailing Returns"))) {
+        if (isVisible(byDesc("Trailing Returns"))
+                || isVisible(byDescContains("Trailing Returns"))) {
             ReportLogger.pass("Trailing Returns section is visible");
             return;
         }
 
-        ReportLogger.step("Scrolling to Trailing Returns section");
+        ReportLogger.step("Aligning Trailing Returns section");
 
-        for (int i = 1; i <= 8; i++) {
-            swipeUpW3C();
-            sleep(800);
+        /*
+         * Discrete Returns validation can leave the page below Trailing Returns.
+         * If Rolling Returns is already visible, Trailing Returns is above the
+         * current viewport, so first move back up the page using swipeDownW3C().
+         */
+        boolean belowTrailingReturns =
+                isVisible(byDesc("Rolling Returns"))
+                        || isVisible(byDescContains("Rolling Returns"))
+                        || isVisible(byDesc("Select rolling return period"))
+                        || isVisible(byDescContains("Select rolling return period"));
 
-            if (isVisible(byDesc("Trailing Returns"))) {
-                ReportLogger.pass("Trailing Returns section is visible");
-                return;
+        if (belowTrailingReturns) {
+            ReportLogger.step(
+                    "Rolling Returns area is visible. Searching upward for Trailing Returns"
+            );
+
+            for (int i = 1; i <= 10; i++) {
+                swipeDownW3C();
+                sleep(700);
+
+                if (isVisible(byDesc("Trailing Returns"))
+                        || isVisible(byDescContains("Trailing Returns"))) {
+                    ReportLogger.pass(
+                            "Trailing Returns section restored above Rolling Returns"
+                    );
+                    return;
+                }
             }
         }
 
-        throw new AssertionError("Trailing Returns section is not visible");
+        /*
+         * Normal path: Trailing Returns is still below the current viewport.
+         * Search downward in controlled steps. If we reach Rolling Returns, we
+         * have crossed the target; reverse direction instead of continuing down.
+         */
+        for (int i = 1; i <= 10; i++) {
+            swipeUpW3C();
+            sleep(700);
+
+            if (isVisible(byDesc("Trailing Returns"))
+                    || isVisible(byDescContains("Trailing Returns"))) {
+                ReportLogger.pass("Trailing Returns section is visible");
+                return;
+            }
+
+            boolean crossedTrailingReturns =
+                    isVisible(byDesc("Rolling Returns"))
+                            || isVisible(byDescContains("Rolling Returns"))
+                            || isVisible(byDesc("Select rolling return period"))
+                            || isVisible(byDescContains("Select rolling return period"));
+
+            if (crossedTrailingReturns) {
+                ReportLogger.step(
+                        "Passed Trailing Returns and reached Rolling Returns. Reversing scroll direction"
+                );
+
+                for (int reverseAttempt = 1; reverseAttempt <= 8; reverseAttempt++) {
+                    swipeDownW3C();
+                    sleep(700);
+
+                    if (isVisible(byDesc("Trailing Returns"))
+                            || isVisible(byDescContains("Trailing Returns"))) {
+                        ReportLogger.pass(
+                                "Trailing Returns section found after bidirectional realignment"
+                        );
+                        return;
+                    }
+                }
+
+                break;
+            }
+        }
+
+        throw new AssertionError(
+                "Trailing Returns section is not visible after bidirectional alignment"
+        );
     }
 
     private void tapTrailingReturnChipMandatory(String chipName) {
@@ -1593,7 +1659,14 @@ public class FundDetailsPage {
 
         String clean = value.trim();
 
-        return clean.matches("-?\\d+(\\.\\d+)?") || clean.equals("-");
+        /*
+         * QA can legitimately expose unavailable return values as "--".
+         * Treat both "-" and "--" as valid table cells so a complete row is
+         * not incorrectly reported as missing numeric data.
+         */
+        return clean.matches("-?\\d+(\\.\\d+)?")
+                || clean.equals("-")
+                || clean.equals("--");
     }
 
     private void logReturnRowIfPresent(String sectionName, List<String> values, String rowStartText, String rowLabel) {
@@ -2576,72 +2649,188 @@ public class FundDetailsPage {
  }
 
  public void verifyWorstOneYearReturnsFootnoteForPaidUser() {
-	    recoverFundDetailsIfNeeded();
+        recoverFundDetailsIfNeeded();
 
-	    ReportLogger.step("Verifying Worst 1 year returns footnote for paid user");
+        ReportLogger.step("Verifying Worst 1 year returns footnote for paid user");
 
-	    scrollToTopOfFundDetails();
-	    scrollUntilVisible("What is the risk?", 14);
+        scrollToTopOfFundDetails();
 
-	    List<String> worstReturnFailures = new ArrayList<>();
+        /*
+         * Do not stop as soon as only the "What is the risk?" heading appears.
+         * On QA the heading can be visible while the Riskometer and Worst 1 year
+         * returns content are still below the viewport. Reuse the proven Risk-card
+         * alignment logic used by FD_006.
+         */
+        scrollToRiskAssessmentCard();
 
-	    runSoftValidation(worstReturnFailures, "Risk section heading", new Runnable() {
-	        @Override
-	        public void run() {
-	            assertVisibleAndLog(byDesc("What is the risk?"), "Risk section heading");
-	        }
-	    });
+        List<String> worstReturnFailures = new ArrayList<>();
 
-	    runSoftValidation(worstReturnFailures, "Riskometer value", new Runnable() {
-	        @Override
-	        public void run() {
-	            assertVisibleAndLog(byDesc("Very High"), "Riskometer value");
-	        }
-	    });
+        /*
+         * Validate the upper/middle Risk-card content before moving slightly lower
+         * to the footnote. This prevents a legitimate footnote alignment swipe from
+         * pushing the heading out of the viewport and creating a false failure.
+         */
+        runSoftValidation(worstReturnFailures, "Risk section heading", new Runnable() {
+            @Override
+            public void run() {
+                assertVisibleAndLog(byDesc("What is the risk?"), "Risk section heading");
+            }
+        });
 
-	    runSoftValidation(worstReturnFailures, "SEBI Riskometer label", new Runnable() {
-	        @Override
-	        public void run() {
-	            assertVisibleAndLog(byDesc("SEBI Riskometer"), "SEBI Riskometer label");
-	        }
-	    });
+        runSoftValidation(worstReturnFailures, "Riskometer value", new Runnable() {
+            @Override
+            public void run() {
+                assertVisibleAndLog(byDesc("Very High"), "Riskometer value");
+            }
+        });
 
-	    runSoftValidation(worstReturnFailures, "Worst 1 year returns label", new Runnable() {
-	        @Override
-	        public void run() {
-	            assertVisibleAndLog(byDesc("Worst 1 year returns"), "Worst 1 year returns label");
-	        }
-	    });
+        runSoftValidation(worstReturnFailures, "SEBI Riskometer label", new Runnable() {
+            @Override
+            public void run() {
+                assertVisibleAndLog(byDesc("SEBI Riskometer"), "SEBI Riskometer label");
+            }
+        });
 
-	    runSoftValidation(worstReturnFailures, "Worst 1 year returns footnote", new Runnable() {
-	        @Override
-	        public void run() {
-	            assertVisibleAndLog(byDesc("(in last 10 years)"), "Worst 1 year returns footnote");
-	        }
-	    });
+        runSoftValidation(worstReturnFailures, "Worst 1 year returns label", new Runnable() {
+            @Override
+            public void run() {
+                assertVisibleAndLog(byDesc("Worst 1 year returns"), "Worst 1 year returns label");
+            }
+        });
 
-	    runSoftValidation(worstReturnFailures, "Worst 1 year returns benchmark legend", new Runnable() {
-	        @Override
-	        public void run() {
-	            assertVisibleAndLog(byDesc("BSE 500 TRI"), "Worst 1 year returns benchmark legend");
-	        }
-	    });
+        /*
+         * The footnote sits lower in the card and can remain outside the physical
+         * viewport even when Flutter already exposes nearby semantic nodes.
+         * Align it separately using small controlled swipes.
+         */
+        try {
+            alignWorstOneYearReturnsFootnote();
+        } catch (Throwable error) {
+            recordValidationFailure(
+                    worstReturnFailures,
+                    "Worst 1 year returns footnote alignment",
+                    error
+            );
+        }
 
-	    /*
-	     * Keep Fund legend optional.
-	     * Reason: Appium sometimes does not expose the small chart legend "Fund"
-	     * as a stable standalone accessibility node, even when the chart is visible.
-	     * Existing stable risk summary validation also logs this as optional.
-	     */
-	    logOptionalVisibleText(byDesc("Fund"), "Worst 1 year returns Fund legend");
+        runSoftValidation(worstReturnFailures, "Worst 1 year returns footnote", new Runnable() {
+            @Override
+            public void run() {
+                WebElement footnote = findVisibleElement(byDesc("(in last 10 years)"));
 
-	    logOptionalVisibleText(byDescContains("-38.1%"), "Worst 1 year returns fund value");
-	    logOptionalVisibleText(byDescContains("-33.2%"), "Worst 1 year returns benchmark value");
+                if (footnote == null) {
+                    footnote = findVisibleElement(byDescContains("in last 10 years"));
+                }
 
-	    throwIfValidationFailures("Worst 1 year returns", worstReturnFailures);
+                if (footnote == null) {
+                    ReportLogger.fail("Worst 1 year returns footnote is not visible");
+                    throw new AssertionError("Worst 1 year returns footnote is not visible");
+                }
 
-	    ReportLogger.pass("Worst 1 year returns footnote validated successfully for paid user");
-	}
+                String text = getElementReadableText(footnote);
+
+                if (text == null || text.trim().isEmpty()) {
+                    text = "(in last 10 years)";
+                }
+
+                ReportLogger.pass("Worst 1 year returns footnote is visible");
+                logValidatedText("Worst 1 year returns footnote", text);
+            }
+        });
+
+        runSoftValidation(worstReturnFailures, "Worst 1 year returns benchmark legend", new Runnable() {
+            @Override
+            public void run() {
+                WebElement benchmark = findVisibleElement(byDesc("BSE 500 TRI"));
+
+                if (benchmark == null) {
+                    benchmark = findVisibleElement(byDescContains("BSE 500 TRI"));
+                }
+
+                if (benchmark == null) {
+                    ReportLogger.fail("Worst 1 year returns benchmark legend is not visible");
+                    throw new AssertionError("Worst 1 year returns benchmark legend is not visible");
+                }
+
+                String text = getElementReadableText(benchmark);
+
+                if (text == null || text.trim().isEmpty()) {
+                    text = "BSE 500 TRI";
+                }
+
+                ReportLogger.pass("Worst 1 year returns benchmark legend is visible");
+                logValidatedText("Worst 1 year returns benchmark legend", text);
+            }
+        });
+
+        /*
+         * Keep the small chart legend and changing return values optional.
+         * They are fund/data dependent and Flutter does not always expose the
+         * legend as a stable standalone accessibility node.
+         */
+        logOptionalVisibleText(byDesc("Fund"), "Worst 1 year returns Fund legend");
+        logOptionalVisibleText(byDescContains("%"), "Worst 1 year returns visible percentage/value");
+
+        throwIfValidationFailures("Worst 1 year returns", worstReturnFailures);
+
+        ReportLogger.pass("Worst 1 year returns footnote validated successfully for paid user");
+    }
+
+    private void alignWorstOneYearReturnsFootnote() {
+        if (isWorstOneYearReturnsFootnoteVisible()) {
+            ReportLogger.pass("Worst 1 year returns footnote is already visible");
+            return;
+        }
+
+        ReportLogger.step("Aligning Worst 1 year returns footnote in the visible viewport");
+
+        for (int attempt = 1; attempt <= 6; attempt++) {
+            smallSwipeUpW3C();
+            sleep(700);
+
+            if (isWorstOneYearReturnsFootnoteVisible()) {
+                ReportLogger.pass(
+                        "Worst 1 year returns footnote aligned after small scroll attempt: " + attempt
+                );
+                return;
+            }
+
+            /*
+             * If the next section is already visible, we may have crossed the
+             * bottom of the Risk card. Reverse once in small steps instead of
+             * continuing farther down the page.
+             */
+            if (isVisible(byDesc("Who should invest?"))
+                    || isVisible(byDescContains("Who should invest?"))) {
+
+                ReportLogger.step(
+                        "Reached Who should invest section before footnote. Reversing slightly."
+                );
+
+                for (int reverseAttempt = 1; reverseAttempt <= 3; reverseAttempt++) {
+                    smallSwipeDownW3C();
+                    sleep(650);
+
+                    if (isWorstOneYearReturnsFootnoteVisible()) {
+                        ReportLogger.pass(
+                                "Worst 1 year returns footnote aligned after reverse attempt: "
+                                        + reverseAttempt
+                        );
+                        return;
+                    }
+                }
+            }
+        }
+
+        throw new AssertionError(
+                "Worst 1 year returns footnote could not be aligned in the visible viewport"
+        );
+    }
+
+    private boolean isWorstOneYearReturnsFootnoteVisible() {
+        return isVisible(byDesc("(in last 10 years)"))
+                || isVisible(byDescContains("in last 10 years"));
+    }
  
  public void verifyTransactionButtonsVisibleForPaidUser() {
 	    recoverFundDetailsIfNeeded();

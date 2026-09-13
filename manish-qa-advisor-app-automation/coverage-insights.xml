@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite
+        name="VRSA Coverage and Insights Dynamic Regression Suite"
+        verbose="1"
+        parallel="false"
+        preserve-order="true"
+        configfailurepolicy="continue">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Coverage and Insights Dynamic Module Validation" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.CoverageInsightsTest"/>
+        </classes>
+    </test>
+
+</suite>

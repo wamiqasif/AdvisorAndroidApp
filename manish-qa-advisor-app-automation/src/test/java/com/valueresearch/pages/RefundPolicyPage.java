@@ -1,5 +1,6 @@
 package com.valueresearch.pages;
 
+import com.valueresearch.utils.AuthHelper;
 import com.valueresearch.utils.ReportLogger;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -23,6 +24,11 @@ public class RefundPolicyPage {
     private static final String REFUND_EMAIL = "advisor@valueresearch.in";
     private static final String LEGACY_REFUND_EMAIL = "advisory@valueresearch.in";
 
+    // Stable Hub locators confirmed from the current Advisor app hierarchy.
+    private static final By HUB_TAB = AppiumBy.accessibilityId("Hub");
+    private static final By HUB_APP_SETTINGS_MARKER =
+            AppiumBy.accessibilityId("Manage your app settings");
+
     private final AndroidDriver driver;
     private String advisorAppPackage = "";
 
@@ -42,61 +48,48 @@ public class RefundPolicyPage {
     public void ensureAdvisorAppLoggedInForRefundPolicy() {
         ReportLogger.step("Checking Advisor app login/session state");
 
-        waitForAppToBeInteractive();
+        /*
+         * Use the framework-wide authentication helper instead of maintaining
+         * a separate Refund Policy login implementation. AuthHelper already
+         * handles startup delay, PIN, login/OTP, and authenticated bottom tabs.
+         */
+        AuthHelper authHelper = new AuthHelper(driver);
+        authHelper.ensureLoggedIn();
 
-        if (isMainAppLoaded()) {
-            ReportLogger.pass("Advisor app session is already active");
-            return;
-        }
-
-        if (isPinScreenVisible()) {
-            ReportLogger.step("PIN screen detected. Entering Advisor PIN");
-            enterAdvisorPin();
-            waitForMainAppAfterPin();
-            ReportLogger.pass("Advisor app login/session confirmed after PIN");
-            return;
-        }
-
-        throw new AssertionError("Unable to confirm Advisor app login/session state"
-                + " | visibleValues=" + collectVisibleStrings());
+        ReportLogger.pass("Advisor app login/session confirmed");
     }
 
     public void openHubFromBottomNavigationForRefundPolicy() {
         ReportLogger.step("Opening Hub from bottom navigation");
 
-        waitForAppToBeInteractive();
-
-        if (isVisibleByAnyText("Hub") && isLikelyOnHubPage()) {
+        if (isLikelyOnHubPage()) {
             ReportLogger.pass("Hub page is already visible");
             return;
         }
 
-        WebElement hubBottomTab = findVisibleTextElementNearBottom("Hub");
+        WebElement hubBottomTab = waitForVisibleElement(HUB_TAB, 10);
 
-        if (hubBottomTab != null) {
-            tapElementCenter(hubBottomTab);
-            sleep(1800);
-            ReportLogger.pass("Tapped Hub bottom navigation tab");
-        } else if (tapAnyVisibleText("Hub")) {
-            sleep(1800);
-            ReportLogger.pass("Tapped Hub tab by visible text");
-        } else {
-            pressBackSilently();
-            sleep(1000);
-
-            hubBottomTab = findVisibleTextElementNearBottom("Hub");
-            if (hubBottomTab != null) {
-                tapElementCenter(hubBottomTab);
-                sleep(1800);
-                ReportLogger.pass("Tapped Hub bottom navigation tab after back recovery");
-            } else {
-                throw new AssertionError("Unable to find/tap Hub tab"
-                        + " | visibleValues=" + collectVisibleStrings());
-            }
+        if (hubBottomTab == null) {
+            throw new AssertionError("Hub bottom navigation tab not found"
+                    + " | visibleValues=" + collectVisibleStrings());
         }
 
-        waitUntilTextVisible("Hub", 10);
-        ReportLogger.pass("Hub page opened successfully");
+        ReportLogger.step("Tapping Hub using accessibility id");
+        tapElementCenter(hubBottomTab);
+
+        long endTime = System.currentTimeMillis() + 12000L;
+
+        while (System.currentTimeMillis() < endTime) {
+            if (isLikelyOnHubPage()) {
+                ReportLogger.pass("Hub page opened successfully");
+                return;
+            }
+
+            sleep(400);
+        }
+
+        throw new AssertionError("Hub page did not become ready after tapping Hub"
+                + " | visibleValues=" + collectVisibleStrings());
     }
 
     public void scrollToRefundPolicyInHubForRefundPolicy() {
@@ -406,84 +399,25 @@ public class RefundPolicyPage {
     }
 
     // =========================================================
-    // LOGIN / SESSION HELPERS
+    // LOGIN / SESSION
     // =========================================================
-
-    private boolean isPinScreenVisible() {
-        List<String> values = collectVisibleStrings();
-
-        return containsAny(values,
-                "Enter your Advisor PIN",
-                "Advisor PIN",
-                "PIN",
-                "Hi,"
-        );
-    }
-
-    private boolean isMainAppLoaded() {
-        List<String> values = collectVisibleStrings();
-
-        return containsAny(values,
-                "Funds",
-                "Portfolio",
-                "Hub",
-                "Clients",
-                "Reports",
-                "Search"
-        );
-    }
-
-    private void enterAdvisorPin() {
-        String pin = "1975";
-
-        for (char digit : pin.toCharArray()) {
-            tapPinDigit(String.valueOf(digit));
-            sleep(450);
-        }
-    }
-
-    private void tapPinDigit(String digit) {
-        WebElement digitElement = findVisibleExactTextElement(digit);
-
-        if (digitElement != null) {
-            tapElementCenter(digitElement);
-            ReportLogger.step("Tapped PIN digit: " + digit);
-            return;
-        }
-
-        digitElement = findVisibleTextElement(digit);
-
-        if (digitElement != null) {
-            tapElementCenter(digitElement);
-            ReportLogger.step("Tapped PIN digit by fallback: " + digit);
-            return;
-        }
-
-        throw new AssertionError("Unable to tap PIN digit: " + digit
-                + " | visibleValues=" + collectVisibleStrings());
-    }
-
-    private void waitForMainAppAfterPin() {
-        ReportLogger.step("Waiting for Advisor app dashboard after PIN");
-
-        for (int i = 1; i <= 25; i++) {
-            if (isMainAppLoaded()) {
-                ReportLogger.pass("Advisor app dashboard loaded after PIN");
-                return;
-            }
-
-            sleep(1000);
-        }
-
-        throw new AssertionError("Advisor app dashboard did not load after PIN"
-                + " | visibleValues=" + collectVisibleStrings());
-    }
+    // Authentication is centralized in AuthHelper.
+    // No module-specific PIN handling is kept here.
 
     // =========================================================
     // HUB / REFUND POLICY HELPERS
     // =========================================================
 
     private boolean isLikelyOnHubPage() {
+        /*
+         * Primary Hub marker from the current app hierarchy. This avoids
+         * treating the bottom-navigation label "Hub" alone as proof that
+         * the Hub page itself has finished loading.
+         */
+        if (isVisible(HUB_APP_SETTINGS_MARKER)) {
+            return true;
+        }
+
         List<String> values = collectVisibleStrings();
 
         for (String value : values) {
@@ -629,6 +563,22 @@ public class RefundPolicyPage {
             }
         } catch (Exception e) {
             ReportLogger.debug("findVisibleElement skipped: " + cleanError(e.getMessage()));
+        }
+
+        return null;
+    }
+
+    private WebElement waitForVisibleElement(By locator, int timeoutSeconds) {
+        long endTime = System.currentTimeMillis() + (timeoutSeconds * 1000L);
+
+        while (System.currentTimeMillis() < endTime) {
+            WebElement element = findVisibleElement(locator);
+
+            if (element != null) {
+                return element;
+            }
+
+            sleep(300);
         }
 
         return null;

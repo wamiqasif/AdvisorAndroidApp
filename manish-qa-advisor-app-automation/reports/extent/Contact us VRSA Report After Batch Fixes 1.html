@@ -1,0 +1,3416 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Advisor App Automation Report</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report dark">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Advisor App Test Automation Report</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Aug 14, 2026 12:42:37 pm</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<a class="dropdown-item" status="fail" href="#"><span>Fail</span><span class="status danger"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_001 - Open Contact Us from Hub</p>
+            <p class="text-sm">
+              <span>12:42:48 pm</span> / <span>00:01:57:905</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_001 - Open Contact Us from Hub</h5>
+<span class='badge badge-success'>08.14.2026 12:42:48 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:44:46 pm</span>
+<span class='badge badge-default'>00:01:57:905</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:48 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_001<br>Validation: Open Hub tab, locate More section, tap Contact Us, and verify Contact us page opens
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:48 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_001 - Open Contact Us from Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:48 pm</td>
+        <td>
+          <b>[STEP]</b> Checking app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:48 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for app to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:48 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting up to 60 seconds for a known app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:49 pm</td>
+        <td>
+          <b>[STEP]</b> Email login screen indicator found: visible element
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:49 pm</td>
+        <td>
+          <b>[STEP]</b> Email login screen detected. Starting Email + OTP login.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:49 pm</td>
+        <td>
+          <b>[STEP]</b> Starting Email + OTP login flow for: m***i@valueresearch.in
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:49 pm</td>
+        <td>
+          <b>[STEP]</b> Entering email
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:49 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for email/phone input field
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:51 pm</td>
+        <td>
+          <b>[STEP]</b> Email/Phone entered | Requested: ma***@valueresearch.in | Actual field value: ma***@valueresearch.in
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:42:51 pm</td>
+        <td>
+          <b>[PASS]</b> Email/Phone field filled successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:51 pm</td>
+        <td>
+          <b>[STEP]</b> Clicking Next after email entry
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:51 pm</td>
+        <td>
+          <b>[STEP]</b> Clicking Next on login screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:53 pm</td>
+        <td>
+          <b>[STEP]</b> Next clicked on login screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:54 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for OTP screen
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:42:54 pm</td>
+        <td>
+          <b>[PASS]</b> OTP screen loaded successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:54 pm</td>
+        <td>
+          <b>[STEP]</b> OTP auto-fetch is enabled. Fetching OTP from email.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:42:54 pm</td>
+        <td>
+          <b>[STEP]</b> Connecting to OTP email inbox using IMAP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:43:06 pm</td>
+        <td>
+          <b>[PASS]</b> Connected to OTP email inbox successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:43:48 pm</td>
+        <td>
+          <b>[STEP]</b> OTP email not found yet. Waiting before retry.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:43:58 pm</td>
+        <td>
+          <b>[STEP]</b> Recent OTP email found. Subject: [DEV] One Time Password for Login
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:07 pm</td>
+        <td>
+          <b>[PASS]</b> OTP fetched successfully from email
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:21 pm</td>
+        <td>
+          <b>[PASS]</b> OTP auto-fetched successfully from email
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:21 pm</td>
+        <td>
+          <b>[STEP]</b> Entering OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:25 pm</td>
+        <td>
+          <b>[PASS]</b> OTP entered successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:25 pm</td>
+        <td>
+          <b>[STEP]</b> Checking Verify OTP button
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:27 pm</td>
+        <td>
+          <b>[STEP]</b> Verify OTP button not found. App may auto-verify OTP.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:27 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting briefly after OTP entry
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:32 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for valid post-login screen after OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:37 pm</td>
+        <td>
+          <b>[STEP]</b> Logged-in tab indicator found: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:37 pm</td>
+        <td>
+          <b>[PASS]</b> Logged-in bottom tabs loaded after OTP
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:37 pm</td>
+        <td>
+          <b>[PASS]</b> Email + OTP login flow completed successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:37 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:37 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Contact Us from Hub -&gt; More -&gt; Contact Us
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:37 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Hub bottom tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:37 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: Hub tab
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:38 pm</td>
+        <td>
+          <b>[PASS]</b> Hub tab opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:38 pm</td>
+        <td>
+          <b>[STEP]</b> Finding Contact Us inside Hub More section
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:38 pm</td>
+        <td>
+          <b>[STEP]</b> Contact Us not visible. Controlled Hub scroll attempt: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:39 pm</td>
+        <td>
+          <b>[STEP]</b> Contact Us not visible. Controlled Hub scroll attempt: 2
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:41 pm</td>
+        <td>
+          <b>[STEP]</b> Contact Us not visible. Controlled Hub scroll attempt: 3
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:43 pm</td>
+        <td>
+          <b>[STEP]</b> Contact Us tile found using accessibility id after controlled scroll 3 | x=545 | y=1939 | width=236 | height=203
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:43 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped Contact Us using element-based mobile: clickGesture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Contact Us opened using element-based mobile: clickGesture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for Contact us page to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Contact us page loaded
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Contact us page opened successfully from Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_001 - Contact Us opened successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_001
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_001_OpenContactUsFromHub</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_002 - Verify Contact Us title and message box</p>
+            <p class="text-sm">
+              <span>12:44:46 pm</span> / <span>00:00:00:268</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_002 - Verify Contact Us title and message box</h5>
+<span class='badge badge-success'>08.14.2026 12:44:46 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:44:46 pm</span>
+<span class='badge badge-default'>00:00:00:268</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_002<br>Validation: Validate Contact us title, Your Message label, placeholder note, and message input box
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_002 - Verify title and message box
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Contact us title and message box
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Contact us title is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Page title: Contact us
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Your Message label is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Message label: Your Message
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Message input box is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Message input placeholder: Type your message here...
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Contact us title, message label, input box, and placeholder details validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_002 - Title and message box validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_002 - Title and message box validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_002_VerifyTitleAndMessageBox</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_003 - Verify Choose File and Escalation Matrix static text</p>
+            <p class="text-sm">
+              <span>12:44:46 pm</span> / <span>00:00:00:134</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_003 - Verify Choose File and Escalation Matrix static text</h5>
+<span class='badge badge-success'>08.14.2026 12:44:46 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:44:46 pm</span>
+<span class='badge badge-default'>00:00:00:134</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_003<br>Validation: Validate Choose File attachment text and Escalation Matrix link text on Contact us page
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_003 - Verify Choose File and Escalation Matrix static text
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Choose File and Escalation Matrix links
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Choose File attachment link is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Choose File visible link text: Choose File
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Choose File full accessibility text: Choose File, Attach a document or screenshot for support
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Escalation Matrix link is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Escalation Matrix link text: Escalation Matrix
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Choose File and Escalation Matrix exact text validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_003 - Choose File and Escalation Matrix static text validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_003 - Choose File and Escalation Matrix static text validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_003_VerifyChooseFileAndEscalationMatrixStaticText</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_004 - Verify phone and working hours</p>
+            <p class="text-sm">
+              <span>12:44:46 pm</span> / <span>00:00:00:236</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_004 - Verify phone and working hours</h5>
+<span class='badge badge-success'>08.14.2026 12:44:46 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:44:47 pm</span>
+<span class='badge badge-default'>00:00:00:236</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_004<br>Validation: Validate Phone label, contact number, and Monday-Friday working hours
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_004 - Verify phone and working hours
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[STEP]</b> Validating phone number and working hours
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Phone label is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Phone label text: Phone
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Phone number is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:46 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Phone number text: +91-9999 322 422
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:47 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Working hours text: Monday-Friday&lt;br&gt;9:30 a.m. - 6 p.m.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:47 pm</td>
+        <td>
+          <b>[PASS]</b> Phone label, phone number, and working hours text validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:47 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_004 - Phone and working hours validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:47 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_004 - Phone and working hours validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:47 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_004_VerifyPhoneAndWorkingHours</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_005 - Verify postal address</p>
+            <p class="text-sm">
+              <span>12:44:47 pm</span> / <span>00:00:07:528</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">CU_005 - Verify postal address</h5>
+<span class='badge badge-success'>08.14.2026 12:44:47 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:44:54 pm</span>
+<span class='badge badge-default'>00:00:07:528</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div>    <div class="row mb-3"><div class="col-md-3">
+<img data-featherlight='/home/manishkhatri/Downloads/Advisor App Testing/test-output/screenshots/CU_005_VerifyPostalAddress_FAILED_20260814_124454_381.png' src="/home/manishkhatri/Downloads/Advisor App Testing/test-output/screenshots/CU_005_VerifyPostalAddress_FAILED_20260814_124454_381.png">
+    
+    </div></div>
+<div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:47 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_005<br>Validation: Validate Postal Address label and Independent Advisors Private Limited office address
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:47 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_005 - Verify postal address
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:47 pm</td>
+        <td>
+          <b>[STEP]</b> Validating postal address
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:47 pm</td>
+        <td>
+          <b>[PASS]</b> Postal Address label is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:47 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Postal Address label text: Postal Address
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>Test failed:</b> CU_005_VerifyPostalAddress
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>Error:</b> Postal address validation failed: Expected text fragments not found for Postal address full text. Missing fragments: C-103, Sector 65, | Noida, Gautam Buddha Nagar, | Uttar Pradesh, 201301 |
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <pre>java.lang.RuntimeException: Postal address validation failed: Expected text fragments not found for Postal address full text. Missing fragments: C-103, Sector 65, | Noida, Gautam Buddha Nagar, | Uttar Pradesh, 201301 |
+	at com.valueresearch.pages.ContactUsVrsaPage.verifyPostalAddress(ContactUsVrsaPage.java:490)
+	at com.valueresearch.tests.ContactUsVrsaTest.CU_005_VerifyPostalAddress(ContactUsVrsaTest.java:87)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+Caused by: java.lang.RuntimeException: Expected text fragments not found for Postal address full text. Missing fragments: C-103, Sector 65, | Noida, Gautam Buddha Nagar, | Uttar Pradesh, 201301 | 
+	at com.valueresearch.pages.ContactUsVrsaPage.assertTextFragmentsPresentWithReport(ContactUsVrsaPage.java:1864)
+	at com.valueresearch.pages.ContactUsVrsaPage.verifyPostalAddress(ContactUsVrsaPage.java:476)
+	... 29 more
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>Failure screenshot attached:</b> /home/manishkhatri/Downloads/Advisor App Testing/test-output/screenshots/CU_005_VerifyPostalAddress_FAILED_20260814_124454_381.png
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_006 - Verify grievance email and SCORES link</p>
+            <p class="text-sm">
+              <span>12:44:54 pm</span> / <span>00:00:00:303</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_006 - Verify grievance email and SCORES link</h5>
+<span class='badge badge-success'>08.14.2026 12:44:54 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:44:54 pm</span>
+<span class='badge badge-default'>00:00:00:303</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_006<br>Validation: Validate grievance officer email, grievance text, SEBI SCORES URL, and SEBI offices text
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_006 - Verify grievance email and SCORES link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[STEP]</b> Validating grievance officer email, grievance text, and SEBI SCORES link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[PASS]</b> Grievance officer email is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Grievance paragraph start text: Subscribers can write to the Investment Advisor at
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Grievance officer email text: grievanceofficer@valueresearch.in
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Grievance paragraph response-time text: if the Investor does not receive a response within 10 business days of writing to the Client Servicing Team. The client can expect a reply within 10 business days of approaching the Investment Advisor.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - SEBI grievance paragraph start text: In case you are not satisfied with our response you can lodge your grievance with SEBI at
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[PASS]</b> SEBI SCORES link is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - SEBI SCORES URL text: https://scores.sebi.gov.in
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - SEBI offices paragraph text: or you may also write to any of the offices of SEBI.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[PASS]</b> Grievance email, full grievance text pieces, and SEBI SCORES exact text validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_006 - Grievance email and SCORES link validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_006 - Grievance email and SCORES link validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_006_VerifyGrievanceAndScoresInfo</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_007 - Verify Android App and iOS App links static text</p>
+            <p class="text-sm">
+              <span>12:44:54 pm</span> / <span>00:00:00:518</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_007 - Verify Android App and iOS App links static text</h5>
+<span class='badge badge-success'>08.14.2026 12:44:54 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:44:55 pm</span>
+<span class='badge badge-default'>00:00:00:518</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_007<br>Validation: Validate Link for SCORES, Android App, and iOS App link labels
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:54 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_007 - Verify Android and iOS App links static text
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Android App and iOS App links
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[STEP]</b> Android App link aligned in safe viewport | attempt=0 | x=347 | y=1978 | width=241 | height=68 | targetBottom=2046 | safeBottom=2168 | submitTop=2204
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Link for SCORES label: Link for SCORES:
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Android App link is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Android App link text: Android App
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[STEP]</b> iOS App link aligned in safe viewport | attempt=0 | x=620 | y=1978 | width=165 | height=68 | targetBottom=2046 | safeBottom=2168 | submitTop=2204
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> iOS App link is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - iOS App link text: iOS App
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Android App and iOS App exact link text validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_007 - Android and iOS App static link text validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_007 - Android and iOS App static link text validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_007_VerifyAndroidAndIosAppLinksStaticText</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="8"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_008 - Verify Submit button static text</p>
+            <p class="text-sm">
+              <span>12:44:55 pm</span> / <span>00:00:00:161</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_008 - Verify Submit button static text</h5>
+<span class='badge badge-success'>08.14.2026 12:44:55 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:44:55 pm</span>
+<span class='badge badge-default'>00:00:00:161</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_008<br>Validation: Validate Submit button is present and its text is Submit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_008 - Verify Submit button static text
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Submit button
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Submit button is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Validated text - Submit button text: Submit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Submit button exact text validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_008 - Submit button text validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_008 - Submit button text validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_008_VerifySubmitButtonStaticText</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="9"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_009 - Verify Contact Us screen stability</p>
+            <p class="text-sm">
+              <span>12:44:55 pm</span> / <span>00:00:00:165</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_009 - Verify Contact Us screen stability</h5>
+<span class='badge badge-success'>08.14.2026 12:44:55 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:44:55 pm</span>
+<span class='badge badge-default'>00:00:00:165</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=9</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_009<br>Validation: Validate Contact us screen does not show crash or ANR markers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_009 - Verify Contact Us screen stability
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Contact us screen stability and no crash/ANR markers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Contact us screen stability validated. No crash/ANR marker found.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_009 - Contact Us screen stability validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_009 - Contact Us screen stability validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_009_VerifyContactUsScreenStability</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="10"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_010 - Verify positive message typing</p>
+            <p class="text-sm">
+              <span>12:44:55 pm</span> / <span>00:00:05:869</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_010 - Verify positive message typing</h5>
+<span class='badge badge-success'>08.14.2026 12:44:55 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:45:01 pm</span>
+<span class='badge badge-default'>00:00:05:869</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=10</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_010<br>Validation: Validate user can type a standard valid message in Contact us message input box
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:55 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_010 - Verify positive message typing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:56 pm</td>
+        <td>
+          <b>[STEP]</b> Validating typing in Contact us message box
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:56 pm</td>
+        <td>
+          <b>[STEP]</b> Typing message for validation: Standard message typing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:56 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:56 pm</td>
+        <td>
+          <b>[PASS]</b> Message input box is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:44:57 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:44:57 pm</td>
+        <td>
+          <b>[PASS]</b> Message input box is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:01 pm</td>
+        <td>
+          <b>[PASS]</b> Typed message validated in report: Automation test message. Please ignore.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:01 pm</td>
+        <td>
+          <b>[PASS]</b> Message typing validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:01 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_010 - Positive message typing validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:01 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_010 - Positive message typing validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:01 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_010_VerifyPositiveMessageTyping</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="11"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_011 - Verify special character message typing</p>
+            <p class="text-sm">
+              <span>12:45:01 pm</span> / <span>00:00:07:478</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_011 - Verify special character message typing</h5>
+<span class='badge badge-success'>08.14.2026 12:45:01 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:45:09 pm</span>
+<span class='badge badge-default'>00:00:07:478</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=11</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:01 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_011<br>Validation: Validate message input accepts safe special characters and numbers
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:01 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_011 - Verify special character message typing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:01 pm</td>
+        <td>
+          <b>[STEP]</b> Typing message for validation: Special character message typing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:01 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:01 pm</td>
+        <td>
+          <b>[PASS]</b> Message input box is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:03 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:03 pm</td>
+        <td>
+          <b>[PASS]</b> Message input box is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:09 pm</td>
+        <td>
+          <b>[PASS]</b> Typed message validated in report: Automation special chars test @ # 123 - please ignore.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:09 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_011 - Special character message typing validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:09 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_011 - Special character message typing validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:09 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_011_VerifySpecialCharacterMessageTyping</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="12"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_012 - Verify message input can be cleared</p>
+            <p class="text-sm">
+              <span>12:45:09 pm</span> / <span>00:00:08:478</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_012 - Verify message input can be cleared</h5>
+<span class='badge badge-success'>08.14.2026 12:45:09 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:45:17 pm</span>
+<span class='badge badge-default'>00:00:08:478</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=12</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:09 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_012<br>Validation: Validate text entered in message input can be removed before submission
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:09 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_012 - Verify input can be cleared
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:09 pm</td>
+        <td>
+          <b>[STEP]</b> Validating message input can be cleared
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:09 pm</td>
+        <td>
+          <b>[STEP]</b> Typing message for validation: Temporary message before clear
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:09 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:09 pm</td>
+        <td>
+          <b>[PASS]</b> Message input box is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:11 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:11 pm</td>
+        <td>
+          <b>[PASS]</b> Message input box is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:15 pm</td>
+        <td>
+          <b>[PASS]</b> Typed message validated in report: Temporary text to clear
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:15 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:15 pm</td>
+        <td>
+          <b>[PASS]</b> Message input box is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:17 pm</td>
+        <td>
+          <b>[PASS]</b> Message input clear validation passed. Temporary text removed.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:17 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_012 - Message input clear validation passed</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:17 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_012 - Message input clear validation passed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:17 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_012_VerifyInputCanBeCleared</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="13"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_013 - Verify empty submit negative validation</p>
+            <p class="text-sm">
+              <span>12:45:17 pm</span> / <span>00:00:06:379</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_013 - Verify empty submit negative validation</h5>
+<span class='badge badge-success'>08.14.2026 12:45:17 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:45:24 pm</span>
+<span class='badge badge-default'>00:00:06:379</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=13</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:17 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_013<br>Validation: Tap Submit with empty message and validate the request is not submitted
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:17 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_013 - Verify empty submit negative validation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:17 pm</td>
+        <td>
+          <b>[STEP]</b> Validating negative case: Submit with empty message should not submit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:18 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:18 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:18 pm</td>
+        <td>
+          <b>[PASS]</b> Message input box is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:21 pm</td>
+        <td>
+          <b>[PASS]</b> Submit button is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:22 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: Submit button with empty message
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:24 pm</td>
+        <td>
+          <b>[PASS]</b> No successful-submission marker found for negative scenario: empty message submit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:24 pm</td>
+        <td>
+          <b>[PASS]</b> Negative validation passed: empty message was not submitted and Contact us page remained active.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:24 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_013 - Empty submit negative validation passed</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:24 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_013 - Empty submit negative validation passed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:24 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_013_VerifyEmptySubmitNegativeValidation</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="14"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_014 - Verify whitespace submit negative validation</p>
+            <p class="text-sm">
+              <span>12:45:24 pm</span> / <span>00:00:07:174</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_014 - Verify whitespace submit negative validation</h5>
+<span class='badge badge-success'>08.14.2026 12:45:24 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:45:31 pm</span>
+<span class='badge badge-default'>00:00:07:174</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=14</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:24 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_014<br>Validation: Tap Submit with whitespace-only message and validate the request is not submitted
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:24 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_014 - Verify whitespace submit negative validation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:24 pm</td>
+        <td>
+          <b>[STEP]</b> Validating negative case: Submit with whitespace-only message should not submit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:24 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:24 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:24 pm</td>
+        <td>
+          <b>[PASS]</b> Message input box is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:29 pm</td>
+        <td>
+          <b>[PASS]</b> Submit button is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:29 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: Submit button with whitespace-only message
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:31 pm</td>
+        <td>
+          <b>[PASS]</b> No successful-submission marker found for negative scenario: whitespace-only message submit
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:31 pm</td>
+        <td>
+          <b>[PASS]</b> Negative validation passed: whitespace-only message was not submitted and Contact us page remained active.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:31 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_014 - Whitespace submit negative validation passed</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:31 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_014 - Whitespace submit negative validation passed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:31 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_014_VerifyWhitespaceSubmitNegativeValidation</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="15"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_015 - Verify Submit button state for empty message</p>
+            <p class="text-sm">
+              <span>12:45:31 pm</span> / <span>00:00:05:172</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_015 - Verify Submit button state for empty message</h5>
+<span class='badge badge-success'>08.14.2026 12:45:31 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:45:36 pm</span>
+<span class='badge badge-default'>00:00:05:172</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=15</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:31 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_015<br>Validation: Log and validate Submit button state attributes when message input is empty
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:31 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_015 - Verify Submit button state for empty message
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:31 pm</td>
+        <td>
+          <b>[STEP]</b> Validating Submit button state for empty message
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:31 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:31 pm</td>
+        <td>
+          <b>[STEP]</b> Message input area is already visible/present. No top reset required.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:31 pm</td>
+        <td>
+          <b>[PASS]</b> Message input box is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:36 pm</td>
+        <td>
+          <b>[PASS]</b> Submit button is visible/present
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:36 pm</td>
+        <td>
+          <b>[PASS]</b> Submit button state for empty message - enabled=true, clickable=false, displayed=true
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:36 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_015 - Submit button state logged successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:36 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_015 - Submit button state logged successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:36 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_015_VerifySubmitButtonStateForEmptyMessage</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="16"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_016 - Verify Choose File functional tap</p>
+            <p class="text-sm">
+              <span>12:45:36 pm</span> / <span>00:00:05:650</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_016 - Verify Choose File functional tap</h5>
+<span class='badge badge-success'>08.14.2026 12:45:36 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:45:42 pm</span>
+<span class='badge badge-default'>00:00:05:650</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=16</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:36 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_016<br>Validation: Tap Choose File and validate file picker, chooser, permission dialog, or external response opens, then return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:36 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_016 - Verify Choose File functional tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:36 pm</td>
+        <td>
+          <b>[STEP]</b> Functional validation: tapping Choose File attachment link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:38 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: Choose File attachment link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:40 pm</td>
+        <td>
+          <b>[PASS]</b> Functional tap response detected for Choose File attachment link | packageChanged=true | leftContactUs=true | markerFound=true | matchedMarker=Recent
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:40 pm</td>
+        <td>
+          <b>[STEP]</b> Restoring Advisor Contact us page after functional action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:41 pm</td>
+        <td>
+          <b>[STEP]</b> External-action recovery attempt: 1 | currentPackage=com.google.android.documentsui
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:42 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to Contact us page after external action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:42 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_016 - Choose File functional tap validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:42 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_016 - Choose File functional tap validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:42 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_016_VerifyChooseFileFunctionalTap</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="17"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_017 - Verify Escalation Matrix functional tap</p>
+            <p class="text-sm">
+              <span>12:45:42 pm</span> / <span>00:00:06:147</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_017 - Verify Escalation Matrix functional tap</h5>
+<span class='badge badge-success'>08.14.2026 12:45:42 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:45:48 pm</span>
+<span class='badge badge-default'>00:00:06:147</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=17</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:42 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_017<br>Validation: Tap Escalation Matrix and validate navigation/chooser response, then return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:42 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_017 - Verify Escalation Matrix functional tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:42 pm</td>
+        <td>
+          <b>[STEP]</b> Functional validation: tapping Escalation Matrix link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:42 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: Escalation Matrix link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:46 pm</td>
+        <td>
+          <b>[PASS]</b> Functional tap response detected for Escalation Matrix link | packageChanged=true | leftContactUs=true | markerFound=true | matchedMarker=Chrome
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:46 pm</td>
+        <td>
+          <b>[STEP]</b> Restoring Advisor Contact us page after functional action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:46 pm</td>
+        <td>
+          <b>[STEP]</b> External-action recovery attempt: 1 | currentPackage=com.android.chrome
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:47 pm</td>
+        <td>
+          <b>[STEP]</b> External-action recovery attempt: 2 | currentPackage=com.android.chrome
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:48 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to Contact us page after external action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:48 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_017 - Escalation Matrix functional tap validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:48 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_017 - Escalation Matrix functional tap validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:48 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_017_VerifyEscalationMatrixFunctionalTap</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="18"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_018 - Verify phone functional tap</p>
+            <p class="text-sm">
+              <span>12:45:48 pm</span> / <span>00:00:05:649</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_018 - Verify phone functional tap</h5>
+<span class='badge badge-success'>08.14.2026 12:45:48 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:45:54 pm</span>
+<span class='badge badge-default'>00:00:05:649</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=18</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:48 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_018<br>Validation: Tap phone number and validate dialer/chooser response, then return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:48 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_018 - Verify phone functional tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:48 pm</td>
+        <td>
+          <b>[STEP]</b> Functional validation: tapping Phone number link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:48 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: Phone number link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:52 pm</td>
+        <td>
+          <b>[PASS]</b> Functional tap response detected for Phone number link | packageChanged=true | leftContactUs=true | markerFound=true | matchedMarker=Dial
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:52 pm</td>
+        <td>
+          <b>[STEP]</b> Restoring Advisor Contact us page after functional action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:52 pm</td>
+        <td>
+          <b>[STEP]</b> External-action recovery attempt: 1 | currentPackage=com.google.android.dialer
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:53 pm</td>
+        <td>
+          <b>[STEP]</b> External-action recovery attempt: 2 | currentPackage=com.google.android.dialer
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:54 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to Contact us page after external action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:54 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_018 - Phone functional tap validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:54 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_018 - Phone functional tap validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:54 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_018_VerifyPhoneFunctionalTap</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="19"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_019 - Verify grievance email functional tap</p>
+            <p class="text-sm">
+              <span>12:45:54 pm</span> / <span>00:00:06:649</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_019 - Verify grievance email functional tap</h5>
+<span class='badge badge-success'>08.14.2026 12:45:54 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:46:00 pm</span>
+<span class='badge badge-default'>00:00:06:649</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=19</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:54 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_019<br>Validation: Tap grievance email and validate email app/chooser response, then return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:54 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_019 - Verify grievance email functional tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:54 pm</td>
+        <td>
+          <b>[STEP]</b> Functional validation: tapping Grievance officer email link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:54 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: Grievance officer email link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:45:58 pm</td>
+        <td>
+          <b>[PASS]</b> Functional tap response detected for Grievance officer email link | packageChanged=true | leftContactUs=true | markerFound=true | matchedMarker=Compose
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:58 pm</td>
+        <td>
+          <b>[STEP]</b> Restoring Advisor Contact us page after functional action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:58 pm</td>
+        <td>
+          <b>[STEP]</b> External-action recovery attempt: 1 | currentPackage=com.google.android.gm
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:45:59 pm</td>
+        <td>
+          <b>[STEP]</b> External-action recovery attempt: 2 | currentPackage=com.google.android.gm
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:00 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to Contact us page after external action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:00 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_019 - Grievance email functional tap validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:00 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_019 - Grievance email functional tap validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:00 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_019_VerifyGrievanceEmailFunctionalTap</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="20"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_020 - Verify SEBI SCORES functional tap</p>
+            <p class="text-sm">
+              <span>12:46:00 pm</span> / <span>00:00:03:177</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_020 - Verify SEBI SCORES functional tap</h5>
+<span class='badge badge-success'>08.14.2026 12:46:00 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:46:04 pm</span>
+<span class='badge badge-default'>00:00:03:177</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=20</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:00 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_020<br>Validation: Tap SEBI SCORES link and validate browser/chooser response, then return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:00 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_020 - Verify SEBI SCORES functional tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:01 pm</td>
+        <td>
+          <b>[STEP]</b> Functional validation: tapping SEBI SCORES link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:01 pm</td>
+        <td>
+          <b>[STEP]</b> SEBI SCORES link aligned in safe viewport | attempt=0 | x=42 | y=1844 | width=740 | height=113 | targetBottom=1957 | safeBottom=2168 | submitTop=2204
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:01 pm</td>
+        <td>
+          <b>[STEP]</b> SEBI SCORES link found | x=42 | y=1844 | width=740 | height=113 | clickable=true | enabled=true
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:01 pm</td>
+        <td>
+          <b>[STEP]</b> Tapping visible SEBI SCORES URL text area | elementX=42 | elementY=1844 | width=740 | height=113 | tapX=175 | tapY=1900
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:01 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: SEBI SCORES visible URL text area at x=175, y=1900
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:01 pm</td>
+        <td>
+          <b>[PASS]</b> Functional navigation detected for SEBI SCORES link - visible URL text area | packageChanged=true | leftContactUs=true | currentPackage=com.android.chrome
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:01 pm</td>
+        <td>
+          <b>[PASS]</b> SEBI SCORES link opened successfully using runtime visible-text-area tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:01 pm</td>
+        <td>
+          <b>[STEP]</b> Restoring Advisor Contact us page after functional action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:01 pm</td>
+        <td>
+          <b>[STEP]</b> External-action recovery attempt: 1 | currentPackage=com.android.chrome
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:04 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to Contact us page after external action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:04 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_020 - SEBI SCORES functional tap validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:04 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_020 - SEBI SCORES functional tap validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:04 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_020_VerifyScoresLinkFunctionalTap</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="21"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_021 - Verify Android App functional tap</p>
+            <p class="text-sm">
+              <span>12:46:04 pm</span> / <span>00:00:04:619</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_021 - Verify Android App functional tap</h5>
+<span class='badge badge-success'>08.14.2026 12:46:04 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:46:08 pm</span>
+<span class='badge badge-default'>00:00:04:619</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=21</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:04 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_021<br>Validation: Tap Android App link under SCORES and validate external response, then return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:04 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_021 - Verify Android App functional tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:04 pm</td>
+        <td>
+          <b>[STEP]</b> Android App link aligned in safe viewport | attempt=0 | x=347 | y=1978 | width=241 | height=68 | targetBottom=2046 | safeBottom=2168 | submitTop=2204
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:04 pm</td>
+        <td>
+          <b>[STEP]</b> Functional validation: tapping Android App link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:04 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: Android App link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:07 pm</td>
+        <td>
+          <b>[PASS]</b> Functional tap response detected for Android App link | packageChanged=true | leftContactUs=true | markerFound=false
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:07 pm</td>
+        <td>
+          <b>[STEP]</b> Restoring Advisor Contact us page after functional action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:07 pm</td>
+        <td>
+          <b>[STEP]</b> External-action recovery attempt: 1 | currentPackage=com.android.vending
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:08 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to Contact us page after external action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:08 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_021 - Android App functional tap validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:08 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_021 - Android App functional tap validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:08 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_021_VerifyAndroidAppFunctionalTap</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="22"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_022 - Verify iOS App functional tap</p>
+            <p class="text-sm">
+              <span>12:46:08 pm</span> / <span>00:00:06:021</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_022 - Verify iOS App functional tap</h5>
+<span class='badge badge-success'>08.14.2026 12:46:08 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:46:14 pm</span>
+<span class='badge badge-default'>00:00:06:021</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=22</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:08 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_022<br>Validation: Tap iOS App link under SCORES and validate external/browser response, then return
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:08 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_022 - Verify iOS App functional tap
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:09 pm</td>
+        <td>
+          <b>[STEP]</b> iOS App link aligned in safe viewport | attempt=0 | x=620 | y=1978 | width=165 | height=68 | targetBottom=2046 | safeBottom=2168 | submitTop=2204
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:09 pm</td>
+        <td>
+          <b>[STEP]</b> Functional validation: tapping iOS App link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:09 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: iOS App link
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:13 pm</td>
+        <td>
+          <b>[PASS]</b> Functional tap response detected for iOS App link | packageChanged=true | leftContactUs=true | markerFound=true | matchedMarker=App Store
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:13 pm</td>
+        <td>
+          <b>[STEP]</b> Restoring Advisor Contact us page after functional action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:13 pm</td>
+        <td>
+          <b>[STEP]</b> External-action recovery attempt: 1 | currentPackage=com.android.chrome
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:14 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to Contact us page after external action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:14 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_022 - iOS App functional tap validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:14 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_022 - iOS App functional tap validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:14 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_022_VerifyIosAppFunctionalTap</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="23"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_024 - Verify Stock Advisor Escalation Matrix PDF</p>
+            <p class="text-sm">
+              <span>12:46:14 pm</span> / <span>00:00:07:960</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_024 - Verify Stock Advisor Escalation Matrix PDF</h5>
+<span class='badge badge-success'>08.14.2026 12:46:14 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:46:22 pm</span>
+<span class='badge badge-default'>00:00:07:960</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=23</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:14 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_024<br>Validation: Select Value Research Stock Advisor from Contact Us dropdown, open Escalation Matrix, and fail if the Fund Advisor/VRFA PDF is shown instead of the Stock Advisor PDF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:14 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_024 - Verify Stock Advisor Escalation Matrix PDF
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:14 pm</td>
+        <td>
+          <b>[STEP]</b> CU_024 - Selecting Value Research Stock Advisor and validating Escalation Matrix target
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:15 pm</td>
+        <td>
+          <b>[STEP]</b> Selecting Value Research Stock Advisor from Contact Us service dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:15 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: Current Fund Advisor dropdown value
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:16 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: Value Research Stock Advisor dropdown option
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:17 pm</td>
+        <td>
+          <b>[PASS]</b> Selected Value Research Stock Advisor from dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:17 pm</td>
+        <td>
+          <b>[PASS]</b> Value Research Stock Advisor is selected in Contact Us dropdown
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:17 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped: Escalation Matrix link for Value Research Stock Advisor
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:18 pm</td>
+        <td>
+          <b>[PASS]</b> Escalation Matrix navigation detected | beforePackage=com.valueresearch.advisor | currentPackage=com.android.chrome
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:21 pm</td>
+        <td>
+          <b>[STEP]</b> Captured external browser target: package=com.android.chrome | url_bar=qastock.valueresearch.in/assets/reports/read-grievance-escalation-matrix-stock-advisor.pdf || null | hierarchy=Page 1: Grievance Escalation Matrix&amp;#13;&amp;#10;Level Details of Contact&amp;#13;&amp;#10;person&amp;#13;&amp;#10;Address Contact&amp;#13;&amp;#10;number&amp;#13;&amp;#10;Email id&amp;#13;&amp;#10;Level I Customer&amp;#13;&amp;#10;care&amp;#13;&amp;#10;Sahib&amp;#13;&amp;#10;Taneja C-103,&amp;#13;&amp;#10;Sector 65,&amp;#13;&amp;#10;Noida,&amp;#13;&amp;#10;Gautam&amp;#13;&amp;#10;Buddha&amp;#13;&amp;#10;Nagar, Uttar&amp;#13;&amp;#10;Pradesh,&amp;#13;&amp;#10;201301&amp;#13;&amp;#10;9999322422 stockadvisor@valueresearch.in&amp;#13;&amp;#10;Level II Grievance&amp;#13;&amp;#10;officer&amp;#13;&amp;#10;Deepa&amp;#13;&amp;#10;Mandahani&amp;#13;&amp;#10;9999322422 grievanceofficer@valueresearch.in&amp;#13;&amp;#10;Level III Compliance&amp;#13;&amp;#10;officer&amp;#13;&amp;#10;Rahul&amp;#13;&amp;#10;Rastogi&amp;#13;&amp;#10;8595521812 compliance@valueresearch.in&amp;#13;&amp;#10;Level IV Principal&amp;#13;&amp;#10;officer&amp;#13;&amp;#10;Ashutosh&amp;#13;&amp;#10;Gupta&amp;#13;&amp;#10;9711400789 principalofficer@valueresearch.in&amp;#13;&amp;#10;Operational/ Working Hours: 10:00 am to 6:00 pm- week days (except market holiday, Saturday&amp;#13;&amp;#10;and Sunday).&amp;#13;&amp;#10;● Customer can write to Level I i.e. Customer care in case of any query/complaint.&amp;#13;&amp;#10;● In absence of a response/complaint not addressed to customer’s satisfaction, he/she may&amp;#13;&amp;#10;escalate the complaint to Level II i.e. Grievance Officer.&amp;#13;&amp;#10;● If a customer is dissatisfied with the response received from Level II, he/she may escalate&amp;#13;&amp;#10;the complaint to Level III i.e. Compliance officer.&amp;#13;&amp;#10;● If a customer is dissatisfied with a response received from a compliance officer, he/she&amp;#13;&amp;#10;may escalate the complaint to level IV i.e Principal officer.&amp;#13;&amp;#10;● If still the complaint persists or stands unresolved, customer can lodge complaint with SEBI&amp;#13;&amp;#10;at https://scores.sebi.gov.in&amp;#13;&amp;#10;● After exhausting all available options, if the complaint is still not resolved, then the&amp;#13;&amp;#10;customer can initiate dispute resolution through the ODR portal at https://smartodr.in/login. || Email: stockadvisor@valueresearch.in || Email: grievanceofficer@valueresearch.in || qastock.valueresearch.in/assets/reports/read-grievance-escalation-matrix-stock-advisor.pdf
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:21 pm</td>
+        <td>
+          <b>[PASS]</b> Validated Stock Advisor Escalation Matrix browser target: package=com.android.chrome | url_bar=qastock.valueresearch.in/assets/reports/read-grievance-escalation-matrix-stock-advisor.pdf || null | hierarchy=Page 1: Grievance Escalation Matrix&amp;#13;&amp;#10;Level Details of Contact&amp;#13;&amp;#10;person&amp;#13;&amp;#10;Address Contact&amp;#13;&amp;#10;number&amp;#13;&amp;#10;Email id&amp;#13;&amp;#10;Level I Customer&amp;#13;&amp;#10;care&amp;#13;&amp;#10;Sahib&amp;#13;&amp;#10;Taneja C-103,&amp;#13;&amp;#10;Sector 65,&amp;#13;&amp;#10;Noida,&amp;#13;&amp;#10;Gautam&amp;#13;&amp;#10;Buddha&amp;#13;&amp;#10;Nagar, Uttar&amp;#13;&amp;#10;Pradesh,&amp;#13;&amp;#10;201301&amp;#13;&amp;#10;9999322422 stockadvisor@valueresearch.in&amp;#13;&amp;#10;Level II Grievance&amp;#13;&amp;#10;officer&amp;#13;&amp;#10;Deepa&amp;#13;&amp;#10;Mandahani&amp;#13;&amp;#10;9999322422 grievanceofficer@valueresearch.in&amp;#13;&amp;#10;Level III Compliance&amp;#13;&amp;#10;officer&amp;#13;&amp;#10;Rahul&amp;#13;&amp;#10;Rastogi&amp;#13;&amp;#10;8595521812 compliance@valueresearch.in&amp;#13;&amp;#10;Level IV Principal&amp;#13;&amp;#10;officer&amp;#13;&amp;#10;Ashutosh&amp;#13;&amp;#10;Gupta&amp;#13;&amp;#10;9711400789 principalofficer@valueresearch.in&amp;#13;&amp;#10;Operational/ Working Hours: 10:00 am to 6:00 pm- week days (except market holiday, Saturday&amp;#13;&amp;#10;and Sunday).&amp;#13;&amp;#10;● Customer can write to Level I i.e. Customer care in case of any query/complaint.&amp;#13;&amp;#10;● In absence of a response/complaint not addressed to customer’s satisfaction, he/she may&amp;#13;&amp;#10;escalate the complaint to Level II i.e. Grievance Officer.&amp;#13;&amp;#10;● If a customer is dissatisfied with the response received from Level II, he/she may escalate&amp;#13;&amp;#10;the complaint to Level III i.e. Compliance officer.&amp;#13;&amp;#10;● If a customer is dissatisfied with a response received from a compliance officer, he/she&amp;#13;&amp;#10;may escalate the complaint to level IV i.e Principal officer.&amp;#13;&amp;#10;● If still the complaint persists or stands unresolved, customer can lodge complaint with SEBI&amp;#13;&amp;#10;at https://scores.sebi.gov.in&amp;#13;&amp;#10;● After exhausting all available options, if the complaint is still not resolved, then the&amp;#13;&amp;#10;customer can initiate dispute resolution through the ODR portal at https://smartodr.in/login. || Email: stockadvisor@valueresearch.in || Email: grievanceofficer@valueresearch.in || qastock.valueresearch.in/assets/reports/read-grievance-escalation-matrix-stock-advisor.pdf
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:21 pm</td>
+        <td>
+          <b>[PASS]</b> CU_024 passed: Stock Advisor selection opened a Stock Advisor Escalation Matrix target
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:21 pm</td>
+        <td>
+          <b>[STEP]</b> Restoring Advisor Contact us page after functional action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:21 pm</td>
+        <td>
+          <b>[STEP]</b> External-action recovery attempt: 1 | currentPackage=com.android.chrome
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:22 pm</td>
+        <td>
+          <b>[PASS]</b> Returned to Contact us page after external action
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:22 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_024 - Stock Advisor Escalation Matrix PDF validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:22 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_024 - Stock Advisor Escalation Matrix PDF validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:22 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_024_VerifyStockAdvisorEscalationMatrixPdf</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="24"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">CU_023 - Verify back navigation to Hub</p>
+            <p class="text-sm">
+              <span>12:46:22 pm</span> / <span>00:00:02:886</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">CU_023 - Verify back navigation to Hub</h5>
+<span class='badge badge-success'>08.14.2026 12:46:22 pm</span>
+<span class='badge badge-danger'>08.14.2026 12:46:25 pm</span>
+<span class='badge badge-default'>00:00:02:886</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=24</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:22 pm</td>
+        <td>
+          Module: Contact Us VRSA<br>Case ID: CU_023<br>Validation: Validate back navigation from Contact us page returns user to Hub area
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:22 pm</td>
+        <td>
+          <b>[STEP]</b> Starting test case: CU_023 - Verify back navigation to Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:46:22 pm</td>
+        <td>
+          <b>[STEP]</b> Validating back navigation from Contact us to Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:25 pm</td>
+        <td>
+          <b>[PASS]</b> Returned Hub/More-area text validated in report: Hub, FAQs, About Us, Contact Us, Privacy Policy
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:25 pm</td>
+        <td>
+          <b>[PASS]</b> Back navigation from Contact us to Hub validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:25 pm</td>
+        <td>
+          <span class='badge white-text green'>CU_023 - Back navigation to Hub validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:25 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: CU_023 - Back navigation to Hub validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>12:46:25 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: CU_023_VerifyBackNavigationToHub</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Aug 14, 2026 12:42:37 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Aug 14, 2026 12:46:26 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>23</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>1</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='95%'>
+<b>23</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='4%'><b>1</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='50%'><b>168</b> events passed</small></div>
+<div>
+<small data-tooltip='0%'><b>3</b> events failed,
+<b data-tooltip='%'>160</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"CU_001 - Open Contact Us from Hub":117.905,"CU_002 - Verify Contact Us title and message box":0.268,"CU_003 - Verify Choose File and Escalation Matrix static text":0.134,"CU_004 - Verify phone and working hours":0.236,"CU_005 - Verify postal address":7.528,"CU_006 - Verify grievance email and SCORES link":0.303,"CU_007 - Verify Android App and iOS App links static text":0.518,"CU_008 - Verify Submit button static text":0.161,"CU_009 - Verify Contact Us screen stability":0.165,"CU_010 - Verify positive message typing":5.869,"CU_011 - Verify special character message typing":7.478,"CU_012 - Verify message input can be cleared":8.478,"CU_013 - Verify empty submit negative validation":6.379,"CU_014 - Verify whitespace submit negative validation":7.174,"CU_015 - Verify Submit button state for empty message":5.172,"CU_016 - Verify Choose File functional tap":5.65,"CU_017 - Verify Escalation Matrix functional tap":6.147,"CU_018 - Verify phone functional tap":5.649,"CU_019 - Verify grievance email functional tap":6.649,"CU_020 - Verify SEBI SCORES functional tap":3.177,"CU_021 - Verify Android App functional tap":4.619,"CU_022 - Verify iOS App functional tap":6.021,"CU_024 - Verify Stock Advisor Escalation Matrix PDF":7.96,"CU_023 - Verify back navigation to Hub":2.886
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td>Advisor App</td>
+</tr>
+<tr>
+<td>Machine</td>
+<td>Local</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>User</td>
+<td>manishkhatri</td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>Android</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>Appium UiAutomator2</td>
+</tr>
+<tr>
+<td>Framework</td>
+<td>TestNG + Maven + ExtentReports</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 23,
+failParent: 1,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 168,
+failEvents: 3,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 160
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

@@ -26,8 +26,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PortfolioAnalysisPage {
 
@@ -78,11 +82,12 @@ public class PortfolioAnalysisPage {
 
     // Funds
     private final By fundPortfolioPerformance = byDesc("Fund Portfolio Performance");
-    private final By fundToGetRidOf = byDesc("1 Fund to get rid of");
-    private final By fundsMayConsiderSellingOff = byDesc("5 Funds you may consider selling off");
-    private final By iciciPruFlexicap = byDesc("ICICI Pru Flexicap-G");
-    private final By abslValueReg = byDesc("ABSL Value Reg-G");
-    private final By hdfcDefenceReg = byDesc("HDFC Defence Reg-G");
+    private final By fundToGetRidOf = AppiumBy.androidUIAutomator(
+            "new UiSelector().descriptionMatches(\"(?i).*\\d+\\s+Funds? to get rid of.*\")"
+    );
+    private final By fundsMayConsiderSellingOff = AppiumBy.androidUIAutomator(
+            "new UiSelector().descriptionMatches(\"(?i).*\\d+\\s+Funds? you may consider selling off.*\")"
+    );
     private final By portfolioInsights = byDesc("Portfolio Insights");
     private final By liquidity = byDesc("Liquidity");
 
@@ -451,7 +456,7 @@ public void changeInvestorToLalitKumarKhatriFromFundsPage() {
             waitForVisible(youVsMarket, "You vs Market");
             waitForVisible(benchmarkSensexTri, "BSE Sensex TRI dropdown");
             waitForVisible(yourPortfolioReturn, "Your Portfolio Return");
-            verifyTextPresentOnCurrentScreen("You have beaten BSE Sensex TRI", "Benchmark comparison message");
+            verifyDynamicBenchmarkComparisonMessage("Fund benchmark comparison message");
             ReportLogger.pass("Fund Portfolio Performance card validated");
         } catch (Exception e) {
             captureScreenshotAndAttach("PA_FUN_003_Performance_Card_Failure");
@@ -461,15 +466,84 @@ public void changeInvestorToLalitKumarKhatriFromFundsPage() {
 
     public void verifyFundActionCards() {
         try {
-            ReportLogger.step("Validating Funds action / attention cards");
+            ReportLogger.step("Validating live Funds action / attention cards without hardcoded counts or fund names");
             ensureOnFundsTab();
-            scrollToVisible(fundToGetRidOf, "1 Fund to get rid of");
-            verifyTextPresentOnCurrentScreen("ICICI Pru Flexicap-G", "ICICI Pru Flexicap-G");
-            verifyTextPresentWithSmallScrollDown("5 Funds you may consider selling off", "5 Funds you may consider selling off");
-            verifyTextPresentOnCurrentScreen("ABSL Value Reg-G", "ABSL Value Reg-G");
-            verifyTextPresentWithSmallScrollDown("HDFC Defence Reg-G", "HDFC Defence Reg-G");
-            verifyTextPresentWithSmallScrollDown("+3 more", "+3 more");
-            ReportLogger.pass("Funds action / attention cards validated");
+
+            boolean getRidOfVisible = tryScrollToVisible(
+                    fundToGetRidOf,
+                    "dynamic Fund(s) to get rid of card"
+            );
+
+            if (getRidOfVisible) {
+                validateAndLogLiveFundActionHeading(
+                        getFirstVisibleLabel(fundToGetRidOf),
+                        "get-rid-of"
+                );
+            }
+
+            boolean sellingOffVisible = tryScrollToVisible(
+                    fundsMayConsiderSellingOff,
+                    "dynamic Fund(s) you may consider selling off card"
+            );
+
+            if (sellingOffVisible) {
+                validateAndLogLiveFundActionHeading(
+                        getFirstVisibleLabel(fundsMayConsiderSellingOff),
+                        "sell-off"
+                );
+            }
+
+            /*
+             * Accessibility can occasionally expose a card heading as text instead
+             * of content-desc. Only when a primary locator misses, do one bounded
+             * fallback scan and recover the live heading from the UI tree.
+             */
+            if (!getRidOfVisible || !sellingOffVisible) {
+                Set<String> fallbackLabels = collectLabelsAcrossCurrentScrollablePage(
+                        "Funds action-card fallback",
+                        10
+                );
+
+                if (!getRidOfVisible) {
+                    List<String> headings = findLabelsMatching(
+                            fallbackLabels,
+                            "^\\d+\\s+Funds?\\s+to\\s+get\\s+rid\\s+of$"
+                    );
+                    if (!headings.isEmpty()) {
+                        validateAndLogLiveFundActionHeading(headings.get(0), "get-rid-of");
+                        getRidOfVisible = true;
+                    }
+                }
+
+                if (!sellingOffVisible) {
+                    List<String> headings = findLabelsMatching(
+                            fallbackLabels,
+                            "^\\d+\\s+Funds?\\s+you\\s+may\\s+consider\\s+selling\\s+off$"
+                    );
+                    if (!headings.isEmpty()) {
+                        validateAndLogLiveFundActionHeading(headings.get(0), "sell-off");
+                        sellingOffVisible = true;
+                    }
+                }
+
+                if (!getRidOfVisible && !sellingOffVisible) {
+                    boolean fundsPageHealthy = containsLabel(fallbackLabels, "Portfolio Insights")
+                            || containsLabel(fallbackLabels, "Liquidity")
+                            || containsLabel(fallbackLabels, "Fund Portfolio Performance");
+
+                    if (!fundsPageHealthy) {
+                        throw new RuntimeException(
+                                "Neither dynamic fund action cards nor stable Funds sections were reachable"
+                        );
+                    }
+
+                    ReportLogger.pass(
+                            "No fund action card is applicable for the current live portfolio; valid data-driven state"
+                    );
+                }
+            }
+
+            ReportLogger.pass("Funds action / attention cards validated using live portfolio data");
         } catch (Exception e) {
             captureScreenshotAndAttach("PA_FUN_004_Action_Cards_Failure");
             throw new AssertionError("Funds action cards validation failed: " + cleanError(e.getMessage()), e);
@@ -478,16 +552,37 @@ public void changeInvestorToLalitKumarKhatriFromFundsPage() {
 
     public void verifyFundsPortfolioInsightsSection() {
         try {
-            ReportLogger.step("Validating Funds Portfolio Insights section");
+            ReportLogger.step("Validating Funds Portfolio Insights section using live applicable insights");
             ensureOnFundsTab();
             scrollToVisible(portfolioInsights, "Portfolio Insights");
-            verifyTextPresentWithSmallScrollDown("Direct plans earn you more", "Direct plan insight");
-            verifyTextPresentWithSmallScrollDown("HDFC Large Cap Reg-G", "HDFC Large Cap Reg-G");
-            verifyTextPresentWithSmallScrollDown("ABSL Value Reg-G", "ABSL Value Reg-G");
-            verifyTextPresentWithSmallScrollDown("+4 more", "+4 more");
-            verifyTextPresentWithSmallScrollDown("IDCW", "IDCW tax efficiency insight");
-            verifyTextPresentWithSmallScrollDown("ICICI Pru ELSS Tax Saver-IDCW", "ICICI Pru ELSS Tax Saver-IDCW");
-            ReportLogger.pass("Funds Portfolio Insights section validated");
+
+            Set<String> insightLabels = collectLabelsFromCurrentPositionDown(
+                    "Funds Portfolio Insights",
+                    8
+            );
+
+            boolean directPlanInsightVisible = containsLabel(insightLabels, "Direct plans earn you more");
+            boolean idcwInsightVisible = containsLabel(insightLabels, "IDCW");
+
+            if (!directPlanInsightVisible && !idcwInsightVisible) {
+                throw new RuntimeException(
+                        "Portfolio Insights section is visible, but no supported live insight card was found"
+                );
+            }
+
+            if (directPlanInsightVisible) {
+                ReportLogger.pass("Live Direct-plan insight is available for the selected investor");
+            }
+            if (idcwInsightVisible) {
+                ReportLogger.pass("Live IDCW insight is available for the selected investor");
+            }
+
+            List<String> moreCounts = findLabelsMatching(insightLabels, "^\\+\\d+\\s+more$");
+            if (!moreCounts.isEmpty()) {
+                ReportLogger.step("Captured live collapsed insight counts: " + String.join(" | ", moreCounts));
+            }
+
+            ReportLogger.pass("Funds Portfolio Insights section validated without hardcoded fund names/counts");
         } catch (Exception e) {
             captureScreenshotAndAttach("PA_FUN_005_Portfolio_Insights_Failure");
             throw new AssertionError("Funds Portfolio Insights validation failed: " + cleanError(e.getMessage()), e);
@@ -514,31 +609,56 @@ public void changeInvestorToLalitKumarKhatriFromFundsPage() {
 
     public void verifyFundsLiquidityMoreDetailPage() {
         try {
-            ReportLogger.step("Validating Funds Liquidity More detail page");
+            ReportLogger.step("Validating Funds Liquidity More detail page with live fund rows");
             ensureOnFundsTab();
             scrollToVisible(liquidity, "Liquidity");
             tapMoreBesideSection(liquidity, "Funds Liquidity More");
             sleep(2000);
             waitForVisible(liquidity, "Liquidity detail page title");
-            verifyTextPresentOnCurrentScreen("Lalit Kumar Khatri", "Investor name on detail page");
-            verifyTextPresentWithSmallScrollDown("Need quick cash for a short time", "Need quick cash text");
-            verifyTextPresentWithSmallScrollDown("Loan Against Mutual Fund", "Loan Against Mutual Fund CTA");
-            verifyTextPresentWithSmallScrollDown("Redeemable free of exit load", "Redeemable free of exit load section");
-            verifyTextPresentWithSmallScrollDown("HDFC Large Cap Fund Reg-G", "HDFC Large Cap Fund Reg-G");
-            verifyTextPresentWithSmallScrollDown("ICICI Pru Midcap-G", "ICICI Pru Midcap-G");
-            verifyTextPresentWithSmallScrollDown("Aditya Birla SL Value Reg-G", "Aditya Birla SL Value Reg-G");
-            verifyTextPresentWithSmallScrollDown("Redeemable with exit load", "Redeemable with exit load section");
-            verifyTextPresentWithSmallScrollDown("HDFC Defence Reg-G", "HDFC Defence Reg-G");
-            verifyTextPresentWithSmallScrollDown("Estimated exit load", "Estimated exit load");
-            verifyTextPresentWithSmallScrollDown("Need cash?", "Need cash text");
-            verifyTextPresentWithSmallScrollDown("Sell", "Sell CTA");
-            verifyTextPresentWithDeepScrollDown("Locked in", "Locked in section");
-            verifyTextPresentWithDeepScrollDown("ICICI Pru ELSS Tax Saver-IDCW", "ICICI Pru ELSS Tax Saver-IDCW");
+
+            Set<String> liveLabels = collectLabelsAcrossCurrentScrollablePage(
+                    "Funds Liquidity detail",
+                    14
+            );
+
+            requireLabelContains(liveLabels, "Lalit", "Selected investor on Funds Liquidity detail");
+            requireLabelContains(liveLabels, "Need quick cash for a short time", "Need quick cash text");
+            requireLabelContains(liveLabels, "Loan Against Mutual Fund", "Loan Against Mutual Fund CTA");
+
+            boolean freeOfExitLoad = containsLabel(liveLabels, "Redeemable free of exit load");
+            boolean withExitLoad = containsLabel(liveLabels, "Redeemable with exit load");
+            boolean lockedIn = containsLabel(liveLabels, "Locked in");
+
+            if (!freeOfExitLoad && !withExitLoad && !lockedIn) {
+                throw new RuntimeException("No Funds liquidity bucket was found on the detail page");
+            }
+
+            if (freeOfExitLoad) {
+                ReportLogger.pass("Verified live liquidity bucket: Redeemable free of exit load");
+            }
+            if (withExitLoad) {
+                ReportLogger.pass("Verified live liquidity bucket: Redeemable with exit load");
+                requireLabelContains(liveLabels, "Estimated exit load", "Estimated exit load for applicable funds");
+            }
+            if (lockedIn) {
+                ReportLogger.pass("Verified live liquidity bucket: Locked in");
+            }
+
+            if ((freeOfExitLoad || withExitLoad) && !containsExactOrTokenLabel(liveLabels, "Sell")) {
+                throw new RuntimeException("Redeemable fund rows are present but Sell CTA was not found");
+            }
+
+            List<String> liveFundRows = extractLikelyFundLabels(liveLabels);
+            if (liveFundRows.isEmpty() && (freeOfExitLoad || withExitLoad || lockedIn)) {
+                ReportLogger.debug("No fund-name label matched the generic detector; static liquidity structure is still valid");
+            } else {
+                logCapturedRows("Live fund rows", liveFundRows);
+            }
+
             tapTopLeftBackButton("Back from Funds Liquidity detail page");
             sleep(1500);
             waitForVisible(fundsTab, "Funds tab after back from Liquidity detail");
-            waitForVisible(liquidity, "Liquidity section after back");
-            ReportLogger.pass("Funds Liquidity More detail page validated");
+            ReportLogger.pass("Funds Liquidity More detail page validated using live data");
         } catch (Exception e) {
             captureScreenshotAndAttach("PA_FUN_007_Liquidity_More_Detail_Failure");
             try { tapTopLeftBackButton("Cleanup back from Funds Liquidity detail after failure"); } catch (Exception ignored) {}
@@ -700,26 +820,7 @@ public void navigateToStocksTab() {
             waitForVisible(benchmarkSensexTri, "BSE Sensex TRI dropdown");
             waitForVisible(yourPortfolioReturn, "Your Portfolio Return");
 
-            /*
-             * Stock benchmark message is dynamic.
-             * It can be "failed to beat", "beaten", or slightly different
-             * depending on selected investor return data.
-             */
-            if (isTextPresentOnCurrentScreen("failed to beat BSE Sensex TRI")
-                    || isTextPresentOnCurrentScreen("beaten BSE Sensex TRI")
-                    || isTextPresentOnCurrentScreen("beat BSE Sensex TRI")
-                    || isTextPresentOnCurrentScreen("BSE Sensex TRI")) {
-
-                ReportLogger.pass("Verified text: Benchmark comparison message");
-
-            } else {
-                ReportLogger.step("Benchmark comparison message not visible immediately. Trying small scroll.");
-
-                verifyTextPresentWithSmallScrollDown(
-                        "BSE Sensex TRI",
-                        "Benchmark comparison message after small scroll"
-                );
-            }
+            verifyDynamicBenchmarkComparisonMessage("Stock benchmark comparison message");
 
             ReportLogger.pass("Stock Portfolio Performance card validated");
 
@@ -733,15 +834,29 @@ public void navigateToStocksTab() {
     }
     public void verifyStocksPortfolioInsightsSection() {
         try {
-            ReportLogger.step("Validating Stocks Portfolio Insights section");
+            ReportLogger.step("Validating Stocks Portfolio Insights section with dynamic FY data");
             ensureOnStocksTab();
             scrollToVisible(portfolioInsights, "Portfolio Insights");
-            verifyTextPresentWithSmallScrollDown("Dividend received", "Dividend received");
-            verifyTextPresentWithSmallScrollDown("FY 2023-24", "FY 2023-24");
-            verifyTextPresentWithSmallScrollDown("FY 2024-25", "FY 2024-25");
-            verifyTextPresentWithSmallScrollDown("FY 2025-26", "FY 2025-26");
-            verifyTextPresentWithSmallScrollDown("Best stocks to re-invest in", "Best stocks to re-invest in");
-            ReportLogger.pass("Stocks Portfolio Insights section validated");
+
+            Set<String> insightLabels = collectLabelsFromCurrentPositionDown(
+                    "Stocks Portfolio Insights",
+                    10
+            );
+
+            requireLabelContains(insightLabels, "Dividend received", "Dividend received insight");
+
+            List<String> fiscalYears = findLabelsMatching(
+                    insightLabels,
+                    "\\bFY\\s+20\\d{2}-\\d{2}\\b"
+            );
+
+            if (fiscalYears.isEmpty()) {
+                throw new RuntimeException("Dividend insight is visible but no dynamic FY row was found");
+            }
+
+            ReportLogger.pass("Captured live dividend FY rows: " + String.join(" | ", fiscalYears));
+            requireLabelContains(insightLabels, "Best stocks to re-invest in", "Best stocks to re-invest in insight");
+            ReportLogger.pass("Stocks Portfolio Insights section validated with live fiscal-year data");
         } catch (Exception e) {
             captureScreenshotAndAttach("PA_STK_004_Portfolio_Insights_Failure");
             throw new AssertionError("Stocks Portfolio Insights validation failed: " + cleanError(e.getMessage()), e);
@@ -764,36 +879,33 @@ public void navigateToStocksTab() {
 
     public void verifyStocksLiquidityMoreDetailPage() {
         try {
-            ReportLogger.step("Validating Stocks Liquidity More detail page");
+            ReportLogger.step("Validating Stocks Liquidity More detail page with live stock rows");
             ensureOnStocksTab();
             scrollToVisible(liquidity, "Liquidity");
             tapMoreBesideSection(liquidity, "Stocks Liquidity More");
             sleep(2000);
             waitForVisible(liquidity, "Liquidity detail page title");
-            verifyTextPresentOnCurrentScreen("Vinit Sharma", "Investor name on Liquidity detail page");
-            verifyTextPresentWithSmallScrollDown("Need Cash? Know which stocks to sell", "Need Cash CTA");
-            verifyTextPresentWithSmallScrollDown("Sellable in 1 day", "Sellable in 1 day section");
-            verifyTextPresentWithSmallScrollDown("Zydus Lifesciences", "Zydus Lifesciences");
-            verifyTextPresentWithSmallScrollDown("HDFC Bank", "HDFC Bank");
-            verifyTextPresentWithSmallScrollDown("Natco Pharma", "Natco Pharma");
-            verifyTextPresentWithSmallScrollDown("Tinna Rubber And Infrastructure", "Tinna Rubber And Infrastructure");
-            verifyTextPresentWithDeepScrollDown("Styrenix Performance Materials", "Styrenix Performance Materials");
-            verifyTextPresentWithDeepScrollDown("Adani Ports and Special Economic Zone", "Adani Ports and Special Economic Zone");
-            verifyTextPresentWithDeepScrollDown("Cipla", "Cipla");
-            verifyTextPresentWithDeepScrollDown("NMDC", "NMDC");
-            verifyTextPresentWithDeepScrollDown("Vedant Fashions", "Vedant Fashions");
-            verifyTextPresentWithDeepScrollDown("Chambal Fertilisers and Chemicals", "Chambal Fertilisers and Chemicals");
-            verifyTextPresentWithDeepScrollDown("NTPC", "NTPC");
-            verifyTextPresentWithDeepScrollDown("Andhra Paper", "Andhra Paper");
-            verifyTextPresentWithDeepScrollDown("Dreamfolks Services", "Dreamfolks Services");
-            verifyTextPresentWithDeepScrollDown("Bandhan Bank", "Bandhan Bank");
-            verifyTextPresentWithDeepScrollDown("Castrol India", "Castrol India");
-            verifyTextPresentWithDeepScrollDown("Kothari Sugars And Chemicals", "Kothari Sugars And Chemicals");
+
+            Set<String> liveLabels = collectLabelsAcrossCurrentScrollablePage(
+                    "Stocks Liquidity detail",
+                    18
+            );
+
+            requireLabelContains(liveLabels, "Vinit", "Selected investor on Stocks Liquidity detail");
+            requireLabelContains(liveLabels, "Need Cash? Know which stocks to sell", "Need Cash CTA");
+            requireLabelContains(liveLabels, "Sellable in 1 day", "Sellable in 1 day section");
+
+            List<String> liveStockRows = extractLikelyStockLabels(liveLabels);
+            if (liveStockRows.isEmpty()) {
+                throw new RuntimeException("Stocks Liquidity detail opened, but no live stock-row label could be captured");
+            }
+
+            logCapturedRows("Live stock rows", liveStockRows);
+
             tapTopLeftBackButton("Back from Stocks Liquidity detail page");
             sleep(1500);
             waitForVisible(stocksTab, "Stocks tab after back from Liquidity detail");
-            waitForVisible(liquidity, "Liquidity section after back");
-            ReportLogger.pass("Stocks Liquidity More detail page validated");
+            ReportLogger.pass("Stocks Liquidity More detail page validated using live stock data");
         } catch (Exception e) {
             captureScreenshotAndAttach("PA_STK_006_Liquidity_More_Detail_Failure");
             try { tapTopLeftBackButton("Cleanup back from Stocks Liquidity detail after failure"); } catch (Exception ignored) {}
@@ -865,9 +977,7 @@ private void ensureOnStocksTabStrictTop() {
                         || isTextPresentOnCurrentScreen("Best stocks to re-invest in")
                         || isTextPresentOnCurrentScreen("Sellable in 1 day")
                         || isTextPresentOnCurrentScreen("Need Cash? Know which stocks to sell")
-                        || isTextPresentOnCurrentScreen("Zydus Lifesciences")
-                        || isTextPresentOnCurrentScreen("HDFC Bank")
-                        || isTextPresentOnCurrentScreen("Bandhan Bank");
+                        || isTextPresentOnCurrentScreen("Liquidity");
 
         if (!stocksContentVisible) {
             throw new RuntimeException("Stocks tab content not visible.");
@@ -1089,21 +1199,70 @@ private boolean tapTopRightHeaderBandForInvestorDropdown() {
     }
 
     private void scrollToVisible(By locator, String elementName) {
-        String lastPageSource = "";
-        for (int attempt = 1; attempt <= 8; attempt++) {
-            if (isElementVisible(locator)) {
-                ReportLogger.pass("Verified: " + elementName);
-                return;
-            }
-            String currentPageSource = safePageSource();
-            if (!currentPageSource.isEmpty() && currentPageSource.equals(lastPageSource)) {
-                throw new RuntimeException(elementName + " not visible. Reached end of current page.");
-            }
-            lastPageSource = currentPageSource;
-            ReportLogger.step("Scrolling down to find: " + elementName + " | Attempt: " + attempt);
-            swipeUpW3C(); sleep(900);
+        if (searchDownForElement(locator, elementName, 7, true)) {
+            return;
         }
-        throw new RuntimeException(elementName + " not visible after scrolling down");
+
+        /*
+         * The previous test may have left this tab below the requested section.
+         * Reset the existing scroll container only; do not refresh/relaunch the app.
+         */
+        ReportLogger.step(
+                elementName + " not found below current position. Resetting current scroll view to top and retrying once."
+        );
+        resetAnyScrollableToBeginning("Current Portfolio Analysis content");
+        sleep(700);
+
+        if (searchDownForElement(locator, elementName, 10, true)) {
+            return;
+        }
+
+        throw new RuntimeException(elementName + " not visible after bounded top-to-bottom search");
+    }
+
+    private boolean tryScrollToVisible(By locator, String elementName) {
+        try {
+            scrollToVisible(locator, elementName);
+            return true;
+        } catch (Exception e) {
+            ReportLogger.debug(elementName + " not found in bounded search: " + cleanError(e.getMessage()));
+            return false;
+        }
+    }
+
+    private boolean searchDownForElement(By locator, String elementName, int maxSwipes, boolean reportSuccess) {
+        String previousPageSource = safePageSource();
+        int unchangedAfterSwipe = 0;
+
+        for (int attempt = 0; attempt <= maxSwipes; attempt++) {
+            if (isElementVisible(locator)) {
+                if (reportSuccess) {
+                    ReportLogger.pass("Verified: " + elementName);
+                }
+                return true;
+            }
+
+            if (attempt == maxSwipes) {
+                break;
+            }
+
+            ReportLogger.step("Scrolling down to find: " + elementName + " | Attempt: " + (attempt + 1));
+            swipeUpW3C();
+            sleep(700);
+
+            String currentPageSource = safePageSource();
+            if (!currentPageSource.isEmpty() && currentPageSource.equals(previousPageSource)) {
+                unchangedAfterSwipe++;
+                if (unchangedAfterSwipe >= 2) {
+                    return false;
+                }
+            } else {
+                unchangedAfterSwipe = 0;
+            }
+            previousPageSource = currentPageSource;
+        }
+
+        return false;
     }
 
 
@@ -1490,6 +1649,447 @@ private boolean isPortfolioHeaderVisibleForDropdown() {
         }
     }
 
+    private void verifyDynamicBenchmarkComparisonMessage(String label) {
+        String regex = "(?i).*(beat|beaten|failed\\s+to\\s+beat).*BSE\\s+Sensex\\s+TRI.*";
+
+        if (isRegexPresentOnCurrentScreen(regex)) {
+            ReportLogger.pass("Verified: " + label);
+            return;
+        }
+
+        for (int attempt = 1; attempt <= 3; attempt++) {
+            smallSwipeUpW3C();
+            sleep(600);
+            if (isRegexPresentOnCurrentScreen(regex)) {
+                ReportLogger.pass("Verified after small scroll: " + label);
+                return;
+            }
+        }
+
+        throw new RuntimeException(label + " not found for the selected investor");
+    }
+
+    private boolean tryFindTextWithSmallScrollDown(String text, String elementName, int maxAttempts) {
+        if (isTextPresentOnCurrentScreen(text)) {
+            reportVerifiedText("Verified text", elementName, text);
+            return true;
+        }
+
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+            ReportLogger.step(
+                    "Small scroll down to find optional live text"
+                            + " | Label: " + elementName
+                            + " | Expected: " + cleanTextForReport(text)
+                            + " | Attempt: " + attempt
+            );
+            smallSwipeUpW3C();
+            sleep(600);
+            if (isTextPresentOnCurrentScreen(text)) {
+                reportVerifiedText("Verified live text after small scroll", elementName, text);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int extractFundCount(String heading) {
+        if (heading == null) {
+            return -1;
+        }
+        Matcher matcher = Pattern.compile("(?i)\\b(\\d+)\\s+Funds?\\b").matcher(heading);
+        if (!matcher.find()) {
+            return -1;
+        }
+        try {
+            return Integer.parseInt(matcher.group(1));
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
+    private void validateAndLogLiveFundActionHeading(String heading, String cardType) {
+        int liveCount = extractFundCount(heading);
+        if (liveCount < 1) {
+            throw new RuntimeException(
+                    "Dynamic " + cardType + " action card was found, but its live fund count was invalid. Heading: " + heading
+            );
+        }
+        ReportLogger.pass(
+                "Captured live " + cardType + " fund count: " + liveCount + " | Heading: " + heading
+        );
+    }
+
+    private String getFirstVisibleLabel(By locator) {
+        try {
+            for (WebElement element : driver.findElements(locator)) {
+                try {
+                    if (!element.isDisplayed()) {
+                        continue;
+                    }
+                    String description = element.getAttribute("content-desc");
+                    if (description != null && !description.trim().isEmpty()) {
+                        return cleanTextForReport(description);
+                    }
+                    String text = element.getText();
+                    if (text != null && !text.trim().isEmpty()) {
+                        return cleanTextForReport(text);
+                    }
+                } catch (Exception ignored) {
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return "";
+    }
+
+    private void logLiveMoreCountsOnCurrentScreen(String sectionName) {
+        List<String> matches = findLabelsMatching(
+                getCurrentScreenLabels(),
+                "^\\+\\d+\\s+more$"
+        );
+        if (!matches.isEmpty()) {
+            ReportLogger.step(sectionName + " live collapsed counts: " + String.join(" | ", matches));
+        }
+    }
+
+    private List<String> findRegexLabelsWithBoundedScroll(String regex, int maxSmallSwipes) {
+        LinkedHashSet<String> matches = new LinkedHashSet<>();
+        Pattern pattern = Pattern.compile(regex);
+
+        for (int attempt = 0; attempt <= maxSmallSwipes; attempt++) {
+            for (String label : getCurrentScreenLabels()) {
+                if (pattern.matcher(label).find()) {
+                    matches.add(cleanTextForReport(label));
+                }
+            }
+
+            if (attempt == maxSmallSwipes) {
+                break;
+            }
+            smallSwipeUpW3C();
+            sleep(550);
+        }
+
+        return new ArrayList<>(matches);
+    }
+
+    private Set<String> collectLabelsFromCurrentPositionDown(String sectionName, int maxSwipes) {
+        LinkedHashSet<String> labels = new LinkedHashSet<>();
+        int unchangedAfterSwipe = 0;
+
+        for (int pageIndex = 0; pageIndex <= maxSwipes; pageIndex++) {
+            String currentPageSource = safePageSource();
+            labels.addAll(extractLabelsFromPageSource(currentPageSource));
+
+            if (pageIndex == maxSwipes) {
+                break;
+            }
+
+            swipeUpW3C();
+            sleep(600);
+
+            String afterSwipeSource = safePageSource();
+            labels.addAll(extractLabelsFromPageSource(afterSwipeSource));
+
+            if (!afterSwipeSource.isEmpty() && afterSwipeSource.equals(currentPageSource)) {
+                unchangedAfterSwipe++;
+                if (unchangedAfterSwipe >= 2) {
+                    break;
+                }
+            } else {
+                unchangedAfterSwipe = 0;
+            }
+        }
+
+        ReportLogger.step(sectionName + " scan captured " + labels.size() + " unique live labels");
+        return labels;
+    }
+
+    private Set<String> collectLabelsAcrossCurrentScrollablePage(String pageName, int maxSwipes) {
+        resetAnyScrollableToBeginning(pageName);
+        sleep(600);
+
+        LinkedHashSet<String> labels = new LinkedHashSet<>();
+        String previousPageSource = "";
+        int unchangedAfterSwipe = 0;
+
+        for (int pageIndex = 0; pageIndex <= maxSwipes; pageIndex++) {
+            String currentPageSource = safePageSource();
+            labels.addAll(extractLabelsFromPageSource(currentPageSource));
+
+            if (pageIndex == maxSwipes) {
+                break;
+            }
+
+            swipeUpW3C();
+            sleep(600);
+
+            String afterSwipeSource = safePageSource();
+            labels.addAll(extractLabelsFromPageSource(afterSwipeSource));
+
+            if (!afterSwipeSource.isEmpty() && afterSwipeSource.equals(currentPageSource)) {
+                unchangedAfterSwipe++;
+                if (unchangedAfterSwipe >= 2) {
+                    break;
+                }
+            } else {
+                unchangedAfterSwipe = 0;
+            }
+
+            previousPageSource = afterSwipeSource;
+        }
+
+        ReportLogger.step(pageName + " live scan captured " + labels.size() + " unique accessibility/text labels");
+        return labels;
+    }
+
+    private void resetAnyScrollableToBeginning(String pageName) {
+        Exception lastError = null;
+
+        String[] selectors = {
+                "new UiScrollable(new UiSelector().className(\"android.widget.ScrollView\")).scrollToBeginning(30)",
+                "new UiScrollable(new UiSelector().scrollable(true)).scrollToBeginning(30)"
+        };
+
+        for (String selector : selectors) {
+            try {
+                driver.findElement(AppiumBy.androidUIAutomator(selector));
+                ReportLogger.step(pageName + " reset to beginning using UiScrollable");
+                return;
+            } catch (Exception e) {
+                lastError = e;
+            }
+        }
+
+        /*
+         * Bounded gesture fallback for RecyclerView/custom scroll containers.
+         * It never refreshes/restarts the app and stops once two swipes no longer
+         * change the accessibility tree.
+         */
+        String previousPageSource = safePageSource();
+        int unchangedAfterSwipe = 0;
+        for (int attempt = 1; attempt <= 6; attempt++) {
+            swipeDownInsideContentArea();
+            sleep(500);
+            String currentPageSource = safePageSource();
+            if (!currentPageSource.isEmpty() && currentPageSource.equals(previousPageSource)) {
+                unchangedAfterSwipe++;
+                if (unchangedAfterSwipe >= 2) {
+                    ReportLogger.step(pageName + " reset to beginning using bounded swipe fallback");
+                    return;
+                }
+            } else {
+                unchangedAfterSwipe = 0;
+            }
+            previousPageSource = currentPageSource;
+        }
+
+        ReportLogger.debug(
+                pageName + " top reset fallback completed without exact end confirmation"
+                        + (lastError == null ? "" : ": " + cleanError(lastError.getMessage()))
+        );
+    }
+
+    private Set<String> getCurrentScreenLabels() {
+        return extractLabelsFromPageSource(safePageSource());
+    }
+
+    private Set<String> extractLabelsFromPageSource(String pageSource) {
+        LinkedHashSet<String> labels = new LinkedHashSet<>();
+        if (pageSource == null || pageSource.isEmpty()) {
+            return labels;
+        }
+
+        Matcher matcher = Pattern.compile("(?:content-desc|text)=\\\"([^\\\"]+)\\\"").matcher(pageSource);
+        while (matcher.find()) {
+            String label = decodeXmlText(matcher.group(1));
+            label = cleanTextForReport(label);
+            if (!label.isEmpty()) {
+                labels.add(label);
+            }
+        }
+        return labels;
+    }
+
+    private String decodeXmlText(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value
+                .replace("&quot;", "\"")
+                .replace("&apos;", "'")
+                .replace("&lt;", "<")
+                .replace("&gt;", ">")
+                .replace("&amp;", "&")
+                .replace("&#10;", " ")
+                .replace("&#xA;", " ");
+    }
+
+    private boolean isRegexPresentOnCurrentScreen(String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        for (String label : getCurrentScreenLabels()) {
+            if (pattern.matcher(label).find()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<String> findLabelsMatching(Set<String> labels, String regex) {
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        LinkedHashSet<String> matches = new LinkedHashSet<>();
+        for (String label : labels) {
+            if (label != null && pattern.matcher(label.trim()).find()) {
+                matches.add(cleanTextForReport(label));
+            }
+        }
+        return new ArrayList<>(matches);
+    }
+
+    private boolean containsLabel(Set<String> labels, String expectedToken) {
+        String normalizedToken = expectedToken == null ? "" : expectedToken.trim().toLowerCase();
+        for (String label : labels) {
+            if (label != null && label.toLowerCase().contains(normalizedToken)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean containsExactOrTokenLabel(Set<String> labels, String expected) {
+        String normalizedExpected = expected == null ? "" : expected.trim().toLowerCase();
+        for (String label : labels) {
+            if (label == null) {
+                continue;
+            }
+            String normalized = label.trim().toLowerCase();
+            if (normalized.equals(normalizedExpected)
+                    || normalized.startsWith(normalizedExpected + " ")
+                    || normalized.endsWith(" " + normalizedExpected)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void requireLabelContains(Set<String> labels, String expectedToken, String elementName) {
+        if (containsLabel(labels, expectedToken)) {
+            ReportLogger.pass("Verified live label: " + elementName + " | Matched: " + expectedToken);
+            return;
+        }
+        throw new RuntimeException(elementName + " not found in bounded live page scan. Expected token: " + expectedToken);
+    }
+
+    private List<String> extractLikelyFundLabels(Set<String> labels) {
+        LinkedHashSet<String> result = new LinkedHashSet<>();
+        for (String label : labels) {
+            if (label == null) {
+                continue;
+            }
+            String cleaned = cleanTextForReport(label);
+            String lower = cleaned.toLowerCase();
+
+            if (cleaned.length() < 4 || cleaned.length() > 100) {
+                continue;
+            }
+            if (lower.contains("loan against mutual fund")
+                    || lower.contains("redeemable")
+                    || lower.contains("estimated exit load")
+                    || lower.equals("funds")
+                    || lower.contains("portfolio analysis")
+                    || lower.contains("need quick cash")
+                    || lower.equals("sell")
+                    || lower.equals("locked in")) {
+                continue;
+            }
+
+            boolean looksLikeFund = lower.contains(" fund")
+                    || lower.contains("reg-g")
+                    || lower.contains("dir-g")
+                    || lower.contains("direct-g")
+                    || lower.contains("idcw")
+                    || lower.contains("elss")
+                    || lower.contains("flexicap")
+                    || lower.contains("midcap")
+                    || lower.contains("large cap")
+                    || lower.contains("small cap");
+
+            if (looksLikeFund) {
+                result.add(cleaned);
+            }
+        }
+        return new ArrayList<>(result);
+    }
+
+    private List<String> extractLikelyStockLabels(Set<String> labels) {
+        LinkedHashSet<String> result = new LinkedHashSet<>();
+        for (String label : labels) {
+            if (label == null) {
+                continue;
+            }
+
+            String cleaned = cleanTextForReport(label);
+            String lower = cleaned.toLowerCase();
+
+            if (cleaned.length() < 2 || cleaned.length() > 90) {
+                continue;
+            }
+            if (!cleaned.matches(".*[A-Za-z].*")) {
+                continue;
+            }
+            if (cleaned.matches(".*\\d.*")) {
+                continue;
+            }
+            if (lower.contains("portfolio analysis")
+                    || lower.equals("summary")
+                    || lower.equals("funds")
+                    || lower.equals("stocks")
+                    || lower.equals("liquidity")
+                    || lower.contains("need cash")
+                    || lower.contains("sellable in")
+                    || lower.equals("more")
+                    || lower.equals("sell")
+                    || lower.contains("vinit")
+                    || lower.contains("investor")
+                    || lower.contains("market")
+                    || lower.contains("return")
+                    || lower.equals("back")
+                    || lower.equals("close")
+                    || lower.equals("done")
+                    || lower.equals("total")
+                    || lower.equals("amount")
+                    || lower.equals("price")
+                    || lower.equals("quantity")
+                    || lower.equals("shares")
+                    || lower.equals("share")
+                    || lower.equals("current value")) {
+                continue;
+            }
+
+            boolean titleLike = Character.isUpperCase(cleaned.charAt(0))
+                    && (cleaned.contains(" ") || cleaned.matches("[A-Z][A-Za-z.&-]{2,30}"));
+
+            if (titleLike) {
+                result.add(cleaned);
+            }
+        }
+        return new ArrayList<>(result);
+    }
+
+    private void logCapturedRows(String label, List<String> rows) {
+        if (rows == null || rows.isEmpty()) {
+            ReportLogger.debug(label + ": none captured");
+            return;
+        }
+
+        int limit = Math.min(rows.size(), 12);
+        List<String> sample = rows.subList(0, limit);
+        ReportLogger.pass(
+                label + " captured dynamically | Count=" + rows.size()
+                        + " | Sample=" + String.join(" | ", sample)
+        );
+    }
+
     private void tapNearestMoreBelow(By sectionLocator, String actionName) {
         WebElement section = wait.until(ExpectedConditions.visibilityOfElementLocated(sectionLocator));
         Rectangle sectionRect = section.getRect();
@@ -1647,30 +2247,12 @@ private boolean isPortfolioHeaderVisibleForDropdown() {
 
     
 private void scrollCurrentScrollViewToBeginning(String pageName) {
-        /*
-         * Tax-style mature reset for tab switch only.
-         * First use UiScrollable against actual ScrollView, then one fallback swipe.
-         */
-        boolean uiScrollableWorked = false;
-
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator(
-                    "new UiScrollable(new UiSelector().className(\"android.widget.ScrollView\")).scrollToBeginning(20)"
-            ));
-            uiScrollableWorked = true;
-            ReportLogger.step(pageName + " ScrollView reset using UiScrollable.scrollToBeginning");
-        } catch (Exception e) {
-            ReportLogger.debug(pageName + " UiScrollable.scrollToBeginning fallback needed: " + cleanError(e.getMessage()));
-        }
+        resetAnyScrollableToBeginning(pageName);
 
         if (!isPortfolioHeaderVisibleForDropdown()) {
-            ReportLogger.step(pageName + " header not visible after reset. Single swipe-down fallback.");
+            ReportLogger.step(pageName + " header not visible after top reset. One safe content swipe-down fallback.");
             swipeDownInsideContentArea();
-            sleep(700);
-        }
-
-        if (!uiScrollableWorked) {
-            ReportLogger.step(pageName + " ScrollView reset completed using fallback");
+            sleep(600);
         }
     }
 

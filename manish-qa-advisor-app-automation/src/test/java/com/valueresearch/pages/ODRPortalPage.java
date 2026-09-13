@@ -1,5 +1,6 @@
 package com.valueresearch.pages;
 
+import com.valueresearch.utils.AuthHelper;
 import com.valueresearch.utils.ReportLogger;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.AppiumBy;
@@ -17,6 +18,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class ODRPortalPage {
+
+    private static final By HUB_TAB = AppiumBy.accessibilityId("Hub");
+    private static final By HUB_READY_MARKER = AppiumBy.accessibilityId("Manage your app settings");
 
     // ODR_FINAL_SPEED_PATCH_V5_ACTIVE
 
@@ -51,49 +55,59 @@ public class ODRPortalPage {
     public void ensureAdvisorAppLoggedInForODR() {
         ReportLogger.step("Checking Advisor app login/session state");
 
-        waitForAppToBeInteractive();
+        AuthHelper authHelper = new AuthHelper(driver);
+        authHelper.ensureLoggedIn();
 
-        if (isMainAppLoaded()) {
-            ReportLogger.pass("Advisor app session is already active");
-            return;
-        }
-
-        if (isPinScreenVisible()) {
-            ReportLogger.step("PIN screen detected. Entering Advisor PIN");
-
-            enterAdvisorPin();
-            waitForMainAppAfterPin();
-
-            ReportLogger.pass("Advisor app login/session confirmed after PIN");
-            return;
-        }
-
-        throw new AssertionError("Unable to confirm Advisor app login/session state"
-                + " | visibleValues=" + collectVisibleStrings());
+        ReportLogger.pass("Advisor app login/session confirmed");
     }
-
 
 
 
     public void openHubFromBottomNavigationForODR() {
         ReportLogger.step("Opening Hub from bottom navigation");
 
-        /*
-         * Do not spend 15-20 seconds proving current screen.
-         * Hub tap is safe even when already selected.
-         */
-        forceTapHubBottomTabFastV5();
+        if (isHubReadyForODR()) {
+            ReportLogger.pass("Hub page is already visible");
+            return;
+        }
 
-        for (int attempt = 1; attempt <= 5; attempt++) {
-            if (isHubContentVisibleCheapV5() || isOdrPortalVisibleCheapV5()) {
-                ReportLogger.pass("Hub page opened successfully after direct Hub tap");
+        WebElement hub = findVisibleElement(HUB_TAB);
+
+        if (hub == null) {
+            long locatorDeadline = System.currentTimeMillis() + 10_000L;
+
+            while (System.currentTimeMillis() < locatorDeadline) {
+                hub = findVisibleElement(HUB_TAB);
+
+                if (hub != null) {
+                    break;
+                }
+
+                sleep(400);
+            }
+        }
+
+        if (hub == null) {
+            throw new AssertionError("Hub bottom navigation tab not found"
+                    + " | currentPackage=" + getCurrentPackageSafely()
+                    + " | visibleValues=" + collectVisibleStrings());
+        }
+
+        ReportLogger.step("Tapping Hub using accessibility id");
+        tapElementCenter(hub);
+
+        long readyDeadline = System.currentTimeMillis() + 12_000L;
+
+        while (System.currentTimeMillis() < readyDeadline) {
+            if (isHubReadyForODR()) {
+                ReportLogger.pass("Hub page opened successfully");
                 return;
             }
 
-            sleep(300);
+            sleep(400);
         }
 
-        throw new AssertionError("Hub page did not open after direct Hub tap"
+        throw new AssertionError("Hub page did not become ready after tapping Hub"
                 + " | currentPackage=" + getCurrentPackageSafely()
                 + " | visibleValues=" + collectVisibleStrings());
     }
@@ -364,73 +378,11 @@ public class ODRPortalPage {
     }
 
     // =========================================================
-    // LOGIN / SESSION HELPERS
+    // LOGIN / SESSION
     // =========================================================
-
-
-    private boolean isPinScreenVisible() {
-        return isTextVisibleFast("Enter your Advisor PIN")
-                || isTextVisibleFast("Advisor PIN")
-                || isTextVisibleFast("PIN")
-                || isTextVisibleFast("Hi,");
-    }
-
-
-    private boolean isMainAppLoaded() {
-        return isTextVisibleFast("Funds")
-                || isTextVisibleFast("Portfolio")
-                || isTextVisibleFast("Hub")
-                || isTextVisibleFast("Clients")
-                || isTextVisibleFast("Reports")
-                || isTextVisibleFast("Search");
-    }
-
-    private void enterAdvisorPin() {
-        String pin = "1975";
-
-        for (char digit : pin.toCharArray()) {
-            tapPinDigit(String.valueOf(digit));
-            sleep(450);
-        }
-    }
-
-    private void tapPinDigit(String digit) {
-        WebElement digitElement = findVisibleExactTextElement(digit);
-
-        if (digitElement != null) {
-            tapElementCenter(digitElement);
-            ReportLogger.step("Tapped PIN digit: " + digit);
-            return;
-        }
-
-        digitElement = findVisibleTextElement(digit);
-
-        if (digitElement != null) {
-            tapElementCenter(digitElement);
-            ReportLogger.step("Tapped PIN digit by fallback: " + digit);
-            return;
-        }
-
-        throw new AssertionError("Unable to tap PIN digit: " + digit
-                + " | visibleValues=" + collectVisibleStrings());
-    }
-
-
-    private void waitForMainAppAfterPin() {
-        ReportLogger.step("Waiting for Advisor app dashboard after PIN");
-
-        for (int i = 1; i <= 12; i++) {
-            if (isMainAppLoaded()) {
-                ReportLogger.pass("Advisor app dashboard loaded after PIN");
-                return;
-            }
-
-            sleep(500);
-        }
-
-        throw new AssertionError("Advisor app dashboard did not load after PIN"
-                + " | visibleValues=" + collectVisibleStrings());
-    }
+    //
+    // Authentication is intentionally centralized in AuthHelper.
+    // Do not keep a module-specific PIN or startup timeout here.
 
     // =========================================================
     // HUB HELPERS
@@ -440,6 +392,13 @@ public class ODRPortalPage {
 
     private boolean isLikelyOnHubPage() {
         return isStrictHubContentVisibleForODR();
+    }
+
+    private boolean isHubReadyForODR() {
+        return findVisibleElement(HUB_READY_MARKER) != null
+                || isHubContentVisibleCheapV5()
+                || isOdrPortalVisibleCheapV5()
+                || isStrictHubContentVisibleForODR();
     }
 
 
@@ -503,7 +462,7 @@ public class ODRPortalPage {
             return;
         }
 
-        if (tapIfVisible(AppiumBy.androidUIAutomator("new UiSelector().descriptionContains(\\\"Hub\\\")"), "Hub bottom tab descriptionContains")) {
+        if (tapIfVisible(AppiumBy.androidUIAutomator("new UiSelector().descriptionContains(\"Hub\")"), "Hub bottom tab descriptionContains")) {
             sleep(700);
             return;
         }
@@ -974,21 +933,6 @@ public class ODRPortalPage {
         return isTextVisibleFast(text) || findVisibleTextElement(text) != null;
     }
 
-
-    private void waitForAppToBeInteractive() {
-        for (int i = 1; i <= 5; i++) {
-            if (!getCurrentPackageSafely().isEmpty()
-                    && (isMainAppLoaded() || isPinScreenVisible() || isTextVisibleFast("Hub"))) {
-                return;
-            }
-
-            if (i == 5 && !collectVisibleStrings().isEmpty()) {
-                return;
-            }
-
-            sleep(300);
-        }
-    }
 
 
     private void waitUntilTextVisible(String text, int timeoutSeconds) {

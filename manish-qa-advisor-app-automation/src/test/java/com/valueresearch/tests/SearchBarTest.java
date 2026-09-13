@@ -336,8 +336,14 @@ public class SearchBarTest extends BaseTest {
         try {
             searchBarPage.returnBackToAdvisorAppSafely();
             ReportLogger.pass(caseId + " CLEANUP COMPLETED - Return flow executed");
+        } catch (AssertionError e) {
+            ReportLogger.debug(caseId
+                    + " cleanup assertion ignored so original testcase result is preserved: "
+                    + e.getMessage());
         } catch (Exception e) {
-            ReportLogger.debug(caseId + " cleanup failed: " + e.getMessage());
+            ReportLogger.debug(caseId
+                    + " cleanup error ignored so original testcase result is preserved: "
+                    + e.getMessage());
         }
     }
 

@@ -1,5 +1,8 @@
 package com.valueresearch.pages;
 
+import com.valueresearch.utils.AuthHelper;
+import com.valueresearch.utils.ConfigReader;
+import com.valueresearch.utils.OtpEmailReader;
 import com.valueresearch.utils.ReportLogger;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -9,7 +12,7 @@ import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
-import com.valueresearch.utils.OtpEmailReader;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,11 +22,90 @@ import java.util.List;
 public class AppSettingsPage {
 
     private final AndroidDriver driver;
+
     private String advisorAppPackage = "";
 
-    private static final String ADVISOR_PIN = "1975";
-    private static final String ADVISOR_APP_PACKAGE = "com.valueresearch.advisor";
-    private static final String PLAY_STORE_PACKAGE = "com.android.vending";
+    // =========================================================
+    // CONFIGURATION
+    // =========================================================
+
+    private static final String ADVISOR_APP_PACKAGE =
+            "com.valueresearch.advisor";
+
+    private static final String PLAY_STORE_PACKAGE =
+            "com.android.vending";
+
+    /*
+     * Reuse the framework-wide PIN configuration.
+     * AuthHelper also reads appPin from config.properties / environment.
+     */
+    private static final String ADVISOR_PIN =
+            ConfigReader.getOptional("appPin", "1975");
+
+    private static final String TEMPORARY_PIN =
+            resolveSetting(
+                    "advisor.temporary.pin",
+                    "ADVISOR_TEMPORARY_PIN",
+                    "1976"
+            );
+
+    // =========================================================
+    // STABLE LOCATORS
+    // =========================================================
+
+    /*
+     * Confirmed from Appium Inspector:
+     *
+     * accessibility id = Hub
+     */
+    private static final By HUB_TAB =
+            AppiumBy.accessibilityId("Hub");
+
+    private static final By HUB_TAB_DESCRIPTION =
+            AppiumBy.androidUIAutomator(
+                    "new UiSelector().description(\"Hub\")"
+            );
+
+    /*
+     * Confirmed from Appium Inspector:
+     *
+     * class        = android.widget.Button
+     * content-desc = Manage your app settings
+     *
+     * This is the PRIMARY locator for App Settings.
+     */
+    private static final By APP_SETTINGS_TILE =
+            AppiumBy.accessibilityId("Manage your app settings");
+
+    private static final By APP_SETTINGS_TILE_DESCRIPTION =
+            AppiumBy.androidUIAutomator(
+                    "new UiSelector().description(\"Manage your app settings\")"
+            );
+
+    /*
+     * Safe fallback in case wording is slightly expanded in future.
+     * Still semantic - no absolute XPath / coordinates.
+     */
+    private static final By APP_SETTINGS_TILE_DESCRIPTION_CONTAINS =
+            AppiumBy.androidUIAutomator(
+                    "new UiSelector().descriptionContains(\"app settings\")"
+            );
+
+    private static final By PORTFOLIO_SETTINGS_TILE =
+            AppiumBy.accessibilityId("Manage your portfolio settings");
+
+    private static final By FUNDS_TAB =
+            AppiumBy.accessibilityId("Funds");
+
+    private static final By STOCKS_TAB =
+            AppiumBy.accessibilityId("Stocks");
+
+    private static final By PORTFOLIO_TAB =
+            AppiumBy.accessibilityId("Portfolio");
+
+    // =========================================================
+    // CONSTRUCTOR
+    // =========================================================
 
     public AppSettingsPage(AndroidDriver driver) {
         this.driver = driver;
@@ -34,70 +116,141 @@ public class AppSettingsPage {
     // =========================================================
 
     public void captureAdvisorAppPackageForAppSettings() {
-        advisorAppPackage = getCurrentPackageSafely();
 
-        if (advisorAppPackage == null || advisorAppPackage.trim().isEmpty()) {
+        String currentPackage = getCurrentPackageSafely();
+
+        /*
+         * Never accidentally remember Play Store or another external
+         * application as the Advisor package.
+         */
+        if (ADVISOR_APP_PACKAGE.equals(currentPackage)) {
+            advisorAppPackage = currentPackage;
+        } else {
             advisorAppPackage = ADVISOR_APP_PACKAGE;
         }
 
-        ReportLogger.pass("Advisor app package captured for App Settings: " + advisorAppPackage);
+        ReportLogger.pass(
+                "Advisor app package captured for App Settings: "
+                        + advisorAppPackage
+        );
     }
 
     public void ensureAdvisorAppLoggedInForAppSettings() {
-        ReportLogger.step("Checking Advisor app login/session state for App Settings");
+
+        ReportLogger.step(
+                "Checking Advisor app login/session state for App Settings"
+        );
 
         activateAdvisorAppIfNeeded();
-        waitForAppToBeInteractive();
 
-        if (isAppSettingsScreenVisible() || isHubScreenVisible() || isMainAppLoaded()) {
-            ReportLogger.pass("Advisor app session is already active for App Settings");
+        /*
+         * If App Settings/Hub is already open, the user is authenticated and
+         * there is no reason to force navigation back to the dashboard.
+         */
+        if (isAppSettingsScreenVisible() || isHubScreenVisible()) {
+
+            ReportLogger.pass(
+                    "Advisor app session is already active for App Settings"
+            );
+
             return;
         }
 
-        if (isPinScreenVisible()) {
-            ReportLogger.step("PIN screen detected. Entering Advisor PIN");
-            enterAdvisorPin();
-            waitForMainAppAfterPin();
-            ReportLogger.pass("Advisor app login/session confirmed after PIN");
-            return;
+        /*
+         * IMPORTANT:
+         *
+         * Do not treat the first FrameLayout as proof that the Flutter screen
+         * is ready. On the QA emulator the Advisor activity can remain on a
+         * blank/white frame for several seconds before PIN/dashboard semantics
+         * are exposed.
+         *
+         * The project already has AuthHelper for this exact problem. It waits
+         * up to the configured long wait (60s in QA), detects PIN/email-login/
+         * logged-in states, and uses config.properties appPin.
+         */
+        new AuthHelper(driver).ensureLoggedIn();
+
+        /*
+         * AuthHelper returns only after a valid logged-in state is detected.
+         * Keep this page-specific assertion so failures remain easy to diagnose.
+         */
+        if (!isMainAppLoaded() && !isHubScreenVisible() && !isAppSettingsScreenVisible()) {
+
+            throw new AssertionError(
+                    "Advisor login helper completed but App Settings module "
+                            + "could not confirm an authenticated Advisor state"
+                            + " | currentPackage="
+                            + getCurrentPackageSafely()
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
-        throw new AssertionError("Unable to confirm Advisor app login/session state"
-                + " | visibleValues=" + collectVisibleStrings());
+        ReportLogger.pass(
+                "Advisor app login/session confirmed for App Settings"
+        );
     }
 
     public void openHubFromDashboardForAppSettings() {
-        ReportLogger.step("Opening Hub tab from dashboard/home");
+
+        ReportLogger.step(
+                "Opening Hub tab from dashboard/home"
+        );
 
         activateAdvisorAppIfNeeded();
+
         waitForAppToBeInteractive();
 
         if (isHubScreenVisible()) {
-            ReportLogger.pass("Hub screen is already visible");
+
+            ReportLogger.pass(
+                    "Hub screen is already visible"
+            );
+
             return;
         }
 
         if (isAppSettingsScreenVisible()) {
-            ReportLogger.pass("App Settings screen is already open, Hub navigation skipped");
+
+            ReportLogger.pass(
+                    "App Settings screen is already open, Hub navigation skipped"
+            );
+
             return;
         }
 
         returnToDashboardIfNeeded();
 
         if (!tapHubTabSafely()) {
-            throw new AssertionError("Unable to open Hub tab"
-                    + " | visibleValues=" + collectVisibleStrings());
+
+            throw new AssertionError(
+                    "Unable to open Hub tab"
+                            + " | currentPackage="
+                            + getCurrentPackageSafely()
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
         waitForHubScreenReady();
-        ReportLogger.pass("Hub tab opened successfully");
+
+        ReportLogger.pass(
+                "Hub tab opened successfully"
+        );
     }
 
     public void openAppSettingsFromHubForAppSettings() {
-        ReportLogger.step("Opening App Settings from Hub");
+
+        ReportLogger.step(
+                "Opening App Settings from Hub"
+        );
 
         if (isAppSettingsScreenVisible()) {
-            ReportLogger.pass("App Settings screen is already visible");
+
+            ReportLogger.pass(
+                    "App Settings screen is already visible"
+            );
+
             return;
         }
 
@@ -105,17 +258,31 @@ public class AppSettingsPage {
             openHubFromDashboardForAppSettings();
         }
 
-        if (!tapAnyVisibleText("App Settings")) {
-            throw new AssertionError("Unable to tap App Settings from Hub"
-                    + " | visibleValues=" + collectVisibleStrings());
+        if (!tapAppSettingsTileSafely()) {
+
+            throw new AssertionError(
+                    "Unable to tap App Settings from Hub"
+                            + " | expectedAccessibilityId="
+                            + "Manage your app settings"
+                            + " | currentPackage="
+                            + getCurrentPackageSafely()
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
         waitForAppSettingsScreenReady();
-        ReportLogger.pass("App Settings screen opened from Hub");
+
+        ReportLogger.pass(
+                "App Settings screen opened from Hub"
+        );
     }
 
     public void validateAppSettingsScreenStructureForAppSettings() {
-        ReportLogger.step("Validating App Settings screen structure");
+
+        ReportLogger.step(
+                "Validating App Settings screen structure"
+        );
 
         waitForAppSettingsScreenReady();
 
@@ -126,34 +293,60 @@ public class AppSettingsPage {
         assertAnyTextVisible("Change PIN");
         assertAnyTextVisible("Storage Settings");
 
-        if (!containsAny(collectVisibleStrings(), "Version", "Build")) {
-            throw new AssertionError("Version/build text is not visible on App Settings screen"
-                    + " | visibleValues=" + collectVisibleStrings());
+        if (!isAnyTextVisibleFast("Version", "Build")) {
+
+            throw new AssertionError(
+                    "Version/build text is not visible on App Settings screen"
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
-        ReportLogger.pass("App Settings structure validated: Settings + Portfolio/App tabs + App options + version/build");
+        ReportLogger.pass(
+                "App Settings structure validated: "
+                        + "Settings + Portfolio/App tabs + "
+                        + "App options + version/build"
+        );
     }
 
     public void ensureAppSettingsScreenReadyForAppSettings() {
-        ReportLogger.step("Ensuring App Settings screen is ready without reopening Hub unnecessarily");
+
+        ReportLogger.step(
+                "Ensuring App Settings screen is ready "
+                        + "without reopening Hub unnecessarily"
+        );
 
         activateAdvisorAppIfNeeded();
+
         waitForAppToBeInteractive();
 
-        if (isChangePinScreenVisible() || isStorageScreenVisible()) {
+        if (isChangePinScreenVisible()
+                || isStorageScreenVisible()) {
+
             returnToAppSettingsFromSubPage();
         }
 
         if (isAppSettingsScreenVisible()) {
+
             ensureAppSettingsScreenOnAppTab();
-            ReportLogger.pass("App Settings screen is already ready");
+
+            ReportLogger.pass(
+                    "App Settings screen is already ready"
+            );
+
             return;
         }
 
         if (isHubScreenVisible()) {
+
             openAppSettingsFromHubForAppSettings();
+
             ensureAppSettingsScreenOnAppTab();
-            ReportLogger.pass("App Settings screen opened from existing Hub screen");
+
+            ReportLogger.pass(
+                    "App Settings screen opened from existing Hub screen"
+            );
+
             return;
         }
 
@@ -162,76 +355,155 @@ public class AppSettingsPage {
         }
 
         openHubFromDashboardForAppSettings();
+
         openAppSettingsFromHubForAppSettings();
+
         ensureAppSettingsScreenOnAppTab();
 
-        ReportLogger.pass("App Settings screen is ready");
+        ReportLogger.pass(
+                "App Settings screen is ready"
+        );
     }
 
     public void resetAppSettingsToAppTabForNextTest() {
-        ReportLogger.step("Resetting App Settings screen to App tab for next test");
+
+        ReportLogger.step(
+                "Resetting App Settings screen to App tab for next test"
+        );
 
         activateAdvisorAppIfNeeded();
 
-        if (isChangePinScreenVisible() || isStorageScreenVisible()) {
+        /*
+         * Cleanup must NEVER become the reason the following tests are
+         * configuration failures.
+         */
+
+        if (isChangePinScreenVisible()
+                || isStorageScreenVisible()) {
+
             returnToAppSettingsFromSubPage();
             return;
         }
 
         if (isAppSettingsScreenVisible()) {
+
             ensureAppSettingsScreenOnAppTab();
             return;
         }
 
+        /*
+         * IMPORTANT:
+         *
+         * Do not reopen App Settings from @AfterMethod.
+         * If the actual test failed while on Hub/dashboard,
+         * the next test's preparation method will recover from there.
+         */
         if (isHubScreenVisible()) {
-            openAppSettingsFromHubForAppSettings();
-            ensureAppSettingsScreenOnAppTab();
+
+            ReportLogger.debug(
+                    "Reset skipped because Hub is visible. "
+                            + "Next test will reopen App Settings."
+            );
+
+            return;
+        }
+
+        if (isMainAppLoaded()) {
+
+            ReportLogger.debug(
+                    "Reset skipped because Advisor main screen is visible. "
+                            + "Next test will reopen App Settings."
+            );
         }
     }
 
     public void validateCheckForUpdatesFlowForAppSettings() {
-        ReportLogger.step("Validating Check for Updates flow");
+
+        ReportLogger.step(
+                "Validating Check for Updates flow"
+        );
 
         ensureAppSettingsScreenOnAppTab();
 
         if (!tapAnyVisibleText("Check for Updates")) {
-            throw new AssertionError("Unable to tap Check for Updates"
-                    + " | visibleValues=" + collectVisibleStrings());
+
+            throw new AssertionError(
+                    "Unable to tap Check for Updates"
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
         if (!waitForPlayStoreAdvisorPageVisible(15)) {
-            throw new AssertionError("Google Play Advisor app page did not open after Check for Updates"
-                    + " | currentPackage=" + getCurrentPackageSafely()
-                    + " | visibleValues=" + collectVisibleStrings());
+
+            throw new AssertionError(
+                    "Google Play Advisor app page did not open "
+                            + "after Check for Updates"
+                            + " | currentPackage="
+                            + getCurrentPackageSafely()
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
-        ReportLogger.pass("Check for Updates opened Google Play page for Value Research Advisor");
+        ReportLogger.pass(
+                "Check for Updates opened Google Play page "
+                        + "for Value Research Advisor"
+        );
 
         returnToAdvisorAppFromExternalApp();
+
         waitForAppSettingsScreenReady();
 
-        ReportLogger.pass("Returned from Google Play to App Settings screen");
+        ReportLogger.pass(
+                "Returned from Google Play to App Settings screen"
+        );
     }
 
     public void validateChangePinSameExistingPinErrorForAppSettings() {
-        ReportLogger.step("Validating Change PIN negative flow with same existing PIN using two-screen flow");
+
+        ReportLogger.step(
+                "Validating Change PIN negative flow "
+                        + "with same existing PIN using two-screen flow"
+        );
 
         ensureAppSettingsScreenOnAppTab();
 
         if (!tapAnyVisibleText("Change PIN")) {
-            throw new AssertionError("Unable to tap Change PIN"
-                    + " | visibleValues=" + collectVisibleStrings());
+
+            throw new AssertionError(
+                    "Unable to tap Change PIN"
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
-        waitForAnyTextVisible(Arrays.asList("Change your pin", "Enter your pin"), 10);
-        ReportLogger.pass("Change PIN screen opened");
+        waitForAnyTextVisible(
+                Arrays.asList(
+                        "Change your pin",
+                        "Enter your pin"
+                ),
+                10
+        );
 
-        ReportLogger.step("Entering existing PIN as new PIN");
+        ReportLogger.pass(
+                "Change PIN screen opened"
+        );
+
+        ReportLogger.step(
+                "Entering existing PIN as new PIN"
+        );
+
         enterPinByVisibleKeypad(ADVISOR_PIN);
 
-        waitForReEnterPinScreenForAppSettings("same existing PIN negative validation");
+        waitForReEnterPinScreenForAppSettings(
+                "same existing PIN negative validation"
+        );
 
-        ReportLogger.step("Re-entering existing PIN as confirm PIN");
+        ReportLogger.step(
+                "Re-entering existing PIN as confirm PIN"
+        );
+
         enterPinByVisibleKeypad(ADVISOR_PIN);
 
         waitForAnyTextVisible(
@@ -243,34 +515,49 @@ public class AppSettingsPage {
                 10
         );
 
-        ReportLogger.pass("Change PIN negative validation passed: same existing PIN is blocked");
+        ReportLogger.pass(
+                "Change PIN negative validation passed: "
+                        + "same existing PIN is blocked"
+        );
 
         pressBackSilently();
+
         sleep(1200);
 
         ensureAppSettingsScreenReadyForAppSettings();
     }
-    
+
     public void validateActualChangePinAndRestoreForAppSettings() {
-        ReportLogger.step("Validating actual Change PIN flow with one email OTP");
 
-        String temporaryPin = "1976";
-
-        performActualChangePinFlowForAppSettings(
-                temporaryPin,
-                "change current PIN to temporary PIN 1976 using one email OTP"
+        ReportLogger.step(
+                "Validating actual Change PIN flow with one email OTP"
         );
 
-        ReportLogger.pass("Actual Change PIN completed successfully. Current PIN is now 1976.");
+        performActualChangePinFlowForAppSettings(
+                TEMPORARY_PIN,
+                "change current PIN to temporary PIN using one email OTP"
+        );
+
+        ReportLogger.pass(
+                "Actual Change PIN completed successfully."
+        );
     }
+
     public void validateStorageSettingsScreenForAppSettings() {
-        ReportLogger.step("Validating Storage Settings screen");
+
+        ReportLogger.step(
+                "Validating Storage Settings screen"
+        );
 
         ensureAppSettingsScreenOnAppTab();
 
         if (!tapAnyVisibleText("Storage Settings")) {
-            throw new AssertionError("Unable to tap Storage Settings"
-                    + " | visibleValues=" + collectVisibleStrings());
+
+            throw new AssertionError(
+                    "Unable to tap Storage Settings"
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
         waitForStorageScreenReady();
@@ -279,24 +566,43 @@ public class AppSettingsPage {
         assertAnyTextVisible("Free Space");
         assertAnyTextVisible("Clear cache");
 
-        if (!containsAny(collectVisibleStrings(), "free up storage", "cache", "downloads won't be removed", "MB")) {
-            throw new AssertionError("Storage details text is not visible"
-                    + " | visibleValues=" + collectVisibleStrings());
+        if (!isAnyTextVisibleFast(
+                "free up storage",
+                "cache",
+                "downloads won't be removed",
+                "MB"
+        )) {
+
+            throw new AssertionError(
+                    "Storage details text is not visible"
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
-        ReportLogger.pass("Storage Settings screen validated: Storage + Free Space + Clear cache");
+        ReportLogger.pass(
+                "Storage Settings screen validated: "
+                        + "Storage + Free Space + Clear cache"
+        );
 
         returnToAppSettingsFromSubPage();
     }
 
     public void validatePortfolioSettingsAndSaveForAppSettings() {
-        ReportLogger.step("Validating Portfolio Settings tab and Save Changes flow");
+
+        ReportLogger.step(
+                "Validating Portfolio Settings tab and Save Changes flow"
+        );
 
         waitForAppSettingsScreenReady();
 
         if (!tapAnyVisibleText("Portfolio")) {
-            throw new AssertionError("Unable to tap Portfolio tab"
-                    + " | visibleValues=" + collectVisibleStrings());
+
+            throw new AssertionError(
+                    "Unable to tap Portfolio tab"
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
         waitForPortfolioSettingsReady();
@@ -309,71 +615,132 @@ public class AppSettingsPage {
         assertAnyTextVisible("Stock Exchange Priority");
         assertAnyTextVisible("NSE / BSE");
         assertAnyTextVisible("BSE / NSE");
-        assertAnyTextVisible("Include fully sold investment in returns");
+        assertAnyTextVisible(
+                "Include fully sold investment in returns"
+        );
         assertAnyTextVisible("Yes");
         assertAnyTextVisible("No");
-        assertAnyTextVisible("Hide fully sold investments from view");
+        assertAnyTextVisible(
+                "Hide fully sold investments from view"
+        );
         assertAnyTextVisible("Save Changes");
 
-        ReportLogger.pass("Portfolio Settings structure validated");
+        ReportLogger.pass(
+                "Portfolio Settings structure validated"
+        );
 
         if (!tapAnyVisibleText("Save Changes")) {
-            throw new AssertionError("Unable to tap Save Changes on Portfolio Settings"
-                    + " | visibleValues=" + collectVisibleStrings());
+
+            throw new AssertionError(
+                    "Unable to tap Save Changes on Portfolio Settings"
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
         waitForAnyTextVisible(
-                Arrays.asList("Please note", "Portfolio Setting Updated", "Portfolio Settings Updated", "Updated"),
+                Arrays.asList(
+                        "Please note",
+                        "Portfolio Setting Updated",
+                        "Portfolio Settings Updated",
+                        "Updated"
+                ),
                 12
         );
 
-        ReportLogger.pass("Portfolio Settings Save Changes flow validated successfully");
+        ReportLogger.pass(
+                "Portfolio Settings Save Changes flow "
+                        + "validated successfully"
+        );
     }
 
     public void returnBackToAdvisorAppSafely() {
-        ReportLogger.step("Returning back to Advisor App after App Settings validation");
+
+        ReportLogger.step(
+                "Returning back to Advisor App "
+                        + "after App Settings validation"
+        );
 
         activateAdvisorAppIfNeeded();
 
-        for (int attempt = 1; attempt <= 7; attempt++) {
-            if (isMainAppLoaded() && !isAppSettingsScreenVisible() && !isChangePinScreenVisible() && !isStorageScreenVisible()) {
-                ReportLogger.pass("Advisor App dashboard/home is visible");
+        for (int attempt = 1;
+             attempt <= 7;
+             attempt++) {
+
+            if (isMainAppLoaded()
+                    && !isAppSettingsScreenVisible()
+                    && !isChangePinScreenVisible()
+                    && !isStorageScreenVisible()) {
+
+                ReportLogger.pass(
+                        "Advisor App dashboard/home is visible"
+                );
+
                 return;
             }
 
-            if (isHubScreenVisible() && !isAppSettingsScreenVisible()) {
-                ReportLogger.pass("Advisor App Hub screen is visible after cleanup");
+            if (isHubScreenVisible()
+                    && !isAppSettingsScreenVisible()) {
+
+                ReportLogger.pass(
+                        "Advisor App Hub screen is visible after cleanup"
+                );
+
                 return;
             }
 
             pressBackSilently();
-            sleep(900);
+
+            sleep(700);
         }
 
-        if (isMainAppLoaded() || isHubScreenVisible()) {
-            ReportLogger.pass("Advisor App is active after cleanup");
+        if (isMainAppLoaded()
+                || isHubScreenVisible()) {
+
+            ReportLogger.pass(
+                    "Advisor App is active after cleanup"
+            );
+
             return;
         }
 
-        ReportLogger.debug("Could not fully confirm dashboard return after App Settings flow"
-                + " | currentPackage=" + getCurrentPackageSafely()
-                + " | visibleValues=" + collectVisibleStrings());
+        ReportLogger.debug(
+                "Could not fully confirm dashboard return "
+                        + "after App Settings flow"
+                        + " | currentPackage="
+                        + getCurrentPackageSafely()
+                        + " | visibleValues="
+                        + collectVisibleStrings()
+        );
     }
 
     public void verifyAppSettingsCompleteFlow() {
-        ReportLogger.step("Verifying complete App Settings flow");
+
+        ReportLogger.step(
+                "Verifying complete App Settings flow"
+        );
 
         captureAdvisorAppPackageForAppSettings();
+
         ensureAdvisorAppLoggedInForAppSettings();
+
         openHubFromDashboardForAppSettings();
+
         openAppSettingsFromHubForAppSettings();
+
         validateAppSettingsScreenStructureForAppSettings();
+
         validateCheckForUpdatesFlowForAppSettings();
+
         validateChangePinSameExistingPinErrorForAppSettings();
+
         validateStorageSettingsScreenForAppSettings();
+
         validatePortfolioSettingsAndSaveForAppSettings();
 
-        ReportLogger.pass("Complete App Settings flow validated successfully");
+        ReportLogger.pass(
+                "Complete App Settings flow validated successfully"
+        );
     }
 
     // =========================================================
@@ -381,256 +748,214 @@ public class AppSettingsPage {
     // =========================================================
 
     private void waitForHubScreenReady() {
-        waitForAnyTextVisible(Arrays.asList("Profile", "Investor Accounts", "App Settings", "Account Details"), 12);
 
-        if (!isHubScreenVisible()) {
-            throw new AssertionError("Hub screen did not become ready"
-                    + " | visibleValues=" + collectVisibleStrings());
+        long endTime =
+                System.currentTimeMillis() + 12000L;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            if (isHubScreenVisible()) {
+                return;
+            }
+
+            sleep(350);
         }
+
+        throw new AssertionError(
+                "Hub screen did not become ready"
+                        + " | visibleValues="
+                        + collectVisibleStrings()
+        );
     }
 
     private void waitForAppSettingsScreenReady() {
-        for (int i = 1; i <= 16; i++) {
+
+        long endTime =
+                System.currentTimeMillis() + 10000L;
+
+        while (System.currentTimeMillis() < endTime) {
+
             if (isAppSettingsScreenVisible()) {
                 return;
             }
 
-            sleep(400);
+            sleep(350);
         }
 
-        throw new AssertionError("App Settings screen is not ready"
-                + " | visibleValues=" + collectVisibleStrings());
-    }
-
-    private void waitForChangePinScreenReady() {
-        waitForAnyTextVisible(Arrays.asList("Change your pin", "Enter your pin"), 10);
-
-        if (!isChangePinScreenVisible()) {
-            throw new AssertionError("Change PIN screen is not ready"
-                    + " | visibleValues=" + collectVisibleStrings());
-        }
+        throw new AssertionError(
+                "App Settings screen is not ready"
+                        + " | currentPackage="
+                        + getCurrentPackageSafely()
+                        + " | visibleValues="
+                        + collectVisibleStrings()
+        );
     }
 
     private void waitForStorageScreenReady() {
-        waitForAnyTextVisible(Arrays.asList("Storage", "Free Space", "Clear cache"), 10);
+
+        waitForAnyTextVisible(
+                Arrays.asList(
+                        "Storage",
+                        "Free Space",
+                        "Clear cache"
+                ),
+                10
+        );
 
         if (!isStorageScreenVisible()) {
-            throw new AssertionError("Storage screen is not ready"
-                    + " | visibleValues=" + collectVisibleStrings());
+
+            throw new AssertionError(
+                    "Storage screen is not ready"
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
     }
 
     private void waitForPortfolioSettingsReady() {
-        waitForAnyTextVisible(Arrays.asList("Currency", "INR", "Unit of value", "Save Changes"), 15);
+
+        waitForAnyTextVisible(
+                Arrays.asList(
+                        "Currency",
+                        "INR",
+                        "Unit of value",
+                        "Save Changes"
+                ),
+                15
+        );
 
         if (!isPortfolioSettingsVisible()) {
-            throw new AssertionError("Portfolio Settings tab is not ready"
-                    + " | visibleValues=" + collectVisibleStrings());
+
+            throw new AssertionError(
+                    "Portfolio Settings tab is not ready"
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
     }
 
     private boolean isHubScreenVisible() {
-        List<String> values = collectVisibleStrings();
 
-        return containsAny(values, "Profile", "Investor Accounts", "Mutual Funds")
-                && containsAny(values, "App Settings", "Account Details", "Portfolio Settings")
-                && containsAny(values, "Funds", "Stocks", "Portfolio", "Hub");
+        /*
+         * Strongest Hub signal:
+         * the Inspector-confirmed App Settings profile tile.
+         */
+        if (isLocatorVisible(APP_SETTINGS_TILE)) {
+            return true;
+        }
+
+        /*
+         * Secondary Hub profile tile.
+         */
+        if (isLocatorVisible(PORTFOLIO_SETTINGS_TILE)) {
+            return true;
+        }
+
+        /*
+         * Fallback for a Hub screen that has been scrolled.
+         */
+        return isLocatorVisible(HUB_TAB)
+                && isAnyTextVisibleFast(
+                "Profile",
+                "Investor Accounts",
+                "Mutual Funds",
+                "Account Details",
+                "Subscription Details",
+                "App Settings"
+        );
     }
 
     private boolean isAppSettingsScreenVisible() {
-        List<String> values = collectVisibleStrings();
 
-        return containsAny(values, "Settings")
-                && containsAny(values, "Portfolio")
-                && containsAny(values, "App")
-                && containsAny(values, "Check for Updates", "Change PIN", "Storage Settings", "Currency", "Save Changes");
+        boolean settingsTitle =
+                isVisibleByAnyText("Settings");
+
+        boolean settingsTab =
+                isVisibleByAnyText("Portfolio")
+                        || isVisibleByAnyText("App");
+
+        boolean settingsContent =
+                isAnyTextVisibleFast(
+                        "Check for Updates",
+                        "Change PIN",
+                        "Storage Settings",
+                        "Currency",
+                        "Unit of value",
+                        "Save Changes"
+                );
+
+        return settingsTitle
+                && settingsTab
+                && settingsContent;
     }
 
     private boolean isChangePinScreenVisible() {
-        List<String> values = collectVisibleStrings();
 
-        return containsAny(values, "Change your pin")
-                && containsAny(values, "Enter your pin", "Re-Enter your pin");
+        return isVisibleByAnyText(
+                "Change your pin"
+        )
+                && isAnyTextVisibleFast(
+                "Enter your pin",
+                "Re-Enter your pin",
+                "Re-enter your pin",
+                "Re Enter your pin"
+        );
     }
 
     private boolean isStorageScreenVisible() {
-        List<String> values = collectVisibleStrings();
 
-        return containsAny(values, "Storage")
-                && containsAny(values, "Free Space", "Clear cache");
+        return isVisibleByAnyText("Storage")
+                && isAnyTextVisibleFast(
+                "Free Space",
+                "Clear cache"
+        );
     }
 
     private boolean isPortfolioSettingsVisible() {
-        List<String> values = collectVisibleStrings();
 
-        return containsAny(values, "Settings")
-                && containsAny(values, "Currency")
-                && containsAny(values, "Unit of value")
-                && containsAny(values, "Save Changes");
+        return isVisibleByAnyText("Settings")
+                && isVisibleByAnyText("Currency")
+                && isVisibleByAnyText("Unit of value")
+                && isVisibleByAnyText("Save Changes");
     }
 
-    private boolean waitForPlayStoreAdvisorPageVisible(int timeoutSeconds) {
-        long endTime = System.currentTimeMillis() + (timeoutSeconds * 1000L);
+    private boolean waitForPlayStoreAdvisorPageVisible(
+            int timeoutSeconds
+    ) {
+
+        long endTime =
+                System.currentTimeMillis()
+                        + timeoutSeconds * 1000L;
 
         while (System.currentTimeMillis() < endTime) {
-            List<String> values = collectVisibleStrings();
-            String currentPackage = getCurrentPackageSafely();
 
-            boolean playStorePackage = currentPackage.toLowerCase().contains("vending")
-                    || currentPackage.toLowerCase().contains("google");
+            String currentPackage =
+                    getCurrentPackageSafely();
 
-            boolean advisorPage = containsAny(values, "Value Research Advisor", "Independent Advisors Private Limited")
-                    && containsAny(values, "Open", "Uninstall", "What's new", "Google Play");
+            boolean playStorePackage =
+                    PLAY_STORE_PACKAGE.equals(currentPackage)
+                            || currentPackage
+                            .toLowerCase()
+                            .contains("vending");
 
-            if (playStorePackage && advisorPage) {
-                return true;
-            }
+            boolean advisorPage =
+                    isAnyTextVisibleFast(
+                            "Value Research Advisor",
+                            "Independent Advisors Private Limited"
+                    );
 
-            if (advisorPage) {
-                return true;
-            }
+            boolean playStoreAction =
+                    isAnyTextVisibleFast(
+                            "Open",
+                            "Uninstall",
+                            "What's new",
+                            "Google Play"
+                    );
 
-            sleep(600);
-        }
+            if (advisorPage
+                    && (playStorePackage
+                    || playStoreAction)) {
 
-        return false;
-    }
-
-    private void ensureAppSettingsScreenOnAppTab() {
-        waitForAppSettingsScreenReady();
-
-        if (containsAny(collectVisibleStrings(), "Check for Updates", "Change PIN", "Storage Settings")) {
-            return;
-        }
-
-        if (!tapAnyVisibleText("App")) {
-            throw new AssertionError("Unable to switch to App tab on Settings screen"
-                    + " | visibleValues=" + collectVisibleStrings());
-        }
-
-        waitForAnyTextVisible(Arrays.asList("Check for Updates", "Change PIN", "Storage Settings"), 8);
-    }
-
-    // =========================================================
-    // NAVIGATION HELPERS
-    // =========================================================
-
-    private void returnToAdvisorAppFromExternalApp() {
-        ReportLogger.step("Returning from external app to Advisor App");
-
-        activateAdvisorAppIfNeeded();
-
-        for (int attempt = 1; attempt <= 6; attempt++) {
-            if (isAppSettingsScreenVisible()) {
-                return;
-            }
-
-            if (isHubScreenVisible()) {
-                openAppSettingsFromHubForAppSettings();
-                return;
-            }
-
-            if (isMainAppLoaded()) {
-                openHubFromDashboardForAppSettings();
-                openAppSettingsFromHubForAppSettings();
-                return;
-            }
-
-            pressBackSilently();
-            sleep(900);
-            activateAdvisorAppIfNeeded();
-        }
-
-        throw new AssertionError("Unable to return to Advisor App Settings after external app"
-                + " | currentPackage=" + getCurrentPackageSafely()
-                + " | visibleValues=" + collectVisibleStrings());
-    }
-
-    private void returnToAppSettingsFromSubPage() {
-        for (int attempt = 1; attempt <= 5; attempt++) {
-            if (isAppSettingsScreenVisible()) {
-                ensureAppSettingsScreenOnAppTab();
-                return;
-            }
-
-            pressBackSilently();
-            sleep(800);
-        }
-
-        if (isHubScreenVisible()) {
-            openAppSettingsFromHubForAppSettings();
-            return;
-        }
-
-        throw new AssertionError("Unable to return to App Settings screen from sub-page"
-                + " | visibleValues=" + collectVisibleStrings());
-    }
-
-    private void returnToDashboardIfNeeded() {
-        if (isMainAppLoaded() && !isAppSettingsScreenVisible() && !isChangePinScreenVisible() && !isStorageScreenVisible()) {
-            return;
-        }
-
-        for (int attempt = 1; attempt <= 6; attempt++) {
-            if (isMainAppLoaded() && !isAppSettingsScreenVisible() && !isChangePinScreenVisible() && !isStorageScreenVisible()) {
-                return;
-            }
-
-            pressBackSilently();
-            sleep(900);
-        }
-
-        if (!isMainAppLoaded()) {
-            activateAdvisorAppIfNeeded();
-            sleep(1000);
-        }
-    }
-
-    private boolean tapHubTabSafely() {
-        By[] hubLocators = new By[]{
-                AppiumBy.androidUIAutomator("new UiSelector().description(\"Hub\")"),
-                By.xpath("//*[@content-desc='Hub']")
-        };
-
-        for (By locator : hubLocators) {
-            WebElement element = waitForElementFast(locator, 2);
-
-            if (element != null) {
-                ReportLogger.step("Tapping Hub tab by exact locator");
-                tapElementCenter(element);
-
-                if (waitForHubVisibleSilently(8)) {
-                    return true;
-                }
-            }
-        }
-
-        WebElement hubText = findVisibleExactTextElement("Hub");
-
-        if (hubText != null) {
-            ReportLogger.step("Tapping Hub tab by visible text");
-            tapElementCenter(hubText);
-
-            if (waitForHubVisibleSilently(8)) {
-                return true;
-            }
-        }
-
-        Dimension size = driver.manage().window().getSize();
-        int x = (int) (size.getWidth() * 0.88);
-        int y = (int) (size.getHeight() * 0.94);
-
-        ReportLogger.step("Tapping Hub tab by coordinate fallback | x=" + x + " | y=" + y);
-        tapByCoordinates(x, y);
-
-        return waitForHubVisibleSilently(8);
-    }
-
-    private boolean waitForHubVisibleSilently(int timeoutSeconds) {
-        long endTime = System.currentTimeMillis() + (timeoutSeconds * 1000L);
-
-        while (System.currentTimeMillis() < endTime) {
-            if (isHubScreenVisible()) {
                 return true;
             }
 
@@ -640,22 +965,363 @@ public class AppSettingsPage {
         return false;
     }
 
-    private void activateAdvisorAppIfNeeded() {
-        try {
-            String packageToActivate = advisorAppPackage;
+    private void ensureAppSettingsScreenOnAppTab() {
 
-            if (packageToActivate == null || packageToActivate.trim().isEmpty()) {
-                packageToActivate = ADVISOR_APP_PACKAGE;
+        waitForAppSettingsScreenReady();
+
+        if (isAnyTextVisibleFast(
+                "Check for Updates",
+                "Change PIN",
+                "Storage Settings"
+        )) {
+            return;
+        }
+
+        if (!tapAnyVisibleText("App")) {
+
+            throw new AssertionError(
+                    "Unable to switch to App tab "
+                            + "on Settings screen"
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
+        }
+
+        waitForAnyTextVisible(
+                Arrays.asList(
+                        "Check for Updates",
+                        "Change PIN",
+                        "Storage Settings"
+                ),
+                8
+        );
+    }
+
+    // =========================================================
+    // NAVIGATION HELPERS
+    // =========================================================
+
+    private void returnToAdvisorAppFromExternalApp() {
+
+        ReportLogger.step(
+                "Returning from external app to Advisor App"
+        );
+
+        activateAdvisorAppIfNeeded();
+
+        for (int attempt = 1;
+             attempt <= 6;
+             attempt++) {
+
+            if (isAppSettingsScreenVisible()) {
+                return;
             }
 
-            String currentPackage = getCurrentPackageSafely();
+            if (isHubScreenVisible()) {
+
+                openAppSettingsFromHubForAppSettings();
+                return;
+            }
+
+            if (isMainAppLoaded()) {
+
+                openHubFromDashboardForAppSettings();
+
+                openAppSettingsFromHubForAppSettings();
+
+                return;
+            }
+
+            pressBackSilently();
+
+            sleep(700);
+
+            activateAdvisorAppIfNeeded();
+        }
+
+        throw new AssertionError(
+                "Unable to return to Advisor App Settings "
+                        + "after external app"
+                        + " | currentPackage="
+                        + getCurrentPackageSafely()
+                        + " | visibleValues="
+                        + collectVisibleStrings()
+        );
+    }
+
+    private void returnToAppSettingsFromSubPage() {
+
+        for (int attempt = 1;
+             attempt <= 5;
+             attempt++) {
+
+            if (isAppSettingsScreenVisible()) {
+
+                ensureAppSettingsScreenOnAppTab();
+                return;
+            }
+
+            pressBackSilently();
+
+            sleep(650);
+        }
+
+        if (isHubScreenVisible()) {
+
+            openAppSettingsFromHubForAppSettings();
+
+            ensureAppSettingsScreenOnAppTab();
+
+            return;
+        }
+
+        throw new AssertionError(
+                "Unable to return to App Settings screen "
+                        + "from sub-page"
+                        + " | visibleValues="
+                        + collectVisibleStrings()
+        );
+    }
+
+    private void returnToDashboardIfNeeded() {
+
+        if (isMainAppLoaded()
+                && !isAppSettingsScreenVisible()
+                && !isChangePinScreenVisible()
+                && !isStorageScreenVisible()) {
+
+            return;
+        }
+
+        for (int attempt = 1;
+             attempt <= 6;
+             attempt++) {
+
+            if (isMainAppLoaded()
+                    && !isAppSettingsScreenVisible()
+                    && !isChangePinScreenVisible()
+                    && !isStorageScreenVisible()) {
+
+                return;
+            }
+
+            pressBackSilently();
+
+            sleep(700);
+        }
+
+        if (!isMainAppLoaded()) {
+
+            activateAdvisorAppIfNeeded();
+
+            sleep(900);
+        }
+    }
+
+    private boolean tapHubTabSafely() {
+
+        /*
+         * PRIMARY - confirmed from Appium Inspector.
+         */
+        WebElement hub =
+                waitForElementFast(
+                        HUB_TAB,
+                        4
+                );
+
+        if (hub != null) {
+
+            ReportLogger.step(
+                    "Tapping Hub tab using accessibility id"
+            );
+
+            tapElementCenter(hub);
+
+            if (waitForHubVisibleSilently(8)) {
+                return true;
+            }
+        }
+
+        /*
+         * Semantic fallback.
+         */
+        hub = waitForElementFast(
+                HUB_TAB_DESCRIPTION,
+                2
+        );
+
+        if (hub != null) {
+
+            ReportLogger.step(
+                    "Tapping Hub tab using content-desc fallback"
+            );
+
+            tapElementCenter(hub);
+
+            if (waitForHubVisibleSilently(8)) {
+                return true;
+            }
+        }
+
+        /*
+         * Last semantic fallback.
+         * No coordinate fallback here.
+         */
+        WebElement hubText =
+                findVisibleExactTextElement("Hub");
+
+        if (hubText != null) {
+
+            ReportLogger.step(
+                    "Tapping Hub tab using visible text fallback"
+            );
+
+            tapElementCenter(hubText);
+
+            return waitForHubVisibleSilently(8);
+        }
+
+        return false;
+    }
+
+    private boolean tapAppSettingsTileSafely() {
+
+        /*
+         * PRIMARY locator confirmed by Appium Inspector.
+         */
+        WebElement element =
+                waitForElementFast(
+                        APP_SETTINGS_TILE,
+                        5
+                );
+
+        if (element != null) {
+
+            ReportLogger.step(
+                    "Tapping App Settings using accessibility id: "
+                            + "Manage your app settings"
+            );
+
+            tapElementCenter(element);
+
+            return true;
+        }
+
+        /*
+         * Exact content-desc fallback.
+         */
+        element =
+                waitForElementFast(
+                        APP_SETTINGS_TILE_DESCRIPTION,
+                        2
+                );
+
+        if (element != null) {
+
+            ReportLogger.step(
+                    "Tapping App Settings using exact "
+                            + "content-desc fallback"
+            );
+
+            tapElementCenter(element);
+
+            return true;
+        }
+
+        /*
+         * Bounded semantic fallback.
+         */
+        element =
+                waitForElementFast(
+                        APP_SETTINGS_TILE_DESCRIPTION_CONTAINS,
+                        2
+                );
+
+        if (element != null) {
+
+            ReportLogger.step(
+                    "Tapping App Settings using "
+                            + "descriptionContains fallback"
+            );
+
+            tapElementCenter(element);
+
+            return true;
+        }
+
+        /*
+         * Optional final text fallback.
+         *
+         * The current app should not reach this because the Inspector
+         * confirms "Manage your app settings" as the accessibility id.
+         */
+        element =
+                findVisibleTextElement("App Settings");
+
+        if (element != null) {
+
+            ReportLogger.step(
+                    "Tapping App Settings using visible text fallback"
+            );
+
+            tapElementCenter(element);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean waitForHubVisibleSilently(
+            int timeoutSeconds
+    ) {
+
+        long endTime =
+                System.currentTimeMillis()
+                        + timeoutSeconds * 1000L;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            if (isHubScreenVisible()) {
+                return true;
+            }
+
+            sleep(350);
+        }
+
+        return false;
+    }
+
+    private void activateAdvisorAppIfNeeded() {
+
+        try {
+
+            String packageToActivate =
+                    advisorAppPackage;
+
+            if (packageToActivate == null
+                    || packageToActivate.trim().isEmpty()) {
+
+                packageToActivate =
+                        ADVISOR_APP_PACKAGE;
+            }
+
+            String currentPackage =
+                    getCurrentPackageSafely();
 
             if (!packageToActivate.equals(currentPackage)) {
+
                 driver.activateApp(packageToActivate);
-                sleep(1200);
+
+                sleep(1000);
             }
+
         } catch (Exception e) {
-            ReportLogger.debug("activateApp skipped/failed: " + cleanError(e.getMessage()));
+
+            ReportLogger.debug(
+                    "activateApp skipped/failed: "
+                            + cleanError(e.getMessage())
+            );
         }
     }
 
@@ -664,651 +1330,1092 @@ public class AppSettingsPage {
     // =========================================================
 
     private boolean isPinScreenVisible() {
-        List<String> values = collectVisibleStrings();
 
-        return containsAny(values,
+        return isAnyTextVisibleFast(
                 "Enter your Advisor PIN",
-                "Advisor PIN",
-                "PIN",
-                "Hi,"
+                "Advisor PIN"
+        )
+                || (
+                isAnyTextVisibleFast("Hi,", "Hi")
+                        && !isMainAppLoaded()
         );
     }
 
     private boolean isMainAppLoaded() {
-        List<String> values = collectVisibleStrings();
 
-        return containsAny(values,
-                "Funds",
-                "Portfolio",
-                "Hub",
-                "Clients",
-                "Reports",
-                "Search",
+        /*
+         * Fast bottom-nav detection.
+         *
+         * These accessibility IDs are considerably cheaper than repeatedly
+         * scanning every node from //*.
+         */
+        boolean hubAvailable =
+                isLocatorVisible(HUB_TAB);
+
+        boolean anotherMainTabAvailable =
+                isLocatorVisible(FUNDS_TAB)
+                        || isLocatorVisible(STOCKS_TAB)
+                        || isLocatorVisible(PORTFOLIO_TAB);
+
+        if (hubAvailable
+                && anotherMainTabAvailable) {
+
+            return true;
+        }
+
+        /*
+         * Safe fallback for transient dashboard states.
+         */
+        return isAnyTextVisibleFast(
                 "Portfolio Value",
                 "Rich Future Starts Here",
-                "Shourya Pratap Singh"
+                "Search"
         );
     }
 
     private void enterAdvisorPin() {
-        enterAdvisorPinValue(ADVISOR_PIN);
+
+        enterAdvisorPinValue(
+                ADVISOR_PIN
+        );
     }
 
-    private void enterAdvisorPinValue(String pin) {
+    private void enterAdvisorPinValue(
+            String pin
+    ) {
+
+        if (pin == null
+                || !pin.matches("\\d{4}")) {
+
+            throw new AssertionError(
+                    "Configured Advisor PIN must contain exactly 4 digits"
+            );
+        }
+
         for (char digit : pin.toCharArray()) {
-            tapPinDigit(String.valueOf(digit));
-            sleep(350);
+
+            tapPinDigit(
+                    String.valueOf(digit)
+            );
+
+            sleep(300);
         }
     }
 
-    private void tapPinDigit(String digit) {
-        WebElement digitElement = findVisibleExactTextElement(digit);
+    private void tapPinDigit(
+            String digit
+    ) {
+
+        WebElement digitElement =
+                findVisibleKeypadDigitElement(digit);
 
         if (digitElement != null) {
+
             tapElementCenter(digitElement);
-            ReportLogger.step("Tapped PIN digit: " + digit);
+
+            /*
+             * Never print the actual PIN digit in logs.
+             */
+            ReportLogger.step(
+                    "Tapped Advisor PIN keypad digit"
+            );
+
             return;
         }
 
+        /*
+         * Coordinate usage is only the last fallback for the numeric keypad.
+         */
+        ReportLogger.debug(
+                "PIN digit semantic locator unavailable. "
+                        + "Using keypad coordinate fallback."
+        );
+
         tapPinDigitByCoordinate(digit);
-        ReportLogger.step("Tapped PIN digit by coordinate fallback: " + digit);
+
+        ReportLogger.step(
+                "Tapped Advisor PIN keypad digit using fallback"
+        );
     }
 
     private void waitForMainAppAfterPin() {
-        ReportLogger.step("Waiting for Advisor app dashboard after PIN");
 
-        for (int i = 1; i <= 25; i++) {
+        ReportLogger.step(
+                "Waiting for Advisor app dashboard after PIN"
+        );
+
+        long endTime =
+                System.currentTimeMillis() + 30000L;
+
+        while (System.currentTimeMillis() < endTime) {
+
             if (isMainAppLoaded()) {
-                ReportLogger.pass("Advisor app dashboard loaded after PIN");
+
+                ReportLogger.pass(
+                        "Advisor app dashboard loaded after PIN"
+                );
+
                 return;
             }
 
-            sleep(800);
+            sleep(500);
         }
 
-        throw new AssertionError("Advisor app dashboard did not load after PIN"
-                + " | visibleValues=" + collectVisibleStrings());
+        throw new AssertionError(
+                "Advisor app dashboard did not load after PIN"
+                        + " | currentPackage="
+                        + getCurrentPackageSafely()
+                        + " | visibleValues="
+                        + collectVisibleStrings()
+        );
     }
 
-    private void enterPinByVisibleKeypad(String pin) {
+    private void enterPinByVisibleKeypad(
+            String pin
+    ) {
+
+        if (pin == null
+                || !pin.matches("\\d{4}")) {
+
+            throw new AssertionError(
+                    "Change PIN value must contain exactly 4 digits"
+            );
+        }
+
         for (char digit : pin.toCharArray()) {
-            tapChangePinKeypadDigit(String.valueOf(digit));
-            sleep(350);
+
+            tapChangePinKeypadDigit(
+                    String.valueOf(digit)
+            );
+
+            sleep(300);
         }
     }
 
-    private void tapChangePinKeypadDigit(String digit) {
-        WebElement digitElement = findVisibleKeypadDigitElement(digit);
+    private void tapChangePinKeypadDigit(
+            String digit
+    ) {
+
+        WebElement digitElement =
+                findVisibleKeypadDigitElement(digit);
 
         if (digitElement != null) {
+
             tapElementCenter(digitElement);
-            ReportLogger.step("Tapped Change PIN keypad digit: " + digit);
+
+            ReportLogger.step(
+                    "Tapped Change PIN keypad digit"
+            );
+
             return;
         }
 
-        ReportLogger.debug("Visible keypad digit locator failed for " + digit + ". Using coordinate fallback.");
+        ReportLogger.debug(
+                "Change PIN keypad semantic locator failed. "
+                        + "Using coordinate fallback."
+        );
+
         tapPinDigitByCoordinate(digit);
-        ReportLogger.step("Tapped Change PIN keypad digit by coordinate fallback: " + digit);
+
+        ReportLogger.step(
+                "Tapped Change PIN keypad digit using fallback"
+        );
     }
 
-    private WebElement findVisibleKeypadDigitElement(String digit) {
-        Dimension size = driver.manage().window().getSize();
-        List<WebElement> matchingElements = new ArrayList<>();
+    private WebElement findVisibleKeypadDigitElement(
+            String digit
+    ) {
 
-        try {
-            List<WebElement> elements = driver.findElements(By.xpath("//*"));
+        Dimension screen =
+                driver.manage()
+                        .window()
+                        .getSize();
 
-            for (WebElement element : elements) {
-                try {
-                    if (!isElementUsable(element)) {
-                        continue;
+        List<WebElement> candidates =
+                new ArrayList<>();
+
+        String escapedDigit =
+                escapeUiSelector(digit);
+
+        By[] locators = new By[]{
+                AppiumBy.androidUIAutomator(
+                        "new UiSelector().text(\""
+                                + escapedDigit
+                                + "\")"
+                ),
+                AppiumBy.androidUIAutomator(
+                        "new UiSelector().description(\""
+                                + escapedDigit
+                                + "\")"
+                ),
+                AppiumBy.accessibilityId(digit)
+        };
+
+        for (By locator : locators) {
+
+            try {
+
+                List<WebElement> elements =
+                        driver.findElements(locator);
+
+                for (WebElement element : elements) {
+
+                    try {
+
+                        if (!isElementUsable(
+                                element,
+                                screen
+                        )) {
+                            continue;
+                        }
+
+                        Rectangle rect =
+                                element.getRect();
+
+                        int centerY =
+                                rect.getY()
+                                        + rect.getHeight() / 2;
+
+                        /*
+                         * Numeric keypad belongs in the lower half of the screen.
+                         * This prevents matching unrelated numbers.
+                         */
+                        if (centerY
+                                < (int) (
+                                screen.getHeight()
+                                        * 0.50
+                        )) {
+                            continue;
+                        }
+
+                        candidates.add(element);
+
+                    } catch (Exception ignored) {
+                        // Ignore stale candidate.
                     }
-
-                    Rectangle rect = element.getRect();
-                    int centerY = rect.getY() + rect.getHeight() / 2;
-
-                    if (centerY < (int) (size.getHeight() * 0.52)) {
-                        continue;
-                    }
-
-                    String text = normalizeSpaces(element.getText());
-                    String desc = normalizeSpaces(element.getAttribute("content-desc"));
-                    String name = normalizeSpaces(element.getAttribute("name"));
-                    String attrText = normalizeSpaces(element.getAttribute("text"));
-
-                    if (digit.equals(text) || digit.equals(desc) || digit.equals(name) || digit.equals(attrText)) {
-                        matchingElements.add(element);
-                    }
-                } catch (Exception ignored) {
-                    // Ignore stale/unreadable element.
                 }
+
+            } catch (Exception ignored) {
+                // Try next semantic locator.
             }
-        } catch (Exception e) {
-            ReportLogger.debug("findVisibleKeypadDigitElement skipped: " + cleanError(e.getMessage()));
         }
 
-        if (matchingElements.isEmpty()) {
+        if (candidates.isEmpty()) {
             return null;
         }
 
-        matchingElements.sort((left, right) -> {
-            Rectangle leftRect = left.getRect();
-            Rectangle rightRect = right.getRect();
-            int leftArea = leftRect.getWidth() * leftRect.getHeight();
-            int rightArea = rightRect.getWidth() * rightRect.getHeight();
+        /*
+         * Prefer the smallest matching element.
+         * Usually this is the actual keypad number rather than a container.
+         */
+        candidates.sort(
+                (left, right) -> {
 
-            int areaCompare = Integer.compare(leftArea, rightArea);
-            if (areaCompare != 0) {
-                return areaCompare;
-            }
+                    try {
 
-            return Integer.compare(rightRect.getY(), leftRect.getY());
-        });
+                        Rectangle leftRect =
+                                left.getRect();
 
-        return matchingElements.get(0);
+                        Rectangle rightRect =
+                                right.getRect();
+
+                        int leftArea =
+                                leftRect.getWidth()
+                                        * leftRect.getHeight();
+
+                        int rightArea =
+                                rightRect.getWidth()
+                                        * rightRect.getHeight();
+
+                        return Integer.compare(
+                                leftArea,
+                                rightArea
+                        );
+
+                    } catch (Exception ignored) {
+                        return 0;
+                    }
+                }
+        );
+
+        return candidates.get(0);
     }
 
-    private void waitForChangePinStepToAdvance(String completedStep) {
-        sleep(700);
+    private void performActualChangePinFlowForAppSettings(
+            String newPin,
+            String flowLabel
+    ) {
 
-        if (!isChangePinScreenVisible()) {
-            return;
-        }
-
-        List<String> values = collectVisibleStrings();
-        ReportLogger.debug("Change PIN step completed: " + completedStep + " | visibleValues=" + values);
-    }
-
-    private void performActualChangePinFlowForAppSettings(String newPin, String flowLabel) {
-        ReportLogger.step("Starting actual Change PIN two-screen OTP flow: " + flowLabel);
+        ReportLogger.step(
+                "Starting actual Change PIN two-screen OTP flow: "
+                        + flowLabel
+        );
 
         ensureAppSettingsScreenOnAppTab();
 
         if (!tapAnyVisibleText("Change PIN")) {
-            throw new AssertionError("Unable to tap Change PIN"
-                    + " | flow=" + flowLabel
-                    + " | visibleValues=" + collectVisibleStrings());
+
+            throw new AssertionError(
+                    "Unable to tap Change PIN"
+                            + " | flow="
+                            + flowLabel
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
-        waitForAnyTextVisible(Arrays.asList("Change your pin", "Enter your pin"), 10);
-        ReportLogger.pass("Change PIN screen opened: " + flowLabel);
+        waitForAnyTextVisible(
+                Arrays.asList(
+                        "Change your pin",
+                        "Enter your pin"
+                ),
+                10
+        );
 
-        ReportLogger.step("Entering new PIN on first screen: " + flowLabel);
+        ReportLogger.pass(
+                "Change PIN screen opened: "
+                        + flowLabel
+        );
+
+        ReportLogger.step(
+                "Entering new PIN on first screen: "
+                        + flowLabel
+        );
+
         enterPinByVisibleKeypad(newPin);
 
-        waitForReEnterPinScreenForAppSettings(flowLabel);
+        waitForReEnterPinScreenForAppSettings(
+                flowLabel
+        );
 
-        ReportLogger.step("Re-entering new PIN on confirm screen: " + flowLabel);
+        ReportLogger.step(
+                "Re-entering new PIN on confirm screen: "
+                        + flowLabel
+        );
+
         enterPinByVisibleKeypad(newPin);
 
-        waitForChangePinOtpSheetForAppSettings(flowLabel);
+        waitForChangePinOtpSheetForAppSettings(
+                flowLabel
+        );
 
-        String otp = OtpEmailReader.fetchLatestOtp();
+        /*
+         * Small bounded wait for the newly-generated OTP email to arrive.
+         */
+        sleep(1500);
 
-        handleChangePinOtpUsingOtpPage(otp, flowLabel);
+        String otp =
+                OtpEmailReader.fetchLatestOtp();
 
-        waitAfterOtpVerifyForChangePin(newPin, flowLabel);
+        handleChangePinOtpUsingOtpPage(
+                otp,
+                flowLabel
+        );
 
-        ReportLogger.pass("Actual Change PIN two-screen OTP flow completed: " + flowLabel);
+        waitAfterOtpVerifyForChangePin(
+                flowLabel
+        );
+
+        ReportLogger.pass(
+                "Actual Change PIN two-screen OTP flow completed: "
+                        + flowLabel
+        );
     }
-    
-    private void handleChangePinOtpUsingOtpPage(String otp, String flowLabel) {
-        if (otp == null || !otp.matches("\\d{6}")) {
-            throw new AssertionError("Valid 6 digit OTP is required for Change PIN flow"
-                    + " | flow=" + flowLabel
-                    + " | otp=" + otp);
+
+    private void handleChangePinOtpUsingOtpPage(
+            String otp,
+            String flowLabel
+    ) {
+
+        if (otp == null
+                || !otp.matches("\\d{6}")) {
+
+            throw new AssertionError(
+                    "Valid 6 digit OTP is required "
+                            + "for Change PIN flow"
+                            + " | flow="
+                            + flowLabel
+            );
         }
 
-        ReportLogger.step("Handling Change PIN OTP using existing OtpPage: " + flowLabel);
+        ReportLogger.step(
+                "Handling Change PIN OTP "
+                        + "using existing OtpPage: "
+                        + flowLabel
+        );
 
-        OtpPage otpPage = new OtpPage(driver);
+        OtpPage otpPage =
+                new OtpPage(driver);
 
         otpPage.waitForOtpScreen();
+
         otpPage.enterOtp(otp);
+
         otpPage.clickVerifyIfVisible();
 
-        ReportLogger.pass("Change PIN OTP submitted using existing OtpPage: " + flowLabel);
+        ReportLogger.pass(
+                "Change PIN OTP submitted "
+                        + "using existing OtpPage: "
+                        + flowLabel
+        );
     }
-    
-    private void waitForChangePinOtpSheetForAppSettings(String flowLabel) {
-        long endTime = System.currentTimeMillis() + 20000L;
+
+    private void waitForChangePinOtpSheetForAppSettings(
+            String flowLabel
+    ) {
+
+        long endTime =
+                System.currentTimeMillis() + 20000L;
 
         while (System.currentTimeMillis() < endTime) {
-            List<String> values = collectVisibleStrings();
 
-            if (containsAny(values,
+            if (isAnyTextVisibleFast(
                     "OTP sent successfully",
                     "Enter OTP",
                     "Verify OTP",
                     "Resend OTP",
-                    "Change pin")) {
-                ReportLogger.pass("Change PIN OTP sheet is visible: " + flowLabel);
+                    "Change pin"
+            )) {
+
+                ReportLogger.pass(
+                        "Change PIN OTP sheet is visible: "
+                                + flowLabel
+                );
+
                 return;
             }
 
-            if (containsAny(values,
+            if (isAnyTextVisibleFast(
                     "Pin Not Matched",
                     "PIN Not Matched",
-                    "Pin Not Matched !!!")) {
-                throw new AssertionError("PIN mismatch appeared before OTP screen"
-                        + " | flow=" + flowLabel
-                        + " | visibleValues=" + values);
+                    "Pin Not Matched !!!"
+            )) {
+
+                throw new AssertionError(
+                        "PIN mismatch appeared before OTP screen"
+                                + " | flow="
+                                + flowLabel
+                                + " | visibleValues="
+                                + collectVisibleStrings()
+                );
             }
 
-            if (containsAny(values,
+            if (isAnyTextVisibleFast(
                     "New PIN cannot be the same as existing PIN",
                     "same as existing PIN",
-                    "cannot be the same")) {
-                throw new AssertionError("Same existing PIN validation appeared unexpectedly"
-                        + " | flow=" + flowLabel
-                        + " | visibleValues=" + values);
+                    "cannot be the same"
+            )) {
+
+                throw new AssertionError(
+                        "Same existing PIN validation "
+                                + "appeared unexpectedly"
+                                + " | flow="
+                                + flowLabel
+                                + " | visibleValues="
+                                + collectVisibleStrings()
+                );
             }
 
-            sleep(500);
+            sleep(400);
         }
 
-        throw new AssertionError("OTP sheet did not appear after Change PIN"
-                + " | flow=" + flowLabel
-                + " | visibleValues=" + collectVisibleStrings());
+        throw new AssertionError(
+                "OTP sheet did not appear after Change PIN"
+                        + " | flow="
+                        + flowLabel
+                        + " | visibleValues="
+                        + collectVisibleStrings()
+        );
     }
-    
-    private void waitAfterOtpVerifyForChangePin(String activePinAfterChange, String flowLabel) {
-        long endTime = System.currentTimeMillis() + 25000L;
+
+    private void waitAfterOtpVerifyForChangePin(
+            String flowLabel
+    ) {
+
+        long endTime =
+                System.currentTimeMillis() + 25000L;
 
         while (System.currentTimeMillis() < endTime) {
-            List<String> values = collectVisibleStrings();
 
-            if (containsAny(values,
+            if (isAnyTextVisibleFast(
                     "PIN changed successfully",
                     "Pin changed successfully",
-                    "OTP verified successfully",
-                    "successfully")) {
-                ReportLogger.pass("Change PIN success message visible after OTP: " + flowLabel);
-                sleep(1500);
+                    "OTP verified successfully"
+            )) {
+
+                ReportLogger.pass(
+                        "Change PIN success message visible after OTP: "
+                                + flowLabel
+                );
+
+                sleep(1000);
+
                 ensureAppSettingsScreenReadyForAppSettings();
+
                 return;
             }
 
             if (isAppSettingsScreenVisible()) {
+
                 ensureAppSettingsScreenOnAppTab();
-                ReportLogger.pass("Returned to App Settings after OTP verification: " + flowLabel);
+
+                ReportLogger.pass(
+                        "Returned to App Settings after OTP verification: "
+                                + flowLabel
+                );
+
                 return;
             }
 
-            if (containsAny(values,
+            if (isAnyTextVisibleFast(
                     "Invalid OTP",
                     "Incorrect OTP",
                     "OTP expired",
-                    "Please enter valid OTP")) {
-                throw new AssertionError("OTP verification failed"
-                        + " | flow=" + flowLabel
-                        + " | visibleValues=" + values);
+                    "Please enter valid OTP"
+            )) {
+
+                throw new AssertionError(
+                        "OTP verification failed"
+                                + " | flow="
+                                + flowLabel
+                                + " | visibleValues="
+                                + collectVisibleStrings()
+                );
             }
 
-            sleep(700);
+            sleep(500);
         }
 
-        throw new AssertionError("Change PIN did not complete after OTP verification"
-                + " | flow=" + flowLabel
-                + " | visibleValues=" + collectVisibleStrings());
+        throw new AssertionError(
+                "Change PIN did not complete "
+                        + "after OTP verification"
+                        + " | flow="
+                        + flowLabel
+                        + " | visibleValues="
+                        + collectVisibleStrings()
+        );
     }
-    
-    private void waitForReEnterPinScreenForAppSettings(String flowLabel) {
-        long endTime = System.currentTimeMillis() + 12000L;
+
+    private void waitForReEnterPinScreenForAppSettings(
+            String flowLabel
+    ) {
+
+        long endTime =
+                System.currentTimeMillis() + 12000L;
 
         while (System.currentTimeMillis() < endTime) {
-            List<String> values = collectVisibleStrings();
 
-            if (containsAny(values, "Re-Enter your pin", "Re-enter your pin", "Re Enter your pin")) {
-                ReportLogger.pass("Re-Enter PIN screen visible: " + flowLabel);
+            if (isAnyTextVisibleFast(
+                    "Re-Enter your pin",
+                    "Re-enter your pin",
+                    "Re Enter your pin"
+            )) {
+
+                ReportLogger.pass(
+                        "Re-Enter PIN screen visible: "
+                                + flowLabel
+                );
+
                 return;
             }
 
-            if (containsAny(values, "Pin Not Matched", "PIN Not Matched", "Pin Not Matched !!!")) {
-                throw new AssertionError("PIN mismatch appeared before confirm screen was ready"
-                        + " | flow=" + flowLabel
-                        + " | visibleValues=" + values);
+            if (isAnyTextVisibleFast(
+                    "Pin Not Matched",
+                    "PIN Not Matched",
+                    "Pin Not Matched !!!"
+            )) {
+
+                throw new AssertionError(
+                        "PIN mismatch appeared before "
+                                + "confirm screen was ready"
+                                + " | flow="
+                                + flowLabel
+                                + " | visibleValues="
+                                + collectVisibleStrings()
+                );
             }
 
-            if (containsAny(values,
+            if (isAnyTextVisibleFast(
                     "New PIN cannot be the same as existing PIN",
                     "same as existing PIN",
-                    "cannot be the same")) {
-                throw new AssertionError("New PIN same-as-existing validation appeared"
-                        + " | flow=" + flowLabel
-                        + " | visibleValues=" + values);
+                    "cannot be the same"
+            )) {
+
+                throw new AssertionError(
+                        "New PIN same-as-existing validation appeared"
+                                + " | flow="
+                                + flowLabel
+                                + " | visibleValues="
+                                + collectVisibleStrings()
+                );
             }
 
-            sleep(500);
+            sleep(400);
         }
 
-        throw new AssertionError("Re-Enter PIN screen did not appear"
-                + " | flow=" + flowLabel
-                + " | visibleValues=" + collectVisibleStrings());
-    }
-    private void waitForActualChangePinSuccessOrSafeState(String activePinAfterChange, String flowLabel) {
-        long endTime = System.currentTimeMillis() + 16000L;
-
-        while (System.currentTimeMillis() < endTime) {
-            List<String> values = collectVisibleStrings();
-
-            if (containsAny(values,
-                    "PIN changed successfully",
-                    "Pin changed successfully",
-                    "pin changed successfully",
-                    "PIN updated successfully",
-                    "Pin updated successfully",
-                    "changed successfully",
-                    "updated successfully")) {
-                ReportLogger.pass("Actual Change PIN success message visible for flow: " + flowLabel);
-                returnToAppSettingsFromAnyChangePinSuccessState(activePinAfterChange);
-                return;
-            }
-
-            if (containsAny(values,
-                    "Incorrect PIN",
-                    "Wrong PIN",
-                    "Invalid PIN",
-                    "PIN does not match",
-                    "Pins do not match",
-                    "PINs do not match",
-                    "cannot be the same",
-                    "same as existing PIN")) {
-                throw new AssertionError("Actual Change PIN flow showed error state"
-                        + " | flow=" + flowLabel
-                        + " | visibleValues=" + values);
-            }
-
-            if (isPinScreenVisible()) {
-                ReportLogger.step("Advisor PIN screen appeared after actual PIN change. Entering active PIN to continue: " + flowLabel);
-                enterAdvisorPinValue(activePinAfterChange);
-                waitForMainAppAfterPin();
-                ensureAppSettingsScreenReadyForAppSettings();
-                return;
-            }
-
-            if (isAppSettingsScreenVisible()) {
-                ensureAppSettingsScreenOnAppTab();
-                ReportLogger.pass("Returned to App Settings after actual Change PIN flow: " + flowLabel);
-                return;
-            }
-
-            if (!isChangePinScreenVisible() && (isMainAppLoaded() || isHubScreenVisible())) {
-                ensureAppSettingsScreenReadyForAppSettings();
-                ReportLogger.pass("Returned to Advisor app after actual Change PIN flow: " + flowLabel);
-                return;
-            }
-
-            sleep(500);
-        }
-
-        throw new AssertionError("Actual Change PIN flow did not show success or safe return state"
-                + " | flow=" + flowLabel
-                + " | visibleValues=" + collectVisibleStrings());
+        throw new AssertionError(
+                "Re-Enter PIN screen did not appear"
+                        + " | flow="
+                        + flowLabel
+                        + " | visibleValues="
+                        + collectVisibleStrings()
+        );
     }
 
-    private void returnToAppSettingsFromAnyChangePinSuccessState(String activePinAfterChange) {
-        if (isPinScreenVisible()) {
-            enterAdvisorPinValue(activePinAfterChange);
-            waitForMainAppAfterPin();
-            ensureAppSettingsScreenReadyForAppSettings();
-            return;
-        }
+    private void tapPinDigitByCoordinate(
+            String digit
+    ) {
 
-        if (isAppSettingsScreenVisible()) {
-            ensureAppSettingsScreenOnAppTab();
-            return;
-        }
-
-        if (isChangePinScreenVisible()) {
-            returnToAppSettingsFromSubPage();
-            return;
-        }
-
-        ensureAppSettingsScreenReadyForAppSettings();
-    }
-
-    private void tapPinDigitByCoordinate(String digit) {
-        Dimension size = driver.manage().window().getSize();
+        Dimension size =
+                driver.manage()
+                        .window()
+                        .getSize();
 
         double xRatio;
         double yRatio;
 
         switch (digit) {
+
             case "1":
                 xRatio = 0.22;
                 yRatio = 0.680;
                 break;
+
             case "2":
                 xRatio = 0.50;
                 yRatio = 0.680;
                 break;
+
             case "3":
                 xRatio = 0.78;
                 yRatio = 0.680;
                 break;
+
             case "4":
                 xRatio = 0.22;
                 yRatio = 0.758;
                 break;
+
             case "5":
                 xRatio = 0.50;
                 yRatio = 0.758;
                 break;
+
             case "6":
                 xRatio = 0.78;
                 yRatio = 0.758;
                 break;
+
             case "7":
                 xRatio = 0.22;
                 yRatio = 0.835;
                 break;
+
             case "8":
                 xRatio = 0.50;
                 yRatio = 0.835;
                 break;
+
             case "9":
                 xRatio = 0.78;
                 yRatio = 0.835;
                 break;
+
             case "0":
                 xRatio = 0.50;
                 yRatio = 0.915;
                 break;
+
             default:
-                throw new IllegalArgumentException("Unsupported PIN digit: " + digit);
+                throw new IllegalArgumentException(
+                        "Unsupported PIN digit"
+                );
         }
 
-        tapByCoordinates((int) (size.getWidth() * xRatio), (int) (size.getHeight() * yRatio));
+        tapByCoordinates(
+                (int) (
+                        size.getWidth()
+                                * xRatio
+                ),
+                (int) (
+                        size.getHeight()
+                                * yRatio
+                )
+        );
     }
 
     // =========================================================
     // ELEMENT HELPERS
     // =========================================================
 
-    private void assertAnyTextVisible(String text) {
+    private void assertAnyTextVisible(
+            String text
+    ) {
+
         if (!isVisibleByAnyText(text)) {
-            throw new AssertionError("Expected text is not visible: " + text
-                    + " | visibleValues=" + collectVisibleStrings());
+
+            throw new AssertionError(
+                    "Expected text is not visible: "
+                            + text
+                            + " | visibleValues="
+                            + collectVisibleStrings()
+            );
         }
 
-        ReportLogger.pass("Visible text validated: " + text);
+        ReportLogger.pass(
+                "Visible text validated: "
+                        + text
+        );
     }
 
-    private boolean tapAnyVisibleText(String text) {
-        WebElement element = findVisibleTextElement(text);
+    private boolean tapAnyVisibleText(
+            String text
+    ) {
+
+        WebElement element =
+                findVisibleTextElement(text);
 
         if (element == null) {
             return false;
         }
 
         tapElementCenter(element);
-        sleep(500);
+
+        sleep(400);
+
         return true;
     }
 
-    private WebElement findVisibleExactTextElement(String expectedText) {
-        try {
-            List<WebElement> elements = driver.findElements(By.xpath("//*"));
+    private WebElement findVisibleExactTextElement(
+            String expectedText
+    ) {
 
-            for (WebElement element : elements) {
-                try {
-                    if (!isElementUsable(element)) {
-                        continue;
-                    }
+        if (expectedText == null
+                || expectedText.trim().isEmpty()) {
 
-                    String text = normalizeSpaces(element.getText());
-                    String desc = normalizeSpaces(element.getAttribute("content-desc"));
-                    String name = normalizeSpaces(element.getAttribute("name"));
-                    String attrText = normalizeSpaces(element.getAttribute("text"));
+            return null;
+        }
 
-                    if (expectedText.equals(text)
-                            || expectedText.equals(desc)
-                            || expectedText.equals(name)
-                            || expectedText.equals(attrText)) {
-                        return element;
-                    }
+        String escaped =
+                escapeUiSelector(expectedText);
 
-                } catch (Exception ignored) {
-                    // Ignore stale/unreadable elements.
-                }
+        /*
+         * Text is intentionally checked before content-desc.
+         *
+         * Example:
+         * Portfolio Settings page may have a "Portfolio" text tab
+         * while the bottom navigation also has content-desc="Portfolio".
+         */
+        By[] locators = new By[]{
+                AppiumBy.androidUIAutomator(
+                        "new UiSelector().text(\""
+                                + escaped
+                                + "\")"
+                ),
+
+                AppiumBy.androidUIAutomator(
+                        "new UiSelector().description(\""
+                                + escaped
+                                + "\")"
+                ),
+
+                AppiumBy.accessibilityId(
+                        expectedText
+                )
+        };
+
+        for (By locator : locators) {
+
+            WebElement element =
+                    firstUsableElement(locator);
+
+            if (element != null) {
+                return element;
             }
-        } catch (Exception e) {
-            ReportLogger.debug("findVisibleExactTextElement skipped: " + cleanError(e.getMessage()));
         }
 
         return null;
     }
 
-    private WebElement findVisibleTextElement(String expectedText) {
-        try {
-            List<WebElement> elements = driver.findElements(By.xpath("//*"));
+    private WebElement findVisibleTextElement(
+            String expectedText
+    ) {
 
-            for (WebElement element : elements) {
-                try {
-                    if (!isElementUsable(element)) {
-                        continue;
-                    }
+        WebElement exact =
+                findVisibleExactTextElement(
+                        expectedText
+                );
 
-                    String text = normalizeSpaces(element.getText());
-                    String desc = normalizeSpaces(element.getAttribute("content-desc"));
-                    String name = normalizeSpaces(element.getAttribute("name"));
-                    String attrText = normalizeSpaces(element.getAttribute("text"));
+        if (exact != null) {
+            return exact;
+        }
 
-                    if (expectedText.equals(text)
-                            || expectedText.equals(desc)
-                            || expectedText.equals(name)
-                            || expectedText.equals(attrText)
-                            || text.contains(expectedText)
-                            || desc.contains(expectedText)
-                            || name.contains(expectedText)
-                            || attrText.contains(expectedText)) {
-                        return element;
-                    }
+        if (expectedText == null
+                || expectedText.trim().isEmpty()) {
 
-                } catch (Exception ignored) {
-                    // Ignore stale/unreadable elements.
-                }
+            return null;
+        }
+
+        String escaped =
+                escapeUiSelector(expectedText);
+
+        By[] containsLocators = new By[]{
+                AppiumBy.androidUIAutomator(
+                        "new UiSelector().textContains(\""
+                                + escaped
+                                + "\")"
+                ),
+
+                AppiumBy.androidUIAutomator(
+                        "new UiSelector().descriptionContains(\""
+                                + escaped
+                                + "\")"
+                )
+        };
+
+        for (By locator : containsLocators) {
+
+            WebElement element =
+                    firstUsableElement(locator);
+
+            if (element != null) {
+                return element;
             }
-        } catch (Exception e) {
-            ReportLogger.debug("findVisibleTextElement skipped: " + cleanError(e.getMessage()));
         }
 
         return null;
     }
 
-    private boolean isVisibleByAnyText(String text) {
-        return findVisibleTextElement(text) != null;
+    private boolean isVisibleByAnyText(
+            String text
+    ) {
+
+        return findVisibleTextElement(text)
+                != null;
     }
 
-    private WebElement waitForElementFast(By locator, int timeoutSeconds) {
-        long endTime = System.currentTimeMillis() + (timeoutSeconds * 1000L);
+    private boolean isAnyTextVisibleFast(
+            String... possibleTexts
+    ) {
+
+        if (possibleTexts == null) {
+            return false;
+        }
+
+        for (String text : possibleTexts) {
+
+            if (text == null
+                    || text.trim().isEmpty()) {
+                continue;
+            }
+
+            if (isVisibleByAnyText(text)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isLocatorVisible(
+            By locator
+    ) {
+
+        return firstUsableElement(locator)
+                != null;
+    }
+
+    private WebElement firstUsableElement(
+            By locator
+    ) {
+
+        try {
+
+            List<WebElement> elements =
+                    driver.findElements(locator);
+
+            for (WebElement element : elements) {
+
+                if (isElementUsable(element)) {
+                    return element;
+                }
+            }
+
+        } catch (Exception ignored) {
+            // Caller decides fallback strategy.
+        }
+
+        return null;
+    }
+
+    private WebElement waitForElementFast(
+            By locator,
+            int timeoutSeconds
+    ) {
+
+        long endTime =
+                System.currentTimeMillis()
+                        + timeoutSeconds * 1000L;
 
         while (System.currentTimeMillis() < endTime) {
-            try {
-                List<WebElement> elements = driver.findElements(locator);
 
-                for (WebElement element : elements) {
-                    if (isElementUsable(element)) {
-                        return element;
-                    }
-                }
-            } catch (Exception ignored) {
-                // Retry until timeout.
+            WebElement element =
+                    firstUsableElement(locator);
+
+            if (element != null) {
+                return element;
             }
 
-            sleep(250);
+            sleep(200);
         }
 
         return null;
     }
 
     private void waitForAppToBeInteractive() {
-        for (int i = 1; i <= 12; i++) {
-            List<String> values = collectVisibleStrings();
 
-            if (!values.isEmpty()) {
-                return;
+        long endTime =
+                System.currentTimeMillis() + 10000L;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                List<WebElement> roots =
+                        driver.findElements(
+                                By.className(
+                                        "android.widget.FrameLayout"
+                                )
+                        );
+
+                if (roots != null
+                        && !roots.isEmpty()) {
+
+                    return;
+                }
+
+            } catch (Exception ignored) {
+                // Retry.
             }
 
-            sleep(600);
+            sleep(350);
         }
     }
 
-    private void waitForAnyTextVisible(List<String> possibleTexts, int timeoutSeconds) {
-        long endTime = System.currentTimeMillis() + (timeoutSeconds * 1000L);
+    private void waitForAnyTextVisible(
+            List<String> possibleTexts,
+            int timeoutSeconds
+    ) {
+
+        long endTime =
+                System.currentTimeMillis()
+                        + timeoutSeconds * 1000L;
 
         while (System.currentTimeMillis() < endTime) {
-            List<String> values = collectVisibleStrings();
 
             for (String text : possibleTexts) {
-                if (containsAny(values, text)) {
+
+                if (isVisibleByAnyText(text)) {
                     return;
                 }
             }
 
-            sleep(400);
+            sleep(300);
         }
 
-        throw new AssertionError("None of the expected texts visible within timeout"
-                + " | expected=" + possibleTexts
-                + " | visibleValues=" + collectVisibleStrings());
+        throw new AssertionError(
+                "None of the expected texts visible within timeout"
+                        + " | expected="
+                        + possibleTexts
+                        + " | visibleValues="
+                        + collectVisibleStrings()
+        );
     }
 
+    /*
+     * IMPORTANT:
+     *
+     * This is now diagnostic-only.
+     *
+     * Do not use collectVisibleStrings() in normal polling loops.
+     * Full //* hierarchy scans are expensive with Appium/UiAutomator2.
+     */
     private List<String> collectVisibleStrings() {
-        List<String> values = new ArrayList<>();
+
+        List<String> values =
+                new ArrayList<>();
 
         try {
-            List<WebElement> elements = driver.findElements(By.xpath("//*"));
+
+            Dimension screen =
+                    driver.manage()
+                            .window()
+                            .getSize();
+
+            List<WebElement> elements =
+                    driver.findElements(
+                            By.xpath("//*")
+                    );
 
             for (WebElement element : elements) {
+
                 try {
-                    if (!isElementUsable(element)) {
+
+                    if (!isElementUsable(
+                            element,
+                            screen
+                    )) {
                         continue;
                     }
 
-                    addUniqueValue(values, element.getText());
-                    addUniqueValue(values, element.getAttribute("content-desc"));
-                    addUniqueValue(values, element.getAttribute("text"));
-                    addUniqueValue(values, element.getAttribute("name"));
+                    addUniqueValue(
+                            values,
+                            element.getText()
+                    );
+
+                    addUniqueValue(
+                            values,
+                            element.getAttribute(
+                                    "content-desc"
+                            )
+                    );
+
+                    addUniqueValue(
+                            values,
+                            element.getAttribute(
+                                    "text"
+                            )
+                    );
 
                 } catch (Exception ignored) {
-                    // Ignore stale/unreadable elements.
+                    // Ignore stale/unreadable element.
                 }
             }
+
         } catch (Exception e) {
-            ReportLogger.debug("collectVisibleStrings skipped: " + cleanError(e.getMessage()));
+
+            ReportLogger.debug(
+                    "collectVisibleStrings skipped: "
+                            + cleanError(
+                            e.getMessage()
+                    )
+            );
         }
 
         return values;
     }
 
-    private void addUniqueValue(List<String> values, String rawValue) {
+    private void addUniqueValue(
+            List<String> values,
+            String rawValue
+    ) {
+
         if (rawValue == null) {
             return;
         }
 
-        String clean = normalizeSpaces(rawValue);
+        String clean =
+                normalizeSpaces(rawValue);
 
         if (clean.isEmpty()) {
             return;
@@ -1318,59 +2425,79 @@ public class AppSettingsPage {
             values.add(clean);
         }
 
-        String[] parts = rawValue.split("\\n");
+        String[] parts =
+                rawValue.split("\\n");
 
         for (String part : parts) {
-            String cleanPart = normalizeSpaces(part);
 
-            if (!cleanPart.isEmpty() && !values.contains(cleanPart)) {
+            String cleanPart =
+                    normalizeSpaces(part);
+
+            if (!cleanPart.isEmpty()
+                    && !values.contains(cleanPart)) {
+
                 values.add(cleanPart);
             }
         }
     }
 
-    private boolean containsAny(List<String> values, String... expectedTexts) {
-        for (String value : values) {
-            String cleanValue = normalizeSpaces(value).toLowerCase();
+    private boolean isElementUsable(
+            WebElement element
+    ) {
 
-            for (String expectedText : expectedTexts) {
-                if (expectedText == null) {
-                    continue;
-                }
+        try {
 
-                String cleanExpected = normalizeSpaces(expectedText).toLowerCase();
+            Dimension size =
+                    driver.manage()
+                            .window()
+                            .getSize();
 
-                if (!cleanExpected.isEmpty() && cleanValue.contains(cleanExpected)) {
-                    return true;
-                }
-            }
+            return isElementUsable(
+                    element,
+                    size
+            );
+
+        } catch (Exception ignored) {
+            return false;
         }
-
-        return false;
     }
 
-    private boolean isElementUsable(WebElement element) {
+    private boolean isElementUsable(
+            WebElement element,
+            Dimension screenSize
+    ) {
+
         try {
-            if (element == null || !element.isDisplayed()) {
+
+            if (element == null
+                    || !element.isDisplayed()) {
+
                 return false;
             }
 
-            Rectangle rect = element.getRect();
-            Dimension size = driver.manage().window().getSize();
+            Rectangle rect =
+                    element.getRect();
 
-            if (rect.getWidth() <= 0 || rect.getHeight() <= 0) {
+            if (rect.getWidth() <= 0
+                    || rect.getHeight() <= 0) {
+
                 return false;
             }
 
-            int centerX = rect.getX() + rect.getWidth() / 2;
-            int centerY = rect.getY() + rect.getHeight() / 2;
+            int centerX =
+                    rect.getX()
+                            + rect.getWidth() / 2;
+
+            int centerY =
+                    rect.getY()
+                            + rect.getHeight() / 2;
 
             return centerX >= 0
-                    && centerX <= size.getWidth()
+                    && centerX <= screenSize.getWidth()
                     && centerY >= 0
-                    && centerY <= size.getHeight();
+                    && centerY <= screenSize.getHeight();
 
-        } catch (Exception e) {
+        } catch (Exception ignored) {
             return false;
         }
     }
@@ -1379,46 +2506,118 @@ public class AppSettingsPage {
     // GESTURE HELPERS
     // =========================================================
 
-    private void tapElementCenter(WebElement element) {
-        Rectangle rect = element.getRect();
-        Dimension size = driver.manage().window().getSize();
+    private void tapElementCenter(
+            WebElement element
+    ) {
 
-        int x = rect.getX() + rect.getWidth() / 2;
-        int y = rect.getY() + rect.getHeight() / 2;
+        Rectangle rect =
+                element.getRect();
 
-        x = clamp(x, 1, size.getWidth() - 2);
-        y = clamp(y, 1, size.getHeight() - 2);
+        Dimension size =
+                driver.manage()
+                        .window()
+                        .getSize();
 
-        tapByCoordinates(x, y);
-    }
+        int x =
+                rect.getX()
+                        + rect.getWidth() / 2;
 
-    private void tapByCoordinates(int x, int y) {
-        Dimension size = driver.manage().window().getSize();
+        int y =
+                rect.getY()
+                        + rect.getHeight() / 2;
 
-        x = clamp(x, 1, size.getWidth() - 2);
-        y = clamp(y, 1, size.getHeight() - 2);
+        x = clamp(
+                x,
+                1,
+                size.getWidth() - 2
+        );
 
-        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-        Sequence tap = new Sequence(finger, 1);
+        y = clamp(
+                y,
+                1,
+                size.getHeight() - 2
+        );
 
-        tap.addAction(finger.createPointerMove(
-                Duration.ZERO,
-                PointerInput.Origin.viewport(),
+        tapByCoordinates(
                 x,
                 y
-        ));
+        );
+    }
 
-        tap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-        tap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+    private void tapByCoordinates(
+            int x,
+            int y
+    ) {
 
-        driver.perform(Collections.singletonList(tap));
+        Dimension size =
+                driver.manage()
+                        .window()
+                        .getSize();
+
+        x = clamp(
+                x,
+                1,
+                size.getWidth() - 2
+        );
+
+        y = clamp(
+                y,
+                1,
+                size.getHeight() - 2
+        );
+
+        PointerInput finger =
+                new PointerInput(
+                        PointerInput.Kind.TOUCH,
+                        "finger"
+                );
+
+        Sequence tap =
+                new Sequence(
+                        finger,
+                        1
+                );
+
+        tap.addAction(
+                finger.createPointerMove(
+                        Duration.ZERO,
+                        PointerInput.Origin.viewport(),
+                        x,
+                        y
+                )
+        );
+
+        tap.addAction(
+                finger.createPointerDown(
+                        PointerInput.MouseButton.LEFT.asArg()
+                )
+        );
+
+        tap.addAction(
+                finger.createPointerUp(
+                        PointerInput.MouseButton.LEFT.asArg()
+                )
+        );
+
+        driver.perform(
+                Collections.singletonList(tap)
+        );
     }
 
     private void pressBackSilently() {
+
         try {
+
             driver.navigate().back();
+
         } catch (Exception e) {
-            ReportLogger.debug("Back press failed: " + cleanError(e.getMessage()));
+
+            ReportLogger.debug(
+                    "Back press failed: "
+                            + cleanError(
+                            e.getMessage()
+                    )
+            );
         }
     }
 
@@ -1427,14 +2626,21 @@ public class AppSettingsPage {
     // =========================================================
 
     private String getCurrentPackageSafely() {
+
         try {
             return driver.getCurrentPackage();
-        } catch (Exception e) {
+
+        } catch (Exception ignored) {
             return "";
         }
     }
 
-    private int clamp(int value, int min, int max) {
+    private int clamp(
+            int value,
+            int min,
+            int max
+    ) {
+
         if (value < min) {
             return min;
         }
@@ -1446,7 +2652,10 @@ public class AppSettingsPage {
         return value;
     }
 
-    private String normalizeSpaces(String value) {
+    private String normalizeSpaces(
+            String value
+    ) {
+
         if (value == null) {
             return "";
         }
@@ -1459,7 +2668,10 @@ public class AppSettingsPage {
                 .trim();
     }
 
-    private String cleanError(String message) {
+    private String cleanError(
+            String message
+    ) {
+
         if (message == null) {
             return "";
         }
@@ -1467,12 +2679,66 @@ public class AppSettingsPage {
         return normalizeSpaces(message);
     }
 
-    private void sleep(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new RuntimeException("Sleep interrupted", e);
+    private String escapeUiSelector(
+            String value
+    ) {
+
+        if (value == null) {
+            return "";
         }
+
+        return value
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"");
+    }
+
+    private void sleep(
+            long millis
+    ) {
+
+        try {
+
+            Thread.sleep(millis);
+
+        } catch (InterruptedException e) {
+
+            Thread.currentThread().interrupt();
+
+            throw new RuntimeException(
+                    "Sleep interrupted",
+                    e
+            );
+        }
+    }
+
+    private static String resolveSetting(
+            String systemProperty,
+            String environmentVariable,
+            String defaultValue
+    ) {
+
+        String propertyValue =
+                System.getProperty(
+                        systemProperty
+                );
+
+        if (propertyValue != null
+                && !propertyValue.trim().isEmpty()) {
+
+            return propertyValue.trim();
+        }
+
+        String environmentValue =
+                System.getenv(
+                        environmentVariable
+                );
+
+        if (environmentValue != null
+                && !environmentValue.trim().isEmpty()) {
+
+            return environmentValue.trim();
+        }
+
+        return defaultValue;
     }
 }

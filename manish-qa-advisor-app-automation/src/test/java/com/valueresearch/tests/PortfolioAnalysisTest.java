@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 public class PortfolioAnalysisTest extends BaseTest {
 
-    private static boolean portfolioAnalysisOpened = false;
+    private boolean portfolioAnalysisOpened = false;
 
     @Test(priority = 1)
     public void PA_SUM_001_OpenPortfolioAnalysisSummaryFromHub() {
@@ -138,7 +138,7 @@ public class PortfolioAnalysisTest extends BaseTest {
         ReportLogger.pass("Completed test case: PA_SUM_011");
     }
 
-    @Test(priority = 12, dependsOnMethods = "PA_SUM_011_VerifyAssetMixCompositionSections")
+    @Test(priority = 12, dependsOnMethods = "PA_SUM_001_OpenPortfolioAnalysisSummaryFromHub")
     public void PA_FUN_001_NavigateToFundsTab() {
         createExtentTest("PA_FUN_001", "Navigate to Funds Tab", "Navigate from Summary flow to Funds tab");
         ReportLogger.step("Starting test case: PA_FUN_001 - Navigate to Funds Tab");
@@ -171,7 +171,7 @@ public class PortfolioAnalysisTest extends BaseTest {
 
     @Test(priority = 15, dependsOnMethods = "PA_FUN_002_ChangeInvestorToLalitKumarKhatri")
     public void PA_FUN_004_VerifyFundActionCards() {
-        createExtentTest("PA_FUN_004", "Verify Fund Action Cards", "Validate get-rid-of and sell-off fund cards");
+        createExtentTest("PA_FUN_004", "Verify Fund Action Cards", "Validate live data-driven fund action cards without hardcoded counts or fund names");
         ReportLogger.step("Starting test case: PA_FUN_004 - Verify Fund Action Cards");
         PortfolioAnalysisPage page = getCurrentPage();
         page.verifyFundActionCards();
@@ -181,7 +181,7 @@ public class PortfolioAnalysisTest extends BaseTest {
 
     @Test(priority = 16, dependsOnMethods = "PA_FUN_002_ChangeInvestorToLalitKumarKhatri")
     public void PA_FUN_005_VerifyPortfolioInsightsSection() {
-        createExtentTest("PA_FUN_005", "Verify Funds Portfolio Insights Section", "Validate regular-plan and IDCW insights on Funds tab");
+        createExtentTest("PA_FUN_005", "Verify Funds Portfolio Insights Section", "Validate applicable live fund insight types without hardcoded fund names/counts");
         ReportLogger.step("Starting test case: PA_FUN_005 - Verify Funds Portfolio Insights Section");
         PortfolioAnalysisPage page = getCurrentPage();
         page.verifyFundsPortfolioInsightsSection();
@@ -201,7 +201,7 @@ public class PortfolioAnalysisTest extends BaseTest {
 
     @Test(priority = 18, dependsOnMethods = "PA_FUN_002_ChangeInvestorToLalitKumarKhatri")
     public void PA_FUN_007_VerifyLiquidityMoreDetailPage() {
-        createExtentTest("PA_FUN_007", "Verify Funds Liquidity More Detail Page", "Validate Funds Liquidity More page sections, fund rows and Sell CTA");
+        createExtentTest("PA_FUN_007", "Verify Funds Liquidity More Detail Page", "Validate Funds Liquidity More page structure and dynamically captured live fund rows");
         ReportLogger.step("Starting test case: PA_FUN_007 - Verify Funds Liquidity More Detail Page");
         PortfolioAnalysisPage page = getCurrentPage();
         page.verifyFundsLiquidityMoreDetailPage();
@@ -209,11 +209,12 @@ public class PortfolioAnalysisTest extends BaseTest {
         ReportLogger.pass("Completed test case: PA_FUN_007");
     }
 
-@Test(priority = 19, dependsOnMethods = "PA_FUN_007_VerifyLiquidityMoreDetailPage")
+@Test(priority = 19, dependsOnMethods = "PA_SUM_001_OpenPortfolioAnalysisSummaryFromHub")
     public void PA_STK_001_NavigateToStocksTab() {
         createExtentTest("PA_STK_001", "Prepare Stocks Flow from Funds", "After Funds flow, scroll Funds to top, select Vinit Sharma, then navigate to Stocks tab");
         ReportLogger.step("Starting test case: PA_STK_001 - Prepare Stocks Flow from Funds");
         PortfolioAnalysisPage page = getCurrentPage();
+        page.recoverPortfolioAnalysisIfNeeded();
         page.prepareStocksFlowFromFundsPage();
         ExtentTestManager.getTest().pass("<span class='badge white-text green'>PA_STK_001 - Vinit selected from Funds and Stocks tab opened successfully</span>");
         ReportLogger.pass("Completed test case: PA_STK_001");
@@ -249,7 +250,7 @@ public class PortfolioAnalysisTest extends BaseTest {
 
     @Test(priority = 22, dependsOnMethods = "PA_STK_002_ChangeInvestorToVinitSharma")
     public void PA_STK_004_VerifyPortfolioInsightsSection() {
-        createExtentTest("PA_STK_004", "Verify Stocks Portfolio Insights Section", "Validate dividend received and reinvest insight on Stocks tab");
+        createExtentTest("PA_STK_004", "Verify Stocks Portfolio Insights Section", "Validate dividend received with dynamic FY rows and reinvest insight on Stocks tab");
         ReportLogger.step("Starting test case: PA_STK_004 - Verify Stocks Portfolio Insights Section");
         PortfolioAnalysisPage page = getCurrentPage();
         page.verifyStocksPortfolioInsightsSection();
@@ -269,7 +270,7 @@ public class PortfolioAnalysisTest extends BaseTest {
 
     @Test(priority = 24, dependsOnMethods = "PA_STK_002_ChangeInvestorToVinitSharma")
     public void PA_STK_006_VerifyLiquidityMoreDetailPage() {
-        createExtentTest("PA_STK_006", "Verify Stocks Liquidity More Detail Page", "Validate Stocks Liquidity More page and stock rows");
+        createExtentTest("PA_STK_006", "Verify Stocks Liquidity More Detail Page", "Validate Stocks Liquidity More page and dynamically captured live stock rows");
         ReportLogger.step("Starting test case: PA_STK_006 - Verify Stocks Liquidity More Detail Page");
         PortfolioAnalysisPage page = getCurrentPage();
         page.verifyStocksLiquidityMoreDetailPage();

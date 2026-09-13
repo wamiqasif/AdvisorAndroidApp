@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite
+        name="VRSA Sell Planner Complete Regression Suite"
+        verbose="1"
+        parallel="false"
+        preserve-order="true"
+        configfailurepolicy="continue">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test
+            name="Sell Planner Complete Functional Regression"
+            preserve-order="true">
+
+        <classes>
+            <class name="com.valueresearch.tests.SellPlannerTest">
+                <methods>
+                    <include name="SP_001_OpenSellPlannerAndValidateLandingPage"/>
+                    <include name="SP_002_ValidateInvestorSelector"/>
+                    <include name="SP_003_ValidateGuidelinesForSellingStocks"/>
+                    <include name="SP_004_SelectHoldingAndValidateSummary"/>
+                    <include name="SP_005_PrimarySellOneShare"/>
+                    <include name="SP_006_PrimaryPartialSalePortfolioPreview"/>
+                    <include name="SP_007_PrimaryFullSalePortfolioPreview"/>
+                    <include name="SP_008_PrimaryPartialSecondaryPartialHoldingsPreview"/>
+                    <include name="SP_009_PrimaryFullSecondaryPartialSectorPreview"/>
+                    <include name="SP_010_PrimaryFullSecondaryFullSectorPreview"/>
+                    <include name="SP_011_DualPartialMarketCapPreview"/>
+                    <include name="SP_012_ValidateMailMyOrderAvailability"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+</suite>

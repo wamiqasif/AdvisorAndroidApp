@@ -21,6 +21,7 @@ public class InvestorCharterTest extends BaseTest {
         ReportLogger.step("Starting test case: ICH_001 - Verify Investor Charter module from Hub");
 
         InvestorCharterPage investorCharterPage = new InvestorCharterPage(driver);
+        boolean hubWasOpened = false;
 
         try {
             ReportLogger.step("INVESTOR CHARTER STEP 01 - Capture Advisor app package");
@@ -33,6 +34,7 @@ public class InvestorCharterTest extends BaseTest {
 
             ReportLogger.step("INVESTOR CHARTER STEP 03 - Open Hub from bottom navigation");
             investorCharterPage.openHubFromBottomNavigationForInvestorCharter();
+            hubWasOpened = true;
             ReportLogger.pass("INVESTOR CHARTER STEP 03 PASSED - Hub page opened");
 
             ReportLogger.step("INVESTOR CHARTER STEP 04 - Scroll Hub page to Investor Charter option");
@@ -66,9 +68,23 @@ public class InvestorCharterTest extends BaseTest {
             markPassed("ICH_001 - Investor Charter module validated successfully");
 
         } finally {
-            ReportLogger.step("INVESTOR CHARTER STEP 11 - Return back to Hub");
-            investorCharterPage.returnBackToHubSafelyForInvestorCharter();
-            ReportLogger.pass("INVESTOR CHARTER STEP 11 COMPLETED - Return flow executed");
+            if (hubWasOpened) {
+                ReportLogger.step("INVESTOR CHARTER STEP 11 - Return back to Hub");
+
+                try {
+                    investorCharterPage.returnBackToHubSafelyForInvestorCharter();
+                    ReportLogger.pass("INVESTOR CHARTER STEP 11 COMPLETED - Return flow executed");
+                } catch (AssertionError e) {
+                    ReportLogger.debug("INVESTOR CHARTER STEP 11 cleanup assertion skipped/failed: "
+                            + safeMessage(e));
+                } catch (Exception e) {
+                    ReportLogger.debug("INVESTOR CHARTER STEP 11 cleanup skipped/failed: "
+                            + safeMessage(e));
+                }
+            } else {
+                ReportLogger.debug("INVESTOR CHARTER STEP 11 SKIPPED - "
+                        + "Hub was never opened because the test failed earlier");
+            }
         }
     }
 
@@ -90,4 +106,18 @@ public class InvestorCharterTest extends BaseTest {
         );
         ReportLogger.pass("Completed test case: " + message);
     }
+    private String safeMessage(Throwable throwable) {
+        if (throwable == null) {
+            return "";
+        }
+
+        String message = throwable.getMessage();
+
+        if (message == null || message.trim().isEmpty()) {
+            return throwable.getClass().getSimpleName();
+        }
+
+        return message;
+    }
+
 }

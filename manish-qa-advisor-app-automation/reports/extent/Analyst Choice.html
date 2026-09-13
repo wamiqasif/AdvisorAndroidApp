@@ -1,0 +1,1320 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Advisor App Automation Report</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report dark">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Advisor App Test Automation Report</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Sep 13, 2026 11:57:59 pm</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">AC_001 - Capture live fund names - Aggressive Growth</p>
+            <p class="text-sm">
+              <span>11:58:13 pm</span> / <span>00:00:35:608</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">AC_001 - Capture live fund names - Aggressive Growth</h5>
+<span class='badge badge-success'>09.13.2026 11:58:13 pm</span>
+<span class='badge badge-danger'>09.13.2026 11:58:49 pm</span>
+<span class='badge badge-default'>00:00:35:608</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:13 pm</td>
+        <td>
+          Module: Analyst's Choice<br>Case ID: AC_001<br>Page Build: VRSA-AC-2026-09-13-2.5<br>Data strategy: Live/dynamic fund capture; no hardcoded fund names<br>Execution strategy: Independent test case for this recommendation card<br>Validation: Open only the Aggressive Growth recommendation card, capture the current live fund names dynamically, and return to the Analyst's Choice listing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:13 pm</td>
+        <td>
+          <b>[STEP]</b> Starting AC_001 - Aggressive Growth dynamic fund capture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:15 pm</td>
+        <td>
+          <b>[STEP]</b> Checking app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:15 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for app to load
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:15 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting up to 60 seconds for a known app login/session state
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:25 pm</td>
+        <td>
+          <b>[STEP]</b> PIN screen indicator found: Enter your Advisor PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:25 pm</td>
+        <td>
+          <b>[STEP]</b> PIN screen detected. Entering PIN once.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:25 pm</td>
+        <td>
+          <b>[STEP]</b> Entering app PIN using strict keypad locator
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:25 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:26 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 9
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:27 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 7
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:28 pm</td>
+        <td>
+          <b>[STEP]</b> Tapped PIN digit by locator: 5
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:29 pm</td>
+        <td>
+          <b>[PASS]</b> PIN entered successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:29 pm</td>
+        <td>
+          <b>[STEP]</b> Waiting for valid logged-in screen after PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:34 pm</td>
+        <td>
+          <b>[STEP]</b> Logged-in tab indicator found: Funds
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:34 pm</td>
+        <td>
+          <b>[PASS]</b> Logged-in bottom tabs loaded after PIN
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:34 pm</td>
+        <td>
+          <b>[PASS]</b> Advisor login/session confirmed
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:35 pm</td>
+        <td>
+          <b>[STEP]</b> Opening Analyst's Choice from Hub
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:35 pm</td>
+        <td>
+          <b>[STEP]</b> Hub tab clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:37 pm</td>
+        <td>
+          <b>[STEP]</b> Analyst's Choice Hub tile clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:42 pm</td>
+        <td>
+          <b>[PASS]</b> Analyst's Choice listing opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:43 pm</td>
+        <td>
+          <b>[STEP]</b> Opening card: Aggressive Growth
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:44 pm</td>
+        <td>
+          <b>[STEP]</b> Aggressive Growth card clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:47 pm</td>
+        <td>
+          <b>[PASS]</b> Aggressive Growth detail opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:48 pm</td>
+        <td>
+          <b>[STEP]</b> Aggressive Growth fund capture | totalCaptured=6
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:49 pm</td>
+        <td>
+          <b>[PASS]</b> Aggressive Growth detail closed and listing restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:49 pm</td>
+        <td>
+          <b>[PASS]</b> Aggressive Growth -&gt; captured 6 fund(s): Edelweiss Mid Cap Direct G | Kotak Mid Cap Direct G | WhiteOak Capital Mid Cap Direct G | Bandhan Small Cap Direct G | HDFC Small Cap Direct G | Invesco India Small Cap Direct G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:49 pm</td>
+        <td>
+          <span class='badge white-text green'>AC_001 - Aggressive Growth fund capture validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:49 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: AC_001 - Aggressive Growth fund capture validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:49 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: AC_001_CaptureAggressiveGrowthFundNames</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">AC_002 - Capture live fund names - Growth</p>
+            <p class="text-sm">
+              <span>11:58:49 pm</span> / <span>00:00:05:261</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">AC_002 - Capture live fund names - Growth</h5>
+<span class='badge badge-success'>09.13.2026 11:58:49 pm</span>
+<span class='badge badge-danger'>09.13.2026 11:58:54 pm</span>
+<span class='badge badge-default'>00:00:05:261</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:49 pm</td>
+        <td>
+          Module: Analyst's Choice<br>Case ID: AC_002<br>Page Build: VRSA-AC-2026-09-13-2.5<br>Data strategy: Live/dynamic fund capture; no hardcoded fund names<br>Execution strategy: Independent test case for this recommendation card<br>Validation: Open only the Growth recommendation card, capture the current live fund names dynamically, and return to the Analyst's Choice listing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:49 pm</td>
+        <td>
+          <b>[STEP]</b> Starting AC_002 - Growth dynamic fund capture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:49 pm</td>
+        <td>
+          <b>[PASS]</b> Existing Analyst's Choice state detected; repeated login/session check skipped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:50 pm</td>
+        <td>
+          <b>[STEP]</b> Opening card: Growth
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:50 pm</td>
+        <td>
+          <b>[STEP]</b> Growth card clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:53 pm</td>
+        <td>
+          <b>[PASS]</b> Growth detail opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:53 pm</td>
+        <td>
+          <b>[STEP]</b> Growth fund capture | totalCaptured=8
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:54 pm</td>
+        <td>
+          <b>[PASS]</b> Growth detail closed and listing restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:54 pm</td>
+        <td>
+          <b>[PASS]</b> Growth -&gt; captured 8 fund(s): Franklin India Flexi Cap Direct G | HDFC Flexi Cap Direct G | Helios Flexi Cap Direct G | Parag Parikh Flexi Cap Direct G | SBI Focused Direct G | ICICI Prudential Large &amp; Mid Cap Direct G | Kotak Large &amp; Mid Cap Direct G | Nippon India Multi Cap Direct G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:54 pm</td>
+        <td>
+          <span class='badge white-text green'>AC_002 - Growth fund capture validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:54 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: AC_002 - Growth fund capture validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:54 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: AC_002_CaptureGrowthFundNames</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">AC_003 - Capture live fund names - Tax Planning</p>
+            <p class="text-sm">
+              <span>11:58:54 pm</span> / <span>00:00:05:513</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">AC_003 - Capture live fund names - Tax Planning</h5>
+<span class='badge badge-success'>09.13.2026 11:58:54 pm</span>
+<span class='badge badge-danger'>09.13.2026 11:59:00 pm</span>
+<span class='badge badge-default'>00:00:05:513</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:54 pm</td>
+        <td>
+          Module: Analyst's Choice<br>Case ID: AC_003<br>Page Build: VRSA-AC-2026-09-13-2.5<br>Data strategy: Live/dynamic fund capture; no hardcoded fund names<br>Execution strategy: Independent test case for this recommendation card<br>Validation: Open only the Tax Planning recommendation card, capture the current live fund names dynamically, and return to the Analyst's Choice listing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:54 pm</td>
+        <td>
+          <b>[STEP]</b> Starting AC_003 - Tax Planning dynamic fund capture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:55 pm</td>
+        <td>
+          <b>[PASS]</b> Existing Analyst's Choice state detected; repeated login/session check skipped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:55 pm</td>
+        <td>
+          <b>[STEP]</b> Opening card: Tax Planning
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:55 pm</td>
+        <td>
+          <b>[STEP]</b> Tax Planning card clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:58:58 pm</td>
+        <td>
+          <b>[PASS]</b> Tax Planning detail opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:58:59 pm</td>
+        <td>
+          <b>[STEP]</b> Tax Planning fund capture | totalCaptured=5
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:00 pm</td>
+        <td>
+          <b>[PASS]</b> Tax Planning detail closed and listing restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:00 pm</td>
+        <td>
+          <b>[PASS]</b> Tax Planning -&gt; captured 5 fund(s): Bandhan ELSS - Tax Saver Direct G | DSP ELSS Tax Saver Direct G | HDFC ELSS - Tax Saver Direct G | Mirae Asset ELSS Tax Saver Direct G | Parag Parikh ELSS Tax Saver Direct G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:00 pm</td>
+        <td>
+          <span class='badge white-text green'>AC_003 - Tax Planning fund capture validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:00 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: AC_003 - Tax Planning fund capture validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:00 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: AC_003_CaptureTaxPlanningFundNames</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">AC_004 - Capture live fund names - Growth - International</p>
+            <p class="text-sm">
+              <span>11:59:00 pm</span> / <span>00:00:04:759</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">AC_004 - Capture live fund names - Growth - International</h5>
+<span class='badge badge-success'>09.13.2026 11:59:00 pm</span>
+<span class='badge badge-danger'>09.13.2026 11:59:05 pm</span>
+<span class='badge badge-default'>00:00:04:759</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:00 pm</td>
+        <td>
+          Module: Analyst's Choice<br>Case ID: AC_004<br>Page Build: VRSA-AC-2026-09-13-2.5<br>Data strategy: Live/dynamic fund capture; no hardcoded fund names<br>Execution strategy: Independent test case for this recommendation card<br>Validation: Open only the Growth - International recommendation card, capture the current live fund names dynamically, and return to the Analyst's Choice listing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:00 pm</td>
+        <td>
+          <b>[STEP]</b> Starting AC_004 - Growth - International dynamic fund capture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:00 pm</td>
+        <td>
+          <b>[PASS]</b> Existing Analyst's Choice state detected; repeated login/session check skipped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:01 pm</td>
+        <td>
+          <b>[STEP]</b> Opening card: Growth - International
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:01 pm</td>
+        <td>
+          <b>[STEP]</b> Growth - International card clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:03 pm</td>
+        <td>
+          <b>[PASS]</b> Growth - International detail opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:03 pm</td>
+        <td>
+          <b>[PASS]</b> Growth - International correctly has no current recommendations
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:05 pm</td>
+        <td>
+          <b>[PASS]</b> Growth - International detail closed and listing restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:05 pm</td>
+        <td>
+          <b>[PASS]</b> Growth - International -&gt; no current fund recommendations
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:05 pm</td>
+        <td>
+          <span class='badge white-text green'>AC_004 - Growth - International fund capture validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:05 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: AC_004 - Growth - International fund capture validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:05 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: AC_004_CaptureGrowthInternationalFundNames</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">AC_005 - Capture live fund names - Conservative Growth</p>
+            <p class="text-sm">
+              <span>11:59:05 pm</span> / <span>00:00:09:193</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">AC_005 - Capture live fund names - Conservative Growth</h5>
+<span class='badge badge-success'>09.13.2026 11:59:05 pm</span>
+<span class='badge badge-danger'>09.13.2026 11:59:14 pm</span>
+<span class='badge badge-default'>00:00:09:193</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:05 pm</td>
+        <td>
+          Module: Analyst's Choice<br>Case ID: AC_005<br>Page Build: VRSA-AC-2026-09-13-2.5<br>Data strategy: Live/dynamic fund capture; no hardcoded fund names<br>Execution strategy: Independent test case for this recommendation card<br>Validation: Open only the Conservative Growth recommendation card, capture the current live fund names dynamically, and return to the Analyst's Choice listing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:05 pm</td>
+        <td>
+          <b>[STEP]</b> Starting AC_005 - Conservative Growth dynamic fund capture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:05 pm</td>
+        <td>
+          <b>[PASS]</b> Existing Analyst's Choice state detected; repeated login/session check skipped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:05 pm</td>
+        <td>
+          <b>[STEP]</b> Opening card: Conservative Growth
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:06 pm</td>
+        <td>
+          <b>[STEP]</b> Finding Conservative Growth card | scroll=1
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:09 pm</td>
+        <td>
+          <b>[STEP]</b> Conservative Growth card clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:12 pm</td>
+        <td>
+          <b>[PASS]</b> Conservative Growth detail opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:13 pm</td>
+        <td>
+          <b>[STEP]</b> Conservative Growth fund capture | totalCaptured=8
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:14 pm</td>
+        <td>
+          <b>[PASS]</b> Conservative Growth detail closed and listing restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:14 pm</td>
+        <td>
+          <b>[PASS]</b> Conservative Growth -&gt; captured 8 fund(s): DSP Aggressive Hybrid Direct G | ICICI Prudential Aggressive Hybrid Direct G | Kotak Aggressive Hybrid Direct IDCW | Mirae Asset Aggressive Hybrid Direct G | ICICI Prudential Large Cap Direct G | Kotak Large Cap Direct G | Navi Nifty 50 Index Direct G | Nippon India ETF Nifty 50 BeES IDCW
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:14 pm</td>
+        <td>
+          <span class='badge white-text green'>AC_005 - Conservative Growth fund capture validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:14 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: AC_005 - Conservative Growth fund capture validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:14 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: AC_005_CaptureConservativeGrowthFundNames</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">AC_006 - Capture live fund names - Conservative Growth & Income</p>
+            <p class="text-sm">
+              <span>11:59:14 pm</span> / <span>00:00:06:586</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">AC_006 - Capture live fund names - Conservative Growth & Income</h5>
+<span class='badge badge-success'>09.13.2026 11:59:14 pm</span>
+<span class='badge badge-danger'>09.13.2026 11:59:21 pm</span>
+<span class='badge badge-default'>00:00:06:586</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:14 pm</td>
+        <td>
+          Module: Analyst's Choice<br>Case ID: AC_006<br>Page Build: VRSA-AC-2026-09-13-2.5<br>Data strategy: Live/dynamic fund capture; no hardcoded fund names<br>Execution strategy: Independent test case for this recommendation card<br>Validation: Open only the Conservative Growth & Income recommendation card, capture the current live fund names dynamically, and return to the Analyst's Choice listing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:14 pm</td>
+        <td>
+          <b>[STEP]</b> Starting AC_006 - Conservative Growth &amp; Income dynamic fund capture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:15 pm</td>
+        <td>
+          <b>[PASS]</b> Existing Analyst's Choice state detected; repeated login/session check skipped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:15 pm</td>
+        <td>
+          <b>[STEP]</b> Opening card: Conservative Growth &amp; Income
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:16 pm</td>
+        <td>
+          <b>[STEP]</b> Conservative Growth &amp; Income card clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:19 pm</td>
+        <td>
+          <b>[PASS]</b> Conservative Growth &amp; Income detail opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:19 pm</td>
+        <td>
+          <b>[STEP]</b> Conservative Growth &amp; Income fund capture | totalCaptured=3
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:21 pm</td>
+        <td>
+          <b>[PASS]</b> Conservative Growth &amp; Income detail closed and listing restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:21 pm</td>
+        <td>
+          <b>[PASS]</b> Conservative Growth &amp; Income -&gt; captured 3 fund(s): Edelweiss Equity Savings Direct G | Kotak Equity Savings Direct G | Mirae Asset Equity Savings Direct G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:21 pm</td>
+        <td>
+          <span class='badge white-text green'>AC_006 - Conservative Growth & Income fund capture validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:21 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: AC_006 - Conservative Growth &amp; Income fund capture validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:21 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: AC_006_CaptureConservativeGrowthIncomeFundNames</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="7"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">AC_007 - Capture live fund names - Core Fixed Income</p>
+            <p class="text-sm">
+              <span>11:59:21 pm</span> / <span>00:00:05:662</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">AC_007 - Capture live fund names - Core Fixed Income</h5>
+<span class='badge badge-success'>09.13.2026 11:59:21 pm</span>
+<span class='badge badge-danger'>09.13.2026 11:59:26 pm</span>
+<span class='badge badge-default'>00:00:05:662</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:21 pm</td>
+        <td>
+          Module: Analyst's Choice<br>Case ID: AC_007<br>Page Build: VRSA-AC-2026-09-13-2.5<br>Data strategy: Live/dynamic fund capture; no hardcoded fund names<br>Execution strategy: Independent test case for this recommendation card<br>Validation: Open only the Core Fixed Income recommendation card, capture the current live fund names dynamically, and return to the Analyst's Choice listing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:21 pm</td>
+        <td>
+          <b>[STEP]</b> Starting AC_007 - Core Fixed Income dynamic fund capture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:21 pm</td>
+        <td>
+          <b>[PASS]</b> Existing Analyst's Choice state detected; repeated login/session check skipped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:22 pm</td>
+        <td>
+          <b>[STEP]</b> Opening card: Core Fixed Income
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:22 pm</td>
+        <td>
+          <b>[STEP]</b> Core Fixed Income card clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:25 pm</td>
+        <td>
+          <b>[PASS]</b> Core Fixed Income detail opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:25 pm</td>
+        <td>
+          <b>[STEP]</b> Core Fixed Income fund capture | totalCaptured=4
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:26 pm</td>
+        <td>
+          <b>[PASS]</b> Core Fixed Income detail closed and listing restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:26 pm</td>
+        <td>
+          <b>[PASS]</b> Core Fixed Income -&gt; captured 4 fund(s): Axis Short Term Direct G | Bandhan Short Term Direct G | HDFC Short Term Direct G | ICICI Prudential Short Term Direct G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:26 pm</td>
+        <td>
+          <span class='badge white-text green'>AC_007 - Core Fixed Income fund capture validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:26 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: AC_007 - Core Fixed Income fund capture validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:26 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: AC_007_CaptureCoreFixedIncomeFundNames</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="8"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">AC_008 - Capture live fund names - Capital Preservation</p>
+            <p class="text-sm">
+              <span>11:59:27 pm</span> / <span>00:00:06:251</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">AC_008 - Capture live fund names - Capital Preservation</h5>
+<span class='badge badge-success'>09.13.2026 11:59:27 pm</span>
+<span class='badge badge-danger'>09.13.2026 11:59:33 pm</span>
+<span class='badge badge-default'>00:00:06:251</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:27 pm</td>
+        <td>
+          Module: Analyst's Choice<br>Case ID: AC_008<br>Page Build: VRSA-AC-2026-09-13-2.5<br>Data strategy: Live/dynamic fund capture; no hardcoded fund names<br>Execution strategy: Independent test case for this recommendation card<br>Validation: Open only the Capital Preservation recommendation card, capture the current live fund names dynamically, and return to the Analyst's Choice listing
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:27 pm</td>
+        <td>
+          <b>[STEP]</b> Starting AC_008 - Capital Preservation dynamic fund capture
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:27 pm</td>
+        <td>
+          <b>[PASS]</b> Existing Analyst's Choice state detected; repeated login/session check skipped
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:28 pm</td>
+        <td>
+          <b>[STEP]</b> Opening card: Capital Preservation
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:28 pm</td>
+        <td>
+          <b>[STEP]</b> Capital Preservation card clicked
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:31 pm</td>
+        <td>
+          <b>[PASS]</b> Capital Preservation detail opened
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>11:59:31 pm</td>
+        <td>
+          <b>[STEP]</b> Capital Preservation fund capture | totalCaptured=6
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:33 pm</td>
+        <td>
+          <b>[PASS]</b> Capital Preservation detail closed and listing restored
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:33 pm</td>
+        <td>
+          <b>[PASS]</b> Capital Preservation -&gt; captured 6 fund(s): Aditya Birla SL Liquid Direct G | Axis Liquid Direct G | HDFC Liquid Direct G | Mirae Asset Liquid Direct G | HDFC Overnight Direct G | ICICI Prudential Overnight Direct G
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:33 pm</td>
+        <td>
+          <span class='badge white-text green'>AC_008 - Capital Preservation fund capture validated successfully</span>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:33 pm</td>
+        <td>
+          <b>[PASS]</b> Completed test case: AC_008 - Capital Preservation fund capture validated successfully
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>11:59:33 pm</td>
+        <td>
+          <span class='badge white-text green'>Test passed: AC_008_CaptureCapitalPreservationFundNames</span>
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>Sep 13, 2026 11:57:59 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>Sep 13, 2026 11:59:34 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>8</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>0</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'>
+<b>8</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='0%'><b>0</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='52%'><b>60</b> events passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> events failed,
+<b data-tooltip='%'>55</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"AC_001 - Capture live fund names - Aggressive Growth":35.608,"AC_002 - Capture live fund names - Growth":5.261,"AC_003 - Capture live fund names - Tax Planning":5.513,"AC_004 - Capture live fund names - Growth - International":4.759,"AC_005 - Capture live fund names - Conservative Growth":9.193,"AC_006 - Capture live fund names - Conservative Growth & Income":6.586,"AC_007 - Capture live fund names - Core Fixed Income":5.662,"AC_008 - Capture live fund names - Capital Preservation":6.251
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td>Advisor App</td>
+</tr>
+<tr>
+<td>Machine</td>
+<td>Local</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>User</td>
+<td>manishkhatri</td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>Android</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>Appium UiAutomator2</td>
+</tr>
+<tr>
+<td>Framework</td>
+<td>TestNG + Maven + ExtentReports</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 8,
+failParent: 0,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 60,
+failEvents: 0,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 55
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

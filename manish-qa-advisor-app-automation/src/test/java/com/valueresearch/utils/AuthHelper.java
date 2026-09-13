@@ -15,12 +15,19 @@ import java.util.Map;
 public class AuthHelper {
 
     private final AndroidDriver driver;
+    private long lastInfrastructureHealthCheckAtMs = 0L;
 
     private final By nextButton = AppiumBy.androidUIAutomator(
             "new UiSelector().descriptionContains(\"Next\")"
     );
 
     private final By[] pinScreenLocators = new By[]{
+            // Fast/stable Flutter semantics first.
+            AppiumBy.accessibilityId("Enter your Advisor PIN"),
+            AppiumBy.accessibilityId("Enter PIN"),
+            AppiumBy.accessibilityId("Advisor PIN"),
+
+            // UiAutomator/text fallbacks for build/device variations.
             AppiumBy.androidUIAutomator("new UiSelector().descriptionContains(\"Enter your Advisor PIN\")"),
             AppiumBy.androidUIAutomator("new UiSelector().descriptionContains(\"Enter PIN\")"),
             AppiumBy.androidUIAutomator("new UiSelector().descriptionContains(\"Advisor PIN\")"),
@@ -113,31 +120,51 @@ public class AuthHelper {
 
             waitForAppToLoad();
 
-            if (isLoggedInScreenVisible()) {
-                ReportLogger.pass("User is already logged in. Bottom tabs are visible.");
-                return;
+            long timeoutMs = ExecutionProfile.longWait().toMillis();
+            long pollingMs = Math.max(250L, ExecutionProfile.pollingInterval().toMillis());
+            long endTime = System.currentTimeMillis() + timeoutMs;
+
+            ReportLogger.step(
+                    "Waiting up to "
+                            + ExecutionProfile.longWait().getSeconds()
+                            + " seconds for a known app login/session state"
+            );
+
+            while (System.currentTimeMillis() < endTime) {
+                assertInfrastructureHealthy("while detecting login/session state", 1500L);
+
+                if (isLoggedInScreenVisible()) {
+                    ReportLogger.pass("User is already logged in. Bottom tabs are visible.");
+                    return;
+                }
+
+                if (isAdditionalPostLoginMarkerVisible(additionalPostLoginMarkers)) {
+                    ReportLogger.pass("User is already logged in. Onboarding screen is visible.");
+                    return;
+                }
+
+                if (isPinScreenVisible()) {
+                    ReportLogger.step("PIN screen detected. Entering PIN once.");
+                    enterPin();
+                    waitAfterPinLogin(additionalPostLoginMarkers);
+                    return;
+                }
+
+                if (isEmailLoginVisible()) {
+                    ReportLogger.step("Email login screen detected. Starting Email + OTP login.");
+                    loginWithEmailAndOtp(additionalPostLoginMarkers);
+                    return;
+                }
+
+                sleep(pollingMs);
             }
 
-            if (isAdditionalPostLoginMarkerVisible(additionalPostLoginMarkers)) {
-                ReportLogger.pass("User is already logged in. Onboarding screen is visible.");
-                return;
-            }
-
-            if (isPinScreenVisible()) {
-                ReportLogger.step("PIN screen detected. Entering PIN once.");
-                enterPin();
-                waitAfterPinLogin(additionalPostLoginMarkers);
-                return;
-            }
-
-            if (isEmailLoginVisible()) {
-                ReportLogger.step("Email login screen detected. Starting Email + OTP login.");
-                loginWithEmailAndOtp(additionalPostLoginMarkers);
-                return;
-            }
-
-            ReportLogger.fail("Unable to detect app state. Logged-in tabs, onboarding screen, PIN screen, and Email login screen were not found.");
-            throw new RuntimeException("Unable to detect app state for login.");
+            ReportLogger.fail(
+                    "Unable to detect app state within "
+                            + ExecutionProfile.longWait().getSeconds()
+                            + " seconds. Logged-in tabs, onboarding screen, PIN screen, and Email login screen were not found."
+            );
+            throw new RuntimeException("Unable to detect app state for login within QA timeout.");
 
         } catch (RuntimeException e) {
             ReportLogger.fail("Login/session check failed: " + e.getMessage());
@@ -495,9 +522,11 @@ public class AuthHelper {
         try {
             ReportLogger.step("Waiting for valid logged-in screen after PIN");
 
-            long endTime = System.currentTimeMillis() + 45_000L;
+            long endTime = System.currentTimeMillis() + ExecutionProfile.longWait().toMillis();
 
             while (System.currentTimeMillis() < endTime) {
+                assertInfrastructureHealthy("while waiting for the logged-in screen after PIN", 1000L);
+
                 if (isIncorrectPinVisible()) {
                     throw new RuntimeException("Incorrect Advisor PIN. Update appPin in config.properties.");
                 }
@@ -535,6 +564,8 @@ public class AuthHelper {
             boolean pinEnteredAfterOtp = false;
 
             while (System.currentTimeMillis() < endTime) {
+                assertInfrastructureHealthy("while waiting for the logged-in screen after OTP", 1000L);
+
                 if (isLoggedInScreenVisible()) {
                     ReportLogger.pass("Logged-in bottom tabs loaded after OTP");
                     return;
@@ -568,9 +599,38 @@ public class AuthHelper {
         }
     }
 
+    /**
+     * Fail fast when Android/Appium infrastructure disappears during an auth wait.
+     * Without this guard a dead emulator can look like a normal UI timeout and
+     * consume the full 60/90 second application wait before TestNG gets a chance
+     * to recover and retry the testcase.
+     */
+    private void assertInfrastructureHealthy(String context, long minimumIntervalMs) {
+        long now = System.currentTimeMillis();
+
+        if (lastInfrastructureHealthCheckAtMs > 0L
+                && (now - lastInfrastructureHealthCheckAtMs) < minimumIntervalMs) {
+            return;
+        }
+
+        lastInfrastructureHealthCheckAtMs = now;
+
+        if (!DriverManager.isDriverHealthy()) {
+            throw new RuntimeException(
+                    "Infrastructure failure: Android device/Appium/UiAutomator2 session became unhealthy "
+                            + context
+            );
+        }
+    }
+
     private void waitForAppToLoad() {
+        /*
+         * Do not use a fixed 5-second startup sleep here. QA startup time is variable.
+         * ensureLoggedIn(...) now polls for a real known app state using the global
+         * ExecutionProfile timeout, so fast runs continue quickly and slow QA runs
+         * are allowed enough time to expose their Flutter semantics.
+         */
         ReportLogger.step("Waiting for app to load");
-        sleep(5000);
     }
 
     private String getOptionalConfig(String key) {

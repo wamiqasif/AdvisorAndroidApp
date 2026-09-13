@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Compliance Pages Module Suite"
+       verbose="1"
+       preserve-order="true"
+       parallel="false">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Compliance Pages Test Cases">
+        <classes>
+            <class name="com.valueresearch.tests.CompliancePagesTest">
+                <methods>
+                    <include name="CP_001_VerifyCompliancePagesInHubMore"/>
+                    <include name="CP_002_VerifyFaqsVrsaPage"/>
+                    <include name="CP_003_VerifyAboutUsVrsaPage"/>
+                    <include name="CP_004_VerifyPrivacyPolicyVrsaPage"/>
+                    <include name="CP_005_VerifyUserAgreementVrsa"/>
+                    <include name="CP_006_VerifyRefundPolicyVrsaPage"/>
+                    <include name="CP_007_VerifyInvestorCharterVrsaPage"/>
+                    <include name="CP_008_VerifyInvestorComplaintVrsaPage"/>
+                    <include name="CP_009_VerifyOdrPortal"/>
+                    <include name="CP_010_VerifyAuditStatusVrsaPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

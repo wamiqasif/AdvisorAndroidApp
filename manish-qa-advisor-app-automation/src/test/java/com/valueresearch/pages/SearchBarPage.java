@@ -1,5 +1,6 @@
 package com.valueresearch.pages;
 
+import com.valueresearch.utils.AuthHelper;
 import com.valueresearch.utils.ReportLogger;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -61,25 +62,10 @@ public class SearchBarPage {
     public void ensureAdvisorAppLoggedInForSearch() {
         ReportLogger.step("Checking Advisor app login/session state");
 
-        waitForAppToBeInteractive();
+        AuthHelper authHelper = new AuthHelper(driver);
+        authHelper.ensureLoggedIn();
 
-        if (isMainAppLoaded()) {
-            ReportLogger.pass("Advisor app session is already active");
-            return;
-        }
-
-        if (isPinScreenVisible()) {
-            ReportLogger.step("PIN screen detected. Entering Advisor PIN");
-
-            enterAdvisorPin();
-            waitForMainAppAfterPin();
-
-            ReportLogger.pass("Advisor app login/session confirmed after PIN");
-            return;
-        }
-
-        throw new AssertionError("Unable to confirm Advisor app login/session state"
-                + " | visibleValues=" + collectVisibleStrings());
+        ReportLogger.pass("Advisor app login/session confirmed");
     }
 
 
@@ -1389,64 +1375,11 @@ public class SearchBarPage {
     }
 
     // =========================================================
-    // LOGIN / SESSION HELPERS
+    // LOGIN / SESSION
     // =========================================================
-
-
-    private boolean isPinScreenVisible() {
-        return isPinScreenVisibleFast();
-    }
-
-
-    private boolean isMainAppLoaded() {
-        return isMainAppLoadedFast();
-    }
-
-    private void enterAdvisorPin() {
-        String pin = "1975";
-
-        for (char digit : pin.toCharArray()) {
-            tapPinDigit(String.valueOf(digit));
-            sleep(450);
-        }
-    }
-
-    private void tapPinDigit(String digit) {
-        WebElement digitElement = findVisibleExactTextElement(digit);
-
-        if (digitElement != null) {
-            tapElementCenter(digitElement);
-            ReportLogger.step("Tapped PIN digit: " + digit);
-            return;
-        }
-
-        digitElement = findVisibleTextElement(digit);
-
-        if (digitElement != null) {
-            tapElementCenter(digitElement);
-            ReportLogger.step("Tapped PIN digit by fallback: " + digit);
-            return;
-        }
-
-        throw new AssertionError("Unable to tap PIN digit: " + digit
-                + " | visibleValues=" + collectVisibleStrings());
-    }
-
-    private void waitForMainAppAfterPin() {
-        ReportLogger.step("Waiting for Advisor app dashboard after PIN");
-
-        for (int i = 1; i <= 25; i++) {
-            if (isMainAppLoaded()) {
-                ReportLogger.pass("Advisor app dashboard loaded after PIN");
-                return;
-            }
-
-            sleep(1000);
-        }
-
-        throw new AssertionError("Advisor app dashboard did not load after PIN"
-                + " | visibleValues=" + collectVisibleStrings());
-    }
+    //
+    // Authentication is centralized in AuthHelper.
+    // Do not keep a Search Bar-specific PIN or short startup timeout here.
 
     // =========================================================
     // DASHBOARD / NAVIGATION HELPERS
@@ -1726,16 +1659,6 @@ public class SearchBarPage {
                 || isPresentFast(AppiumBy.androidUIAutomator("new UiSelector().textContains(\"Rich Future Starts Here\")"), 0);
     }
 
-    private boolean isPinScreenVisibleFast() {
-        return isPresentFast(AppiumBy.androidUIAutomator("new UiSelector().descriptionContains(\"Enter your Advisor PIN\")"), 0)
-                || isPresentFast(AppiumBy.androidUIAutomator("new UiSelector().descriptionContains(\"Advisor PIN\")"), 0)
-                || isPresentFast(AppiumBy.androidUIAutomator("new UiSelector().descriptionContains(\"PIN\")"), 0)
-                || isPresentFast(AppiumBy.androidUIAutomator("new UiSelector().descriptionContains(\"Hi,\")"), 0)
-                || isPresentFast(AppiumBy.androidUIAutomator("new UiSelector().textContains(\"Enter your Advisor PIN\")"), 0)
-                || isPresentFast(AppiumBy.androidUIAutomator("new UiSelector().textContains(\"Advisor PIN\")"), 0)
-                || isPresentFast(AppiumBy.androidUIAutomator("new UiSelector().textContains(\"PIN\")"), 0)
-                || isPresentFast(AppiumBy.androidUIAutomator("new UiSelector().textContains(\"Hi,\")"), 0);
-    }
 
     private boolean isSearchScreenVisibleFast() {
         boolean hasInput = isPresentFast(AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\")"), 0)
@@ -2015,15 +1938,6 @@ public class SearchBarPage {
     }
 
 
-    private void waitForAppToBeInteractive() {
-        for (int i = 1; i <= 8; i++) {
-            if (isMainAppLoadedFast() || isPinScreenVisibleFast() || isSearchScreenVisibleFast()) {
-                return;
-            }
-
-            sleep(350);
-        }
-    }
 
 
     private void waitForAnyTextVisible(List<String> possibleTexts, int timeoutSeconds) {

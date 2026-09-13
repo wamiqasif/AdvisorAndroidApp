@@ -21,6 +21,7 @@ public class RefundPolicyTest extends BaseTest {
         ReportLogger.step("Starting test case: RP_001 - Verify Refund Policy module from Hub");
 
         RefundPolicyPage refundPolicyPage = new RefundPolicyPage(driver);
+        boolean hubWasOpened = false;
 
         try {
             ReportLogger.step("REFUND POLICY STEP 01 - Capture Advisor app package");
@@ -33,6 +34,7 @@ public class RefundPolicyTest extends BaseTest {
 
             ReportLogger.step("REFUND POLICY STEP 03 - Open Hub from bottom navigation");
             refundPolicyPage.openHubFromBottomNavigationForRefundPolicy();
+            hubWasOpened = true;
             ReportLogger.pass("REFUND POLICY STEP 03 PASSED - Hub page opened");
 
             ReportLogger.step("REFUND POLICY STEP 04 - Scroll Hub page to Refund Policy option");
@@ -58,9 +60,22 @@ public class RefundPolicyTest extends BaseTest {
             markPassed("RP_001 - Refund Policy module validated successfully");
 
         } finally {
-            ReportLogger.step("REFUND POLICY STEP 09 - Return back to Hub");
-            refundPolicyPage.returnBackToHubSafelyForRefundPolicy();
-            ReportLogger.pass("REFUND POLICY STEP 09 COMPLETED - Return flow executed");
+            if (hubWasOpened) {
+                ReportLogger.step("REFUND POLICY STEP 09 - Return back to Hub");
+
+                try {
+                    refundPolicyPage.returnBackToHubSafelyForRefundPolicy();
+                    ReportLogger.pass("REFUND POLICY STEP 09 COMPLETED - Return flow executed");
+                } catch (AssertionError e) {
+                    ReportLogger.debug("REFUND POLICY STEP 09 cleanup assertion skipped/failed: "
+                            + safeMessage(e));
+                } catch (Exception e) {
+                    ReportLogger.debug("REFUND POLICY STEP 09 cleanup skipped/failed: "
+                            + safeMessage(e));
+                }
+            } else {
+                ReportLogger.debug("REFUND POLICY STEP 09 SKIPPED - Hub was never opened because test failed earlier");
+            }
         }
     }
 
@@ -81,5 +96,19 @@ public class RefundPolicyTest extends BaseTest {
                 "<span class='badge white-text green'>" + message + "</span>"
         );
         ReportLogger.pass("Completed test case: " + message);
+    }
+
+    private String safeMessage(Throwable throwable) {
+        if (throwable == null) {
+            return "";
+        }
+
+        String message = throwable.getMessage();
+
+        if (message == null || message.trim().isEmpty()) {
+            return throwable.getClass().getSimpleName();
+        }
+
+        return message;
     }
 }

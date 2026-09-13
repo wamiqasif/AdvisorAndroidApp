@@ -1,5 +1,6 @@
 package com.valueresearch.pages;
 
+import com.valueresearch.utils.AuthHelper;
 import com.valueresearch.utils.ReportLogger;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -21,6 +22,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AuditStatusPage {
+
+    // Stable navigation locators confirmed from the Advisor app hierarchy.
+    private static final By HUB_TAB = AppiumBy.accessibilityId("Hub");
+    private static final By HUB_READY_MARKER = AppiumBy.accessibilityId("Manage your app settings");
 
     // AUDIT_VALIDATION_FAST_V3_ACTIVE
 
@@ -53,43 +58,54 @@ public class AuditStatusPage {
     public void ensureAdvisorAppLoggedInForAudit() {
         ReportLogger.step("Checking Advisor app login/session state");
 
-        waitForAppToBeInteractive();
+        /*
+         * Authentication is intentionally centralized in AuthHelper.
+         * It already handles the real app startup delay, PIN screen,
+         * OTP/login states and configured appPin. Do not duplicate
+         * short module-specific login waits here.
+         */
+        AuthHelper authHelper = new AuthHelper(driver);
+        authHelper.ensureLoggedIn();
 
-        if (isMainAppLoaded()) {
-            ReportLogger.pass("Advisor app session is already active");
-            return;
-        }
+        invalidateVisibleStringsCacheAuditV1();
 
-        if (isPinScreenVisible()) {
-            ReportLogger.step("PIN screen detected. Entering Advisor PIN");
-
-            enterAdvisorPin();
-            waitForMainAppAfterPin();
-
-            ReportLogger.pass("Advisor app login/session confirmed after PIN");
-            return;
-        }
-
-        throw new AssertionError("Unable to confirm Advisor app login/session state"
-                + " | visibleValues=" + collectVisibleStrings());
+        ReportLogger.pass("Advisor app login/session confirmed");
     }
 
 
     public void openHubFromBottomNavigationForAudit() {
         ReportLogger.step("Opening Hub from bottom navigation");
 
-        forceTapHubBottomTabFastAuditV1();
+        invalidateVisibleStringsCacheAuditV1();
 
-        for (int attempt = 1; attempt <= 5; attempt++) {
-            if (isHubContentVisibleCheapAuditV1() || isAuditStatusVisibleCheapAuditV1()) {
-                ReportLogger.pass("Hub page opened successfully after direct Hub tap");
+        if (isHubPageReadyForAudit()) {
+            ReportLogger.pass("Hub page is already visible");
+            return;
+        }
+
+        WebElement hubTab = waitForVisibleElementAudit(HUB_TAB, 10);
+
+        if (hubTab == null) {
+            throw new AssertionError("Hub bottom navigation tab not found"
+                    + " | expectedAccessibilityId=Hub"
+                    + " | visibleValues=" + collectVisibleStrings());
+        }
+
+        ReportLogger.step("Tapping Hub using accessibility id");
+        tapElementCenter(hubTab);
+
+        long endTime = System.currentTimeMillis() + 12000L;
+
+        while (System.currentTimeMillis() < endTime) {
+            if (isHubPageReadyForAudit()) {
+                ReportLogger.pass("Hub page opened successfully");
                 return;
             }
 
-            sleep(300);
+            sleep(350);
         }
 
-        throw new AssertionError("Hub page did not open after direct Hub tap"
+        throw new AssertionError("Hub page did not become ready after tapping Hub"
                 + " | visibleValues=" + collectVisibleStrings());
     }
 
@@ -311,7 +327,7 @@ public class AuditStatusPage {
         ReportLogger.step("Returning back to Hub after Audit Status validation");
 
         for (int attempt = 1; attempt <= 2; attempt++) {
-            if (isHubContentVisibleCheapAuditV1() || isAuditStatusVisibleCheapAuditV1()) {
+            if (isHubPageReadyForAudit()) {
                 ReportLogger.pass("Already back on Hub");
                 return;
             }
@@ -319,7 +335,7 @@ public class AuditStatusPage {
             pressBackSilently();
             sleep(500);
 
-            if (isHubContentVisibleCheapAuditV1() || isAuditStatusVisibleCheapAuditV1()) {
+            if (isHubPageReadyForAudit()) {
                 ReportLogger.pass("Returned back to Hub after back attempt " + attempt);
                 return;
             }
@@ -329,14 +345,14 @@ public class AuditStatusPage {
             driver.activateApp("com.valueresearch.advisor");
             sleep(600);
 
-            if (isHubContentVisibleCheapAuditV1() || isAuditStatusVisibleCheapAuditV1()) {
+            if (isHubPageReadyForAudit()) {
                 ReportLogger.pass("Advisor App activated and Hub content visible");
                 return;
             }
 
             forceTapHubBottomTabFastAuditV1();
 
-            if (isHubContentVisibleCheapAuditV1() || isAuditStatusVisibleCheapAuditV1()) {
+            if (isHubPageReadyForAudit()) {
                 ReportLogger.pass("Returned to Hub using app activation + Hub tap");
                 return;
             }
@@ -368,62 +384,39 @@ public class AuditStatusPage {
     }
 
     // =========================================================
-    // LOGIN / SESSION HELPERS
+    // HUB / AUDIT STATUS HELPERS
     // =========================================================
 
+    private WebElement waitForVisibleElementAudit(By locator, int timeoutSeconds) {
+        long endTime = System.currentTimeMillis() + (timeoutSeconds * 1000L);
 
-    private boolean isPinScreenVisible() {
-        return isPinScreenVisibleFastAuditV2();
-    }
+        while (System.currentTimeMillis() < endTime) {
+            WebElement element = findVisibleElement(locator);
 
-
-    private boolean isMainAppLoaded() {
-        return isMainAppLoadedFastAuditV2();
-    }
-
-
-    private void enterAdvisorPin() {
-        ReportLogger.step("Entering Advisor PIN");
-
-        String pin = "1975";
-
-        for (char digit : pin.toCharArray()) {
-            tapPinDigit(String.valueOf(digit));
-            sleep(120);
-        }
-    }
-
-
-    private void tapPinDigit(String digit) {
-        if (tapPinDigitFastAuditV2(digit)) {
-            ReportLogger.step("Tapped PIN digit: " + digit);
-            return;
-        }
-
-        tapPinDigitByCoordinateFallbackAuditV2(digit);
-        ReportLogger.step("Tapped PIN digit by coordinate fallback: " + digit);
-    }
-
-
-    private void waitForMainAppAfterPin() {
-        ReportLogger.step("Waiting for Advisor app dashboard after PIN");
-
-        for (int i = 1; i <= 14; i++) {
-            if (isMainAppLoadedFastAuditV2()) {
-                ReportLogger.pass("Advisor app dashboard loaded after PIN");
-                return;
+            if (element != null) {
+                return element;
             }
 
             sleep(300);
         }
 
-        throw new AssertionError("Advisor app dashboard did not load after PIN"
-                + " | visibleValues=" + collectVisibleStrings());
+        return null;
     }
 
-    // =========================================================
-    // HUB / AUDIT STATUS HELPERS
-    // =========================================================
+    private boolean isHubPageReadyForAudit() {
+        /*
+         * Do not use a generic "Audit Status" text check here because the
+         * actual Audit Status detail page also contains that title.
+         *
+         * Hub is confirmed by either:
+         * 1. the stable top Hub profile tile,
+         * 2. known Hub content, or
+         * 3. the exact Hub Audit Status tile accessibility description.
+         */
+        return findVisibleElement(HUB_READY_MARKER) != null
+                || isHubContentVisibleCheapAuditV1()
+                || findVisibleElement(auditStatusExactLocator()) != null;
+    }
 
     private boolean isLikelyOnHubPage() {
         List<String> values = collectVisibleStrings();
@@ -655,22 +648,6 @@ public class AuditStatusPage {
     }
 
 
-    private void waitForAppToBeInteractive() {
-        for (int i = 1; i <= 5; i++) {
-            if (!getCurrentPackageSafely().isEmpty()
-                    && (isMainAppLoadedFastAuditV2() || isPinScreenVisibleFastAuditV2())) {
-                return;
-            }
-
-            sleep(250);
-        }
-
-        /*
-         * One final fallback only for evidence.
-         */
-        collectVisibleStrings();
-    }
-
     private void waitUntilTextVisible(String text, int timeoutSeconds) {
         for (int i = 1; i <= timeoutSeconds; i++) {
             if (isVisibleByAnyText(text)) {
@@ -736,68 +713,6 @@ public class AuditStatusPage {
                 || isAuditTextPresentFastV2("SEBI")
                 || isAuditTextPresentFastV2("conducted")
                 || isAuditTextPresentFastV2("Conducted");
-    }
-
-    private boolean isPinScreenVisibleFastAuditV2() {
-        return isAuditTextPresentFastV2("Enter your Advisor PIN")
-                || isAuditTextPresentFastV2("Advisor PIN")
-                || isAuditTextPresentFastV2("PIN")
-                || isAuditTextPresentFastV2("Hi,");
-    }
-
-    private boolean isMainAppLoadedFastAuditV2() {
-        return isAuditTextPresentFastV2("Funds")
-                || isAuditTextPresentFastV2("Portfolio")
-                || isAuditTextPresentFastV2("Hub")
-                || isAuditTextPresentFastV2("Clients")
-                || isAuditTextPresentFastV2("Reports")
-                || isAuditTextPresentFastV2("Search");
-    }
-
-    private boolean tapPinDigitFastAuditV2(String digit) {
-        By[] locators = new By[]{
-                AppiumBy.accessibilityId(digit),
-                AppiumBy.androidUIAutomator("new UiSelector().text(\"" + escapeUiTextAuditFastV2(digit) + "\")"),
-                AppiumBy.androidUIAutomator("new UiSelector().description(\"" + escapeUiTextAuditFastV2(digit) + "\")")
-        };
-
-        for (By locator : locators) {
-            WebElement element = findVisibleElement(locator);
-
-            if (element != null) {
-                tapElementCenter(element);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private void tapPinDigitByCoordinateFallbackAuditV2(String digit) {
-        Dimension size = driver.manage().window().getSize();
-
-        int col;
-        int row;
-
-        switch (digit) {
-            case "1": col = 0; row = 0; break;
-            case "2": col = 1; row = 0; break;
-            case "3": col = 2; row = 0; break;
-            case "4": col = 0; row = 1; break;
-            case "5": col = 1; row = 1; break;
-            case "6": col = 2; row = 1; break;
-            case "7": col = 0; row = 2; break;
-            case "8": col = 1; row = 2; break;
-            case "9": col = 2; row = 2; break;
-            case "0": col = 1; row = 3; break;
-            default:
-                throw new AssertionError("Unsupported PIN digit: " + digit);
-        }
-
-        int x = (int) (size.getWidth() * (0.25 + (col * 0.25)));
-        int y = (int) (size.getHeight() * (0.49 + (row * 0.105)));
-
-        tapByCoordinates(x, y);
     }
 
     private boolean isAuditStatusPageLoadedCheapAuditV2() {

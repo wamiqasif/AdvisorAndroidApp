@@ -2,6 +2,7 @@ package com.valueresearch.utils;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import org.openqa.selenium.By;
 
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -76,28 +77,172 @@ public class DriverManager {
         }
     }
 
+
+    /**
+     * Returns true only when the current failure is caused by Android/Appium
+     * infrastructure rather than by a functional assertion.
+     *
+     * <p>The live driver health check is intentionally part of this decision.
+     * A testcase can surface a generic timeout/assertion after the emulator or
+     * UiAutomator2 died, so the throwable message alone is not sufficient.</p>
+     */
+    public static synchronized boolean isInfrastructureFailure(Throwable throwable) {
+        if (!isDriverHealthy()) {
+            return true;
+        }
+
+        Throwable current = throwable;
+
+        while (current != null) {
+            String className = current.getClass().getName();
+            String message = cleanError(current.getMessage());
+
+            if (className.endsWith("NoSuchSessionException")
+                    || className.endsWith("SessionNotCreatedException")
+                    || containsInfrastructureSignal(message)) {
+                return true;
+            }
+
+            current = current.getCause();
+        }
+
+        return false;
+    }
+
+    public static String describeInfrastructureFailure(Throwable throwable) {
+        Throwable current = throwable;
+
+        while (current != null) {
+            String message = cleanError(current.getMessage());
+
+            if (containsInfrastructureSignal(message)) {
+                return shortRecoveryError(message);
+            }
+
+            String className = current.getClass().getName();
+            if (className.endsWith("NoSuchSessionException")
+                    || className.endsWith("SessionNotCreatedException")) {
+                return className + (message.isEmpty() ? "" : ": " + shortRecoveryError(message));
+            }
+
+            current = current.getCause();
+        }
+
+        return "Android device/Appium/UiAutomator2 session became unhealthy during testcase execution";
+    }
+
     public static synchronized boolean isDriverHealthy() {
-        if (driver == null || driver.getSessionId() == null) {
+        if (driver == null) {
+            return false;
+        }
+
+        if (driver.getSessionId() == null) {
+            System.out.println("[RECOVERY] Driver health check failed: session ID is null.");
             return false;
         }
 
         String deviceName = getConfigValue("deviceName", DEFAULT_DEVICE_NAME);
 
+        /*
+         * Layer 1:
+         * Verify that Android itself is still reachable.
+         */
         if (!DeviceRecoveryManager.isDeviceOnline(deviceName)) {
+            System.out.println(
+                    "[RECOVERY] Driver health check failed: Android device is not online: "
+                            + deviceName
+            );
             return false;
         }
 
+        /*
+         * Layer 2:
+         * Verify the UiAutomator2 instrumentation itself.
+         *
+         * Do not rely only on getCurrentPackage(). A stale Java driver/session
+         * can still have a session ID, and lightweight commands can appear alive
+         * even after UiAutomator2 instrumentation has crashed.
+         *
+         * findElements() performs a real UI hierarchy request through the
+         * UiAutomator2 server. We do not care whether FrameLayout elements are
+         * returned; successful command execution is the health signal.
+         */
         try {
-            /*
-             * This is a real UiAutomator2 command. A Java driver object can still
-             * have a session ID even after the instrumentation process has died.
-             */
-            driver.getCurrentPackage();
+            driver.findElements(
+                    By.className("android.widget.FrameLayout")
+            );
+
             return true;
 
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            String message = cleanError(e.getMessage());
+
+            if (isDeadUiAutomator2Error(message)) {
+                System.out.println(
+                        "[RECOVERY] Dead UiAutomator2 instrumentation detected: "
+                                + shortRecoveryError(message)
+                );
+            } else {
+                System.out.println(
+                        "[RECOVERY] AndroidDriver health check failed: "
+                                + shortRecoveryError(message)
+                );
+            }
+
             return false;
         }
+    }
+
+
+    private static boolean containsInfrastructureSignal(String message) {
+        if (message == null || message.trim().isEmpty()) {
+            return false;
+        }
+
+        String lower = message.toLowerCase();
+
+        return isDeadUiAutomator2Error(message)
+                || lower.contains("android device is not online")
+                || lower.contains("device offline")
+                || lower.contains("device not found")
+                || lower.contains("no devices/emulators found")
+                || lower.contains("adb: device")
+                || lower.contains("could not proxy command")
+                || lower.contains("connection reset")
+                || lower.contains("broken pipe")
+                || lower.contains("failed to start android driver")
+                || lower.contains("failed to activate advisor app")
+                || lower.contains("appium is not ready")
+                || lower.contains("could not start a new session")
+                || lower.contains("new session could not be created")
+                || lower.contains("unable to connect to appium server");
+    }
+
+    private static boolean isDeadUiAutomator2Error(String message) {
+        if (message == null || message.trim().isEmpty()) {
+            return false;
+        }
+
+        String lower = message.toLowerCase();
+
+        return lower.contains("instrumentation process is not running")
+                || lower.contains("cannot be proxied to uiautomator2 server")
+                || lower.contains("uiautomator2 server is not running")
+                || lower.contains("socket hang up")
+                || lower.contains("econnrefused")
+                || lower.contains("connection refused")
+                || lower.contains("session is either terminated or not started")
+                || lower.contains("invalid session id");
+    }
+
+    private static String shortRecoveryError(String message) {
+        String cleaned = cleanError(message);
+
+        if (cleaned.length() <= 350) {
+            return cleaned;
+        }
+
+        return cleaned.substring(0, 350) + "...";
     }
 
     private static AndroidDriver createAndroidDriver(
@@ -112,6 +257,13 @@ public class DriverManager {
         System.out.println("UDID         : " + deviceName);
         System.out.println("App Package  : " + appPackage);
         System.out.println("App Activity : " + appActivity);
+        System.out.println("Execution Profile : " + ExecutionProfile.getProfileName());
+        System.out.println("Default Wait      : " + ExecutionProfile.defaultWait().getSeconds() + " sec");
+        System.out.println("Long Wait         : " + ExecutionProfile.longWait().getSeconds() + " sec");
+        System.out.println("Polling Interval  : " + ExecutionProfile.pollingInterval().toMillis() + " ms");
+
+        int waitForIdleTimeout = ExecutionProfile.getWaitForIdleTimeoutMs();
+        int waitForSelectorTimeout = ExecutionProfile.getWaitForSelectorTimeoutMs();
 
         UiAutomator2Options options = new UiAutomator2Options();
 
@@ -142,13 +294,20 @@ public class DriverManager {
         options.setCapability("appium:uiautomator2ServerLaunchTimeout", 60_000);
 
         /*
-         * Global UiAutomator2 speed settings for all modules.
-         * These reduce real-device idle waiting and selector delay.
+         * QA-safe UiAutomator2 synchronization settings.
+         *
+         * Do not override actionAcknowledgmentTimeout or
+         * scrollAcknowledgmentTimeout globally. Their Appium defaults are safer
+         * for a build whose response/render time varies during execution.
          */
-        options.setCapability("appium:settings[waitForIdleTimeout]", 100);
-        options.setCapability("appium:settings[waitForSelectorTimeout]", 1000);
-        options.setCapability("appium:settings[actionAcknowledgmentTimeout]", 500);
-        options.setCapability("appium:settings[scrollAcknowledgmentTimeout]", 500);
+        options.setCapability(
+                "appium:settings[waitForIdleTimeout]",
+                waitForIdleTimeout
+        );
+        options.setCapability(
+                "appium:settings[waitForSelectorTimeout]",
+                waitForSelectorTimeout
+        );
 
         options.setNewCommandTimeout(Duration.ofSeconds(600));
 
@@ -158,9 +317,9 @@ public class DriverManager {
         );
 
         try {
-            applyAppiumSpeedSettings(newDriver);
+            applyAppiumStabilitySettings(newDriver);
             forceActivateAdvisorApp(newDriver, appPackage);
-            applyAppiumSpeedSettings(newDriver);
+            applyAppiumStabilitySettings(newDriver);
 
             System.out.println("Android driver started and Advisor app activated");
             return newDriver;
@@ -176,14 +335,14 @@ public class DriverManager {
         }
     }
 
-    private static void applyAppiumSpeedSettings(AndroidDriver activeDriver) {
+    private static void applyAppiumStabilitySettings(AndroidDriver activeDriver) {
         if (activeDriver == null) {
             return;
         }
 
         try {
             activeDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(0));
-            System.out.println("Implicit wait set to 0 ms for faster Appium execution");
+            System.out.println("Implicit wait set to 0 ms");
         } catch (Exception e) {
             System.out.println("Unable to set implicit wait to 0: " + cleanError(e.getMessage()));
         }
@@ -192,10 +351,17 @@ public class DriverManager {
          * Reflection is used here so the project does not need any extra Appium
          * version-specific API dependency.
          */
-        setAppiumSettingSafely(activeDriver, "waitForIdleTimeout", 100);
-        setAppiumSettingSafely(activeDriver, "waitForSelectorTimeout", 1000);
-        setAppiumSettingSafely(activeDriver, "actionAcknowledgmentTimeout", 500);
-        setAppiumSettingSafely(activeDriver, "scrollAcknowledgmentTimeout", 500);
+        setAppiumSettingSafely(
+                activeDriver,
+                "waitForIdleTimeout",
+                ExecutionProfile.getWaitForIdleTimeoutMs()
+        );
+
+        setAppiumSettingSafely(
+                activeDriver,
+                "waitForSelectorTimeout",
+                ExecutionProfile.getWaitForSelectorTimeoutMs()
+        );
     }
 
     private static void setAppiumSettingSafely(
