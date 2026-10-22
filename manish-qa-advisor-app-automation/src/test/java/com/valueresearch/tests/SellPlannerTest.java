@@ -339,9 +339,8 @@ public class SellPlannerTest extends BaseTest {
 
         String message = caseId
                 + " skipped: Sell Planner test-data precondition is not met. "
-                + "Missing configured holdings=" + missing
-                + ". Current investor is in the empty/import-stocks state or the configured portfolio is incomplete. "
-                + "Restore/import the QA portfolio, then rerun this scenario.";
+                + "Configured holdings not found after bounded scrolling=" + missing
+                + ". Verify the selected investor, portfolio data and exact stock accessibility IDs, then rerun.";
 
         ReportLogger.info(message);
         safeCleanup();

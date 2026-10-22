@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Automation active for 20-Oct-2026 to 19-Nov-2026 only. -->
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="MFI Anniversary VRO Suite"
+       verbose="1"
+       parallel="false"
+       configfailurepolicy="continue"
+       preserve-order="true">
+
+    <listeners>
+        <listener class-name="com.valueresearch.tests.MFIanniversaryvroTest$MfiSuiteListener"/>
+    </listeners>
+    <test name="MFI VRO Store and Subscription">
+        <classes>
+            <class name="com.valueresearch.tests.MFIanniversaryvroTest">
+                <methods>
+                    <include name="MFI_VRO_002_VerifySubscribeStoreNavigation"/>
+                    <include name="MFI_VRO_003_VerifyAnniversaryMagazineCard"/>
+                    <include name="MFI_VRO_004_VerifySubscriptionPlansAndContent"/>
+                    <include name="MFI_VRO_005_VerifyCheckoutNavigation"/>
+                    <include name="MFI_VRO_006_PurchaseThreeYearDigitalPlan"/>
+                    <include name="MFI_VRO_007_PurchaseThreeYearPrintDigitalPlan"/>
+                    <include name="MFI_VRO_008_VerifyProfileSubscriptionHistory"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

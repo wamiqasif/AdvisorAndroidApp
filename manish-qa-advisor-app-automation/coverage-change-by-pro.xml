@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Coverage, Insights and Reports - Product Changes"
+       verbose="1" parallel="false" preserve-order="true" configfailurepolicy="continue">
+    <!-- Password only for this module; global/legacy OTP settings do not override it. -->
+    <parameter name="loginMethod" value="PASSWORD"/>
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+    <test name="Coverage Changes - TC_001 to TC_003" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.CoverageChangesbyProTest">
+                <methods>
+                    <!-- No method dependencies: any selected case can run alone. -->
+                    <include name="TC_001_VerifyCoverageInsightsReportsIcons"/>
+                    <include name="TC_002_VerifyDynamicStockDetailsDrawer"/>
+                    <include name="TC_003_VerifyLapsedCoverageAndInsightsCopy"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

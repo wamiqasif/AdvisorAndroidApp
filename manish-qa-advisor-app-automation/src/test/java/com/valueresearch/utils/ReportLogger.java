@@ -2,65 +2,86 @@ package com.valueresearch.utils;
 
 import com.aventstack.extentreports.Status;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class ReportLogger {
+/** Concise execution output; technical diagnostics are opt-in. Existing public APIs are preserved. */
+public final class ReportLogger {
 
-    /*
-     * Default behavior:
-     * STEP / PASS / FAIL / INFO -> Extent report + terminal
-     * DEBUG -> terminal only
-     *
-     * If debug logs are needed inside Extent report, run:
-     * mvn clean test -DsuiteXmlFile=tax.xml -DdebugReport=true
-     */
-    private static final boolean DEBUG_IN_REPORT =
-            Boolean.parseBoolean(System.getProperty("debugReport", "false"));
+    private static final ZoneId IST = ZoneId.of("Asia/Kolkata");
+    private static final DateTimeFormatter TIMESTAMP = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
     private ReportLogger() {
-        // Utility class
     }
 
-    public static void step(String message) {
-        String formattedMessage = "<b>[STEP]</b> " + escapeHtml(message);
-
-        logToReport(Status.INFO, formattedMessage);
-        logToConsole("STEP", message);
-    }
-
-    public static void pass(String message) {
-        String formattedMessage = "<b>[PASS]</b> " + escapeHtml(message);
-
-        logToReport(Status.PASS, formattedMessage);
-        logToConsole("PASS", message);
-    }
-
-    public static void fail(String message) {
-        String formattedMessage = "<b>[FAIL]</b> " + escapeHtml(message);
-
-        logToReport(Status.FAIL, formattedMessage);
-        logToConsole("FAIL", message);
-    }
-
-    public static void info(String message) {
-        String formattedMessage = escapeHtml(message);
-
-        logToReport(Status.INFO, formattedMessage);
-        logToConsole("INFO", message);
-    }
+    public static void step(String message) { log(Status.INFO, "STEP", message); }
+    public static void pass(String message) { log(Status.PASS, "PASS", message); }
+    public static void fail(String message) { log(Status.FAIL, "FAIL", message); }
+    public static void info(String message) { log(Status.INFO, "INFO", message); }
 
     public static void debug(String message) {
-        /*
-         * Keep technical locator/input debug in terminal only.
-         * This keeps Extent report clean.
-         */
-        logToConsole("DEBUG", message);
-
-        if (DEBUG_IN_REPORT) {
-            String formattedMessage = "<b>[DEBUG]</b> " + escapeHtml(message);
-            logToReport(Status.INFO, formattedMessage);
+        if (isDebugConsoleEnabled()) {
+            console("DEBUG", message);
         }
+        if (isDebugReportEnabled()) {
+            logToReport(Status.INFO, "<b>[DEBUG]</b> " + escapeHtml(message));
+        }
+    }
+
+    public static boolean isDebugReportEnabled() {
+        return flag("debugReport", "AUTOMATION_DEBUG_REPORT");
+    }
+
+    public static boolean isDebugConsoleEnabled() {
+        return flag("debugConsole", "AUTOMATION_DEBUG_CONSOLE");
+    }
+
+    /** Drop Selenium's diagnostic footer, preserving the actionable error or assertion message. */
+    public static String summary(Throwable failure) {
+        if (failure == null) {
+            return "Unknown failure";
+        }
+        String message = compact(failure.getMessage());
+        return failure.getClass().getSimpleName() + (message.isEmpty() ? "" : ": " + message);
+    }
+
+    /** Console-only output for infrastructure/listener messages, with an explicit IST timestamp. */
+    public static void console(String level, String message) {
+        System.out.println("[" + TIMESTAMP.format(ZonedDateTime.now(IST)) + "] [" + level + "] " + compact(message));
+    }
+
+    private static void log(Status status, String level, String message) {
+        String concise = compact(message);
+        logToReport(status, "<b>[" + level + "]</b> " + escapeHtml(concise));
+        console(level, concise);
+    }
+
+    private static boolean flag(String property, String environment) {
+        String value = System.getProperty(property);
+        return Boolean.parseBoolean(value == null ? System.getenv(environment) : value.trim());
+    }
+
+    private static String compact(String message) {
+        if (message == null) {
+            return "";
+        }
+        StringBuilder result = new StringBuilder();
+        for (String line : message.split("\\R")) {
+            String trimmed = line.trim();
+            if (trimmed.startsWith("Build info:") || trimmed.startsWith("System info:")
+                    || trimmed.startsWith("Driver info:") || trimmed.startsWith("Capabilities ")
+                    || trimmed.startsWith("Session ID:") || trimmed.startsWith("Command:")) {
+                break;
+            }
+            if (!trimmed.isEmpty()) {
+                if (result.length() > 0) {
+                    result.append(' ');
+                }
+                result.append(trimmed);
+            }
+        }
+        return result.toString();
     }
 
     private static void logToReport(Status status, String message) {
@@ -69,23 +90,11 @@ public class ReportLogger {
                 ExtentTestManager.getTest().log(status, message);
             }
         } catch (Exception e) {
-            logToConsole("REPORT_LOG_ERROR", e.getMessage());
+            console("REPORT_LOG_ERROR", summary(e));
         }
-    }
-
-    private static void logToConsole(String level, String message) {
-        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
-        System.out.println("[" + timestamp + "] [" + level + "] " + message);
     }
 
     private static String escapeHtml(String text) {
-        if (text == null) {
-            return "";
-        }
-
-        return text
-                .replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;");
+        return text == null ? "" : text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
 }

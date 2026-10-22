@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite
-        name="VRSA Ready to Invest Portfolios Dynamic Regression Suite"
-        verbose="1"
-        parallel="false"
-        preserve-order="true"
-        configfailurepolicy="continue">
-
+<suite name="VRSA Stock Analyst's Choice - Legacy RTI Dynamic Regression"
+       verbose="1" parallel="false" preserve-order="true" configfailurepolicy="continue">
+    <parameter name="loginMethod" value="PASSWORD"/>
     <listeners>
         <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
     </listeners>
-
-    <test name="Ready to Invest Portfolios - Analyst Picks Dynamic Validation" preserve-order="true">
+    <test name="Stock Analyst's Choice - five dynamic regression cases" preserve-order="true">
         <classes>
-            <class name="com.valueresearch.tests.ReadyToInvestPortfoliosTest"/>
+            <class name="com.valueresearch.tests.ReadyToInvestPortfoliosTest">
+                <methods>
+                    <include name="RTI_001_OpenModuleAndValidateLanding"/>
+                    <include name="RTI_002_ValidateAllTabsAndFiltersDynamically"/>
+                    <include name="RTI_003_ValidateHorizontalTableScroll"/>
+                    <include name="RTI_004_ValidateVerticalScrollAndPortfolioPlannerCta"/>
+                    <include name="RTI_005_ValidateTopLevelSwitchingFast"/>
+                </methods>
+            </class>
         </classes>
     </test>
-
 </suite>

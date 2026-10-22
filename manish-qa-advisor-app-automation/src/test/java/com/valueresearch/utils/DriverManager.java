@@ -3,47 +3,94 @@ package com.valueresearch.utils;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class DriverManager {
 
     private static AndroidDriver driver;
+    private static String activeAppPackage;
+    private static String activeAppActivity;
+    private static String activeDeviceName;
+    private static String activeDeviceUdid;
+    private static String activeAppiumServerUrl;
 
     private static final String DEFAULT_APPIUM_SERVER_URL = "http://127.0.0.1:4723";
-    private static final String DEFAULT_DEVICE_NAME = "adb-RZCT80J98ZA-tvFqgN._adb-tls-connect._tcp";
     private static final String DEFAULT_APP_PACKAGE = "com.valueresearch.advisor";
     private static final String DEFAULT_APP_ACTIVITY = ".MainActivity";
 
+    /** Existing modules continue using the Advisor configuration. */
     public static synchronized AndroidDriver getDriver() {
-        if (isDriverHealthy()) {
+        return getDriverForApp(
+                getConfigValue("appPackage", DEFAULT_APP_PACKAGE),
+                getConfigValue("appActivity", DEFAULT_APP_ACTIVITY)
+        );
+    }
+
+    /** Reads module-specific package/activity keys using ConfigReader. */
+    public static synchronized AndroidDriver getDriver(
+            String appPackageConfigKey,
+            String appActivityConfigKey
+    ) {
+        return getDriverForApp(
+                getRequiredConfigValue(appPackageConfigKey),
+                getRequiredConfigValue(appActivityConfigKey)
+        );
+    }
+
+    private static AndroidDriver getDriverForApp(
+            String appPackage,
+            String appActivity
+    ) {
+        String appiumServerUrl = getConfigValue("appiumServerUrl", DEFAULT_APPIUM_SERVER_URL);
+        // Use the real ADB serial, NOT the human-readable deviceName, for routing.
+        String deviceUdid = resolveDeviceUdid();
+        String deviceName = getConfigValue("deviceName", deviceUdid);
+
+        boolean sameTarget = appPackage.equals(activeAppPackage)
+                && appActivity.equals(activeAppActivity)
+                && deviceName.equals(activeDeviceName)
+                && deviceUdid.equals(activeDeviceUdid)
+                && appiumServerUrl.equals(activeAppiumServerUrl);
+
+        if (sameTarget && isDriverHealthy()) {
             return driver;
         }
 
         if (driver != null) {
-            System.out.println("[RECOVERY] Existing AndroidDriver is not healthy. Discarding stale session.");
+            System.out.println(sameTarget
+                    ? "[RECOVERY] Existing AndroidDriver is not healthy. Discarding stale session."
+                    : "[DRIVER] App/device/server target changed. Replacing the existing session.");
         }
 
         safelyDiscardDriver();
 
-        String appiumServerUrl = getConfigValue("appiumServerUrl", DEFAULT_APPIUM_SERVER_URL);
-        String deviceName = getConfigValue("deviceName", DEFAULT_DEVICE_NAME);
-        String appPackage = getConfigValue("appPackage", DEFAULT_APP_PACKAGE);
-        String appActivity = getConfigValue("appActivity", DEFAULT_APP_ACTIVITY);
-
-        DeviceRecoveryManager.ensureInfrastructureReady(deviceName, appiumServerUrl);
+        System.out.println("[DRIVER] Preparing ADB UDID: " + deviceUdid
+                + " | Device name: " + deviceName + " | Appium: " + appiumServerUrl);
+        try {
+            DeviceRecoveryManager.ensureInfrastructureReady(deviceUdid, appiumServerUrl);
+        } catch (RuntimeException infrastructureFailure) {
+            throw new IllegalStateException(
+                    "Android device/Appium infrastructure is not ready for ADB UDID '"
+                            + deviceUdid + "'. Run 'adb devices -l' and verify the active "
+                            + "USB/wireless connection.", infrastructureFailure);
+        }
 
         try {
             driver = createAndroidDriver(
                     appiumServerUrl,
                     deviceName,
+                    deviceUdid,
                     appPackage,
                     appActivity
             );
+            rememberTarget(appiumServerUrl, deviceName, deviceUdid, appPackage, appActivity);
 
             return driver;
 
@@ -53,39 +100,34 @@ public class DriverManager {
 
             safelyDiscardDriver();
 
-            DeviceRecoveryManager.forceCompleteRecovery(deviceName, appiumServerUrl);
+            DeviceRecoveryManager.forceCompleteRecovery(deviceUdid, appiumServerUrl);
 
             try {
                 driver = createAndroidDriver(
                         appiumServerUrl,
                         deviceName,
+                        deviceUdid,
                         appPackage,
                         appActivity
                 );
+                rememberTarget(appiumServerUrl, deviceName, deviceUdid, appPackage, appActivity);
 
                 return driver;
 
             } catch (Exception recoveryFailure) {
                 safelyDiscardDriver();
 
-                throw new RuntimeException(
-                        "Failed to start Android driver even after automatic emulator/UiAutomator2 recovery: "
+                RuntimeException combined = new RuntimeException(
+                        "Failed to start Android driver for ADB UDID '" + deviceUdid
+                                + "' even after device/UiAutomator2 recovery: "
                                 + cleanError(recoveryFailure.getMessage()),
-                        recoveryFailure
-                );
+                        recoveryFailure);
+                combined.addSuppressed(firstFailure);
+                throw combined;
             }
         }
     }
 
-
-    /**
-     * Returns true only when the current failure is caused by Android/Appium
-     * infrastructure rather than by a functional assertion.
-     *
-     * <p>The live driver health check is intentionally part of this decision.
-     * A testcase can surface a generic timeout/assertion after the emulator or
-     * UiAutomator2 died, so the throwable message alone is not sufficient.</p>
-     */
     public static synchronized boolean isInfrastructureFailure(Throwable throwable) {
         if (!isDriverHealthy()) {
             return true;
@@ -141,32 +183,22 @@ public class DriverManager {
             return false;
         }
 
-        String deviceName = getConfigValue("deviceName", DEFAULT_DEVICE_NAME);
+        String deviceUdid = activeDeviceUdid != null
+                ? activeDeviceUdid
+                : resolveDeviceUdid();
 
         /*
          * Layer 1:
          * Verify that Android itself is still reachable.
          */
-        if (!DeviceRecoveryManager.isDeviceOnline(deviceName)) {
+        if (!DeviceRecoveryManager.isDeviceOnline(deviceUdid)) {
             System.out.println(
                     "[RECOVERY] Driver health check failed: Android device is not online: "
-                            + deviceName
+                            + deviceUdid
             );
             return false;
         }
 
-        /*
-         * Layer 2:
-         * Verify the UiAutomator2 instrumentation itself.
-         *
-         * Do not rely only on getCurrentPackage(). A stale Java driver/session
-         * can still have a session ID, and lightweight commands can appear alive
-         * even after UiAutomator2 instrumentation has crashed.
-         *
-         * findElements() performs a real UI hierarchy request through the
-         * UiAutomator2 server. We do not care whether FrameLayout elements are
-         * returned; successful command execution is the health signal.
-         */
         try {
             driver.findElements(
                     By.className("android.widget.FrameLayout")
@@ -193,13 +225,12 @@ public class DriverManager {
         }
     }
 
-
     private static boolean containsInfrastructureSignal(String message) {
         if (message == null || message.trim().isEmpty()) {
             return false;
         }
 
-        String lower = message.toLowerCase();
+        String lower = message.toLowerCase(Locale.ROOT);
 
         return isDeadUiAutomator2Error(message)
                 || lower.contains("android device is not online")
@@ -212,6 +243,7 @@ public class DriverManager {
                 || lower.contains("broken pipe")
                 || lower.contains("failed to start android driver")
                 || lower.contains("failed to activate advisor app")
+                || lower.contains("failed to activate app")
                 || lower.contains("appium is not ready")
                 || lower.contains("could not start a new session")
                 || lower.contains("new session could not be created")
@@ -223,7 +255,7 @@ public class DriverManager {
             return false;
         }
 
-        String lower = message.toLowerCase();
+        String lower = message.toLowerCase(Locale.ROOT);
 
         return lower.contains("instrumentation process is not running")
                 || lower.contains("cannot be proxied to uiautomator2 server")
@@ -248,13 +280,14 @@ public class DriverManager {
     private static AndroidDriver createAndroidDriver(
             String appiumServerUrl,
             String deviceName,
+            String deviceUdid,
             String appPackage,
             String appActivity
     ) throws Exception {
         System.out.println("Starting Android driver with:");
         System.out.println("Appium URL   : " + appiumServerUrl);
         System.out.println("Device Name  : " + deviceName);
-        System.out.println("UDID         : " + deviceName);
+        System.out.println("ADB UDID     : " + deviceUdid);
         System.out.println("App Package  : " + appPackage);
         System.out.println("App Activity : " + appActivity);
         System.out.println("Execution Profile : " + ExecutionProfile.getProfileName());
@@ -271,7 +304,7 @@ public class DriverManager {
         options.setAutomationName("UiAutomator2");
 
         options.setDeviceName(deviceName);
-        options.setUdid(deviceName);
+        options.setUdid(deviceUdid);
 
         options.setAppPackage(appPackage);
         options.setAppActivity(appActivity);
@@ -293,13 +326,6 @@ public class DriverManager {
         options.setCapability("appium:uiautomator2ServerInstallTimeout", 60_000);
         options.setCapability("appium:uiautomator2ServerLaunchTimeout", 60_000);
 
-        /*
-         * QA-safe UiAutomator2 synchronization settings.
-         *
-         * Do not override actionAcknowledgmentTimeout or
-         * scrollAcknowledgmentTimeout globally. Their Appium defaults are safer
-         * for a build whose response/render time varies during execution.
-         */
         options.setCapability(
                 "appium:settings[waitForIdleTimeout]",
                 waitForIdleTimeout
@@ -318,10 +344,10 @@ public class DriverManager {
 
         try {
             applyAppiumStabilitySettings(newDriver);
-            forceActivateAdvisorApp(newDriver, appPackage);
+            forceActivateApp(newDriver, appPackage);
             applyAppiumStabilitySettings(newDriver);
 
-            System.out.println("Android driver started and Advisor app activated");
+            System.out.println("Android driver started and app activated: " + appPackage);
             return newDriver;
 
         } catch (Exception e) {
@@ -393,27 +419,89 @@ public class DriverManager {
         }
     }
 
-    private static void forceActivateAdvisorApp(
+    private static void forceActivateApp(
             AndroidDriver activeDriver,
             String appPackage
     ) {
         try {
             Map<String, Object> params = new HashMap<>();
             params.put("appId", appPackage);
-
             activeDriver.executeScript("mobile: activateApp", params);
 
-            Thread.sleep(2_000);
+            // Wait for the actual foreground app instead of a fixed sleep.
+            new WebDriverWait(
+                    activeDriver,
+                    ExecutionProfile.longWait(),
+                    ExecutionProfile.pollingInterval()
+            ).until(current -> appPackage.equals(activeDriver.getCurrentPackage()));
 
-            System.out.println("Advisor app activated");
-
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new RuntimeException("Advisor app activation was interrupted", e);
-
+            System.out.println("App activated: " + appPackage);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to activate Advisor app: " + e.getMessage(), e);
+            throw new RuntimeException(
+                    "Failed to activate app: " + appPackage + " | " + cleanError(e.getMessage()),
+                    e
+            );
         }
+    }
+
+    /**
+     * Select a physical USB/wireless device or emulator by its exact 'adb devices' serial.
+     * Environment override is optional and helpful for CI or fast local switching.
+     * Older projects with deviceName=<ADB serial> continue to work.
+     */
+    private static String resolveDeviceUdid() {
+        String environmentUdid = System.getenv("APPIUM_DEVICE_UDID");
+        if (environmentUdid != null && !environmentUdid.trim().isEmpty()) {
+            return environmentUdid.trim();
+        }
+        String configUdid = getConfigValue("udid", "");
+        if (!configUdid.isEmpty()) {
+            return configUdid;
+        }
+        String legacyName = getConfigValue("deviceName", "");
+        if (legacyName.isEmpty() || legacyName.contains(" ")) {
+            throw new IllegalStateException(
+                    "No valid ADB UDID configured. Set udid=<serial from 'adb devices'> "
+                            + "in config.properties, or APPIUM_DEVICE_UDID in the environment. "
+                            + "deviceName is a label, not an ADB identifier.");
+        }
+        System.out.println("[DRIVER] 'udid' not set; using legacy deviceName as ADB serial: "
+                + legacyName);
+        return legacyName;
+    }
+
+    private static String getRequiredConfigValue(String key) {
+        if (key == null || key.trim().isEmpty()) {
+            throw new IllegalArgumentException("App configuration key must not be blank");
+        }
+
+        String configKey = key.trim();
+        try {
+            String value = ConfigReader.get(configKey);
+            if (value == null || value.trim().isEmpty()) {
+                throw new IllegalArgumentException("Configuration value is empty");
+            }
+            return value.trim();
+        } catch (Exception e) {
+            throw new IllegalArgumentException(
+                    "Missing or invalid app setting in config.properties: " + configKey,
+                    e
+            );
+        }
+    }
+
+    private static void rememberTarget(
+            String serverUrl,
+            String deviceName,
+            String deviceUdid,
+            String appPackage,
+            String appActivity
+    ) {
+        activeDeviceUdid = deviceUdid;
+        activeAppiumServerUrl = serverUrl;
+        activeDeviceName = deviceName;
+        activeAppPackage = appPackage;
+        activeAppActivity = appActivity;
     }
 
     private static String getConfigValue(String key, String defaultValue) {
@@ -442,6 +530,11 @@ public class DriverManager {
     private static void safelyDiscardDriver() {
         AndroidDriver staleDriver = driver;
         driver = null;
+        activeAppPackage = null;
+        activeAppActivity = null;
+        activeDeviceName = null;
+        activeDeviceUdid = null;
+        activeAppiumServerUrl = null;
 
         if (staleDriver == null) {
             return;
@@ -456,10 +549,6 @@ public class DriverManager {
     }
 
     public static synchronized void quitDriver() {
-        if (driver == null) {
-            return;
-        }
-
         safelyDiscardDriver();
         System.out.println("Android driver stopped");
     }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite
+    name="VRSA Portfolio Analysis FA - Combined Regression Suite"
+    verbose="1"
+    parallel="false"
+    preserve-order="true"
+    configfailurepolicy="continue">
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <test
+        name="Portfolio Analysis FA - Summary Entry + Optimize + Good + New Fund + Steady"
+        preserve-order="true">
+
+        <classes>
+            <class name="com.valueresearch.tests.PortfolioAnalysisFaTest">
+                <methods>
+                    <include name="PAFA_000_VerifyFundReviewEntryPointsAcrossSummaryAndFundsSifs"/>
+                    <include name="PAFA_001_VerifyOptimizeCalculationTriggersAndDrawersAcrossFunds"/>
+                    <include name="PAFA_002_VerifyGoodStartAdviceAcrossGoodFunds"/>
+                    <include name="PAFA_003_VerifyNewFundAdviceAgainstPrdAcrossFunds"/>
+                    <include name="PAFA_004_VerifySteadyAdviceAgainstPrdAcrossMappedFunds"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+</suite>

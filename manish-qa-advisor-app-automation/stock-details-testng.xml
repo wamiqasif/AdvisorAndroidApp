@@ -2,21 +2,17 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="Stock Details Full Suite"
-       verbose="1"
-       preserve-order="true"
-       parallel="false"
-       configfailurepolicy="continue">
-
+       verbose="1" preserve-order="true" parallel="false" configfailurepolicy="continue">
+    <!-- Explicitly select password login for this suite. -->
+    <parameter name="loginMethod" value="PASSWORD"/>
     <listeners>
         <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
     </listeners>
-
-    <test name="Stock Details Module - SD_001 to SD_016"
-          preserve-order="true">
-
+    <test name="Stock Details Module - SD_001 to SD_016" preserve-order="true">
         <classes>
             <class name="com.valueresearch.tests.StockDetailsTest">
                 <methods>
+
                     <include name="SD_001_OpenStockDetailsFromSearch"/>
                     <include name="SD_002_VerifyStockHeader"/>
                     <include name="SD_003_VerifyStockRatingAndRange"/>
@@ -36,7 +32,5 @@
                 </methods>
             </class>
         </classes>
-
     </test>
-
 </suite>

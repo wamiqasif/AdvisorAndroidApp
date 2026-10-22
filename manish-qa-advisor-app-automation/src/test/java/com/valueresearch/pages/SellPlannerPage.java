@@ -1,6 +1,7 @@
 package com.valueresearch.pages;
 
 import com.valueresearch.utils.AuthHelper;
+import com.valueresearch.utils.ConfigReader;
 import com.valueresearch.utils.ReportLogger;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -40,13 +41,14 @@ import java.util.regex.Pattern;
  */
 public class SellPlannerPage {
 
-    public static final String BUILD_VERSION = "VRSA-SP-2026-09-13-1.8";
+    public static final String BUILD_VERSION = "VRSA-SP-2026-10-13-2.1";
 
-    private static final String APP_PACKAGE = "com.valueresearch.advisor";
+    private static final String DEFAULT_APP_PACKAGE = "com.valueresearch.advisor";
 
     private static final int SHORT_WAIT_SECONDS = 12;
     private static final int PAGE_WAIT_SECONDS = 25;
     private static final int POLL_MS = 250;
+    private static final int MAX_PLANNER_SCROLLS = 8;
     private static final long SCREEN_SETTLE_MS = 900L;
     private static final long ROW_SETTLE_MS = 450L;
 
@@ -56,6 +58,7 @@ public class SellPlannerPage {
     private static final double SUMMARY_AMOUNT_TOLERANCE = 2.0;
 
     private final AndroidDriver driver;
+    private final String appPackage;
 
     // =========================================================
     // CONFIRMED APPIUM INSPECTOR LOCATORS
@@ -139,6 +142,22 @@ public class SellPlannerPage {
 
     public SellPlannerPage(AndroidDriver driver) {
         this.driver = driver;
+        this.appPackage = resolveAdvisorAppPackage();
+    }
+
+    private String resolveAdvisorAppPackage() {
+        // Use the same target as the running session, including QA/dev variants.
+        Object capability = driver.getCapabilities().getCapability("appium:appPackage");
+        if (!(capability instanceof String) || ((String) capability).trim().isEmpty()) {
+            capability = driver.getCapabilities().getCapability("appPackage");
+        }
+        if (capability instanceof String && !((String) capability).trim().isEmpty()) {
+            return ((String) capability).trim();
+        }
+
+        // Some Appium versions omit appPackage from returned session capabilities.
+        // Reuse DriverManager's configuration and default in that case.
+        return ConfigReader.getOptional("appPackage", DEFAULT_APP_PACKAGE).trim();
     }
 
     // =========================================================
@@ -146,7 +165,7 @@ public class SellPlannerPage {
     // =========================================================
 
     public void openSellPlannerFromHub() {
-        ReportLogger.step("Opening VRSA Sell Planner");
+        ReportLogger.step("Opening VRSA Sell Planner | appPackage=" + appPackage);
         activateAdvisorAppIfNeeded();
 
         if (recoverToCleanSellPlannerLocally()) {
@@ -221,7 +240,6 @@ public class SellPlannerPage {
 
         // Populated holdings state.
         requireDisplayed(STOCKS_HEADER, "Stocks header");
-        requireDisplayed(PORTFOLIO_PREVIEW_LINK, "Portfolio preview link");
         requireDisplayed(INITIAL_CTA, "Select holdings to sell CTA");
 
         if (selected < 0) {
@@ -233,9 +251,10 @@ public class SellPlannerPage {
             ReportLogger.pass("Sell Planner selected holdings count is 0");
         }
 
-        for (String holding : expectedHoldings()) {
-            requireDisplayed(AppiumBy.accessibilityId(holding), "holding: " + holding);
-        }
+        // SP_001 checks the landing UI for the current investor's actual portfolio.
+        // The configured sell-scenario holdings are checked by SP_004-SP_012.
+        requirePlannerElementWithScroll(PORTFOLIO_PREVIEW_LINK, "Portfolio preview link");
+        restoreSellPlannerOverviewIfNeeded();
 
         ReportLogger.pass("Sell Planner populated holdings landing page validated successfully");
     }
@@ -256,29 +275,43 @@ public class SellPlannerPage {
         }
 
         List<String> missing = new ArrayList<>();
-        if (requiredStocks == null || requiredStocks.length == 0) {
-            return missing;
-        }
-
-        if (isEmptyHoldingsState()) {
+        if (requiredStocks != null) {
             for (String stock : requiredStocks) {
-                if (stock != null && !stock.trim().isEmpty()) {
+                if (stock != null && !stock.trim().isEmpty() && !missing.contains(stock.trim())) {
                     missing.add(stock.trim());
                 }
             }
+        }
+        if (missing.isEmpty() || isEmptyHoldingsState()) {
             return missing;
         }
 
-        for (String stock : requiredStocks) {
-            if (stock == null || stock.trim().isEmpty()) {
-                continue;
+        // A native Flutter node may not exist until its row enters the viewport.
+        // Search both directions before reporting a genuine data precondition failure.
+        try {
+            removeVisibleRequiredHoldings(missing);
+            for (boolean towardEnd : new boolean[]{true, false}) {
+                for (int attempt = 1; !missing.isEmpty() && attempt <= MAX_PLANNER_SCROLLS; attempt++) {
+                    boolean more = scrollSellPlannerBody(towardEnd);
+                    removeVisibleRequiredHoldings(missing);
+                    if (!more) {
+                        break;
+                    }
+                }
+                if (missing.isEmpty()) {
+                    break;
+                }
             }
-            String value = stock.trim();
-            if (firstDisplayed(AppiumBy.accessibilityId(value)) == null) {
-                missing.add(value);
-            }
+        } finally {
+            restoreSellPlannerOverviewIfNeeded();
         }
+        ReportLogger.info("Sell Planner configured-holdings check completed after bounded viewport search"
+                + " | missing=" + missing);
         return missing;
+    }
+
+    private void removeVisibleRequiredHoldings(List<String> missing) {
+        missing.removeIf(stock -> visibleInPlannerViewport(AppiumBy.accessibilityId(stock)) != null);
     }
 
     // =========================================================
@@ -570,6 +603,7 @@ public class SellPlannerPage {
         LinkedHashMap<String, Double> rowAmounts = new LinkedHashMap<>();
         LinkedHashMap<String, Integer> totalSharesByStock = new LinkedHashMap<>();
 
+        restoreSellPlannerOverviewIfNeeded();
         int expectedSelectedCount = readSelectedHoldingsCount();
         if (expectedSelectedCount != 0) {
             throw new AssertionError(
@@ -706,118 +740,62 @@ public class SellPlannerPage {
     }
 
     private void selectHolding(String stockName, int expectedBeforeCount) {
-        // Inspector evidence proves an important Flutter behavior:
-        // - unchecked row checkbox: no standalone ImageView is exposed
-        // - checked row checkbox: a clickable android.widget.ImageView appears
-        // Therefore selection must not depend on locating an unchecked checkbox node.
-        // Anchor to the semantic stock row, derive the checkbox column from the
-        // viewport width, derive row Y from stock + subtitle semantics, and verify
-        // the selected-count transition after each bounded W3C tap.
         ensurePortfolioColumnsVisible();
-
         int expectedAfter = expectedBeforeCount + 1;
-        WebElement stock = waitForStock(stockName);
-        Rectangle stockRect = stock.getRect();
-        int stockCenterY = centerY(stockRect);
+        int lastTapX = -1;
+        int lastTapY = -1;
+        int[] offsets = new int[]{0, 8, -8, -4};
 
-        Dimension size = driver.manage().window().getSize();
-        int checkboxX = (int) Math.round(size.getWidth() * 0.0523);
-        checkboxX = Math.max(24, Math.min(size.getWidth() - 24, checkboxX));
-
-        WebElement metadata = findHoldingMetadataElement(stock);
-        int metadataCenterY = metadata == null ? stockCenterY : centerY(metadata.getRect());
-        int rowCenterY = metadata == null
-                ? stockCenterY + Math.max(14, stockRect.getHeight())
-                : (stockCenterY + metadataCenterY) / 2;
-
-        int[] candidateYs = new int[]{
-                rowCenterY,
-                rowCenterY + 8,
-                rowCenterY - 8,
-                metadataCenterY - 4
-        };
-
-        ReportLogger.debug(
-                "Resolved unchecked checkbox tap anchors from Inspector-backed row geometry"
-                        + " | stock=" + stockName
-                        + " | checkboxX=" + checkboxX
-                        + " | stockCenterY=" + stockCenterY
-                        + " | metadataCenterY=" + metadataCenterY
-                        + " | rowCenterY=" + rowCenterY
-        );
-
-        int lastAttemptY = rowCenterY;
-        for (int i = 0; i < candidateYs.length; i++) {
-            int tapY = Math.max(1, Math.min(size.getHeight() - 2, candidateYs[i]));
-            lastAttemptY = tapY;
-
+        for (int attempt = 0; attempt < offsets.length; attempt++) {
             int before = readSelectedHoldingsCountSafe();
             if (before == expectedAfter) {
-                ReportLogger.pass(
-                        "Holding already selected after prior verified tap"
-                                + " | stock=" + stockName
-                                + " | selectedCount=" + expectedAfter
-                );
+                ReportLogger.pass("Holding already selected after prior verified tap"
+                        + " | stock=" + stockName + " | selectedCount=" + expectedAfter);
                 return;
             }
             if (before != expectedBeforeCount) {
-                throw new AssertionError(
-                        "Unexpected selected-count state before checkbox tap"
-                                + " | stock=" + stockName
-                                + " | expectedBefore=" + expectedBeforeCount
-                                + " | actual=" + before
-                );
+                throw new AssertionError("Unexpected selected-count state before checkbox tap"
+                        + " | stock=" + stockName + " | expectedBefore=" + expectedBeforeCount
+                        + " | actual=" + before);
             }
 
-            tapViewportPoint(
-                    checkboxX,
-                    tapY,
-                    "unchecked checkbox column for " + stockName + " | attempt=" + (i + 1)
-            );
+            // Summary reads may scroll to the overview. Always resolve this row again afterwards.
+            WebElement stock = waitForStock(stockName);
+            Rectangle stockRect = stock.getRect();
+            int stockY = centerY(stockRect);
+            WebElement metadata = findHoldingMetadataElement(stock);
+            int metadataY = metadata == null ? stockY : centerY(metadata.getRect());
+            int rowY = metadata == null ? stockY + Math.max(14, stockRect.getHeight())
+                    : (stockY + metadataY) / 2;
+            Dimension size = driver.manage().window().getSize();
+            int checkboxX = Math.max(24, Math.min(size.getWidth() - 24,
+                    (int) Math.round(size.getWidth() * 0.0523)));
+            int tapY = attempt == 3 ? metadataY - 4 : rowY + offsets[attempt];
+            tapY = Math.max(1, Math.min(size.getHeight() - 2, tapY));
+            lastTapX = checkboxX;
+            lastTapY = tapY;
 
+            tapViewportPoint(checkboxX, tapY,
+                    "unchecked checkbox column for " + stockName + " | attempt=" + (attempt + 1));
             if (waitForSelectedCount(expectedAfter, 2200L)) {
                 sleep(ROW_SETTLE_MS);
-
-                // After selection, Flutter exposes the green checked control as an
-                // ImageView. This is a post-condition only; it is not required to
-                // perform the unchecked-state tap.
                 WebElement checkedImage = waitForHoldingCheckbox(stockName, 1200L);
-                ReportLogger.pass(
-                        "Holding selected successfully"
-                                + " | stock=" + stockName
-                                + " | selectedCount=" + expectedAfter
-                                + " | method=row-anchored checkbox column"
-                                + " | tapX=" + checkboxX
-                                + " | tapY=" + tapY
-                                + " | checkedImageVisible=" + (checkedImage != null)
-                );
+                ReportLogger.pass("Holding selected successfully | stock=" + stockName
+                        + " | selectedCount=" + expectedAfter
+                        + " | checkedImageVisible=" + (checkedImage != null));
                 return;
             }
-
             int after = readSelectedHoldingsCountSafe();
             if (after != expectedBeforeCount) {
-                throw new AssertionError(
-                        "Checkbox tap changed Sell Planner to an unexpected selection state"
-                                + " | stock=" + stockName
-                                + " | expectedAfter=" + expectedAfter
-                                + " | actual=" + after
-                                + " | tapX=" + checkboxX
-                                + " | tapY=" + tapY
-                );
+                throw new AssertionError("Checkbox tap changed Sell Planner to an unexpected selection state"
+                        + " | stock=" + stockName + " | expectedAfter=" + expectedAfter
+                        + " | actual=" + after);
             }
         }
-
-        throw new AssertionError(
-                "Holding selection did not update selected count after bounded row-anchored checkbox taps"
-                        + " | stock=" + stockName
-                        + " | expectedSelected=" + expectedAfter
-                        + " | actualSelected=" + readSelectedHoldingsCountSafe()
-                        + " | mailVisible=" + (firstDisplayed(MAIL_MY_ORDER) != null)
-                        + " | checkboxX=" + checkboxX
-                        + " | rowCenterY=" + rowCenterY
-                        + " | lastTapY=" + lastAttemptY
-                        + " | checkedImageVisible=" + (findHoldingCheckbox(stockName) != null)
-        );
+        throw new AssertionError("Holding selection did not update selected count after bounded row-anchored taps"
+                + " | stock=" + stockName + " | expectedSelected=" + expectedAfter
+                + " | actualSelected=" + readSelectedHoldingsCountSafe()
+                + " | lastTapX=" + lastTapX + " | lastTapY=" + lastTapY);
     }
 
     private WebElement findHoldingMetadataElement(WebElement stockElement) {
@@ -1307,7 +1285,7 @@ public class SellPlannerPage {
     private void openPortfolioPreview() {
         ReportLogger.step("Opening Sell Planner Portfolio preview");
 
-        WebElement link = waitForDisplayed(PORTFOLIO_PREVIEW_LINK, SHORT_WAIT_SECONDS);
+        WebElement link = findPlannerElementWithBoundedScroll(PORTFOLIO_PREVIEW_LINK, "Portfolio preview link");
         if (link == null) {
             throw new AssertionError("Clickable Portfolio preview link is not visible");
         }
@@ -1712,10 +1690,136 @@ public class SellPlannerPage {
         return best;
     }
 
+    private WebElement visibleInPlannerViewport(By locator) {
+        Dimension size = driver.manage().window().getSize();
+        int bottom = (int) Math.round(size.getHeight() * 0.92);
+        WebElement footer = firstDisplayed(MAIL_MY_ORDER);
+        if (footer == null) {
+            footer = firstDisplayed(INITIAL_CTA);
+        }
+        if (footer != null) {
+            bottom = Math.min(bottom, footer.getRect().getY() - 4);
+        }
+        for (WebElement element : safeFindElements(locator)) {
+            try {
+                Rectangle rect = element.getRect();
+                if (element.isDisplayed() && rect.getWidth() > 0 && rect.getHeight() > 0
+                        && rect.getY() >= (int) Math.round(size.getHeight() * 0.10)
+                        && rect.getY() + rect.getHeight() <= bottom
+                        && centerX(rect) > 0 && centerX(rect) < size.getWidth()) {
+                    return element;
+                }
+            } catch (org.openqa.selenium.StaleElementReferenceException ignored) {
+                // Re-locate after the next viewport movement.
+            }
+        }
+        return null;
+    }
+
+    private WebElement findPlannerElementWithBoundedScroll(By locator, String label) {
+        WebElement element = visibleInPlannerViewport(locator);
+        if (element != null) {
+            return element;
+        }
+        for (boolean towardEnd : new boolean[]{true, false}) {
+            for (int attempt = 1; attempt <= MAX_PLANNER_SCROLLS; attempt++) {
+                boolean more = scrollSellPlannerBody(towardEnd);
+                element = visibleInPlannerViewport(locator);
+                if (element != null) {
+                    ReportLogger.step("Located Sell Planner element after vertical scroll"
+                            + " | element=" + label + " | attempt=" + attempt);
+                    return element;
+                }
+                if (!more) {
+                    break;
+                }
+            }
+        }
+        return null;
+    }
+
+    private WebElement requirePlannerElementWithScroll(By locator, String label) {
+        WebElement element = findPlannerElementWithBoundedScroll(locator, label);
+        if (element == null) {
+            throw new AssertionError(label + " was not found after bounded vertical scrolling"
+                    + " | locator=" + locator);
+        }
+        ReportLogger.pass(label + " is visible");
+        return element;
+    }
+
+    private boolean scrollSellPlannerBody(boolean towardEnd) {
+        assertDriverAlive("while scrolling Sell Planner holdings");
+        if (!appPackage.equals(safeCurrentPackage())
+                || (firstDisplayed(SELL_PLANNER_TITLE) == null
+                    && firstDisplayed(INITIAL_CTA) == null && firstDisplayed(MAIL_MY_ORDER) == null)) {
+            throw new AssertionError("Sell Planner scrolling stopped because the expected page is no longer visible");
+        }
+
+        Dimension size = driver.manage().window().getSize();
+        int left = (int) Math.round(size.getWidth() * 0.18);
+        int right = (int) Math.round(size.getWidth() * 0.82);
+        int top = (int) Math.round(size.getHeight() * 0.22);
+        int bottom = (int) Math.round(size.getHeight() * 0.86);
+
+        WebElement scroll = firstDisplayed(HORIZONTAL_SCROLL_VIEW);
+        if (scroll == null) {
+            scroll = firstDisplayed(AppiumBy.className("android.widget.ScrollView"));
+        }
+        if (scroll != null) {
+            Rectangle rect = scroll.getRect();
+            top = Math.max(top, rect.getY() + 10);
+            bottom = Math.min(bottom, rect.getY() + rect.getHeight() - 10);
+        }
+        WebElement header = firstDisplayed(STOCKS_HEADER);
+        if (header != null) {
+            Rectangle rect = header.getRect();
+            top = Math.max(top, rect.getY() + rect.getHeight() + 8);
+        }
+        WebElement footer = firstDisplayed(MAIL_MY_ORDER);
+        if (footer == null) {
+            footer = firstDisplayed(INITIAL_CTA);
+        }
+        if (footer != null) {
+            bottom = Math.min(bottom, footer.getRect().getY() - 10);
+        }
+        if (bottom - top < 80) {
+            throw new AssertionError("Sell Planner has no usable body area for a safe vertical scroll");
+        }
+
+        Map<String, Object> args = new LinkedHashMap<>();
+        args.put("left", left);
+        args.put("top", top);
+        args.put("width", right - left);
+        args.put("height", bottom - top);
+        args.put("direction", towardEnd ? "down" : "up");
+        args.put("percent", 0.65);
+        Object more = driver.executeScript("mobile: scrollGesture", args);
+        sleep(POLL_MS);
+        return !(more instanceof Boolean) || ((Boolean) more);
+    }
+
+    private void restoreSellPlannerOverviewIfNeeded() {
+        for (int attempt = 0; attempt <= MAX_PLANNER_SCROLLS; attempt++) {
+            if (isSellPlannerStructureReady()) {
+                return;
+            }
+            if (attempt == MAX_PLANNER_SCROLLS) {
+                break;
+            }
+            boolean more = scrollSellPlannerBody(false);
+            if (!more && !isSellPlannerStructureReady()) {
+                break;
+            }
+        }
+        throw new AssertionError("Sell Planner overview could not be restored after bounded upward scrolling");
+    }
+
     private WebElement waitForStock(String stockName) {
-        WebElement stock = waitForDisplayed(AppiumBy.accessibilityId(stockName), SHORT_WAIT_SECONDS);
+        WebElement stock = findPlannerElementWithBoundedScroll(
+                AppiumBy.accessibilityId(stockName), "holding: " + stockName);
         if (stock == null) {
-            throw new AssertionError("Expected Sell Planner holding is not visible: " + stockName);
+            throw new AssertionError("Expected Sell Planner holding was not found after bounded scrolling: " + stockName);
         }
         return stock;
     }
@@ -1872,8 +1976,9 @@ public class SellPlannerPage {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Collections.singletonList(swipe));
 
-            if (firstDisplayed(SELL_PLANNER_TITLE) == null) {
-                throw new AssertionError("Sell Planner title disappeared during table horizontal drag");
+            if (firstDisplayed(SELL_PLANNER_TITLE) == null
+                    && firstDisplayed(INITIAL_CTA) == null && firstDisplayed(MAIL_MY_ORDER) == null) {
+                throw new AssertionError("Sell Planner disappeared during table horizontal drag");
             }
 
             ReportLogger.step(
@@ -2143,6 +2248,10 @@ public class SellPlannerPage {
     private int readSelectedHoldingsCount() {
         WebElement marker = firstDisplayed(SELECTED_COUNT_MARKER);
         if (marker == null) {
+            restoreSellPlannerOverviewIfNeeded();
+            marker = firstDisplayed(SELECTED_COUNT_MARKER);
+        }
+        if (marker == null) {
             throw new AssertionError("Selected holdings summary marker is not visible");
         }
 
@@ -2225,6 +2334,10 @@ public class SellPlannerPage {
 
     private double readTopSelectedWorth() {
         WebElement label = firstDisplayed(TOTAL_WORTH_LABEL);
+        if (label == null) {
+            restoreSellPlannerOverviewIfNeeded();
+            label = firstDisplayed(TOTAL_WORTH_LABEL);
+        }
         if (label == null) {
             throw new AssertionError("TOTAL WORTH OF STOCK SELECTED label is not visible");
         }
@@ -2556,15 +2669,21 @@ public class SellPlannerPage {
 
     private void activateAdvisorAppIfNeeded() {
         String current = safeCurrentPackage();
-        if (APP_PACKAGE.equals(current)) {
+        if (appPackage.equals(current)) {
             return;
         }
 
         try {
-            driver.activateApp(APP_PACKAGE);
-            sleep(900L);
+            ReportLogger.step("Activating Advisor app | appPackage=" + appPackage);
+            driver.activateApp(appPackage);
+            sleep(900);
         } catch (Exception e) {
-            throw new AssertionError("Unable to activate Advisor app | currentPackage=" + current, e);
+            String message = "Unable to activate Advisor app"
+                    + " | targetPackage=" + appPackage
+                    + " | currentPackage=" + current
+                    + " | error=" + cleanError(e.getMessage());
+            ReportLogger.fail(message);
+            throw new AssertionError(message, e);
         }
     }
 

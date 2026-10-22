@@ -1,6 +1,8 @@
 package com.valueresearch.pages;
 
 import com.valueresearch.utils.AuthHelper;
+import com.valueresearch.utils.ConfigReader;
+import com.valueresearch.utils.ExecutionProfile;
 import com.valueresearch.utils.ReportLogger;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -11,6 +13,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
@@ -37,9 +41,9 @@ import java.util.Map;
  */
 public class InvestmentPlannerPage {
 
-    public static final String BUILD_VERSION = "VRSA-IP-2026-08-21-15.4";
+    public static final String BUILD_VERSION = "VRSA-IP-2026-10-13-15.6";
 
-    private static final String APP_PACKAGE = "com.valueresearch.advisor";
+    private static final String DEFAULT_APP_PACKAGE = "com.valueresearch.advisor";
 
     private static final int SHORT_WAIT_SECONDS = 12;
     private static final int PAGE_WAIT_SECONDS = 25;
@@ -48,12 +52,14 @@ public class InvestmentPlannerPage {
     // longer than ordinary UI transitions. Keep these waits module-local so the
     // framework/global waits remain unchanged.
     private static final int OWN_LIST_ASYNC_WAIT_SECONDS = 20;
+    private static final int DEFAULT_OWN_LIST_SELECTION_WAIT_SECONDS = 90;
     private static final int MAIL_CONFIRM_WAIT_SECONDS = 60;
     private static final int ORDER_WAIT_SECONDS = 60;
     private static final int POLL_MS = 300;
     private static final long SCREEN_SETTLE_MS = 1100L;
 
     private final AndroidDriver driver;
+    private final String appPackage;
 
     // =========================================================
     // CONFIRMED STABLE LOCATORS FROM APPIUM INSPECTOR
@@ -164,6 +170,22 @@ public class InvestmentPlannerPage {
 
     public InvestmentPlannerPage(AndroidDriver driver) {
         this.driver = driver;
+        this.appPackage = resolveAdvisorAppPackage();
+    }
+
+    private String resolveAdvisorAppPackage() {
+        // Use the same target as the running session, including QA/dev variants.
+        Object capability = driver.getCapabilities().getCapability("appium:appPackage");
+        if (!(capability instanceof String) || ((String) capability).trim().isEmpty()) {
+            capability = driver.getCapabilities().getCapability("appPackage");
+        }
+        if (capability instanceof String && !((String) capability).trim().isEmpty()) {
+            return ((String) capability).trim();
+        }
+
+        // Some Appium versions omit appPackage from returned session capabilities.
+        // Reuse DriverManager's configuration and default in that case.
+        return ConfigReader.getOptional("appPackage", DEFAULT_APP_PACKAGE).trim();
     }
 
     // =========================================================
@@ -171,7 +193,7 @@ public class InvestmentPlannerPage {
     // =========================================================
 
     public void openInvestmentPlannerFromHub() {
-        ReportLogger.step("Opening VRSA Investment Planner");
+        ReportLogger.step("Opening VRSA Investment Planner | appPackage=" + appPackage);
 
         activateAdvisorAppIfNeeded();
 
@@ -1703,42 +1725,48 @@ public class InvestmentPlannerPage {
                 || firstDisplayed(WATCHLIST) != null;
     }
 
-    private boolean waitForOwnListSheetToClose(long timeoutMs) {
-        long deadline = System.currentTimeMillis() + Math.max(1000L, timeoutMs);
-        int consecutiveConfirmedPolls = 0;
-
-        while (System.currentTimeMillis() < deadline) {
-            assertDriverAlive("while waiting for Choose a list sheet to close");
-
-            boolean sheetMarkersGone =
-                    firstDisplayed(CHOOSE_A_LIST) == null
-                            && firstDisplayed(RECOMMENDATIONS) == null
-                            && firstDisplayed(WATCHLIST) == null;
-
-            boolean plannerReturned =
-                    firstDisplayed(INVESTMENT_PLANNER_TITLE) != null
-                            && firstDisplayed(GENERATE_MY_ORDER) != null;
-
-            if (sheetMarkersGone && plannerReturned) {
-                consecutiveConfirmedPolls++;
-
-                // Require two consecutive confirmed observations so a transient
-                // Flutter semantics rebuild cannot be mistaken for completion.
-                if (consecutiveConfirmedPolls >= 2) {
-                    sleep(350);
-                    ReportLogger.pass(
-                            "Choose a list sheet closed and own-list selection was applied successfully"
-                    );
-                    return true;
-                }
-            } else {
-                consecutiveConfirmedPolls = 0;
-            }
-
-            sleep(200);
+    private Duration ownListSelectionTimeout() {
+        // Module-local cap: slow watchlists may take longer than opening the list sheet.
+        long seconds = Long.parseLong(ConfigReader.getOptional(
+                "ipOwnListSelectionWaitSeconds",
+                String.valueOf(DEFAULT_OWN_LIST_SELECTION_WAIT_SECONDS)
+        ));
+        if (seconds <= 0L) {
+            throw new IllegalArgumentException("ipOwnListSelectionWaitSeconds must be positive");
         }
+        return Duration.ofSeconds(seconds);
+    }
 
-        return false;
+    private boolean waitForOwnListSheetToClose(long timeoutMs) {
+        WebDriverWait wait = new WebDriverWait(
+                driver,
+                Duration.ofMillis(Math.max(1000L, timeoutMs)),
+                ExecutionProfile.pollingInterval()
+        );
+        wait.ignoring(StaleElementReferenceException.class);
+
+        try {
+            wait.until(d -> {
+                assertDriverAlive("while waiting for own-list selection to load");
+
+                // The old sheet must actually disappear, including its loading state.
+                if (isOwnListSheetOpen()) {
+                    return false;
+                }
+                if (!isPlannerLandingReady()) {
+                    return false;
+                }
+
+                WebElement generate = firstDisplayed(GENERATE_MY_ORDER);
+                return generate != null && generate.isEnabled();
+            });
+
+            // Continue immediately once ready; no fixed post-load sleep or repeat tap.
+            ReportLogger.pass("Choose a list sheet closed and own-list selection was applied successfully");
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
     private void selectOwnListItemWithVerifiedClose(
@@ -1754,6 +1782,7 @@ public class InvestmentPlannerPage {
             );
         }
 
+        Duration selectionTimeout = ownListSelectionTimeout();
         String clickable = "";
         try {
             clickable = candidate.getAttribute("clickable");
@@ -1780,7 +1809,12 @@ public class InvestmentPlannerPage {
                 itemType + " option: " + itemName
         );
 
-        if (waitForOwnListSheetToClose(Duration.ofSeconds(OWN_LIST_ASYNC_WAIT_SECONDS).toMillis())) {
+        ReportLogger.step("Waiting for " + itemType + " selection to load"
+                + " | item=" + itemName
+                + " | maximumWaitSeconds=" + selectionTimeout.getSeconds()
+                + " | pollingMillis=" + ExecutionProfile.pollingInterval().toMillis());
+
+        if (waitForOwnListSheetToClose(selectionTimeout.toMillis())) {
             ReportLogger.pass(
                     itemType + " selected successfully: " + itemName
             );
@@ -1789,7 +1823,7 @@ public class InvestmentPlannerPage {
 
         throw new AssertionError(
                 "Own-list selection did not return to a confirmed planner state within "
-                        + OWN_LIST_ASYNC_WAIT_SECONDS
+                        + selectionTimeout.getSeconds()
                         + " seconds"
                         + " | type=" + itemType
                         + " | item=" + itemName
@@ -2496,7 +2530,7 @@ public class InvestmentPlannerPage {
         }
 
         try {
-            driver.activateApp(APP_PACKAGE);
+            driver.activateApp(appPackage);
             sleep(900);
         } catch (Exception ignored) {
         }
@@ -3441,19 +3475,21 @@ public class InvestmentPlannerPage {
 
     private void activateAdvisorAppIfNeeded() {
         String current = safeCurrentPackage();
-        if (APP_PACKAGE.equals(current)) {
+        if (appPackage.equals(current)) {
             return;
         }
 
         try {
-            driver.activateApp(APP_PACKAGE);
+            ReportLogger.step("Activating Advisor app | appPackage=" + appPackage);
+            driver.activateApp(appPackage);
             sleep(900);
         } catch (Exception e) {
-            throw new AssertionError(
-                    "Unable to activate Advisor app"
-                            + " | currentPackage=" + current,
-                    e
-            );
+            String message = "Unable to activate Advisor app"
+                    + " | targetPackage=" + appPackage
+                    + " | currentPackage=" + current
+                    + " | error=" + cleanError(e.getMessage());
+            ReportLogger.fail(message);
+            throw new AssertionError(message, e);
         }
     }
 

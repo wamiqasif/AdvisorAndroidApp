@@ -1,320 +1,365 @@
 package com.valueresearch.utils;
 
 import org.jsoup.Jsoup;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.FluentWait;
 
+import javax.mail.Address;
 import javax.mail.BodyPart;
 import javax.mail.Folder;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
-import javax.mail.internet.MimeMessage;
+import javax.mail.UIDFolder;
 import javax.mail.internet.MimeMultipart;
+import java.time.Duration;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OtpEmailReader {
+/** Existing IMAP provider/body parsing, with polling and an additive fresh-login API. */
+public final class OtpEmailReader {
 
     private static final long DEFAULT_TIMEOUT_MILLIS = 90_000L;
-    private static final long POLL_INTERVAL_MILLIS = 5_000L;
     private static final long MAX_EMAIL_AGE_MILLIS = 180_000L;
+    private static final Pattern OTP_PATTERN = Pattern.compile("\\b\\d{6}\\b");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(
+            "[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}");
 
     private OtpEmailReader() {
-        // Utility class
+    }
+
+    public static final class LoginRequestMarker {
+        private final long uidValidity;
+        private final long lastUid;
+
+        private LoginRequestMarker(long uidValidity, long lastUid) {
+            this.uidValidity = uidValidity;
+            this.lastUid = lastUid;
+        }
+    }
+
+    /** Validate config without connecting to IMAP; matching-session reuse never calls this. */
+    public static void validateBatch1Configuration() {
+        String email = batch1ConfigEmail();
+        if (!EMAIL_PATTERN.matcher(email).matches()) {
+            throw new IllegalArgumentException("Invalid batch1OtpEmail / BATCH1_OTP_EMAIL");
+        }
+        resolveImapHost(email);
+        if (batch1ConfigPassword().isEmpty()) {
+            throw new IllegalArgumentException("Empty Batch 1 mailbox app password");
+        }
+        batch1ConfigSubject();
+        positiveLong("batch1OtpTimeoutSeconds", 90L);
+        positiveLong("batch1OtpPollingMillis", 2000L);
+    }
+
+    /** Batch 1 mailbox only. Capture before Next; earlier UIDs cannot satisfy the new login. */
+    public static LoginRequestMarker captureLoginRequestMarker() {
+        try (Mailbox mailbox = Mailbox.open(batch1ConfigEmail(), batch1ConfigPassword())) {
+            UIDFolder uidFolder = requireUidFolder(mailbox.inbox);
+            int count = mailbox.inbox.getMessageCount();
+            long lastUid = count == 0 ? 0L : uidFolder.getUID(mailbox.inbox.getMessage(count));
+            if (lastUid < 0L) {
+                throw new IllegalStateException("The mailbox did not expose a valid UID");
+            }
+            return new LoginRequestMarker(uidFolder.getUIDValidity(), lastUid);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Could not capture the login OTP mailbox checkpoint", e);
+        }
+    }
+
+    /** New persona-aware entry point. Legacy overloads below remain available to existing modules. */
+    public static String fetchLatestOtpAfter(LoginRequestMarker marker, String expectedRecipient) {
+        if (marker == null || expectedRecipient == null || !EMAIL_PATTERN.matcher(expectedRecipient).matches()) {
+            throw new IllegalArgumentException("A mailbox checkpoint and valid login email are required");
+        }
+        long timeoutMillis = positiveLong("batch1OtpTimeoutSeconds", 90L) * 1000L;
+        return fetch(batch1ConfigEmail(), batch1ConfigPassword(), batch1ConfigSubject(),
+                timeoutMillis, marker, expectedRecipient);
     }
 
     public static String fetchLatestOtp() {
-        String email = getRequiredConfigOrEnv("otpEmail", "OTP_EMAIL");
-        String password = getRequiredConfigOrEnv("otpEmailAppPassword", "OTP_EMAIL_APP_PASSWORD");
-
-        /*
-         * Gmail app passwords are often copied with spaces.
-         * Remove spaces safely before IMAP login.
-         */
-        password = password.replace(" ", "").trim();
-
-        String subjectKeyword = getOptionalConfigOrEnv(
-                "otpEmailSubjectKeyword",
-                "OTP_EMAIL_SUBJECT_KEYWORD",
-                "OTP"
-        );
-
-        return fetchLatestOtp(email, password, subjectKeyword, DEFAULT_TIMEOUT_MILLIS);
+        return fetchLatestOtp(configEmail(), configPassword(), configSubject(), DEFAULT_TIMEOUT_MILLIS);
     }
 
-    public static String fetchLatestOtp(
-            String email,
-            String password,
-            String subjectKeyword,
-            long timeoutMillis
-    ) {
-        Store store = null;
-        Folder inbox = null;
+    public static String fetchLatestOtp(String email, String password, String subjectKeyword, long timeoutMillis) {
+        return fetch(email, password, subjectKeyword, timeoutMillis, null, null);
+    }
 
-        try {
-            String host = resolveImapHost(email);
-
-            ReportLogger.step("Connecting to OTP email inbox using IMAP");
-
-            Properties props = new Properties();
-            props.put("mail.store.protocol", "imaps");
-            props.put("mail.imaps.host", host);
-            props.put("mail.imaps.port", "993");
-            props.put("mail.imaps.ssl.enable", "true");
-            props.put("mail.imaps.ssl.trust", host);
-            props.put("mail.imaps.connectiontimeout", "15000");
-            props.put("mail.imaps.timeout", "15000");
-            props.put("mail.imaps.writetimeout", "15000");
-
-            Session session = Session.getInstance(props);
-            session.setDebug(false);
-
-            store = session.getStore("imaps");
-            store.connect(host, email, password);
-
-            inbox = store.getFolder("INBOX");
-            inbox.open(Folder.READ_ONLY);
-
-            ReportLogger.pass("Connected to OTP email inbox successfully");
-
-            long startTime = System.currentTimeMillis();
-
-            while (System.currentTimeMillis() - startTime < timeoutMillis) {
-                String otp = searchLatestOtpInInbox(inbox, subjectKeyword);
-
-                if (otp != null) {
-                    ReportLogger.pass("OTP fetched successfully from email");
-                    return otp;
+    private static String fetch(String email, String password, String keyword, long timeoutMillis,
+            LoginRequestMarker marker, String recipient) {
+        if (timeoutMillis <= 0L) {
+            throw new IllegalArgumentException("OTP timeout must be positive");
+        }
+        try (Mailbox mailbox = Mailbox.open(email, password)) {
+            if (marker != null && requireUidFolder(mailbox.inbox).getUIDValidity() != marker.uidValidity) {
+                throw new IllegalStateException("Mailbox UID validity changed; request a new login OTP");
+            }
+            ReportLogger.step("Polling the OTP mailbox for " + (marker == null ? "a recent" : "a new") + " login email");
+            FluentWait<Folder> wait = new FluentWait<>(mailbox.inbox)
+                    .withTimeout(Duration.ofMillis(timeoutMillis))
+                    .pollingEvery(Duration.ofMillis(marker == null ? 5000L
+                            : positiveLong("batch1OtpPollingMillis", 2000L)))
+                    .withMessage("No matching OTP email arrived within the configured timeout");
+            String otp = wait.until(folder -> {
+                try {
+                    return findOtp(folder, keyword, marker, recipient, email);
+                } catch (MessagingException e) {
+                    throw new RuntimeException("OTP mailbox read failed", e);
                 }
-
-                ReportLogger.step("OTP email not found yet. Waiting before retry.");
-                sleep(POLL_INTERVAL_MILLIS);
-            }
-
-            ReportLogger.fail("OTP email not received within timeout");
-            throw new RuntimeException("OTP email not received within timeout.");
-
-        } catch (RuntimeException e) {
-            ReportLogger.fail("OTP email fetch failed: " + e.getMessage());
-            throw e;
-        } catch (Exception e) {
-            ReportLogger.fail("OTP email fetch failed unexpectedly: " + e.getMessage());
-            throw new RuntimeException("OTP email fetch failed unexpectedly: " + e.getMessage(), e);
-        } finally {
-            closeInboxSafely(inbox);
-            closeStoreSafely(store);
+            });
+            ReportLogger.pass("OTP fetched successfully; OTP value is not logged");
+            return otp;
+        } catch (TimeoutException e) {
+            throw new RuntimeException("No matching OTP arrived. Check the mailbox, recipient and login subject", e);
+        } catch (MessagingException e) {
+            throw new RuntimeException("OTP mailbox connection failed", e);
         }
     }
 
-    private static String searchLatestOtpInInbox(Folder inbox, String subjectKeyword) throws Exception {
-        int messageCount = inbox.getMessageCount();
-
-        if (messageCount <= 0) {
-            return null;
+    private static String findOtp(Folder inbox, String keyword, LoginRequestMarker marker,
+            String recipient, String mailboxEmail) throws MessagingException {
+        Message[] messages;
+        if (marker != null) {
+            messages = requireUidFolder(inbox).getMessagesByUID(marker.lastUid + 1L, UIDFolder.LASTUID);
+        } else {
+            int count = inbox.getMessageCount();
+            if (count == 0) {
+                return null;
+            }
+            messages = inbox.getMessages(Math.max(1, count - 30), count);
         }
-
-        int startIndex = Math.max(1, messageCount - 30);
-        Message[] messages = inbox.getMessages(startIndex, messageCount);
-
-        Date now = new Date();
-
         for (int i = messages.length - 1; i >= 0; i--) {
-            MimeMessage message = (MimeMessage) messages[i];
-
-            Date receivedDate = message.getReceivedDate();
-
-            if (receivedDate == null) {
+            Message message = messages[i];
+            if (message == null || message.isExpunged()) {
                 continue;
             }
-
-            long ageMillis = now.getTime() - receivedDate.getTime();
-
-            if (ageMillis > MAX_EMAIL_AGE_MILLIS) {
+            // Some IMAP servers return an existing boundary message for an empty UID range.
+            if (marker != null && requireUidFolder(inbox).getUID(message) <= marker.lastUid) {
                 continue;
             }
-
+            Date received = message.getReceivedDate();
+            if (received == null || System.currentTimeMillis() - received.getTime() > MAX_EMAIL_AGE_MILLIS) {
+                continue;
+            }
             String subject = message.getSubject();
-
-            if (!isOtpSubject(subject, subjectKeyword)) {
+            if (!isOtpSubject(subject, keyword, marker != null)) {
                 continue;
             }
-
-            ReportLogger.step("Recent OTP email found. Subject: " + safeText(subject));
-
-            String body = getTextFromMessage(message);
-            String otp = extractSixDigitOtp(body);
-
-            if (otp != null) {
-                return otp;
+            if (recipient != null && !matchesRecipient(message, recipient, mailboxEmail)) {
+                continue;
             }
-
-            ReportLogger.step("OTP email found but 6-digit OTP was not present in body.");
+            String body;
+            try {
+                body = textFromMessage(message);
+            } catch (java.io.IOException e) {
+                throw new RuntimeException("Could not decode OTP email", e);
+            }
+            Matcher matcher = OTP_PATTERN.matcher(body);
+            if (matcher.find()) {
+                return matcher.group();
+            }
         }
-
         return null;
     }
 
-    private static boolean isOtpSubject(String subject, String subjectKeyword) {
-        if (subject == null || subject.trim().isEmpty()) {
+    private static boolean isOtpSubject(String subject, String keyword, boolean strict) {
+        if (subject == null) {
             return false;
         }
-
-        String lowerSubject = subject.toLowerCase();
-        String lowerKeyword = subjectKeyword == null ? "otp" : subjectKeyword.toLowerCase();
-
-        return lowerSubject.contains(lowerKeyword)
-                || lowerSubject.contains("otp")
-                || lowerSubject.contains("one time password")
-                || lowerSubject.contains("verification code");
+        String lower = subject.toLowerCase(Locale.ROOT);
+        String required = keyword == null || keyword.trim().isEmpty() ? "otp" : keyword.toLowerCase(Locale.ROOT);
+        if (strict) {
+            return lower.contains(required);
+        }
+        // Preserve the original broad subject matching for legacy callers.
+        return lower.contains(required) || lower.contains("otp")
+                || lower.contains("one time password") || lower.contains("verification code");
     }
 
-    private static String extractSixDigitOtp(String body) {
-        if (body == null || body.trim().isEmpty()) {
-            return null;
+    private static boolean matchesRecipient(Message message, String expected, String mailbox)
+            throws MessagingException {
+        StringBuilder headers = new StringBuilder();
+        Address[] recipients = message.getAllRecipients();
+        if (recipients != null) {
+            for (Address address : recipients) {
+                headers.append(address.toString()).append(' ');
+            }
         }
-
-        Matcher matcher = Pattern.compile("\\b\\d{6}\\b").matcher(body);
-
-        if (matcher.find()) {
-            return matcher.group();
+        for (String name : new String[]{"Delivered-To", "X-Original-To", "Envelope-To", "X-Forwarded-To"}) {
+            String[] values = message.getHeader(name);
+            if (values != null) {
+                for (String value : values) {
+                    headers.append(value).append(' ');
+                }
+            }
         }
-
-        return null;
+        return matchesRecipientHeaders(headers.toString(), expected, mailbox);
     }
 
-    private static String getTextFromMessage(Message message) throws Exception {
-        if (message.isMimeType("text/plain")) {
-            return String.valueOf(message.getContent());
+    private static boolean matchesRecipientHeaders(String headers, String expected, String mailbox) {
+        String target = expected.toLowerCase(Locale.ROOT);
+        String base = mailbox.toLowerCase(Locale.ROOT);
+        String localPart = base.substring(0, base.indexOf('@'));
+        String domain = base.substring(base.indexOf('@'));
+        boolean targetSeen = false;
+        boolean conflictingAlias = false;
+        boolean baseSeen = false;
+        Matcher matcher = EMAIL_PATTERN.matcher(headers);
+        while (matcher.find()) {
+            String address = matcher.group().toLowerCase(Locale.ROOT);
+            targetSeen |= address.equals(target);
+            baseSeen |= address.equals(base);
+            conflictingAlias |= address.startsWith(localPart + "+") && address.endsWith(domain)
+                    && !address.equals(target);
         }
+        // A forwarded email may explicitly target the base inbox. The UID checkpoint still enforces freshness.
+        // Reject conflicting persona aliases even if Delivered-To also names the base inbox.
+        return !conflictingAlias && (targetSeen || baseSeen);
+    }
 
-        if (message.isMimeType("text/html")) {
-            return Jsoup.parse(String.valueOf(message.getContent())).text();
+    private static String textFromMessage(javax.mail.Part part) throws MessagingException, java.io.IOException {
+        if (part.isMimeType("text/plain")) {
+            return String.valueOf(part.getContent());
         }
-
-        if (message.isMimeType("multipart/*")) {
-            return getTextFromMimeMultipart((MimeMultipart) message.getContent());
+        if (part.isMimeType("text/html")) {
+            return Jsoup.parse(String.valueOf(part.getContent())).text();
         }
-
+        if (part.isMimeType("multipart/*")) {
+            MimeMultipart multipart = (MimeMultipart) part.getContent();
+            StringBuilder text = new StringBuilder();
+            for (int i = 0; i < multipart.getCount(); i++) {
+                BodyPart child = multipart.getBodyPart(i);
+                if (!javax.mail.Part.ATTACHMENT.equalsIgnoreCase(child.getDisposition())) {
+                    text.append(textFromMessage(child)).append('\n');
+                }
+            }
+            return text.toString();
+        }
         return "";
     }
 
-    private static String getTextFromMimeMultipart(MimeMultipart mimeMultipart) throws Exception {
-        StringBuilder result = new StringBuilder();
-
-        int count = mimeMultipart.getCount();
-
-        for (int i = 0; i < count; i++) {
-            BodyPart bodyPart = mimeMultipart.getBodyPart(i);
-
-            if (bodyPart.isMimeType("text/plain")) {
-                result.append(bodyPart.getContent());
-            } else if (bodyPart.isMimeType("text/html")) {
-                result.append(Jsoup.parse(String.valueOf(bodyPart.getContent())).text());
-            } else if (bodyPart.getContent() instanceof MimeMultipart) {
-                result.append(getTextFromMimeMultipart((MimeMultipart) bodyPart.getContent()));
-            }
+    private static UIDFolder requireUidFolder(Folder inbox) {
+        if (!(inbox instanceof UIDFolder)) {
+            throw new IllegalStateException("Fresh OTP retrieval requires an IMAP mailbox with UID support");
         }
-
-        return result.toString();
+        return (UIDFolder) inbox;
     }
 
     private static String resolveImapHost(String email) {
-        if (email == null || email.trim().isEmpty()) {
-            throw new RuntimeException("OTP email is missing.");
-        }
-
-        String lowerEmail = email.toLowerCase();
-
-        if (lowerEmail.endsWith("@gmail.com")) {
+        String lower = email.toLowerCase(Locale.ROOT);
+        if (lower.endsWith("@gmail.com") || lower.endsWith("@valueresearchonline.com")
+                || lower.endsWith("@valueresearch.in")) {
             return "imap.gmail.com";
         }
-
-        if (lowerEmail.endsWith("@outlook.com")
-                || lowerEmail.endsWith("@hotmail.com")
-                || lowerEmail.endsWith("@live.com")) {
+        if (lower.endsWith("@outlook.com") || lower.endsWith("@hotmail.com") || lower.endsWith("@live.com")) {
             return "outlook.office365.com";
         }
-
-        if (lowerEmail.endsWith("@valueresearchonline.com")
-                || lowerEmail.endsWith("@valueresearch.in")) {
-            return "imap.gmail.com";
-        }
-
-        throw new RuntimeException("Unsupported OTP email provider: " + email);
+        throw new IllegalArgumentException("Unsupported OTP email provider");
     }
 
-    private static String getRequiredConfigOrEnv(String configKey, String envKey) {
-        String value = System.getenv(envKey);
+    private static String configEmail() {
+        return configOrEnv("otpEmail", "OTP_EMAIL", null);
+    }
 
+    private static String configPassword() {
+        return configOrEnv("otpEmailAppPassword", "OTP_EMAIL_APP_PASSWORD", null).replace(" ", "");
+    }
+
+    private static String configSubject() {
+        return configOrEnv("otpEmailSubjectKeyword", "OTP_EMAIL_SUBJECT_KEYWORD", "OTP");
+    }
+
+    // Deliberately do not fall back to the legacy OTP_EMAIL* settings.
+    // Existing regression callers keep using configEmail/configPassword/configSubject above.
+    private static String batch1ConfigEmail() {
+        return configOrEnv("batch1OtpEmail", "BATCH1_OTP_EMAIL", null);
+    }
+
+    private static String batch1ConfigPassword() {
+        return configOrEnv("batch1OtpEmailAppPassword", "BATCH1_OTP_EMAIL_APP_PASSWORD", null)
+                .replace(" ", "");
+    }
+
+    private static String batch1ConfigSubject() {
+        return configOrEnv("batch1OtpEmailSubjectKeyword", "BATCH1_OTP_EMAIL_SUBJECT_KEYWORD",
+                "One Time Password for Login");
+    }
+
+    private static String configOrEnv(String key, String environmentKey, String fallback) {
+        String value = System.getenv(environmentKey);
         if (value == null || value.trim().isEmpty()) {
-            value = ConfigReader.get(configKey);
+            value = ConfigReader.getOptional(key, fallback);
         }
-
         if (value == null || value.trim().isEmpty()) {
-            throw new RuntimeException(
-                    "Missing required OTP config. Set environment variable "
-                            + envKey
-                            + " or config key "
-                            + configKey
-            );
+            throw new IllegalArgumentException("Missing OTP setting: " + environmentKey + " / " + key
+                    + ". Set the environment variable in the Eclipse TestNG Run Configuration or the property "
+                    + "in src/test/resources/config.properties before starting an email/OTP login");
         }
-
         return value.trim();
     }
 
-    private static String getOptionalConfigOrEnv(String configKey, String envKey, String defaultValue) {
-        String value = System.getenv(envKey);
+    private static long positiveLong(String key, long fallback) {
+        long value = Long.parseLong(ConfigReader.getOptional(key, String.valueOf(fallback)));
+        if (value <= 0L) {
+            throw new IllegalArgumentException(key + " must be positive");
+        }
+        return value;
+    }
 
-        if (value == null || value.trim().isEmpty()) {
+    private static final class Mailbox implements AutoCloseable {
+        private final Store store;
+        private final Folder inbox;
+
+        private Mailbox(Store store, Folder inbox) {
+            this.store = store;
+            this.inbox = inbox;
+        }
+
+        private static Mailbox open(String email, String password) throws MessagingException {
+            String host = resolveImapHost(email);
+            Properties properties = new Properties();
+            properties.put("mail.store.protocol", "imaps");
+            properties.put("mail.imaps.host", host);
+            properties.put("mail.imaps.port", "993");
+            properties.put("mail.imaps.ssl.enable", "true");
+            properties.put("mail.imaps.ssl.checkserveridentity", "true");
+            properties.put("mail.imaps.connectiontimeout", "15000");
+            properties.put("mail.imaps.timeout", "15000");
+            properties.put("mail.imaps.writetimeout", "15000");
+            Store store = Session.getInstance(properties).getStore("imaps");
+            Folder inbox = null;
             try {
-                value = ConfigReader.get(configKey);
-            } catch (Exception ignored) {
-                // Use default
+                store.connect(host, email, password.replace(" ", "").trim());
+                inbox = store.getFolder("INBOX");
+                inbox.open(Folder.READ_ONLY);
+                return new Mailbox(store, inbox);
+            } catch (MessagingException | RuntimeException e) {
+                new Mailbox(store, inbox).close();
+                throw e;
             }
         }
 
-        if (value == null || value.trim().isEmpty()) {
-            return defaultValue;
-        }
-
-        return value.trim();
-    }
-
-    private static void closeInboxSafely(Folder inbox) {
-        try {
-            if (inbox != null && inbox.isOpen()) {
-                inbox.close(false);
+        @Override
+        public void close() {
+            try {
+                if (inbox != null && inbox.isOpen()) {
+                    inbox.close(false);
+                }
+            } catch (MessagingException ignored) {
+                // Best-effort cleanup; retain the original failure.
             }
-        } catch (Exception ignored) {
-            // Ignore cleanup failure
-        }
-    }
-
-    private static void closeStoreSafely(Store store) {
-        try {
-            if (store != null && store.isConnected()) {
-                store.close();
+            try {
+                if (store != null && store.isConnected()) {
+                    store.close();
+                }
+            } catch (MessagingException ignored) {
+                // Best-effort cleanup; retain the original failure.
             }
-        } catch (Exception ignored) {
-            // Ignore cleanup failure
-        }
-    }
-
-    private static String safeText(String text) {
-        if (text == null) {
-            return "";
-        }
-
-        return text.replace("\n", " ").replace("\r", " ").trim();
-    }
-
-    private static void sleep(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new RuntimeException("OTP email polling interrupted", e);
         }
     }
 }

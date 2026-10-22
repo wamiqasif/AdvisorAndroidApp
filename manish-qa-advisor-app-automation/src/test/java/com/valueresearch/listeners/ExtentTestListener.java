@@ -6,6 +6,7 @@ import com.valueresearch.base.BaseTest;
 import com.valueresearch.utils.DriverManager;
 import com.valueresearch.utils.ExtentManager;
 import com.valueresearch.utils.ExtentTestManager;
+import com.valueresearch.utils.ReportLogger;
 import com.valueresearch.utils.ScreenshotUtils;
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.IAnnotationTransformer;
@@ -21,8 +22,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ExtentTestListener implements ITestListener, ISuiteListener, IConfigurationListener, IAnnotationTransformer {
 
@@ -282,7 +281,7 @@ public class ExtentTestListener implements ITestListener, ISuiteListener, IConfi
                 "<b>Test skipped:</b> " + escapeHtml(getMethodName(result))
         );
 
-        logThrowable(test, result.getThrowable());
+        logThrowable(test, result.getThrowable(), Status.SKIP);
 
         ExtentTestManager.unload();
     }
@@ -432,10 +431,10 @@ public class ExtentTestListener implements ITestListener, ISuiteListener, IConfi
 
             test.log(
                     Status.INFO,
-                    "<b>Failure screenshot attached:</b> " + escapeHtml(screenshotPath)
+                    "Failure screenshot attached."
             );
 
-            logToConsole("Failure screenshot captured: " + screenshotPath);
+            logToConsole("Failure screenshot captured for " + getMethodName(result));
 
         } catch (Exception e) {
             try {
@@ -453,12 +452,20 @@ public class ExtentTestListener implements ITestListener, ISuiteListener, IConfi
     }
 
     private void logThrowable(ExtentTest test, Throwable throwable) {
+        logThrowable(test, throwable, Status.FAIL);
+    }
+
+    private void logThrowable(ExtentTest test, Throwable throwable, Status status) {
         if (throwable == null) {
             return;
         }
-
-        test.log(Status.FAIL, "<b>Error:</b> " + escapeHtml(throwable.getMessage()));
-        test.log(Status.FAIL, "<pre>" + escapeHtml(getStackTrace(throwable)) + "</pre>");
+        String label = status == Status.SKIP ? "<b>Skip reason:</b> " : "<b>Error:</b> ";
+        test.log(status, label + escapeHtml(ReportLogger.summary(throwable)));
+        if (ReportLogger.isDebugReportEnabled()) {
+            String detailsLabel = status == Status.SKIP ? "Technical skip details" : "Technical failure details";
+            test.log(Status.INFO, "<details><summary>" + detailsLabel + "</summary><pre>"
+                    + escapeHtml(getStackTrace(throwable)) + "</pre></details>");
+        }
     }
 
     private String getStackTrace(Throwable throwable) {
@@ -494,9 +501,6 @@ public class ExtentTestListener implements ITestListener, ISuiteListener, IConfi
     }
 
     private void logToConsole(String message) {
-        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
-                .format(new Date());
-
-        System.out.println("[" + timestamp + "] [LISTENER] " + message);
+        ReportLogger.console("LISTENER", message);
     }
 }

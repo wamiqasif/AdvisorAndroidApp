@@ -6,30 +6,50 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
+/** Shared Appium session lifecycle for existing Advisor test modules. */
 public class BaseTest {
 
     public static AndroidDriver driver;
 
     @BeforeClass(alwaysRun = true)
     public void setUp() {
-        driver = DriverManager.getDriver();
+        driver = requireDriver("@BeforeClass");
     }
 
-    /**
-     * Global recovery checkpoint before every test method.
-     *
-     * <p>If the previous test killed UiAutomator2 or the emulator, the stale
-     * session is discarded, the emulator is restarted when required, and a
-     * fresh UiAutomator2 session is created before the next test begins.</p>
-     */
+    /** Revalidate/recover UiAutomator2 before each test. */
     @BeforeMethod(alwaysRun = true)
     public void ensureHealthyDriverBeforeEveryTest() {
-        driver = DriverManager.getDriver();
+        driver = requireDriver("@BeforeMethod");
+    }
+
+    private AndroidDriver requireDriver(String phase) {
+        try {
+            AndroidDriver current = DriverManager.getDriver();
+            if (current == null) {
+                throw new IllegalStateException("DriverManager.getDriver() returned null");
+            }
+            if (current.getSessionId() == null) {
+                throw new IllegalStateException("AndroidDriver has no Appium session ID");
+            }
+            System.out.println("[DRIVER] " + phase + " ready | Session ID: "
+                    + current.getSessionId());
+            return current;
+        } catch (RuntimeException failure) {
+            System.err.println("[DRIVER] " + phase + " failed: " + failure);
+            failure.printStackTrace(System.err);
+            // Keep the root failure as the cause rather than masking it with an NPE.
+            throw new IllegalStateException(
+                    "Failed to initialize/verify AndroidDriver during " + phase
+                            + ". Check Appium server, ADB udid, and recovery logs.", failure);
+        }
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        DriverManager.quitDriver();
-        driver = null;
+        try {
+            DriverManager.quitDriver();
+        } finally {
+            driver = null;
+        }
     }
 }

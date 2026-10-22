@@ -1,6 +1,7 @@
 package com.valueresearch.pages;
 
 import com.valueresearch.utils.AuthHelper;
+import com.valueresearch.utils.AdvisorAccountSession;
 import com.valueresearch.utils.ReportLogger;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -40,7 +41,7 @@ import java.util.regex.Pattern;
  */
 public class CoverageInsightsPage {
 
-    public static final String BUILD_VERSION = "COVERAGE_INSIGHTS_DYNAMIC_V4_20260904";
+    public static final String BUILD_VERSION = "COVERAGE_INSIGHTS_V6_HUB_SCROLL_READY_20261015";
 
     private static final long SHORT_WAIT_MS = 12_000L;
     private static final long PAGE_READY_WAIT_MS = 25_000L;
@@ -48,6 +49,7 @@ public class CoverageInsightsPage {
     private static final long POLL_MS = 350L;
 
     private static final By HUB = AppiumBy.accessibilityId("Hub");
+    private static final By VERTICAL_SCROLL_VIEW = AppiumBy.className("android.widget.ScrollView");
     private static final By COVERAGE_INSIGHTS_TILE =
             AppiumBy.accessibilityId("Open coverage");
     private static final By ALL_STORIES = AppiumBy.accessibilityId("All Stories");
@@ -99,9 +101,20 @@ public class CoverageInsightsPage {
     };
 
     private final AndroidDriver driver;
+    private final AdvisorAccountSession preparedSession;
 
+    /** Legacy callers retain the existing generic AuthHelper behavior. */
     public CoverageInsightsPage(AndroidDriver driver) {
-        this.driver = driver;
+        this(driver, null);
+    }
+
+    /** Common test setup owns account selection, login and security authentication. */
+    public CoverageInsightsPage(AndroidDriver driver, AdvisorAccountSession preparedSession) {
+        this.driver = java.util.Objects.requireNonNull(driver, "AndroidDriver is required");
+        if (preparedSession != null && !preparedSession.isForDriver(driver)) {
+            throw new IllegalArgumentException("Prepared account session belongs to another driver");
+        }
+        this.preparedSession = preparedSession;
     }
 
     // =========================================================
@@ -110,45 +123,64 @@ public class CoverageInsightsPage {
 
     public void openFromHub() {
         ReportLogger.step("[" + BUILD_VERSION + "] Opening Coverage and insights from Hub");
-        assertDriverAlive("before Coverage and insights navigation");
+        String stage = "checking driver and prepared account";
+        try {
+            assertDriverAlive("before Coverage and insights navigation");
+            if (preparedSession != null) preparedSession.assertPrepared();
 
-        if (isAllStoriesOpen()) {
-            ReportLogger.pass("Coverage and insights is already open");
-            return;
-        }
-
-        // AuthHelper is still the single source of truth for login/PIN recovery.
-        new AuthHelper(driver).ensureLoggedIn();
-
-        // Cleanup normally returns to Hub. Do not tap the already-selected Hub tab
-        // again because Flutter rebuilds/refreshes the Hub unnecessarily.
-        if (isHubScreenReady()) {
-            ReportLogger.debug("Hub is already active - skipping redundant Hub tab tap/refresh");
-        } else {
-            WebElement hub = bottomMostVisible(HUB);
-            if (hub == null) {
-                throw new AssertionError("Hub bottom-navigation tab is not visible");
+            stage = "checking current screen";
+            if (isAllStoriesOpen()) {
+                stage = "checking body of already-open All Stories page";
+                waitForAllStoriesReady();
+                ReportLogger.pass("Coverage and insights is already open and its body is ready");
+                return;
             }
-            safeClick(hub, "Hub bottom-navigation tab");
-            if (!waitForHubScreenReady(SHORT_WAIT_MS)) {
+
+            // Prepared module tests never repeat default-account login.
+            if (preparedSession == null) new AuthHelper(driver).ensureLoggedIn();
+
+            stage = "opening Hub";
+            if (isHubScreenReady()) {
+                ReportLogger.debug("Hub is already active - skipping redundant Hub tab tap/refresh");
+            } else {
+                WebElement hub = bottomMostVisible(HUB);
+                if (hub == null) {
+                    throw new AssertionError("Hub bottom-navigation tab is not visible");
+                }
+                safeClick(hub, "Hub bottom-navigation tab");
+                // Inspector shows only the ScrollView at Hub's initial position.
+                // The Stocks/Open buttons appear after scrolling, so they cannot
+                // be a prerequisite for starting that scroll.
+                if (!waitForHubContainerAfterNavigation(SHORT_WAIT_MS)) {
+                    throw new AssertionError(
+                            "Hub was tapped but its scroll container did not become visible. visible="
+                                    + collectVisibleValues()
+                    );
+                }
+            }
+
+            stage = "scrolling Hub to locate Open coverage";
+            ReportLogger.step("Hub is ready for scrolling; locating Open coverage");
+            WebElement tile = findHubTileWithBoundedScroll();
+            if (tile == null) {
                 throw new AssertionError(
-                        "Hub tab was tapped but Hub navigation tiles did not become visible. visible="
+                        "Coverage Hub tile (accessibility id: Open coverage) was not found after bounded scrolling. visible="
                                 + collectVisibleValues()
                 );
             }
-        }
 
-        WebElement tile = findHubTileWithBoundedScroll();
-        if (tile == null) {
-            throw new AssertionError(
-                    "Coverage and insights Hub tile was not found after bounded scrolling. visible="
-                            + collectVisibleValues()
-            );
-        }
+            stage = "tapping Open coverage";
+            ReportLogger.step("Coverage Hub tile found; opening it");
+            safeClick(tile, "Coverage and insights Hub tile");
 
-        safeClick(tile, "Coverage and insights Hub tile");
-        waitForAllStoriesReady();
-        ReportLogger.pass("Coverage and insights page opened successfully");
+            stage = "waiting for All Stories and accessible module body";
+            waitForAllStoriesReady();
+            ReportLogger.pass("Coverage and insights page opened successfully");
+        } catch (RuntimeException | AssertionError failure) {
+            ReportLogger.fail("[" + BUILD_VERSION + "] Navigation failed while " + stage
+                    + ": " + failure.getClass().getSimpleName() + " - " + clean(failure.getMessage()));
+            throw failure;
+        }
     }
 
     public void recoverToHubSafely() {
@@ -163,7 +195,7 @@ public class CoverageInsightsPage {
             // the Hub bottom tab and forcing an unnecessary Hub refresh/rebuild.
             if (isAllStoriesOpen()) {
                 driver.navigate().back();
-                if (waitForHubScreenReady(8_000L)) {
+                if (waitForHubContainerAfterNavigation(8_000L)) {
                     ReportLogger.debug("Coverage/Insights cleanup returned to Hub with one controlled Back");
                     return;
                 }
@@ -175,7 +207,9 @@ public class CoverageInsightsPage {
                 WebElement hub = bottomMostVisible(HUB);
                 if (hub != null) {
                     safeClick(hub, "Hub bottom-navigation fallback during cleanup");
-                    waitForHubScreenReady(8_000L);
+                    if (!waitForHubContainerAfterNavigation(8_000L)) {
+                        throw new AssertionError("Hub scroll container did not appear during cleanup");
+                    }
                 }
             }
         } catch (Exception e) {
@@ -840,6 +874,7 @@ public class CoverageInsightsPage {
 
     private void waitForAllStoriesReady() {
         WebElement allStories = waitForVisible(ALL_STORIES, PAGE_READY_WAIT_MS);
+        ReportLogger.step("All Stories is visible; checking accessible module body");
 
         // The current build's top-level labels are visually rendered but not guaranteed
         // to be independent accessibility nodes. Do not fail page opening because of
@@ -857,7 +892,10 @@ public class CoverageInsightsPage {
         }
 
         throw new AssertionError(
-                "All Stories header appeared but module body did not become ready. visible="
+                "All Stories opened, but no accessible search field, category rail or resolved content "
+                        + "appeared within " + PAGE_READY_WAIT_MS + " ms. "
+                        + "Refresh Inspector on the fully loaded module and export the complete page source; "
+                        + "a heading-only hierarchy cannot support the dynamic category/content checks. visible="
                         + collectVisibleValues()
         );
     }
@@ -1278,6 +1316,14 @@ public class CoverageInsightsPage {
             return true;
         }
 
+        // Use selection only as positive evidence. Some Flutter builds do not
+        // expose it; those builds take the explicit Hub-tap path instead.
+        WebElement hub = bottomMostVisible(HUB);
+        if (hub != null && "true".equalsIgnoreCase(safeAttribute(hub, "selected"))
+                && firstDisplayed(VERTICAL_SCROLL_VIEW) != null) {
+            return true;
+        }
+
         int visibleOpenTiles = 0;
         for (WebElement element : safeFindElements(HUB_OPEN_BUTTONS)) {
             if (isDisplayed(element)) {
@@ -1290,10 +1336,16 @@ public class CoverageInsightsPage {
         return false;
     }
 
-    private boolean waitForHubScreenReady(long timeoutMs) {
+    /**
+     * Only call immediately after tapping Hub or returning from this module.
+     * A generic ScrollView alone is not used to identify Hub on an unknown screen.
+     */
+    private boolean waitForHubContainerAfterNavigation(long timeoutMs) {
         long endAt = System.currentTimeMillis() + timeoutMs;
         while (System.currentTimeMillis() < endAt) {
-            if (isHubScreenReady()) {
+            if ((!isAllStoriesOpen() && firstDisplayed(HUB) != null
+                    && firstDisplayed(VERTICAL_SCROLL_VIEW) != null)
+                    || isHubScreenReady()) {
                 return true;
             }
             assertDriverAlive("while waiting for Hub screen");
@@ -1310,7 +1362,13 @@ public class CoverageInsightsPage {
             }
             String value = semanticValue(element);
             if (!value.isEmpty()) {
-                values.add(normalizeWhitespace(value));
+                Rectangle rect = safeRect(element);
+                if (rect != null) {
+                    // Repeated labels can remain visible while their positions
+                    // change. Include geometry before concluding scrolling stopped.
+                    values.add(normalizeWhitespace(value) + "@" + rect.getX() + "," + rect.getY()
+                            + "," + rect.getWidth() + "," + rect.getHeight());
+                }
             }
         }
         return String.join("|", values);
@@ -1382,7 +1440,10 @@ public class CoverageInsightsPage {
         try {
             return driver.findElements(locator);
         } catch (Exception e) {
-            return Collections.emptyList();
+            // findElements already returns an empty list for no match. Preserve
+            // actual driver errors instead of disguising them as absent locators.
+            throw new IllegalStateException("Appium lookup failed for " + locator
+                    + ": " + clean(e.getMessage()), e);
         }
     }
 

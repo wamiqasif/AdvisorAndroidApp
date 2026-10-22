@@ -2,6 +2,12 @@ package com.valueresearch.pages;
 import java.util.Arrays;
 import com.valueresearch.utils.ExtentTestManager;
 import com.valueresearch.utils.ReportLogger;
+import com.valueresearch.utils.ExecutionProfile;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -66,43 +72,84 @@ public class StockDetailsPage {
     }
 
     public void recoverStockDetailsIfNeeded() {
-        if (isOnStockDetailsPage()) {
+        final NativeSnapshot[] latest = {readNativeSnapshot()};
+        if (isStockDetailsSnapshot(latest[0])) {
             ReportLogger.debug("Stock Details page or known Stock Details section is already visible");
             return;
         }
 
-        ReportLogger.step("Returning to Stock Details page");
-
-        for (int i = 1; i <= 3; i++) {
-            pressBackSilently();
-            sleep(1200);
-
-            if (isOnStockDetailsPage()) {
+        for (int attempt = 0; attempt < 3; attempt++) {
+            if (isStockDetailsChildSnapshot(latest[0])) {
+                ReportLogger.step("Returning from a recognised Stock Details More screen");
+                driver.navigate().back();
+            } else if (attempt > 0) {
+                break;
+            }
+            try {
+                keyRatioWait(ExecutionProfile.shortWait()).until(d -> {
+                    latest[0] = readNativeSnapshot();
+                    return isStockDetailsSnapshot(latest[0]);
+                });
                 ReportLogger.pass("Returned to Stock Details page");
                 return;
+            } catch (TimeoutException notReady) {
+                // A scrolled/temporarily incomplete page is not evidence that
+                // Back is safe. Only leave an explicitly recognised More screen.
+                if (!isStockDetailsChildSnapshot(latest[0])) break;
             }
         }
 
-        throw new RuntimeException("Unable to return to Stock Details page. Not reopening full search flow automatically.");
+        throw new RuntimeException("Stock Details viewport could not be recognised after a bounded recheck; "
+                + "Back was restricted to recognised More screens | values=" + nativeStrings(latest[0].nodes));
     }
 
     public boolean isOnStockDetailsPage() {
-        return isVisible(byDesc(STOCK_HEADER))
-                || isVisible(byDescContains(STOCK_HEADER))
-                || isVisible(byDesc("Stock Rating"))
-                || isVisible(byDesc("Stock Range"))
-                || isVisible(byDesc("Fundamentals"))
-                || isVisible(byDesc("10 Years Aggregate"))
-                || isVisible(byDesc("Stock Performance"))
-                || isVisible(byDesc("Financials"))
-                || isVisible(byDesc("Key Ratios"))
-                || isVisible(byDesc("Peers"))
-                || isVisible(byDesc("Shareholding"))
-                || isVisible(byDesc("Company Profile"))
-                || isVisible(byDescContains("Company Profile"))
-                || isVisible(byDesc("Business"))
-                || isVisible(byDesc("News"))
-                || isVisible(byDesc("Analysis"));
+        return isStockDetailsSnapshot(readNativeSnapshot());
+    }
+
+    private boolean isStockDetailsChildSnapshot(NativeSnapshot snapshot) {
+        List<String> values = nativeStrings(snapshot.nodes);
+        for (String label : new String[]{"Profitability", "Solvency", "Operating Efficiency",
+                "Annual Consolidated", "Annual Standalone", "Quarterly Consolidated", "Quarterly Standalone"}) {
+            if (values.contains(label)) return true;
+        }
+        return false;
+    }
+
+    private boolean isStockDetailsSnapshot(NativeSnapshot snapshot) {
+        if (isStockDetailsChildSnapshot(snapshot)) return false;
+        List<String> values = nativeStrings(snapshot.nodes);
+        for (String heading : new String[]{STOCK_HEADER, "Stock Rating", "Stock Range", "Fundamentals",
+                "10 Years Aggregate", "Stock Performance", "Essential Checks", "Financials", "Key Ratios",
+                "Peers", "Shareholding", "Company Profile", "Business", "News", "Analysis"}) {
+            if (values.contains(heading)) return true;
+        }
+        if (values.containsAll(Arrays.asList("Efficiency", "Valuation", "Growth"))) return true;
+        for (NativeNode node : snapshot.nodes) {
+            String text = normalizeSpaces(node.text);
+            if (text.startsWith(STOCK_HEADER + " ") || text.startsWith("Company Profile ")) return true;
+            for (String title : ESSENTIAL_CARD_TITLES) {
+                if (text.contains(title) && hasEssentialChecksDynamicScore(text)) return true;
+            }
+            String lower = text.toLowerCase(java.util.Locale.ROOT);
+            if ((lower.contains("price to earnings") || lower.contains("price to book")
+                    || lower.contains("p/e ratio") || lower.contains("p/b ratio"))
+                    && text.contains("Min") && text.contains("Median") && text.contains("Max")) return true;
+        }
+
+        // At the end of SD_004, Flutter can expose numeric Fundamentals cells
+        // while its section/row headings are above the viewport or unlabelled.
+        // Recognise a combination of observed data types, never fixed prices.
+        long croreValues = values.stream().filter(v -> v.matches("₹\\s*\\d[\\d,]*(?:\\.\\d+)?\\s*Cr")).count();
+        long percentages = values.stream().filter(v -> v.matches("-?\\d+(?:\\.\\d+)?\\s*%")).count();
+        long plainNumbers = values.stream().filter(v -> v.matches("-?\\d[\\d,]*(?:\\.\\d+)?")).count();
+        long rupeeValues = values.stream().filter(v -> v.matches("₹\\s*\\d[\\d,]*(?:\\.\\d+)?")).count();
+        boolean sharesCount = values.stream().anyMatch(v -> v.matches("\\d[\\d,]*") && v.replace(",", "").length() >= 8);
+        boolean fundamentalsBody = values.contains("Net Profit (TTM)") && croreValues >= 2
+                && percentages >= 1 && plainNumbers >= 3;
+        boolean fundamentalsTail = sharesCount && rupeeValues >= 2 && plainNumbers >= 2;
+        boolean aggregateBody = values.containsAll(Arrays.asList("CFO", "EBITDA", "Net Profit")) && rupeeValues >= 3;
+        return fundamentalsBody || fundamentalsTail || aggregateBody;
     }
 
     private void verifyStockDetailsOpenedOnly() {
@@ -119,7 +166,9 @@ public class StockDetailsPage {
     // SD_002 - HEADER VALIDATION
     // =========================================================
 
-    public void verifyStockHeader() {
+public void verifyStockHeader() {
+    runKeyRatiosWithImmediateLookups(() -> {
+
         ReportLogger.step("Verifying Stock Details header with live value capture");
 
         recoverStockDetailsIfNeeded();
@@ -128,8 +177,7 @@ public class StockDetailsPage {
 
         assertVisibleAndLog(byDesc(STOCK_HEADER), "Stock header");
 
-        assertVisibleAndLog(byDescContains("NSE"), "NSE chip");
-        assertVisibleAndLog(byDescContains("BSE"), "BSE chip");
+        validateHeaderExchangeSelector();
 
         assertVisibleAndLog(byDesc("Consumer Staples"), "Sector label");
         assertVisibleAndLog(byDesc("Tobacco Products"), "Industry label");
@@ -140,14 +188,15 @@ public class StockDetailsPage {
          */
         captureHeaderLiveValues();
 
-        assertVisibleAndLog(byDesc("Price"), "Price chart option");
-        assertVisibleAndLog(byDesc("P/E Ratio"), "P/E Ratio chart option");
-        assertVisibleAndLog(byDesc("P/B Ratio"), "P/B Ratio chart option");
+        validateHeaderChartControls();
 
         assertVisibleAndLog(byDesc("Stock Rating"), "Stock Rating section");
 
         ReportLogger.pass("Stock header validated successfully with live values");
-    }
+
+    });
+}
+
 
     private void captureHeaderLiveValues() {
         ReportLogger.step("Capturing Stock Header live values");
@@ -206,6 +255,7 @@ public class StockDetailsPage {
     // =========================================================
 
     public void verifyStockRatingAndRange() {
+        runKeyRatiosWithImmediateLookups(() -> {
         ReportLogger.step("Verifying Stock Rating and Stock Range section");
 
         recoverStockDetailsIfNeeded();
@@ -230,9 +280,10 @@ public class StockDetailsPage {
 
         assertVisibleAndLog(byDesc("Stock Range"), "Stock Range section");
 
-        validateStockRangeCarouselUsingRealDots();
+        validateStockRangeCarousel();
 
         ReportLogger.pass("Stock Rating and Stock Range section validated successfully");
+        });
     }
 
     private void scrollToStockRatingSection() {
@@ -280,246 +331,139 @@ public class StockDetailsPage {
         throw new AssertionError("Stock Range card body is not visible after controlled scrolling");
     }
 
-    private void validateStockRangeCarouselUsingRealDots() {
-        ReportLogger.step("Validating all 3 Stock Range cards strictly using real carousel dot elements");
-
-        alignStockRangeCardBody();
-
-        List<WebElement> dots = findStockRangeDotElements();
-
-        if (dots.size() < 3) {
-            throw new AssertionError("Expected 3 Stock Range carousel dots, but found: " + dots.size());
+    private void validateStockRangeCarousel() {
+        ReportLogger.step("Validating all three Stock Range cards using their titles and live content");
+        for (String expected : new String[]{"Today's Range", "52 Week Range", "Liquidity"}) {
+            NativeNode card = openStockRangeCard(expected);
+            NativeSnapshot snapshot = readNativeSnapshot();
+            Rectangle area = stockRangeCardBounds(card, snapshot);
+            List<NativeNode> content = new ArrayList<>();
+            for (NativeNode node : snapshot.section("Stock Range", "Fundamentals")) {
+                Rectangle intersection = intersectNativeBounds(node.visible, area);
+                if (intersection.getWidth() >= node.visible.getWidth() * 0.7
+                        && intersection.getHeight() >= node.visible.getHeight() * 0.7) content.add(node);
+            }
+            String text = String.join("\n", nativeStrings(content));
+            if (expected.equals("Liquidity")) {
+                for (String label : new String[]{"Low", "Moderate", "High"}) {
+                    if (!text.contains(label)) throw new AssertionError("Liquidity scale label missing: " + label + " | card=" + text);
+                }
+            } else {
+                if (!text.contains("Low") || !text.contains("High")) {
+                    throw new AssertionError(expected + " Low/High labels missing | card=" + text);
+                }
+                List<String> prices = new ArrayList<>();
+                // Do not read 52 from the title as a price, or values from a neighbouring card.
+                for (NativeNode node : content) {
+                    String value = node.text.replace("52 Week Range", "").replace("Today's Range", "").replace("Today’s Range", "");
+                    java.util.regex.Matcher matcher = Pattern.compile("₹\\s*([\\d,]+(?:\\.\\d+)?)").matcher(value);
+                    while (matcher.find()) prices.add(matcher.group(1).replace(",", ""));
+                }
+                if (prices.size() < 2) throw new AssertionError(expected + " requires two live price values | card=" + text);
+                // Native source order can differ from the visual Low/High order.
+                // Keep the actual values without assigning them by list position.
+            }
+            logValidatedText(expected + " live card", text);
         }
-
-        tapElementCenter(dots.get(0));
-        sleep(1000);
-        alignStockRangeCardBody();
-        validateTodaysRangeCardStrict();
-
-        dots = findStockRangeDotElements();
-
-        if (dots.size() < 3) {
-            throw new AssertionError("Expected 3 Stock Range carousel dots after Dot 1 tap, but found: " + dots.size());
-        }
-
-        tapElementCenter(dots.get(1));
-        sleep(1000);
-        alignStockRangeCardBody();
-        validateWeekRangeCardStrict();
-
-        dots = findStockRangeDotElements();
-
-        if (dots.size() < 3) {
-            throw new AssertionError("Expected 3 Stock Range carousel dots after Dot 2 tap, but found: " + dots.size());
-        }
-
-        tapElementCenter(dots.get(2));
-        sleep(1000);
-        alignStockRangeCardBody();
-        validateLiquidityCardStrict();
-
-        ReportLogger.pass("All 3 Stock Range carousel cards validated strictly using real dot elements");
     }
 
-    private List<WebElement> findStockRangeDotElements() {
-        ReportLogger.step("Finding Stock Range carousel dot elements");
-
-        WebElement stockRangeHeading = findVisibleElement(byDesc("Stock Range"));
-
-        if (stockRangeHeading == null) {
-            throw new AssertionError("Stock Range heading is not visible while finding carousel dots");
-        }
-
-        Rectangle headingRect = stockRangeHeading.getRect();
-        Dimension size = driver.manage().window().getSize();
-
-        int minY = headingRect.getY() + 250;
-        int maxY = headingRect.getY() + 650;
-
-        int minX = (int) (size.getWidth() * 0.35);
-        int maxX = (int) (size.getWidth() * 0.65);
-
-        List<WebElement> allViews = driver.findElements(AppiumBy.className("android.view.View"));
-        List<WebElement> dotCandidates = new ArrayList<>();
-
-        for (WebElement element : allViews) {
-            try {
-                if (element == null || !element.isDisplayed()) {
+    private NativeNode openStockRangeCard(String expected) {
+        NativeNode card = null;
+        for (int direction = 0; direction < 2; direction++) {
+            for (int attempt = 0; attempt < 4; attempt++) {
+                NativeSnapshot snapshot = readNativeSnapshot();
+                card = activeStockRangeCard(snapshot);
+                if (card == null) {
+                    swipeVisibleBody(true, "stock-range");
+                    sleep(400);
                     continue;
                 }
-
-                Rectangle rect = element.getRect();
-
-                int centerX = rect.getX() + rect.getWidth() / 2;
-                int centerY = rect.getY() + rect.getHeight() / 2;
-
-                boolean dotLikeSize =
-                        rect.getWidth() >= 15
-                                && rect.getWidth() <= 80
-                                && rect.getHeight() >= 15
-                                && rect.getHeight() <= 80;
-
-                boolean insideDotArea =
-                        centerX >= minX
-                                && centerX <= maxX
-                                && centerY >= minY
-                                && centerY <= maxY;
-
-                boolean clickable = false;
-
-                try {
-                    String clickableAttr = element.getAttribute("clickable");
-                    clickable = "true".equalsIgnoreCase(clickableAttr);
-                } catch (Exception ignored) {
-                    // ignore
+                if (card.visible.getY() > snapshot.screen.getHeight() * 0.65) {
+                    swipeStockSectionBody(true, true, "stock-range-alignment");
+                    sleep(400);
+                    continue;
                 }
-
-                if (dotLikeSize && insideDotArea && clickable) {
-                    dotCandidates.add(element);
+                Rectangle area = stockRangeCardBounds(card, snapshot);
+                // The failed run stopped as soon as the title appeared at the
+                // bottom. Bring the complete card above the navigation bar first.
+                if (area.getY() + area.getHeight() > snapshot.screen.getHeight() * 0.88) {
+                    swipeStockSectionBody(true, true, "stock-range-alignment");
+                    sleep(400);
+                    continue;
                 }
-
-            } catch (Exception ignored) {
-                // ignore stale/invalid elements
+                if (stockRangeTitle(card.text).equals(expected)) return card;
+                swipeInBounds(area, true, direction == 0);
+                sleep(450);
             }
         }
+        throw new AssertionError("Stock Range card not reached: " + expected
+                + " | active=" + (card == null ? "none" : card.text) + "; capture this card's native XML if its title changed");
+    }
 
-        dotCandidates.sort((a, b) -> {
-            Rectangle rectA = a.getRect();
-            Rectangle rectB = b.getRect();
-            return Integer.compare(rectA.getX(), rectB.getX());
-        });
+    private String stockRangeTitle(String text) {
+        String clean = normalizeSpaces(text == null ? "" : text.replace("\\n", "\n")).replace('’', '\'');
+        // Confirmed Inspector semantics: the third card has no Liquidity title.
+        // Match the complete scale, scoped by the Stock Range section and bounds.
+        if (clean.equals("Low Moderate High")) return "Liquidity";
+        for (String title : new String[]{"Today's Range", "52 Week Range", "Liquidity"}) {
+            if (clean.equals(title) || clean.startsWith(title + " ")) return title;
+        }
+        return "";
+    }
 
-        List<WebElement> uniqueDots = new ArrayList<>();
+    private NativeNode activeStockRangeCard(NativeSnapshot snapshot) {
+        NativeNode best = null;
+        long bestArea = 0;
+        for (NativeNode node : snapshot.section("Stock Range", "Fundamentals")) {
+            if (stockRangeTitle(node.text).isEmpty()) continue;
+            if (node.visible.getWidth() < node.bounds.getWidth() * 0.75) continue;
+            long area = (long) node.visible.getWidth() * node.visible.getHeight();
+            if (area > bestArea) { best = node; bestArea = area; }
+        }
+        return best;
+    }
 
-        for (WebElement candidate : dotCandidates) {
-            Rectangle candidateRect = candidate.getRect();
-            int candidateCenterX = candidateRect.getX() + candidateRect.getWidth() / 2;
-
-            boolean duplicate = false;
-
-            for (WebElement existing : uniqueDots) {
-                Rectangle existingRect = existing.getRect();
-                int existingCenterX = existingRect.getX() + existingRect.getWidth() / 2;
-
-                if (Math.abs(candidateCenterX - existingCenterX) < 18) {
-                    duplicate = true;
-                    break;
-                }
+    private Rectangle stockRangeCardBounds(NativeNode title, NativeSnapshot snapshot) {
+        Rectangle best = title.bounds;
+        // Prefer an actual card container, including on builds exposing the title
+        // and prices as separate accessibility nodes.
+        for (org.w3c.dom.Node parent = title.element; parent instanceof org.w3c.dom.Element; parent = parent.getParentNode()) {
+            Rectangle bounds = nativeBounds(((org.w3c.dom.Element) parent).getAttribute("bounds"));
+            if (bounds != null && bounds.getWidth() >= snapshot.screen.getWidth() * 0.55
+                    && bounds.getHeight() >= snapshot.screen.getHeight() * 0.08
+                    && bounds.getHeight() <= snapshot.screen.getHeight() * 0.40) return bounds;
+        }
+        if (best.getHeight() >= snapshot.screen.getHeight() * 0.08) return best;
+        // Some Flutter builds expose a flat semantics tree with no card parent.
+        // Derive the area from the title and the actual labels/value nodes below
+        // it, stopping at the next card/section rather than guessing dot offsets.
+        int right = snapshot.screen.getWidth();
+        for (NativeNode node : snapshot.section("Stock Range", "Fundamentals")) {
+            if (!stockRangeTitle(node.text).isEmpty() && node.bounds.getX() > title.bounds.getX()
+                    + snapshot.screen.getWidth() * 0.50) right = Math.min(right, node.bounds.getX());
+        }
+        int left = title.visible.getX(), bottom = title.visible.getY() + title.visible.getHeight();
+        for (NativeNode node : snapshot.section("Stock Range", "Fundamentals")) {
+            int centerX = node.visible.getX() + node.visible.getWidth() / 2;
+            if (centerX < left || centerX >= right || node.visible.getY() < title.visible.getY()) continue;
+            if (node.visible.getY() > title.visible.getY() + snapshot.screen.getHeight() * 0.40) continue;
+            String value = normalizeSpaces(node.text);
+            if (value.equals("Low") || value.equals("Moderate") || value.equals("High") || value.startsWith("₹")) {
+                bottom = Math.max(bottom, node.visible.getY() + node.visible.getHeight());
             }
-
-            if (!duplicate) {
-                uniqueDots.add(candidate);
-            }
         }
-
-        if (uniqueDots.size() > 3) {
-            uniqueDots = new ArrayList<>(uniqueDots.subList(0, 3));
+        if (right - left >= snapshot.screen.getWidth() * 0.50 && bottom - title.visible.getY() >= 80) {
+            return new Rectangle(left, title.visible.getY(), bottom - title.visible.getY(), right - left);
         }
-
-        ReportLogger.pass("Stock Range carousel dots found: " + uniqueDots.size());
-
-        for (int i = 0; i < uniqueDots.size(); i++) {
-            Rectangle rect = uniqueDots.get(i).getRect();
-
-            ReportLogger.step("Stock Range dot " + (i + 1)
-                    + " bounds | x=" + rect.getX()
-                    + " | y=" + rect.getY()
-                    + " | width=" + rect.getWidth()
-                    + " | height=" + rect.getHeight());
-        }
-
-        return uniqueDots;
+        throw new AssertionError("Stock Range card container is not exposed; provide its native XML | title=" + title.text);
     }
 
-    private void alignStockRangeCardBody() {
-        ReportLogger.step("Aligning Stock Range card body");
-
-        for (int i = 1; i <= 4; i++) {
-            if (isVisible(byDesc("Stock Range")) && isAnyStockRangeCardVisible()) {
-                ReportLogger.pass("Stock Range card body is aligned");
-                return;
-            }
-
-            smallSwipeUpW3C();
-            sleep(600);
-        }
-
-        ReportLogger.debug("Stock Range card body not aligned after small swipes");
-    }
-
-    private void validateTodaysRangeCardStrict() {
-        ReportLogger.step("Strictly validating Today's Range card");
-
-        assertVisibleAndLogFlexible(
-                new By[]{
-                        byDescContains("Today’s Range"),
-                        byDescContains("Today's Range")
-                },
-                "Today's Range card"
-        );
-
-        List<String> values = collectVisibleContentDescriptions();
-
-        String cardText = findFirstMatchingValue(values, new String[]{
-                ".*Today.*Range.*Low.*High.*",
-                ".*Today.*Range.*"
-        });
-
-        if (cardText != null) {
-            logValidatedText("Today's Range live card value", cardText);
-        }
-
-        ReportLogger.pass("Today's Range card strictly validated");
-    }
-
-    private void validateWeekRangeCardStrict() {
-        ReportLogger.step("Strictly validating 52 Week Range card");
-
-        assertVisibleAndLogFlexible(
-                new By[]{
-                        byDescContains("52 Week Range")
-                },
-                "52 Week Range card"
-        );
-
-        List<String> values = collectVisibleContentDescriptions();
-
-        String cardText = findFirstMatchingValue(values, new String[]{
-                ".*52 Week Range.*Low.*High.*",
-                ".*52 Week Range.*"
-        });
-
-        if (cardText != null) {
-            logValidatedText("52 Week Range live card value", cardText);
-        }
-
-        ReportLogger.pass("52 Week Range card strictly validated");
-    }
-
-    private void validateLiquidityCardStrict() {
-        ReportLogger.step("Strictly validating Liquidity card");
-
-        assertVisibleAndLogFlexible(
-                new By[]{
-                        byDescContains("Liquidity"),
-                        byDescContains("Low\nModerate\nHigh"),
-                        byDescContains("Low Moderate High")
-                },
-                "Liquidity card"
-        );
-
-        List<String> values = collectVisibleContentDescriptions();
-
-        String cardText = findFirstMatchingValue(values, new String[]{
-                ".*Liquidity.*",
-                ".*Low.*Moderate.*High.*"
-        });
-
-        if (cardText != null) {
-            logValidatedText("Liquidity live card value", cardText);
-        }
-
-        ReportLogger.pass("Liquidity card strictly validated");
+    private void swipeStockSectionBody(boolean up, boolean small, String context) {
+        Dimension screen = driver.manage().window().getSize();
+        int top = (int) (screen.getHeight() * (small ? 0.48 : 0.22));
+        int height = (int) (screen.getHeight() * (small ? 0.27 : 0.63));
+        ReportLogger.debug("Scrolling " + context + " " + (up ? "up" : "down"));
+        swipeInBounds(new Rectangle(0, top, height, screen.getWidth()), false, up);
     }
 
     private boolean isAnyStockRangeCardVisible() {
@@ -1071,7 +1015,7 @@ public class StockDetailsPage {
                     + " | " + rowValue);
         }
     }
-    
+
     private void stockPerformanceControlledTableSwipeUp() {
         try {
             Dimension size = driver.manage().window().getSize();
@@ -1107,7 +1051,7 @@ public class StockDetailsPage {
             driver.executeScript("mobile: scrollGesture", params);
         }
     }
-    
+
     private void alignStockPerformanceTabsAndTable() {
         ReportLogger.step("Aligning Stock Performance tabs and table");
 
@@ -1278,7 +1222,7 @@ public class StockDetailsPage {
             driver.executeScript("mobile: scrollGesture", params);
         }
     }
-    
+
     private void captureCurrentStockPerformanceViewportColumnWise(
             String tabName,
             java.util.LinkedHashMap<String, String> capturedRows
@@ -1362,7 +1306,7 @@ public class StockDetailsPage {
                     + " | " + rowValue);
         }
     }
-    
+
     private void stockPerformanceTableSwipeUpW3C() {
         try {
             Dimension size = driver.manage().window().getSize();
@@ -1447,7 +1391,7 @@ public class StockDetailsPage {
                     + " | " + rowValue);
         }
     }
-    
+
     private List<String> getNextThreeDecimalValuesBeforeNextRowOrSection(List<String> values, int startIndex) {
         List<String> numbers = new ArrayList<>();
 
@@ -1845,7 +1789,7 @@ public class StockDetailsPage {
 
         throw new AssertionError(label + " is not visible after controlled scrolling");
     }
-    
+
     private void pageSwipeDownW3C() {
         try {
             Dimension size = driver.manage().window().getSize();
@@ -1893,7 +1837,7 @@ public class StockDetailsPage {
                     values.add(desc.trim());
                 }
 
-            } catch (Exception ignored) {
+            } catch (StaleElementReferenceException ignored) {
                 // Ignore stale Flutter element
             }
         }
@@ -2031,12 +1975,14 @@ public class StockDetailsPage {
                 .replaceAll("\\s+", " ")
                 .trim();
     }
- 
+
  //=========================================================
 //SD_008 - FINANCIALS
 //=========================================================
 
- public void verifyFinancials() {
+public void verifyFinancials() {
+    runKeyRatiosWithImmediateLookups(() -> {
+
 	    ReportLogger.step("Verifying Financials section");
 
 	    recoverStockDetailsIfNeeded();
@@ -2067,7 +2013,10 @@ public class StockDetailsPage {
 	    verifyFinancialsMoreDetails();
 
 	    ReportLogger.pass("Financials section validated successfully");
-	}
+
+    });
+}
+
 
 private void alignFinancialsSectionSafely() {
     ReportLogger.step("Aligning Financials section safely");
@@ -2182,7 +2131,7 @@ private void validateFinancialsTab(
   logOptionalFinancialsText(byDesc("*All values are in (Cr)"), tabName + " values note");
 
   if (validateQuarterly) {
-      alignFinancialsPeriodControls();
+      alignFinancialsPeriodControls("Quarterly");
       assertFinancialsPeriodOptionVisible(tabName, "Quarterly");
 
       tapFinancialsPeriodOption("Quarterly");
@@ -2403,75 +2352,29 @@ private By[] getFinancialsPeriodLocators(String optionName) {
 }
 
 private boolean isFinancialsPeriodOptionVisible(String optionName) {
-  return isVisibleFlexible(getFinancialsPeriodLocators(optionName));
+  return findFinancialsPeriodOption(optionName) != null;
 }
 
 private void alignFinancialsPeriodControls() {
-  ReportLogger.step("Aligning Financials Annual/Quarterly controls");
-
-  if (isFinancialsPeriodOptionVisible("Annual")
-          || isFinancialsPeriodOptionVisible("Quarterly")) {
-      ReportLogger.pass("Financials period controls are already visible");
-      return;
-  }
-
-  /*
-   * The chart body remains visible while the selector is slightly above the
-   * viewport. Move back with small, bounded swipes only.
-   */
-  for (int attempt = 1; attempt <= 4; attempt++) {
-      financialsSmallSwipeDown();
-      sleep(500);
-
-      if (isFinancialsPeriodOptionVisible("Annual")
-              || isFinancialsPeriodOptionVisible("Quarterly")) {
-          ReportLogger.pass(
-                  "Financials period controls aligned after downward recovery "
-                          + attempt
-          );
-          return;
-      }
-  }
-
-  /*
-   * Standalone recovery: if the test entered slightly above Financials, use a
-   * few small forward swipes rather than a large page jump.
-   */
-  for (int attempt = 1; attempt <= 3; attempt++) {
-      financialsSmallSwipeUp();
-      sleep(500);
-
-      if (isFinancialsPeriodOptionVisible("Annual")
-              || isFinancialsPeriodOptionVisible("Quarterly")) {
-          ReportLogger.pass(
-                  "Financials period controls aligned after upward correction "
-                          + attempt
-          );
-          return;
-      }
-  }
-
-  throw new AssertionError("Financials Annual/Quarterly controls could not be aligned");
+  alignFinancialsPeriodControls("Annual");
 }
 
 private void assertFinancialsPeriodOptionVisible(String tabName, String optionName) {
-  assertVisibleAndLogFlexible(
-          getFinancialsPeriodLocators(optionName),
-          tabName + " " + optionName + " option"
-  );
+  WebElement option = findFinancialsPeriodOption(optionName);
+  if (option == null) throw new AssertionError(tabName + " Financials " + optionName + " control is not visible");
+  logValidatedText(tabName + " " + optionName + " option", getElementReadableText(option));
 }
 
 private void tapFinancialsPeriodOption(String optionName) {
   ReportLogger.step("Opening Financials period option: " + optionName);
 
-  alignFinancialsPeriodControls();
+  alignFinancialsPeriodControls(optionName);
 
-  for (By locator : getFinancialsPeriodLocators(optionName)) {
-      if (tapIfVisible(locator, "Financials period option: " + optionName)) {
-          sleep(700);
-          ReportLogger.pass("Financials period option opened: " + optionName);
-          return;
-      }
+  WebElement option = findFinancialsPeriodOption(optionName);
+  if (option != null) {
+      option.click();
+      ReportLogger.pass("Tapped scoped Financials period option: " + optionName);
+      return;
   }
 
   throw new AssertionError("Unable to tap Financials period option: " + optionName);
@@ -2738,6 +2641,8 @@ private void financialsHorizontalTabSwipeLeft() {
 // =========================================================
 
 public void verifyEssentialChecks() {
+    runKeyRatiosWithImmediateLookups(() -> {
+
     ReportLogger.step("Verifying Essential Checks section");
 
     recoverStockDetailsIfNeeded();
@@ -2749,7 +2654,10 @@ public void verifyEssentialChecks() {
     validateEssentialChecksCarouselSafely();
 
     ReportLogger.pass("Essential Checks section validated successfully with live value capture");
+
+    });
 }
+
 
 private void alignEssentialChecksSectionSafely() {
     ReportLogger.step("Aligning Essential Checks section safely");
@@ -2818,57 +2726,26 @@ private boolean isAnyEssentialChecksCardVisible() {
 }
 
 private void validateEssentialChecksCarouselSafely() {
-    ReportLogger.step("Validating Essential Checks carousel using aligned exact dot locators");
-
-    /*
-     * Appium Inspector confirms these three stable ScrollView child locators:
-     * Dot 1 -> //android.widget.ScrollView/android.view.View[5]
-     * Dot 2 -> //android.widget.ScrollView/android.view.View[6]
-     * Dot 3 -> //android.widget.ScrollView/android.view.View[7]
-     *
-     * The section is not considered ready until the heading, current card and
-     * all three dots are visible together. This prevents false alignment where
-     * only the card is visible but the dot row is outside the viewport.
-     */
-    alignEssentialChecksCardAndDots();
-
-    String[] expectedTitles = new String[]{
-            "Altman Z-Score",
-            "Modified C-Score",
-            "Piotroski F-Score"
+    ReportLogger.step("Validating Essential Checks using the visible card carousel");
+    String[] titles = {"Altman Z-Score", "Modified C-Score", "Piotroski F-Score"};
+    String[] questions = {
+        "Is there a threat to the company's solvency?",
+        "Can creative accounting be detected through the financial numbers?",
+        "How did the company perform in the last one year?"
     };
-
-    String[] expectedQuestions = new String[]{
-            "Is there a threat to the company's solvency?",
-            "Can creative accounting be detected through the financial numbers?",
-            "How did the company perform in the last one year?"
-    };
-
-    java.util.LinkedHashMap<String, String> capturedCards =
-            new java.util.LinkedHashMap<>();
-
-    for (int dotNumber = 1; dotNumber <= 3; dotNumber++) {
-        String cardText = tapEssentialChecksDotAndValidate(
-                dotNumber,
-                expectedTitles[dotNumber - 1],
-                expectedQuestions[dotNumber - 1]
-        );
-
-        capturedCards.put(expectedTitles[dotNumber - 1], cardText);
+    java.util.LinkedHashMap<String, String> captured = new java.util.LinkedHashMap<>();
+    for (int index = 0; index < titles.length; index++) {
+        EssentialCardSnapshot card = openEssentialChecksCard(titles[index], index > 0);
+        String text = normalizeSpaces(card.text);
+        if (!text.contains(questions[index]) || !hasEssentialChecksDynamicScore(text)) {
+            throw new AssertionError("Essential Checks card content is incomplete | expected=" + titles[index]);
+        }
+        captured.put(titles[index], card.text);
+        logValidatedText("Essential Checks card | " + titles[index], card.text);
     }
-
-    for (Map.Entry<String, String> entry : capturedCards.entrySet()) {
-        logValidatedText(
-                "Essential Checks card | " + entry.getKey(),
-                entry.getValue()
-        );
-    }
-
-    ReportLogger.pass(
-            "All 3 Essential Checks cards validated using exact dots"
-                    + " | cards=" + capturedCards.keySet()
-    );
+    ReportLogger.pass("All 3 Essential Checks cards validated | cards=" + captured.keySet());
 }
+
 
 private By getEssentialChecksDotLocator(int dotNumber) {
     return By.xpath(
@@ -3525,30 +3402,18 @@ private void essentialChecksSmallSwipeDown() {
 
 private void verifyFinancialsMoreDetails() {
     ReportLogger.step("Verifying Financials More details screen");
-
     alignFinancialsSectionSafely();
-
     openFinancialsMorePage();
-
-    validateFinancialsMoreTopControls();
-
-    /*
-     * Validate main Financials More headings only for default Annual Consolidated.
-     */
-    validateFinancialsMoreMainHeadings();
-
-    /*
-     * For other modes, only verify tap/open.
-     * Do not validate any table heading or values.
-     */
-    validateFinancialsMoreModeOpens("Annual Standalone");
-    validateFinancialsMoreModeOpens("Quarterly Consolidated");
-    validateFinancialsMoreModeOpens("Quarterly Standalone");
-
-    returnFromFinancialsMorePage();
-
+    runWithChildScreenCleanup(() -> {
+        validateFinancialsMoreTopControls();
+        validateFinancialsMoreMainHeadings();
+        validateFinancialsMoreModeOpens("Annual Standalone");
+        validateFinancialsMoreModeOpens("Quarterly Consolidated");
+        validateFinancialsMoreModeOpens("Quarterly Standalone");
+    }, this::returnFromFinancialsMorePage);
     ReportLogger.pass("Financials More details screen validated successfully");
 }
+
 
 private void openFinancialsMorePage() {
  ReportLogger.step("Opening Financials More details screen");
@@ -3661,8 +3526,9 @@ private void validateFinancialsMoreMainHeadings() {
 
     int stableCount = 0;
     int maxScrollAttempts = 18;
+    long scanDeadline = System.nanoTime() + ExecutionProfile.longWait().toNanos();
 
-    for (int scroll = 1; scroll <= maxScrollAttempts; scroll++) {
+    for (int scroll = 1; scroll <= maxScrollAttempts && System.nanoTime() < scanDeadline; scroll++) {
         int beforeCount = capturedMainHeadings.size();
 
         captureFinancialsMoreMainHeadings(capturedMainHeadings);
@@ -3691,7 +3557,7 @@ private void validateFinancialsMoreMainHeadings() {
         /*
          * Do not stop early before at least 3 headings are captured.
          */
-        if (capturedMainHeadings.size() >= 3 && stableCount >= 2) {
+        if (capturedMainHeadings.size() >= 3) {
             ReportLogger.pass("Required Financials More main headings captured");
             break;
         }
@@ -3984,82 +3850,23 @@ private void addUnique(List<String> list, String value) {
 }
 
 private void returnFromFinancialsMorePage() {
- ReportLogger.step("Returning from Financials More page");
-
- pressBackSilently();
- sleep(1200);
-
- if (isVisible(byDesc("Financials"))
-         || isVisible(byDesc("Stock Rating"))
-         || isVisible(byDesc(STOCK_HEADER))) {
-     ReportLogger.pass("Returned from Financials More page");
-     return;
- }
-
- throw new AssertionError("Did not return from Financials More page after back press");
+    ReportLogger.step("Returning from Financials More page");
+    driver.navigate().back();
+    keyRatioWait(ExecutionProfile.defaultWait()).withMessage("Financials More did not close after Back")
+            .until(d -> !isFinancialsMoreScreenVisible() && isOnStockDetailsPage());
+    ReportLogger.pass("Returned to Stock Details from Financials More");
 }
+
 
 private void financialsMoreTableSwipeUp() {
- try {
-     Dimension size = driver.manage().window().getSize();
-
-     /*
-      * Scroll Financials More body.
-      * This is vertical table/page scroll, not chip-strip scroll.
-      */
-     int x = (int) (size.getWidth() * 0.88);
-     int startY = (int) (size.getHeight() * 0.78);
-     int endY = (int) (size.getHeight() * 0.38);
-
-     PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-     Sequence swipe = new Sequence(finger, 1);
-
-     swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-     swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-     swipe.addAction(finger.createPointerMove(Duration.ofMillis(650), PointerInput.Origin.viewport(), x, endY));
-     swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-     driver.perform(Collections.singletonList(swipe));
-
- } catch (Exception firstError) {
-     Map<String, Object> params = new HashMap<>();
-     params.put("left", 760);
-     params.put("top", 620);
-     params.put("width", 260);
-     params.put("height", 1040);
-     params.put("direction", "up");
-     params.put("percent", 0.45);
-
-     driver.executeScript("mobile: scrollGesture", params);
- }
+    swipeVisibleBody(true, "financials-more");
 }
+
 
 private void financialsMoreTinyStabilizeSwipe() {
- try {
-     Dimension size = driver.manage().window().getSize();
-
-     /*
-      * Tiny redraw trigger only.
-      * Must not move away from current More screen area.
-      */
-     int x = (int) (size.getWidth() * 0.88);
-     int startY = (int) (size.getHeight() * 0.68);
-     int endY = (int) (size.getHeight() * 0.61);
-
-     PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-     Sequence swipe = new Sequence(finger, 1);
-
-     swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-     swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-     swipe.addAction(finger.createPointerMove(Duration.ofMillis(250), PointerInput.Origin.viewport(), x, endY));
-     swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-     driver.perform(Collections.singletonList(swipe));
-
- } catch (Exception e) {
-     ReportLogger.debug("Financials More tiny stabilize swipe skipped: " + cleanError(e.getMessage()));
- }
+    // Polling the next capture supplies stabilization; no extra redraw-trigger swipe.
 }
+
 
 private void financialsMoreModeSwipeLeft() {
  swipeFinancialsMoreModeStrip(true);
@@ -4133,8 +3940,13 @@ private int getFinancialsMoreModeStripCenterY() {
 //=========================================================
 
 public void verifyKeyRatios() {
+    runKeyRatiosWithImmediateLookups(this::verifyKeyRatiosContent);
+}
+
+private void verifyKeyRatiosContent() {
  ReportLogger.step("Verifying Key Ratios section with live numeric value capture");
 
+ dismissValuationDurationSheetIfOpen(false);
  recoverStockDetailsIfNeeded();
 
  alignKeyRatiosSectionSafely();
@@ -4151,6 +3963,46 @@ public void verifyKeyRatios() {
  validateKeyRatiosTabWithLiveCards("Growth", "TREND");
 
  ReportLogger.pass("Key Ratios section validated successfully with live numeric value capture");
+}
+
+/** Keep polling bounded; restore the shared settings even when a check fails. */
+private void runKeyRatiosWithImmediateLookups(Runnable validation) {
+    Map<String, Object> settings = driver.getSettings();
+    Object selectorTimeout = settings.get("waitForSelectorTimeout");
+    Object idleTimeout = settings.get("waitForIdleTimeout");
+    Duration implicitWait = driver.manage().timeouts().getImplicitWaitTimeout();
+    Throwable originalFailure = null;
+    try {
+        driver.manage().timeouts().implicitlyWait(Duration.ZERO);
+        if (selectorTimeout instanceof Number) driver.setSetting("waitForSelectorTimeout", 0);
+        if (idleTimeout instanceof Number) driver.setSetting("waitForIdleTimeout", 0);
+        validation.run();
+    } catch (RuntimeException | AssertionError failure) {
+        originalFailure = failure;
+        throw failure;
+    } finally {
+        Throwable restorationFailure = null;
+        for (String setting : new String[]{"waitForSelectorTimeout", "waitForIdleTimeout"}) {
+            Object previous = "waitForSelectorTimeout".equals(setting) ? selectorTimeout : idleTimeout;
+            if (!(previous instanceof Number)) continue;
+            try {
+                driver.setSetting(setting, previous);
+            } catch (RuntimeException failure) {
+                if (restorationFailure == null) restorationFailure = failure;
+                else restorationFailure.addSuppressed(failure);
+            }
+        }
+        try {
+            driver.manage().timeouts().implicitlyWait(implicitWait);
+        } catch (RuntimeException failure) {
+            if (restorationFailure == null) restorationFailure = failure;
+            else restorationFailure.addSuppressed(failure);
+        }
+        if (restorationFailure != null) {
+            if (originalFailure != null) originalFailure.addSuppressed(restorationFailure);
+            else throw new IllegalStateException("Could not restore Appium settings after Stock Details validation", restorationFailure);
+        }
+    }
 }
 
 private void alignKeyRatiosSectionSafely() {
@@ -4318,6 +4170,15 @@ private void tapKeyRatiosTab(String tabName) {
 
 
 private void waitForKeyRatiosCardContent(String tabName) {
+ if ("Valuation".equals(tabName)) {
+     try {
+         keyRatioWait(ExecutionProfile.defaultWait()).until(d -> getCurrentVisibleValuationCardData());
+         return;
+     } catch (TimeoutException timeout) {
+         throw new AssertionError("Valuation tab did not expose a complete range card. "
+                 + valuationReadDiagnostic + ". Capture Inspector XML of this tab.", timeout);
+     }
+ }
  for (int i = 1; i <= 10; i++) {
      List<String> values = collectVisibleContentDescriptions();
 
@@ -4382,7 +4243,7 @@ private void captureVisibleKeyRatioCards(
 }
 
 private void validateValuationKeyRatiosCardsWithAllPeriods() {
- ReportLogger.step("Validating Valuation Key Ratios cards with all period chips");
+ ReportLogger.step("Validating Valuation Key Ratios cards with all durations");
 
  resetKeyRatiosCarouselToStart();
 
@@ -4449,7 +4310,7 @@ private void validateValuationKeyRatiosCardsWithAllPeriods() {
      );
  }
 
- ReportLogger.pass("Key Ratios Valuation tab validated with all period chips"
+ ReportLogger.pass("Key Ratios Valuation tab validated with all durations"
          + " | cardsCaptured="
          + capturedCards.size()
          + " | cards="
@@ -4462,10 +4323,15 @@ private void validateVisibleValuationCardAllPeriods(
  KeyRatioCardData currentCard = getCurrentVisibleValuationCardData();
 
  if (currentCard == null) {
-     return;
+     try {
+         currentCard = keyRatioWait(ExecutionProfile.defaultWait()).until(d -> getCurrentVisibleValuationCardData());
+     } catch (TimeoutException timeout) {
+         throw new AssertionError("Valuation carousel has no complete card. " + valuationReadDiagnostic, timeout);
+     }
  }
 
  String cardTitle = currentCard.title;
+ if (capturedCards.containsKey(cardTitle) && capturedCards.get(cardTitle).size() == 3) return;
 
  if (!capturedCards.containsKey(cardTitle)) {
      capturedCards.put(cardTitle, new java.util.LinkedHashMap<>());
@@ -4484,115 +4350,283 @@ private void validateVisibleValuationCardAllPeriods(
 }
 
 private void validateValuationPeriodForCurrentCard(
-     String cardTitle,
-     String periodName,
-     java.util.LinkedHashMap<String, String> periodValues
+        String cardTitle,
+        String periodName,
+        java.util.LinkedHashMap<String, String> periodValues
 ) {
- if (!tapVisibleValuationPeriodChip(periodName)) {
-     throw new AssertionError("Unable to tap Valuation period chip: "
-             + periodName
-             + " | card="
-             + cardTitle);
- }
+    tapVisibleValuationPeriodChip(cardTitle, periodName);
 
- sleep(900);
-
- KeyRatioCardData updatedCard = getCurrentVisibleValuationCardData();
-
- if (updatedCard == null) {
-     throw new AssertionError("Valuation card data not found after tapping period: "
-             + periodName
-             + " | card="
-             + cardTitle);
- }
-
- if (!normalizeSpaces(updatedCard.title).equals(normalizeSpaces(cardTitle))) {
-     throw new AssertionError("Valuation card changed unexpectedly after tapping period"
-             + " | expectedCard="
-             + cardTitle
-             + " | actualCard="
-             + updatedCard.title
-             + " | period="
-             + periodName);
- }
-
- periodValues.put(periodName, updatedCard.summary);
-
- logValidatedText(
-         "Key Ratios Valuation | " + cardTitle + " | " + periodName,
-         updatedCard.summary
- );
+    // Flutter can temporarily remove/rebuild card semantics after the tap.
+    // Require two complete, matching reads of this same card, not a fixed delay.
+    final String[] previous = {null};
+    final String[] diagnostic = {"Waiting for the valuation card to finish rendering"};
+    try {
+        KeyRatioCardData updated = keyRatioWait(ExecutionProfile.defaultWait()).until(d -> {
+            ValuationCardSnapshot snapshot = readVisibleValuationCard(cardTitle);
+            if (snapshot == null) {
+                previous[0] = null;
+                return null;
+            }
+            diagnostic[0] = "Card is visible; waiting for stable Min/Median/Max values";
+            String summary = snapshot.data.summary;
+            boolean stable = summary.equals(previous[0]);
+            previous[0] = summary;
+            return stable ? snapshot.data : null;
+        });
+        periodValues.put(periodName, updated.summary);
+        logValidatedText("Key Ratios Valuation | " + cardTitle + " | " + periodName, updated.summary);
+    } catch (TimeoutException timeout) {
+        throw new AssertionError("Valuation card was not ready after the duration sheet closed"
+                + " | card=" + cardTitle + " | period=" + periodName
+                + " | " + diagnostic[0] + " | " + valuationReadDiagnostic
+                + ". If Inspector still shows plain Views for the chart, expose its title and"
+                + " numeric Min/Median/Max through accessibility semantics; a duration locator"
+                + " cannot read values absent from the native hierarchy.", timeout);
+    }
 }
 
-private boolean tapVisibleValuationPeriodChip(String periodName) {
- ReportLogger.step("Tapping Valuation period chip: " + periodName);
+private static final String[] VALUATION_DURATIONS = {"1 Year", "3 Year", "5 Year"};
 
- if (tapIfVisible(byDesc(periodName), "Valuation period chip: " + periodName)) {
-     ReportLogger.pass("Tapped Valuation period chip: " + periodName);
-     return true;
- }
+private void tapVisibleValuationPeriodChip(String cardTitle, String periodName) {
+    if (!Arrays.asList(VALUATION_DURATIONS).contains(periodName)) {
+        throw new IllegalArgumentException("Unsupported Valuation duration: " + periodName);
+    }
+    ReportLogger.step("Selecting Valuation duration: " + cardTitle + " | " + periodName);
+    final boolean[] openedHere = {false};
+    final String[] stage = {"locating Select Duration and its current ImageView value"};
+    runWithChildScreenCleanup(() -> {
+        try {
+            // Only the current value exists before the sheet opens. For example, to select
+            // 3 Year from 1 Year, first tap the 1 Year ImageView beside Select Duration.
+            if (findVisibleValuationDurationScrim() == null) {
+                ValuationDurationControl trigger = keyRatioWait(ExecutionProfile.defaultWait())
+                        .until(d -> findValuationDurationControl());
+                openedHere[0] = true;
+                trigger.element.click();
+            }
+            stage[0] = "waiting for the duration bottom sheet (Scrim and duration options)";
+            keyRatioWait(ExecutionProfile.defaultWait()).until(d -> findValuationDurationSheet());
 
- String plural = periodName.replace("Year", "Years");
+            stage[0] = "locating " + periodName + " below the Scrim boundary";
+            WebElement option = keyRatioWait(ExecutionProfile.defaultWait()).until(d -> {
+                Rectangle scrim = findValuationDurationSheet();
+                return scrim == null ? null : findValuationDurationOption(periodName, scrim);
+            });
+            // The selected option is an ImageView; unselected options are Views.
+            // Exact accessibility IDs match both, with bounds excluding the background.
+            option.click();
 
- if (!plural.equals(periodName)
-         && tapIfVisible(byDesc(plural), "Valuation period chip: " + plural)) {
-     ReportLogger.pass("Tapped Valuation period chip: " + plural);
-     return true;
- }
-
- return false;
+            stage[0] = "waiting for sheet dismissal and the selected value " + periodName;
+            keyRatioWait(ExecutionProfile.defaultWait()).until(d -> {
+                if (findVisibleValuationDurationScrim() != null) return false;
+                ValuationDurationControl selected = findValuationDurationControl();
+                return selected != null && periodName.equals(selected.period);
+            });
+            ReportLogger.pass("Valuation duration selected and sheet closed: "
+                    + cardTitle + " | " + periodName);
+        } catch (TimeoutException timeout) {
+            throw new AssertionError("Unable to select Valuation duration"
+                    + " | card=" + cardTitle + " | period=" + periodName
+                    + " | stage=" + stage[0]
+                    + ". Expected Select Duration + current ImageView, then a Scrim with"
+                    + " 1 Year / 3 Year / 5 Year options. Capture Inspector XML at this stage.", timeout);
+        }
+    }, () -> dismissValuationDurationSheetIfOpen(openedHere[0]));
 }
+
+private ValuationDurationControl findValuationDurationControl() {
+    for (WebElement label : driver.findElements(byDesc("Select Duration"))) {
+        if (!label.isDisplayed()) continue;
+        Rectangle labelBounds = label.getRect();
+        if (!isFullyOnValuationScreen(labelBounds)) continue;
+        for (String period : VALUATION_DURATIONS) {
+            By trigger = AppiumBy.androidUIAutomator("new UiSelector()"
+                    + ".className(\"android.widget.ImageView\").description(\"" + period + "\")");
+            for (WebElement candidate : driver.findElements(trigger)) {
+                if (!candidate.isDisplayed() || !candidate.isEnabled()) continue;
+                Rectangle bounds = candidate.getRect();
+                // Pair the trigger with its label on the same row. Do not click another
+                // '1 Year' elsewhere in Stock Details or an option in an open sheet.
+                if (isFullyOnValuationScreen(bounds)
+                        && bounds.getX() >= labelBounds.getX() + labelBounds.getWidth()
+                        && bounds.getY() < labelBounds.getY() + labelBounds.getHeight()
+                        && bounds.getY() + bounds.getHeight() > labelBounds.getY()) {
+                    return new ValuationDurationControl(candidate, period);
+                }
+            }
+        }
+    }
+    return null;
+}
+
+private Rectangle findVisibleValuationDurationScrim() {
+    Dimension screen = driver.manage().window().getSize();
+    for (WebElement element : driver.findElements(byDesc("Scrim"))) {
+        if (!element.isDisplayed()) continue;
+        Rectangle bounds = element.getRect();
+        if (isFullyOnValuationScreen(bounds)
+                && bounds.getY() + bounds.getHeight() < screen.getHeight()) return bounds;
+    }
+    return null;
+}
+
+private Rectangle findValuationDurationSheet() {
+    Rectangle scrim = findVisibleValuationDurationScrim();
+    if (scrim == null) return null;
+    for (String period : VALUATION_DURATIONS) {
+        if (findValuationDurationOption(period, scrim) != null) return scrim;
+    }
+    return null;
+}
+
+private WebElement findValuationDurationOption(String period, Rectangle scrim) {
+    for (WebElement option : driver.findElements(byDesc(period))) {
+        if (!option.isDisplayed() || !option.isEnabled()) continue;
+        Rectangle bounds = option.getRect();
+        if (isFullyOnValuationScreen(bounds)
+                && bounds.getY() >= scrim.getY() + scrim.getHeight()) return option;
+    }
+    return null;
+}
+
+private boolean isFullyOnValuationScreen(Rectangle bounds) {
+    Dimension screen = driver.manage().window().getSize();
+    return bounds.getWidth() > 0 && bounds.getHeight() > 0
+            && bounds.getX() >= 0 && bounds.getY() >= 0
+            && bounds.getX() + bounds.getWidth() <= screen.getWidth()
+            && bounds.getY() + bounds.getHeight() <= screen.getHeight();
+}
+
+private void dismissValuationDurationSheetIfOpen(boolean openedHere) {
+    // A generic Scrim alone is not enough to dismiss an unrelated dialog. Outside
+    // this picker flow, also require one of its duration options in the sheet.
+    if (openedHere ? findVisibleValuationDurationScrim() == null : findValuationDurationSheet() == null) return;
+    ReportLogger.step("Closing the Valuation duration sheet before continuing Stock Details");
+    driver.navigate().back();
+    try {
+        keyRatioWait(ExecutionProfile.shortWait())
+                .until(d -> findVisibleValuationDurationScrim() == null);
+    } catch (TimeoutException timeout) {
+        throw new AssertionError("Valuation duration sheet did not close after Back", timeout);
+    }
+}
+
+private static final class ValuationDurationControl {
+    private final WebElement element;
+    private final String period;
+
+    private ValuationDurationControl(WebElement element, String period) {
+        this.element = element;
+        this.period = period;
+    }
+}
+
+private boolean isInsideVisibleValuationCard(Rectangle chip, Rectangle card) {
+    Dimension screen = driver.manage().window().getSize();
+    int centerX = chip.getX() + chip.getWidth() / 2;
+    int centerY = chip.getY() + chip.getHeight() / 2;
+    return chip.getWidth() > 0 && chip.getHeight() > 0
+            && chip.getX() >= 0 && chip.getY() >= 0
+            && chip.getX() + chip.getWidth() <= screen.getWidth()
+            && chip.getY() + chip.getHeight() <= screen.getHeight()
+            && centerX >= card.getX() && centerX < card.getX() + card.getWidth()
+            && centerY >= card.getY() && centerY < card.getY() + card.getHeight();
+}
+
+private String valuationReadDiagnostic = "No valuation card has been read yet";
 
 private KeyRatioCardData getCurrentVisibleValuationCardData() {
- List<String> values = collectVisibleContentDescriptions();
-
- boolean insideKeyRatios = false;
-
- for (String rawValue : values) {
-     String clean = normalizeSpaces(rawValue);
-
-     if (clean.equals("Key Ratios")) {
-         insideKeyRatios = true;
-         continue;
-     }
-
-     if (!insideKeyRatios) {
-         continue;
-     }
-
-     if (clean.equals("Peers")
-             || clean.equals("Shareholding")
-             || clean.equals("News")
-             || clean.equals("Analysis")) {
-         break;
-     }
-
-     if (!isKeyRatioCardDescription(rawValue)) {
-         continue;
-     }
-
-     KeyRatioCardData cardData = parseKeyRatioCard(rawValue, "VALUATION");
-
-     if (cardData == null) {
-         continue;
-     }
-
-     String title = normalizeSpaces(cardData.title).toLowerCase();
-
-     if (title.contains("price to earnings")
-             || title.contains("price to book")) {
-         return cardData;
-     }
- }
-
- return null;
+    ValuationCardSnapshot snapshot = readVisibleValuationCard(null);
+    return snapshot == null ? null : snapshot.data;
 }
+
+private ValuationCardSnapshot readVisibleValuationCard(String expectedTitle) {
+    // Query only merged range-card semantics, rather than every View in the hierarchy.
+    // The section heading may be above the viewport; it is not a prerequisite for a card.
+    By cards = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.view.View\")"
+            + ".descriptionContains(\"Median\")");
+    ValuationCardSnapshot best = null;
+    int largestVisibleArea = 0;
+    Dimension screen = driver.manage().window().getSize();
+    valuationReadDiagnostic = "No visible merged valuation card exposes its title and numeric Min/Median/Max."
+            + " If Inspector shows plain Views for this chart, its accessibility semantics are missing";
+    for (WebElement element : driver.findElements(cards)) {
+        try {
+            if (!element.isDisplayed()) continue;
+            String raw = element.getAttribute("content-desc");
+            List<String> tokens = splitKeyRatioCardTokens(raw);
+            if (tokens.isEmpty()) continue;
+            if (!tokens.contains("Min") || !tokens.contains("Median") || !tokens.contains("Max")) {
+                valuationReadDiagnostic = "Valuation card range labels are not all visible yet";
+                continue;
+            }
+            String title = normalizeSpaces(tokens.get(0));
+            String lower = title.toLowerCase(java.util.Locale.ROOT);
+            if (!(lower.contains("price to earnings") || lower.contains("price to book")
+                    || lower.contains("p/e ratio") || lower.contains("p/b ratio"))) continue;
+            if (expectedTitle != null && !title.equalsIgnoreCase(normalizeSpaces(expectedTitle))) continue;
+            Rectangle bounds = element.getRect();
+            int width = Math.max(0, Math.min(screen.getWidth(), bounds.getX() + bounds.getWidth()) - Math.max(0, bounds.getX()));
+            int height = Math.max(0, Math.min(screen.getHeight(), bounds.getY() + bounds.getHeight()) - Math.max(0, bounds.getY()));
+            if (width == 0 || height == 0) continue;
+            KeyRatioCardData data;
+            try {
+                data = parseKeyRatioCard(raw, "VALUATION");
+            } catch (AssertionError incompleteCard) {
+                valuationReadDiagnostic = incompleteCard.getMessage();
+                continue; // A partially rendered card is retried by the explicit wait.
+            }
+            if (data != null && width * height > largestVisibleArea) {
+                best = new ValuationCardSnapshot(data, bounds);
+                largestVisibleArea = width * height;
+            }
+        } catch (StaleElementReferenceException stale) {
+            valuationReadDiagnostic = "Valuation card was replaced during rendering";
+        }
+    }
+    return best;
+}
+
+private WebDriverWait keyRatioWait(Duration timeout) {
+    WebDriverWait wait = new WebDriverWait(driver, timeout);
+    wait.pollingEvery(ExecutionProfile.pollingInterval());
+    wait.ignoring(StaleElementReferenceException.class);
+    return wait;
+}
+
+private boolean keyRatiosNavigationVisible() {
+    // A scrolled card can remain visible while 'Key Ratios' itself is offscreen.
+    // Do not turn a dead UiAutomator2 connection into a false 'screen not found'.
+    for (String tab : new String[]{"Efficiency", "Valuation", "Growth"}) {
+        boolean found = false;
+        for (WebElement element : driver.findElements(byDesc(tab))) {
+            try {
+                if (element.isDisplayed()) { found = true; break; }
+            } catch (StaleElementReferenceException stale) {
+                return false;
+            }
+        }
+        if (!found) return readVisibleValuationCard(null) != null;
+    }
+    return true;
+}
+
+private static final class ValuationCardSnapshot {
+    private final KeyRatioCardData data;
+    private final Rectangle bounds;
+
+    private ValuationCardSnapshot(KeyRatioCardData data, Rectangle bounds) {
+        this.data = data;
+        this.bounds = bounds;
+    }
+}
+
 
 private boolean isKeyRatiosCarouselStillValid() {
  if (!isVisible(byDesc("Efficiency"))
          || !isVisible(byDesc("Valuation"))
          || !isVisible(byDesc("Growth"))) {
-     return false;
+     return getCurrentVisibleValuationCardData() != null;
  }
 
  List<String> values = collectVisibleContentDescriptions();
@@ -5142,26 +5176,21 @@ private static class KeyRatioCardData {
 //=========================================================
 
 public void verifyKeyRatiosMoreDetails() {
-ReportLogger.step("Verifying Key Ratios More details screen");
-
-recoverStockDetailsIfNeeded();
-
-alignKeyRatiosSectionSafely();
-
-openKeyRatiosMorePage();
-
-validateKeyRatiosMoreTopTabsReachable();
-
-validateAllRatioBlocksForKeyRatiosMoreTab("Profitability");
-validateAllRatioBlocksForKeyRatiosMoreTab("Growth");
-validateAllRatioBlocksForKeyRatiosMoreTab("Solvency");
-validateAllRatioBlocksForKeyRatiosMoreTab("Operating Efficiency");
-validateAllRatioBlocksForKeyRatiosMoreTab("Valuation");
-
-returnFromKeyRatiosMorePage();
-
-ReportLogger.pass("Key Ratios More details screen validated successfully");
+    runKeyRatiosWithImmediateLookups(() -> {
+        ReportLogger.step("Verifying Key Ratios More details screen");
+        recoverStockDetailsIfNeeded();
+        alignKeyRatiosSectionSafely();
+        openKeyRatiosMorePage();
+        runWithChildScreenCleanup(() -> {
+            validateKeyRatiosMoreTopTabsReachable();
+            for (String tab : new String[]{"Profitability", "Growth", "Solvency", "Operating Efficiency", "Valuation"}) {
+                validateAllRatioBlocksForKeyRatiosMoreTab(tab);
+            }
+        }, this::returnFromKeyRatiosMorePage);
+        ReportLogger.pass("Key Ratios More details screen validated successfully");
+    });
 }
+
 
 private void openKeyRatiosMorePage() {
 ReportLogger.step("Opening Key Ratios More details screen");
@@ -5297,19 +5326,29 @@ List<String> expectedBlocks = getExpectedKeyRatiosMoreBlocks(tabName);
 
 int stableScrollCount = 0;
 String previousPageSignature = "";
-int maxAttempts = "Valuation".equals(tabName) ? 55 : 45;
+int maxAttempts = "Valuation".equals(tabName) ? 24 : 18;
+long scanDeadline = System.nanoTime() + ExecutionProfile.longWait().toNanos();
 
 for (int attempt = 1; attempt <= maxAttempts; attempt++) {
    int beforeCount = capturedBlocks.size();
 
-   captureVisibleKeyRatiosMoreRatioBlocks(tabName, capturedBlocks);
+   String currentSignature = captureVisibleKeyRatiosMoreRatioBlocks(tabName, capturedBlocks);
 
    int afterCount = capturedBlocks.size();
-   String currentSignature = buildKeyRatiosMoreVisibleSignature();
-
+   // This is a no-progress timeout, not a budget for visiting every ratio card.
+   // A responsive device can still need more than longWait to traverse all blocks.
+   if (afterCount > beforeCount) {
+       scanDeadline = System.nanoTime() + ExecutionProfile.longWait().toNanos();
+   }
    if (areAllExpectedKeyRatiosMoreBlocksCaptured(expectedBlocks, capturedBlocks)) {
        ReportLogger.pass("All expected Key Ratios More blocks captured for tab: " + tabName);
        break;
+   }
+   // Read the viewport reached by the preceding gesture before deciding it stalled.
+   if (afterCount == beforeCount && System.nanoTime() >= scanDeadline) break;
+   if (attempt % 3 == 0) {
+       ReportLogger.step("Key Ratios More scan | tab=" + tabName + " | attempt=" + attempt
+               + " | captured=" + capturedBlocks.size() + "/" + expectedBlocks.size());
    }
 
    if (afterCount > beforeCount) {
@@ -5327,7 +5366,7 @@ for (int attempt = 1; attempt <= maxAttempts; attempt++) {
     * Flutter sometimes keeps the same top tokens while the body is still moving,
     * which was causing intermittent misses like Net Profit Growth and Valuation blocks.
     */
-   if (stableScrollCount >= 10) {
+   if (stableScrollCount >= 3) {
        ReportLogger.debug("Key Ratios More body looks stable. Running targeted missing-block recovery for tab: " + tabName);
        break;
    }
@@ -5337,7 +5376,7 @@ for (int attempt = 1; attempt <= maxAttempts; attempt++) {
 }
 
 if (!areAllExpectedKeyRatiosMoreBlocksCaptured(expectedBlocks, capturedBlocks)) {
-   recoverMissingKeyRatiosMoreBlocks(tabName, capturedBlocks);
+   recoverMissingKeyRatiosMoreBlocks(tabName, capturedBlocks, scanDeadline);
 }
 
 validateMinimumKeyRatiosMoreBlocksCaptured(tabName, capturedBlocks);
@@ -5366,7 +5405,7 @@ List<String> expectedBlocks = getExpectedKeyRatiosMoreBlocks(tabName);
 List<String> missingBlocks = new ArrayList<>();
 
 for (String expectedBlock : expectedBlocks) {
-   if (!capturedBlocks.containsKey(expectedBlock)) {
+   if (!hasCapturedRatioBlock(capturedBlocks, expectedBlock)) {
        missingBlocks.add(expectedBlock);
    }
 }
@@ -5388,7 +5427,7 @@ if (expectedBlocks == null || expectedBlocks.isEmpty()) {
 }
 
 for (String expectedBlock : expectedBlocks) {
-   if (!capturedBlocks.containsKey(expectedBlock)) {
+   if (!hasCapturedRatioBlock(capturedBlocks, expectedBlock)) {
        return false;
    }
 }
@@ -5398,7 +5437,8 @@ return true;
 
 private void recoverMissingKeyRatiosMoreBlocks(
    String tabName,
-   java.util.LinkedHashMap<String, String> capturedBlocks
+   java.util.LinkedHashMap<String, String> capturedBlocks,
+   long scanDeadline
 ) {
 List<String> expectedBlocks = getExpectedKeyRatiosMoreBlocks(tabName);
 
@@ -5417,8 +5457,8 @@ if (areAllExpectedKeyRatiosMoreBlocksCaptured(expectedBlocks, capturedBlocks)) {
 * Recovery pass 1: move back toward the top.
 * This catches first/middle blocks that were skipped by a large swipe.
 */
-int downRecoveryAttempts = "Valuation".equals(tabName) ? 16 : 10;
-for (int i = 1; i <= downRecoveryAttempts; i++) {
+int downRecoveryAttempts = "Valuation".equals(tabName) ? 6 : 4;
+for (int i = 1; i <= downRecoveryAttempts && System.nanoTime() < scanDeadline; i++) {
    keyRatiosMoreBodySwipeDown();
    sleep(650);
    captureVisibleKeyRatiosMoreRatioBlocks(tabName, capturedBlocks);
@@ -5435,8 +5475,8 @@ for (int i = 1; i <= downRecoveryAttempts; i++) {
 * Recovery pass 2: scan downward again from the recovered/top area.
 * This catches lower Valuation blocks like Close Price / High Price / Low Price.
 */
-int upRecoveryAttempts = "Valuation".equals(tabName) ? 28 : 16;
-for (int i = 1; i <= upRecoveryAttempts; i++) {
+int upRecoveryAttempts = "Valuation".equals(tabName) ? 10 : 6;
+for (int i = 1; i <= upRecoveryAttempts && System.nanoTime() < scanDeadline; i++) {
    keyRatiosMoreBodySwipeUp();
    sleep(700);
    captureVisibleKeyRatiosMoreRatioBlocks(tabName, capturedBlocks);
@@ -5633,8 +5673,7 @@ for (String token : tokens) {
        return true;
    }
 
-   if ("Valuation".equals(tabName)
-           && (title.equals("Price / Earnings") || title.equals("Price / Book Value"))) {
+   if ("Valuation".equals(tabName) && title.equals("Price / Earnings")) {
        return true;
    }
 }
@@ -5642,7 +5681,9 @@ for (String token : tokens) {
 return false;
 }
 private void resetValuationTabToTop() {
-  ReportLogger.step("Aligning Valuation tab to visible first block");
+  ReportLogger.step("Aligning Valuation tab to its first Price / Earnings block");
+
+  if (isValuationTopVisuallyConfirmed()) return;
 
   /*
    * First, push the page upward enough to reach the real top of Valuation.
@@ -5669,38 +5710,31 @@ private void resetValuationTabToTop() {
   }
 
   throw new AssertionError("Unable to align Valuation tab to visible first ratio block"
-          + " | expected=Price / Earnings or Price / Book Value");
+          + " | expected=Price / Earnings. Price / Book Value is the second block"
+          + "; capture Inspector XML of the Valuation tab if the first heading is absent.");
 }
 
 private boolean isValuationTopVisuallyConfirmed() {
-  WebElement firstValuationBlock = findVisibleElementFlexible(new By[]{
+  for (By locator : new By[]{
           byDesc("Price / Earnings"),
           byDescContains("Price / Earnings"),
           byDesc("Price/Earnings"),
           byDescContains("Price/Earnings"),
-          byDesc("Price / Book Value"),
-          byDescContains("Price / Book Value"),
-          byDesc("Price/Book Value"),
-          byDescContains("Price/Book Value")
-  });
-
-  if (firstValuationBlock == null) {
-      return false;
+          byText("Price / Earnings"),
+          byTextContains("Price/Earnings")
+  }) {
+      for (WebElement firstValuationBlock : driver.findElements(locator)) {
+          if (!firstValuationBlock.isDisplayed()) continue;
+          Rectangle rect = firstValuationBlock.getRect();
+          Dimension size = driver.manage().window().getSize();
+          if (isFullyOnValuationScreen(rect)
+                  && rect.getY() >= (int) (size.getHeight() * 0.12)
+                  && rect.getY() <= (int) (size.getHeight() * 0.82)) return true;
+      }
   }
-
-  Rectangle rect = firstValuationBlock.getRect();
-  Dimension size = driver.manage().window().getSize();
-
-  /*
-   * Must be physically inside the visible body area.
-   * Do not trust source-token visibility because Flutter can keep stale/offscreen nodes.
-   */
-  return rect.getY() >= (int) (size.getHeight() * 0.12)
-          && rect.getY() <= (int) (size.getHeight() * 0.82)
-          && rect.getHeight() > 0
-          && rect.getWidth() > 0;
+  return false;
 }
-private void captureVisibleKeyRatiosMoreRatioBlocks(
+private String captureVisibleKeyRatiosMoreRatioBlocks(
    String tabName,
    java.util.LinkedHashMap<String, String> capturedBlocks
 ) {
@@ -5737,6 +5771,8 @@ for (int i = 0; i < tokens.size(); i++) {
 * but not full table structure in the same viewport.
 */
 captureKnownVisibleKeyRatiosMoreBlocks(tabName, tokens, capturedBlocks);
+// Reuse this viewport for progress detection instead of remotely reading every node twice.
+return String.join("|", tokens);
 }
 
 private void captureKnownVisibleKeyRatiosMoreBlocks(
@@ -5764,9 +5800,8 @@ for (int i = 0; i < tokens.size(); i++) {
        value = findNearestKeyRatiosMoreValue(tokens, i);
    }
 
-   if (value.isEmpty()) {
-       value = "--";
-   }
+   if (value.isEmpty()) continue; // A real UI placeholder is valid; an absent value is not.
+
 
    capturedBlocks.put(title, value);
 
@@ -5912,6 +5947,12 @@ clean = clean
 
 clean = clean.replaceAll("\\s+", " ");
 
+String debtHeading = clean.replaceAll("[-–—]", " ").replaceAll("\\s+", " ");
+if (debtHeading.equalsIgnoreCase("Short term debt to equity")
+        || debtHeading.equalsIgnoreCase("Short term debt to equity ratio")) {
+    return "Short term debt to equity ratio";
+}
+
 if (clean.equalsIgnoreCase("Receivable Days")) {
    return "Receivable days";
 }
@@ -6032,8 +6073,8 @@ return "";
 }
 
 private boolean titlesMatchKeyRatiosMoreExpectedBlock(String actualTitle, String expectedTitle) {
-String actual = normalizeSpaces(actualTitle).toLowerCase();
-String expected = normalizeSpaces(expectedTitle).toLowerCase();
+String actual = normalizeKeyRatiosMoreBlockTitle(actualTitle).toLowerCase(java.util.Locale.ROOT);
+String expected = normalizeKeyRatiosMoreBlockTitle(expectedTitle).toLowerCase(java.util.Locale.ROOT);
 
 if (actual.equals(expected)) {
    return true;
@@ -6361,92 +6402,22 @@ for (int i = 1; i <= 6; i++) {
 
 private void returnFromKeyRatiosMorePage() {
     ReportLogger.step("Returning from Key Ratios More details page");
-
-    pressBackSilently();
-    sleep(1800);
-
-    if (!isOnStockDetailsPage()) {
-        throw new AssertionError("Did not return from Key Ratios More details page after back press");
-    }
-
-    /*
-     * Important:
-     * Do not pass just because "Key Ratios" heading is somewhere in source.
-     * Normalize the page back to Key Ratios section so SD_011 starts from
-     * a predictable position and Peers is just below.
-     */
-    alignKeyRatiosSectionSafely();
-    sleep(700);
-
-    if (isKeyRatiosVisibleEnoughForMore()) {
-        ReportLogger.pass("Returned from Key Ratios More details page and reset to Key Ratios section");
-        return;
-    }
-
-    throw new AssertionError("Returned from Key Ratios More page, but Key Ratios section was not reset properly");
+    driver.navigate().back();
+    keyRatioWait(ExecutionProfile.defaultWait()).withMessage("Key Ratios More did not close after Back")
+            .until(d -> !isKeyRatiosMoreScreenVisible() && isOnStockDetailsPage());
+    ReportLogger.pass("Returned to Stock Details from Key Ratios More");
 }
+
 
 private void keyRatiosMoreBodySwipeUp() {
-try {
-   Dimension size = driver.manage().window().getSize();
-
-   int x = (int) (size.getWidth() * 0.88);
-   int startY = (int) (size.getHeight() * 0.78);
-   int endY = (int) (size.getHeight() * 0.30);
-
-   PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-   Sequence swipe = new Sequence(finger, 1);
-
-   swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-   swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-   swipe.addAction(finger.createPointerMove(Duration.ofMillis(680), PointerInput.Origin.viewport(), x, endY));
-   swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-   driver.perform(Collections.singletonList(swipe));
-
-} catch (Exception firstError) {
-   Map<String, Object> params = new HashMap<>();
-   params.put("left", 760);
-   params.put("top", 520);
-   params.put("width", 260);
-   params.put("height", 1450);
-   params.put("direction", "up");
-   params.put("percent", 0.62);
-
-   driver.executeScript("mobile: scrollGesture", params);
+    swipeVisibleBody(true, "key-ratios-more");
 }
-}
+
 
 private void keyRatiosMoreBodySwipeDown() {
-try {
-   Dimension size = driver.manage().window().getSize();
-
-   int x = (int) (size.getWidth() * 0.88);
-   int startY = (int) (size.getHeight() * 0.30);
-   int endY = (int) (size.getHeight() * 0.78);
-
-   PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-   Sequence swipe = new Sequence(finger, 1);
-
-   swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-   swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-   swipe.addAction(finger.createPointerMove(Duration.ofMillis(680), PointerInput.Origin.viewport(), x, endY));
-   swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-   driver.perform(Collections.singletonList(swipe));
-
-} catch (Exception firstError) {
-   Map<String, Object> params = new HashMap<>();
-   params.put("left", 760);
-   params.put("top", 520);
-   params.put("width", 260);
-   params.put("height", 1450);
-   params.put("direction", "down");
-   params.put("percent", 0.62);
-
-   driver.executeScript("mobile: scrollGesture", params);
+    swipeVisibleBody(false, "key-ratios-more");
 }
-}
+
 
 private void keyRatiosMoreTopTabsSwipeLeft() {
 swipeKeyRatiosMoreTopTabs(true);
@@ -6508,806 +6479,84 @@ private int getKeyRatiosMoreTopTabsCenterY() {
 //=========================================================
 
 public void verifyPeers() {
-	  ReportLogger.step("Verifying Peers section");
+    runKeyRatiosWithImmediateLookups(() -> {
+        ReportLogger.step("Verifying Peers section");
+        recoverStockDetailsIfNeeded();
+        alignPeersSectionSafely();
+        validatePeersVisibleTable();
+        ReportLogger.pass("Peers section validated successfully");
+    });
+}
 
-	  recoverStockDetailsIfNeeded();
-
-	  alignPeersSectionSafely();
-
-	  /*
-	   * Regression-safe body stabilization:
-	   * The Peers title/header can be visible while company rows are still below
-	   * the viewport. Do not validate until at least ITC row is actually visible.
-	   */
-	  stabilizePeersTableBody();
-
-	  if (!isPeersSectionVisibleEnough()) {
-	      throw new AssertionError("Peers section is not visible enough after alignment"
-	              + " | values=" + getVisiblePeersSectionValues());
-	  }
-
-	  logValidatedText("Peers section", "Peers");
-
-	  validatePeersVisibleTable();
-
-	  ReportLogger.pass("Peers section validated successfully");
-	}
 private void alignPeersSectionSafely() {
-  ReportLogger.step("Aligning Peers section safely from any Stock Details position");
-
-  if (isPeersSectionVisibleEnough()) {
-      ReportLogger.pass("Peers section is already visible enough");
-      return;
-  }
-
-  /*
-   * Critical regression fix:
-   * After SD_010 returns from Key Ratios More, the app can land below Peers
-   * around Shareholding / Company Profile / News / Analysis. In that state,
-   * swiping up goes farther down and causes an endless-looking wait.
-   * So first recover upward in the page by swiping DOWN until Peers body is visible.
-   */
-  if (isBelowPeersSectionVisible()) {
-      for (int i = 1; i <= 14; i++) {
-          if (isPeersSectionVisibleEnough()) {
-              ReportLogger.pass("Peers section recovered from lower page after swipe down " + i);
-              return;
-          }
-
-          peersPageSwipeDown();
-          sleep(700);
-      }
-  }
-
-  /*
-   * Normal flow from top/middle Stock Details: move down towards Peers.
-   */
-  for (int i = 1; i <= 24; i++) {
-      if (isPeersSectionVisibleEnough()) {
-          ReportLogger.pass("Peers section aligned after swipe up " + i);
-          return;
-      }
-
-      if (isBelowPeersSectionVisible()) {
-          ReportLogger.debug("Overscrolled below Peers while aligning. Switching to recovery swipe down.");
-          break;
-      }
-
-      peersPageSwipeUp();
-      sleep(750);
-  }
-
-  /*
-   * Recovery from below Peers.
-   */
-  for (int i = 1; i <= 16; i++) {
-      if (isPeersSectionVisibleEnough()) {
-          ReportLogger.pass("Peers section aligned after recovery swipe down " + i);
-          return;
-      }
-
-      peersPageSwipeDown();
-      sleep(700);
-  }
-
-  /*
-   * Final nearby body adjustment. Header-only is not enough; stabilize rows too.
-   */
-  for (int i = 1; i <= 10; i++) {
-      if (isPeersSectionVisibleEnough()) {
-          ReportLogger.pass("Peers section aligned after final adjustment " + i);
-          return;
-      }
-
-      if (isBelowPeersSectionVisible()) {
-          peersTinySwipeDown();
-      } else {
-          peersTinySwipeUp();
-      }
-
-      sleep(600);
-  }
-
-  throw new AssertionError("Peers section could not be aligned safely"
-          + " | values=" + getVisiblePeersSectionValues());
-}
-
-private boolean isBelowPeersSectionVisible() {
-  return isVisible(byDesc("Shareholding"))
-          || isVisible(byDescContains("Shareholding"))
-          || isVisible(byDesc("Company Profile"))
-          || isVisible(byDescContains("Company Profile"))
-          || isVisible(byDesc("News"))
-          || isVisible(byDescContains("News"))
-          || isVisible(byDesc("Analysis"))
-          || isVisible(byDescContains("Analysis"))
-          || isVisible(byDesc("Business"))
-          || isVisible(byDescContains("Business"));
-}
-
-private boolean isPeersSectionReady() {
-return isPeersSectionVisibleEnough();
+    ReportLogger.step("Aligning Peers using one native snapshot per attempt");
+    long deadline = System.nanoTime() + ExecutionProfile.longWait().toNanos();
+    String previous = "";
+    int unchanged = 0;
+    NativeSnapshot snapshot = readNativeSnapshot();
+    for (int attempt = 0; attempt < 28; attempt++) {
+        if (peersSnapshotReady(snapshot)) return;
+        // Always inspect the result of the last gesture, including when its
+        // command consumed the remaining time budget.
+        if (System.nanoTime() >= deadline || unchanged >= 3) break;
+        boolean below = snapshot.has("Shareholding") || snapshot.has("Company Profile")
+                || snapshot.has("Business") || snapshot.has("News") || snapshot.has("Analysis");
+        swipeStockSectionBody(!below, snapshot.has("Peers"), "peers");
+        sleep(400);
+        snapshot = readNativeSnapshot();
+        String current = nativeSignature(snapshot.nodes);
+        unchanged = current.equals(previous) ? unchanged + 1 : 0;
+        previous = current;
+    }
+    if (peersSnapshotReady(snapshot)) return;
+    throw new AssertionError("Peers table not ready after bounded alignment | values="
+            + nativeStrings(snapshot.section("Peers", "Shareholding", "Company Profile")));
 }
 
 private boolean isPeersSectionVisibleEnough() {
-    List<String> values = getVisiblePeersSectionValues();
-
-    boolean hasPeersHeading = false;
-    boolean hasKnownCompany = false;
-    boolean hasMetricHeader = false;
-    boolean hasCompanyHeader = false;
-    int companyCount = 0;
-
-    java.util.LinkedHashSet<String> companiesFromValues = new java.util.LinkedHashSet<>();
-
-    for (String value : values) {
-        String clean = normalizeSpaces(value);
-
-        if (clean.isEmpty()) {
-            continue;
-        }
-
-        if (clean.equals("Peers") || clean.startsWith("Peers ")) {
-            hasPeersHeading = true;
-        }
-
-        if (isPeersCompanyHeader(clean)) {
-            hasCompanyHeader = true;
-        }
-
-        if (isPeersMetricHeader(clean)) {
-            hasMetricHeader = true;
-        }
-
-        String companyName = getExactPeersCompanyName(clean);
-
-        if (!companyName.isEmpty()) {
-            companiesFromValues.add(companyName);
-            hasKnownCompany = true;
-        }
-
-        String[] parts = value.split("\\n|\\s{2,}|\\|");
-
-        for (String part : parts) {
-            String cleanPart = normalizeSpaces(part);
-
-            if (cleanPart.isEmpty()) {
-                continue;
-            }
-
-            if (isPeersCompanyHeader(cleanPart)) {
-                hasCompanyHeader = true;
-            }
-
-            if (isPeersMetricHeader(cleanPart)) {
-                hasMetricHeader = true;
-            }
-
-            String partCompanyName = getExactPeersCompanyName(cleanPart);
-
-            if (!partCompanyName.isEmpty()) {
-                companiesFromValues.add(partCompanyName);
-                hasKnownCompany = true;
-            }
-        }
-    }
-
-    companyCount = companiesFromValues.size();
-
-    /*
-     * Old rule was too strict:
-     * heading + company header + metric header + known company.
-     *
-     * Stable rule:
-     * If Peers heading and at least 2 real companies are visible, section is usable.
-     * Metric headers can be hidden by Flutter/Appium while rows are already visible.
-     */
-    if (hasPeersHeading && companyCount >= 2) {
-        return true;
-    }
-
-    /*
-     * Fallback: accept table evidence when row data is present.
-     */
-    return hasKnownCompany && companyCount >= 2 && (hasCompanyHeader || hasMetricHeader);
+    return peersSnapshotReady(readNativeSnapshot());
 }
+
 private void stabilizePeersTableBody() {
-  ReportLogger.step("Stabilizing Peers table body");
-
-  for (int i = 1; i <= 10; i++) {
-      java.util.LinkedHashSet<String> companies = collectVisiblePeersCompanyNames();
-
-      if (companies.contains("ITC")) {
-          ReportLogger.pass("Peers table body stabilized with company rows: " + companies);
-          return;
-      }
-
-      List<String> values = getVisiblePeersSectionValues();
-
-      boolean hasHeaderOnly = false;
-
-      for (String value : values) {
-          String clean = normalizeSpaces(value);
-
-          if (isPeersCompanyHeader(clean) || isPeersMetricHeader(clean)) {
-              hasHeaderOnly = true;
-              break;
-          }
-      }
-
-      if (hasHeaderOnly) {
-          ReportLogger.debug("Peers heading/header visible but company rows missing. Tiny swipe up attempt=" + i);
-          peersTinySwipeUp();
-      } else if (isVisible(byDesc("Shareholding")) || isVisible(byDescContains("Shareholding"))) {
-          ReportLogger.debug("Peers table appears overscrolled near Shareholding. Tiny swipe down attempt=" + i);
-          peersTinySwipeDown();
-      } else {
-          ReportLogger.debug("Peers body not ready. Controlled swipe up attempt=" + i);
-          peersTinySwipeUp();
-      }
-
-      sleep(750);
-  }
-
-  java.util.LinkedHashSet<String> companies = collectVisiblePeersCompanyNames();
-
-  if (!companies.contains("ITC")) {
-      throw new AssertionError("Peers table body did not stabilize. ITC row not visible"
-              + " | companies=" + companies
-              + " | values=" + getVisiblePeersSectionValues());
-  }
-}
-
-private void validatePeersVisibleTable() {
-  ReportLogger.step("Validating visible Peers table");
-
-  List<String> sectionValues = getVisiblePeersSectionValues();
-
-  if (sectionValues.isEmpty()) {
-      throw new AssertionError("Peers section values not found in current viewport");
-  }
-
-  java.util.LinkedHashSet<String> headers = new java.util.LinkedHashSet<>();
-  java.util.LinkedHashSet<String> companies = collectVisiblePeersCompanyNames();
-
-  for (String value : sectionValues) {
-      String clean = normalizeSpaces(value);
-
-      if (clean.isEmpty()) {
-          continue;
-      }
-
-      if (isPeersCompanyHeader(clean)) {
-          headers.add("Company");
-      }
-
-      String metricHeader = getPeersMetricHeaderName(clean);
-
-      if (!metricHeader.isEmpty()) {
-          headers.add(metricHeader);
-      }
-
-      String[] parts = value.split("\\n");
-
-      for (String part : parts) {
-          String cleanPart = normalizeSpaces(part);
-
-          if (cleanPart.isEmpty()) {
-              continue;
-          }
-
-          if (isPeersCompanyHeader(cleanPart)) {
-              headers.add("Company");
-          }
-
-          String partMetricHeader = getPeersMetricHeaderName(cleanPart);
-
-          if (!partMetricHeader.isEmpty()) {
-              headers.add(partMetricHeader);
-          }
-      }
-  }
-
-  if (!companies.contains("ITC")) {
-      throw new AssertionError("Peers table ITC row not found"
-              + " | companies=" + companies
-              + " | values=" + sectionValues);
-  }
-
-  /*
-   * Validate visible peer rows only.
-   * Depending on viewport, Appium may expose 2 rows or all rows.
-   */
-  if (companies.size() < 2) {
-      throw new AssertionError("Peers table company rows are incomplete"
-              + " | expectedAtLeast=2"
-              + " | actual=" + companies.size()
-              + " | companies=" + companies
-              + " | values=" + sectionValues);
-  }
-
-  /*
-   * Header validation:
-   * Pass when headers are exposed.
-   * Do not fail when Appium hides headers but rows are visible.
-   */
-  if (!headers.isEmpty()) {
-      logValidatedText("Peers table headers", headers.toString());
-      ReportLogger.pass("Peers table headers validated: " + headers);
-  } else {
-      ReportLogger.debug("Peers table headers not exposed by Appium in this viewport. Continuing with visible company validation.");
-  }
-
-  logValidatedText("Peers table companies", companies.toString());
-
-  ReportLogger.pass("Peers table validated successfully"
-          + " | headers=" + headers
-          + " | companies=" + companies);
-}
-private List<String> getVisiblePeersSectionValues() {
-  List<String> values = collectPeersVisibleStrings();
-  List<String> peersValues = new ArrayList<>();
-
-  boolean insidePeers = false;
-
-  for (String rawValue : values) {
-      String clean = normalizeSpaces(rawValue);
-
-      if (clean.equals("Peers") || clean.startsWith("Peers ")) {
-          insidePeers = true;
-          addPeersValue(peersValues, rawValue);
-          continue;
-      }
-
-      if (!insidePeers) {
-          continue;
-      }
-
-      if (clean.equals("Shareholding") && peersValues.size() > 3) {
-          break;
-      }
-
-      if (isHardPeersEndMarker(clean)) {
-          break;
-      }
-
-      addPeersValue(peersValues, rawValue);
-  }
-
-  /*
-   * Critical fallback:
-   * If exact Peers heading disappears after scroll, but the visible screen contains
-   * table evidence, use all visible strings as the Peers section snapshot.
-   */
-  if (peersValues.isEmpty()) {
-      boolean hasPeersEvidence = false;
-
-      for (String rawValue : values) {
-          String clean = normalizeSpaces(rawValue);
-
-          if (isPeersCompanyHeader(clean)
-                  || isPeersMetricHeader(clean)
-                  || isExactPeersCompanyName(clean)) {
-              hasPeersEvidence = true;
-              break;
-          }
-      }
-
-      if (hasPeersEvidence) {
-          for (String rawValue : values) {
-              addPeersValue(peersValues, rawValue);
-          }
-      }
-  }
-
-  return peersValues;
-}
-
-private List<String> collectPeersVisibleStrings() {
-List<String> values = new ArrayList<>();
-
-/*
-* Existing project helper: content-desc based values.
-*/
-List<String> descValues = collectVisibleContentDescriptions();
-
-for (String value : descValues) {
-   addUniquePeersString(values, value);
-}
-
-/*
-* Extra fallback for table cells exposed as text/name instead of content-desc.
-*/
-try {
-   List<WebElement> elements = driver.findElements(By.xpath("//*"));
-
-   for (WebElement element : elements) {
-       try {
-           if (element == null || !element.isDisplayed()) {
-               continue;
-           }
-
-           addUniquePeersString(values, element.getText());
-           addUniquePeersString(values, element.getAttribute("content-desc"));
-           addUniquePeersString(values, element.getAttribute("text"));
-           addUniquePeersString(values, element.getAttribute("name"));
-
-       } catch (Exception ignored) {
-           // Ignore stale/inaccessible Appium elements.
-       }
-   }
-} catch (Exception e) {
-   ReportLogger.debug("Peers visible text fallback skipped: " + cleanError(e.getMessage()));
-}
-
-return values;
-}
-
-private void addUniquePeersString(List<String> values, String rawValue) {
-if (rawValue == null) {
-   return;
-}
-
-String clean = normalizeSpaces(rawValue);
-
-if (clean.isEmpty()) {
-   return;
-}
-
-if (!values.contains(rawValue) && !values.contains(clean)) {
-   values.add(rawValue);
-}
-}
-
-private void addPeersValue(List<String> peersValues, String rawValue) {
-if (rawValue == null) {
-   return;
-}
-
-String clean = normalizeSpaces(rawValue);
-
-if (!clean.isEmpty() && !peersValues.contains(clean)) {
-   peersValues.add(clean);
-}
-
-String[] parts = rawValue.split("\\n");
-
-for (String part : parts) {
-   String cleanPart = normalizeSpaces(part);
-
-   if (!cleanPart.isEmpty() && !peersValues.contains(cleanPart)) {
-       peersValues.add(cleanPart);
-   }
-}
-}
-
-private boolean isHardPeersEndMarker(String value) {
-if (value == null) {
-   return false;
-}
-
-String clean = normalizeSpaces(value);
-
-return clean.equals("News")
-       || clean.equals("Analysis")
-       || clean.equals("Business")
-       || clean.equals("Documents");
-}
-
-private boolean isPeersCompanyHeader(String value) {
-if (value == null) {
-   return false;
-}
-
-String clean = normalizeSpaces(value).toLowerCase();
-
-return clean.equals("company")
-       || clean.startsWith("company ")
-       || clean.contains("company ");
-}
-
-private boolean isPeersMetricHeader(String value) {
-return !getPeersMetricHeaderName(value).isEmpty();
-}
-
-private String getPeersMetricHeaderName(String value) {
-if (value == null) {
-   return "";
-}
-
-String clean = normalizeSpaces(value)
-       .replace("\n", " ")
-       .replace("₹", "")
-       .toLowerCase();
-
-if (clean.contains("market cap")) {
-   return "Market Cap";
-}
-
-if (clean.contains("revenue")) {
-   return "Revenue";
-}
-
-if (clean.contains("net profit")) {
-   return "Net Profit";
-}
-
-if (clean.contains("net margin")) {
-   return "Net Margin";
-}
-
-if (clean.contains("roe")) {
-   return "RoE";
-}
-
-if (clean.contains("p/e")) {
-   return "P/E";
-}
-
-if (clean.contains("p/b")) {
-   return "P/B";
-}
-
-return "";
+    // Shared by SD_012 before opening More. Use the same bounded readiness check.
+    alignPeersSectionSafely();
 }
 
 private java.util.LinkedHashSet<String> collectVisiblePeersCompanyNames() {
-ReportLogger.step("Collecting visible Peers company names from left company column");
-
-java.util.LinkedHashSet<String> companies = new java.util.LinkedHashSet<>();
-
-WebElement peersHeading = findVisibleElement(byDesc("Peers"));
-
-if (peersHeading == null) {
-   return companies;
+    return peersCompanies(readNativeSnapshot());
 }
 
-Rectangle peersRect = peersHeading.getRect();
-Dimension size = driver.manage().window().getSize();
-
-int minY = peersRect.getY();
-int maxY = size.getHeight();
-
-WebElement shareholdingHeading = findVisibleElement(byDesc("Shareholding"));
-
-if (shareholdingHeading != null) {
-   maxY = shareholdingHeading.getRect().getY();
+private List<String> getVisiblePeersSectionValues() {
+    NativeSnapshot snapshot = readNativeSnapshot();
+    return nativeStrings(snapshot.section("Peers", "Shareholding", "Company Profile"));
 }
 
-/*
-* Company column is on the left side of the Peers table.
-* This avoids reading metric values or mixed table text as company names.
-*/
-int maxCompanyColumnX = (int) (size.getWidth() * 0.48);
-
-try {
-   List<WebElement> elements = driver.findElements(By.xpath("//*"));
-
-   for (WebElement element : elements) {
-       try {
-           if (element == null || !element.isDisplayed()) {
-               continue;
-           }
-
-           Rectangle rect = element.getRect();
-
-           int centerX = rect.getX() + rect.getWidth() / 2;
-           int centerY = rect.getY() + rect.getHeight() / 2;
-
-           if (centerY < minY || centerY > maxY) {
-               continue;
-           }
-
-           if (centerX > maxCompanyColumnX) {
-               continue;
-           }
-
-           collectPeerCompanyNameFromElement(element, companies);
-
-       } catch (Exception ignored) {
-           // Ignore stale Flutter/Appium elements.
-       }
-   }
-} catch (Exception e) {
-   ReportLogger.debug("Peers company column scan skipped: " + cleanError(e.getMessage()));
+private java.util.LinkedHashSet<String> peersCompanies(NativeSnapshot snapshot) {
+    java.util.LinkedHashSet<String> companies = new java.util.LinkedHashSet<>();
+    for (String value : nativeStrings(snapshot.section("Peers", "Shareholding", "Company Profile"))) {
+        for (String company : new String[]{"ITC", "Godfrey Phillips", "NTC", "Sinnar Bidi Udyog", "VST", "Nestle India"}) {
+            if (value.equals(company)) companies.add(company);
+        }
+    }
+    return companies;
 }
 
-ReportLogger.pass("Visible Peers company names captured: " + companies);
-
-return companies;
+private boolean peersSnapshotReady(NativeSnapshot snapshot) {
+    List<String> values = nativeStrings(snapshot.section("Peers", "Shareholding", "Company Profile"));
+    java.util.LinkedHashSet<String> companies = peersCompanies(snapshot);
+    boolean header = values.contains("Company") || values.stream().anyMatch(v -> v.contains("Market Cap") || v.contains("Revenue (TTM)"));
+    long numericCells = values.stream().filter(v -> v.matches("[-+]?\\d[\\d,]*(?:\\.\\d+)?")).count();
+    return (snapshot.has("Peers") || header) && companies.contains("ITC") && companies.size() >= 2 && numericCells >= 2;
 }
 
-private void collectPeerCompanyNameFromElement(
-   WebElement element,
-   java.util.LinkedHashSet<String> companies
-) {
-List<String> rawValues = new ArrayList<>();
-
-try {
-   rawValues.add(element.getText());
-} catch (Exception ignored) {
-   // Ignore.
-}
-
-try {
-   rawValues.add(element.getAttribute("content-desc"));
-} catch (Exception ignored) {
-   // Ignore.
-}
-
-try {
-   rawValues.add(element.getAttribute("text"));
-} catch (Exception ignored) {
-   // Ignore.
-}
-
-try {
-   rawValues.add(element.getAttribute("name"));
-} catch (Exception ignored) {
-   // Ignore.
-}
-
-for (String rawValue : rawValues) {
-   if (rawValue == null) {
-       continue;
-   }
-
-   String[] parts = rawValue.split("\\n");
-
-   for (String part : parts) {
-       String companyName = getExactPeersCompanyName(part);
-
-       if (!companyName.isEmpty()) {
-           companies.add(companyName);
-       }
-   }
-}
-}
-
-private boolean isExactPeersCompanyName(String value) {
-return !getExactPeersCompanyName(value).isEmpty();
-}
-
-private String getExactPeersCompanyName(String value) {
-if (value == null) {
-   return "";
-}
-
-String clean = normalizeSpaces(value);
-
-/*
-* Exact visible company names only.
-* Do not infer names from numeric cells or mixed strings.
-*/
-if (clean.equals("ITC")) {
-   return "ITC";
-}
-
-if (clean.equals("Godfrey Phillips")) {
-   return "Godfrey Phillips";
-}
-
-if (clean.equals("Nestle India")) {
-   return "Nestle India";
-}
-
-if (clean.equals("NTC")) {
-   return "NTC";
-}
-
-if (clean.equals("VST")) {
-   return "VST";
-}
-
-return "";
-}
-
-private void peersPageSwipeUp() {
-try {
-   Dimension size = driver.manage().window().getSize();
-
-   int x = (int) (size.getWidth() * 0.88);
-   int startY = (int) (size.getHeight() * 0.78);
-   int endY = (int) (size.getHeight() * 0.40);
-
-   PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-   Sequence swipe = new Sequence(finger, 1);
-
-   swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-   swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-   swipe.addAction(finger.createPointerMove(Duration.ofMillis(620), PointerInput.Origin.viewport(), x, endY));
-   swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-   driver.perform(Collections.singletonList(swipe));
-
-} catch (Exception firstError) {
-   Map<String, Object> params = new HashMap<>();
-   params.put("left", 760);
-   params.put("top", 760);
-   params.put("width", 260);
-   params.put("height", 980);
-   params.put("direction", "up");
-   params.put("percent", 0.42);
-
-   driver.executeScript("mobile: scrollGesture", params);
-}
-}
-
-private void peersPageSwipeDown() {
-try {
-   Dimension size = driver.manage().window().getSize();
-
-   int x = (int) (size.getWidth() * 0.88);
-   int startY = (int) (size.getHeight() * 0.40);
-   int endY = (int) (size.getHeight() * 0.78);
-
-   PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-   Sequence swipe = new Sequence(finger, 1);
-
-   swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-   swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-   swipe.addAction(finger.createPointerMove(Duration.ofMillis(620), PointerInput.Origin.viewport(), x, endY));
-   swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-   driver.perform(Collections.singletonList(swipe));
-
-} catch (Exception firstError) {
-   Map<String, Object> params = new HashMap<>();
-   params.put("left", 760);
-   params.put("top", 760);
-   params.put("width", 260);
-   params.put("height", 980);
-   params.put("direction", "down");
-   params.put("percent", 0.42);
-
-   driver.executeScript("mobile: scrollGesture", params);
-}
-}
-
-private void peersTinySwipeUp() {
-try {
-   Dimension size = driver.manage().window().getSize();
-
-   int x = (int) (size.getWidth() * 0.88);
-   int startY = (int) (size.getHeight() * 0.66);
-   int endY = (int) (size.getHeight() * 0.56);
-
-   PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-   Sequence swipe = new Sequence(finger, 1);
-
-   swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-   swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-   swipe.addAction(finger.createPointerMove(Duration.ofMillis(300), PointerInput.Origin.viewport(), x, endY));
-   swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-   driver.perform(Collections.singletonList(swipe));
-
-} catch (Exception e) {
-   ReportLogger.debug("Peers tiny swipe up skipped: " + cleanError(e.getMessage()));
-}
-}
-
-private void peersTinySwipeDown() {
-try {
-   Dimension size = driver.manage().window().getSize();
-
-   int x = (int) (size.getWidth() * 0.88);
-   int startY = (int) (size.getHeight() * 0.56);
-   int endY = (int) (size.getHeight() * 0.66);
-
-   PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-   Sequence swipe = new Sequence(finger, 1);
-
-   swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-   swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-   swipe.addAction(finger.createPointerMove(Duration.ofMillis(300), PointerInput.Origin.viewport(), x, endY));
-   swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-   driver.perform(Collections.singletonList(swipe));
-
-} catch (Exception e) {
-   ReportLogger.debug("Peers tiny swipe down skipped: " + cleanError(e.getMessage()));
-}
+private void validatePeersVisibleTable() {
+    NativeSnapshot snapshot = readNativeSnapshot();
+    if (!peersSnapshotReady(snapshot)) {
+        throw new AssertionError("Peers company rows or numeric cells missing | values="
+                + nativeStrings(snapshot.section("Peers", "Shareholding", "Company Profile")));
+    }
+    logValidatedText("Peers table companies", peersCompanies(snapshot).toString());
+    logValidatedText("Peers live table", nativeStrings(snapshot.section("Peers", "Shareholding", "Company Profile")).toString());
 }
 
 //=========================================================
@@ -7315,18 +6564,14 @@ try {
 //=========================================================
 
 public void verifyPeersMoreDetails() {
- ReportLogger.step("Verifying Peers More Details section");
-
- recoverStockDetailsIfNeeded();
-
- openPeersMoreDetailsSafely();
-
- try {
-     validatePeersMoreDetailsPage();
+ runKeyRatiosWithImmediateLookups(() -> {
+     ReportLogger.step("Verifying Peers More Details section");
+     recoverStockDetailsIfNeeded();
+     openPeersMoreDetailsSafely();
+     runWithChildScreenCleanup(this::validatePeersMoreDetailsPage,
+             this::returnFromPeersMoreDetailsPageSafely);
      ReportLogger.pass("Peers More Details section validated successfully");
- } finally {
-     returnFromPeersMoreDetailsPageSafely();
- }
+ });
 }
 
 private void returnFromPeersMoreDetailsPageSafely() {
@@ -7730,7 +6975,7 @@ private void validatePeersMoreTabCompaniesAndRowLabels(String tabName) {
 
  assertAllPeersMoreCompaniesPresent(tabName, companies);
 
- java.util.LinkedHashSet<String> rowLabels = collectPeersMoreVisibleRowLabels(tabName);
+ java.util.LinkedHashSet<String> rowLabels = collectPeersMoreRowLabelsWithVerticalScan(tabName);
 
  List<String> expectedLabels = getExpectedPeersMoreRowLabels(tabName);
  List<String> missingLabels = new ArrayList<>();
@@ -7772,31 +7017,63 @@ private java.util.LinkedHashSet<String> collectPeersMoreVisibleRowLabels(String 
      }
  }
 
- try {
-     List<WebElement> elements = driver.findElements(By.xpath("//*"));
-
-     for (WebElement element : elements) {
-         try {
-             if (element == null || !element.isDisplayed()) {
-                 continue;
+ // Retain native TextView/ImageView support without repeating an entire XPath tree scan.
+ for (String expected : getExpectedPeersMoreRowLabels(tabName)) {
+     if (rowLabels.contains(expected)) continue;
+     By[] rowLocators = "Short term debt to equity ratio".equals(expected)
+             ? new By[]{byDescContains("Short"), byTextContains("Short"),
+                     byDescContains("short"), byTextContains("short")}
+             : new By[]{byDescContains(expected), byTextContains(expected)};
+     for (By locator : rowLocators) {
+         for (WebElement element : driver.findElements(locator)) {
+             try {
+                 if (element.isDisplayed() && isFullyOnValuationScreen(element.getRect())) {
+                     collectPeersMoreRowLabelFromText(getElementReadableText(element), tabName, rowLabels);
+                 }
+             } catch (StaleElementReferenceException replacedRow) {
+                 // The next body snapshot will reacquire a row rebuilt during scrolling.
              }
-
-             collectPeersMoreRowLabelFromText(element.getText(), tabName, rowLabels);
-             collectPeersMoreRowLabelFromText(element.getAttribute("content-desc"), tabName, rowLabels);
-             collectPeersMoreRowLabelFromText(element.getAttribute("text"), tabName, rowLabels);
-             collectPeersMoreRowLabelFromText(element.getAttribute("name"), tabName, rowLabels);
-
-         } catch (Exception ignored) {
-             // Ignore stale Flutter/Appium elements.
          }
      }
- } catch (Exception e) {
-     ReportLogger.debug("Peers More row label fallback skipped: " + cleanError(e.getMessage()));
  }
-
  ReportLogger.step("Peers More row labels captured for " + tabName + ": " + rowLabels);
 
  return rowLabels;
+}
+
+private java.util.LinkedHashSet<String> collectPeersMoreRowLabelsWithVerticalScan(String tabName) {
+    java.util.LinkedHashSet<String> labels = new java.util.LinkedHashSet<>();
+    List<String> expected = getExpectedPeersMoreRowLabels(tabName);
+    final int[] swipes = {0};
+    runWithChildScreenCleanup(() -> {
+        int stableViews = 0;
+        String previous = null;
+        long noProgressDeadline = System.nanoTime() + ExecutionProfile.longWait().toNanos();
+        for (int attempt = 0; attempt < 12; attempt++) {
+            java.util.LinkedHashSet<String> visible = collectPeersMoreVisibleRowLabels(tabName);
+            int before = labels.size();
+            labels.addAll(visible);
+            if (labels.containsAll(expected)) return;
+            if (labels.size() > before) {
+                noProgressDeadline = System.nanoTime() + ExecutionProfile.longWait().toNanos();
+            }
+            if (labels.size() == before && System.nanoTime() >= noProgressDeadline) break;
+            String signature = visible.toString();
+            stableViews = labels.size() == before && signature.equals(previous) ? stableViews + 1 : 0;
+            previous = signature;
+            if (stableViews >= 3 || attempt == 11) break;
+            swipeVisibleBody(true, "peers-more-rows");
+            swipes[0]++;
+            sleep(ExecutionProfile.pollingInterval().toMillis());
+        }
+    }, () -> {
+        // Restore the body before the next tab/company scan. Only undo swipes made here.
+        for (int i = 0; i < swipes[0]; i++) {
+            swipeVisibleBody(false, "peers-more-rows");
+            sleep(ExecutionProfile.pollingInterval().toMillis());
+        }
+    });
+    return labels;
 }
 
 private void collectPeersMoreRowLabelFromText(
@@ -7808,14 +7085,19 @@ private void collectPeersMoreRowLabelFromText(
      return;
  }
 
- String clean = normalizeSpaces(text);
+ String clean = normalizeSpaces(text.replace("\\n", " "));
 
  if (clean.isEmpty()) {
      return;
  }
 
  for (String expectedLabel : getExpectedPeersMoreRowLabels(tabName)) {
-     if (clean.equals(expectedLabel) || clean.contains(expectedLabel)) {
+     if (clean.equals(expectedLabel) || clean.contains(expectedLabel)
+             || titlesMatchKeyRatiosMoreExpectedBlock(extractCleanKeyRatiosMoreBlockTitle(clean), expectedLabel)
+             || ("Short term debt to equity ratio".equals(expectedLabel)
+                 && Pattern.compile("(?i)^short[\\s\\-–—]+term\\s+debt\\s+to\\s+equity"
+                         + "(?:\\s+ratio)?\\s*(?:\\(%\\))?\\s*(?::|\\||--|N/?A|[-+]?\\d|$)")
+                         .matcher(clean).find())) {
          rowLabels.add(expectedLabel);
      }
  }
@@ -8366,1219 +7648,263 @@ private int getPeersMoreTableHeaderCenterY() {
 //=========================================================
 
 public void verifyShareholding() {
-ReportLogger.step("Verifying Shareholding section");
-
-recoverStockDetailsIfNeeded();
-
-alignShareholdingSectionSafely();
-
-stabilizeShareholdingBody();
-
-if (!isShareholdingSectionVisibleEnough()) {
-   throw new AssertionError("Shareholding section is not visible enough after alignment"
-           + " | snapshot=" + getShareholdingCurrentSectionSnapshot());
+    runKeyRatiosWithImmediateLookups(() -> {
+        ReportLogger.step("Verifying Shareholding with bounded native snapshots");
+        recoverStockDetailsIfNeeded();
+        alignShareholdingSectionSafely();
+        java.util.LinkedHashSet<String> quarters = collectShareholdingQuarters();
+        if (quarters.size() < 4) throw new AssertionError("Too few Shareholding quarters | expectedAtLeast=4 | actual=" + quarters);
+        for (String quarter : quarters) {
+            alignShareholdingSectionSafely();
+            openShareholdingQuarter(quarter);
+            validateShareholdingQuarter(quarter);
+        }
+        logValidatedText("Shareholding quarter chips", quarters.toString());
+        ReportLogger.pass("Every available Shareholding quarter validated with holder labels and actual percentage values");
+    });
 }
 
-logValidatedText("Shareholding section", "Shareholding");
+private static final Pattern SHAREHOLDING_QUARTER = Pattern.compile("^(Mar|Jun|Sep|Dec)\\s*['’‘]?\\s*(\\d{2})$");
+private static final List<String> SHAREHOLDING_HOLDERS = Arrays.asList("FIIs", "DIIs", "Others", "Mutual Fund");
 
-validateShareholdingSectionContent();
+private String canonicalShareholdingQuarter(String value) {
+    java.util.regex.Matcher matcher = SHAREHOLDING_QUARTER.matcher(normalizeSpaces(value));
+    return matcher.matches() ? matcher.group(1) + " '" + matcher.group(2) : "";
+}
 
-ReportLogger.pass("Shareholding section validated successfully");
+private List<NativeNode> shareholdingNodes(NativeSnapshot snapshot) {
+    return snapshot.section("Shareholding", "Company Profile", "Business", "News", "Analysis");
+}
+
+private List<NativeNode> shareholdingQuarterNodes(NativeSnapshot snapshot) {
+    List<NativeNode> chips = new ArrayList<>();
+    for (NativeNode node : shareholdingNodes(snapshot)) {
+        if (!canonicalShareholdingQuarter(node.text).isEmpty()) chips.add(node);
+    }
+    chips.sort((a, b) -> Integer.compare(a.visible.getX(), b.visible.getX()));
+    return chips;
+}
+
+private boolean shareholdingBodyReady(NativeSnapshot snapshot) {
+    List<String> values = nativeStrings(shareholdingNodes(snapshot));
+    boolean type = values.stream().anyMatch(v -> v.equals("Type") || v.startsWith("Type "));
+    boolean percentage = values.stream().anyMatch(v -> v.contains("Percentage"));
+    boolean holder = values.stream().anyMatch(SHAREHOLDING_HOLDERS::contains);
+    boolean number = values.stream().anyMatch(v -> v.matches("\\d{1,3}(?:\\.\\d{1,2})?\\s*%?") && shareholdingPercentage(v) != null);
+    return !shareholdingQuarterNodes(snapshot).isEmpty() && type && percentage && holder && number;
 }
 
 private void alignShareholdingSectionSafely() {
-ReportLogger.step("Aligning Shareholding section safely");
-
-if (isShareholdingSectionVisibleEnough()) {
-   ReportLogger.pass("Shareholding section is already visible enough");
-   return;
-}
-
-/*
-* Shareholding is below Peers and above Company Profile.
-* From fresh Stock Details page, move downward.
-*/
-for (int i = 1; i <= 30; i++) {
-   if (isShareholdingSectionVisibleEnough()) {
-       ReportLogger.pass("Shareholding section aligned after swipe up " + i);
-       return;
-   }
-
-   if (isCompanyProfileVisible()) {
-       ReportLogger.debug("Overscrolled below Shareholding into Company Profile. Starting recovery.");
-       break;
-   }
-
-   shareholdingPageSwipeUp();
-   sleep(800);
-}
-
-/*
-* Recovery if page crossed below Shareholding.
-*/
-for (int i = 1; i <= 14; i++) {
-   if (isShareholdingSectionVisibleEnough()) {
-       ReportLogger.pass("Shareholding section aligned after recovery swipe down " + i);
-       return;
-   }
-
-   shareholdingPageSwipeDown();
-   sleep(700);
-}
-
-/*
-* Final nearby adjustment.
-*/
-for (int i = 1; i <= 10; i++) {
-   if (isShareholdingSectionVisibleEnough()) {
-       ReportLogger.pass("Shareholding section aligned after final adjustment " + i);
-       return;
-   }
-
-   if (isCompanyProfileVisible()) {
-       shareholdingTinySwipeDown();
-   } else {
-       shareholdingTinySwipeUp();
-   }
-
-   sleep(600);
-}
-
-throw new AssertionError("Shareholding section could not be aligned safely");
-}
-
-private boolean isShareholdingSectionVisibleEnough() {
-List<String> values = collectShareholdingVisibleStrings();
-
-boolean hasHeading = false;
-boolean hasQuarter = false;
-boolean hasLegend = false;
-boolean hasTypeHeader = false;
-boolean hasPercentageHeader = false;
-boolean hasNumericValue = false;
-
-for (String value : values) {
-   String clean = normalizeSpaces(value);
-
-   if (clean.isEmpty()) {
-       continue;
-   }
-
-   if (clean.equals("Shareholding") || clean.startsWith("Shareholding ")) {
-       hasHeading = true;
-   }
-
-   if (isShareholdingQuarterChip(clean)) {
-       hasQuarter = true;
-   }
-
-   if (isShareholdingLegendLabel(clean)) {
-       hasLegend = true;
-   }
-
-   if (clean.equals("Type") || clean.contains("Type")) {
-       hasTypeHeader = true;
-   }
-
-   if (clean.equals("Percentage (%)")
-           || clean.contains("Percentage (%)")
-           || clean.contains("Percentage")) {
-       hasPercentageHeader = true;
-   }
-
-   if (isValidShareholdingPercentageNumber(clean)) {
-       hasNumericValue = true;
-   }
-
-   String[] parts = value.split("\\n|\\s{2,}|\\|");
-
-   for (String part : parts) {
-       String cleanPart = normalizeSpaces(part);
-
-       if (cleanPart.isEmpty()) {
-           continue;
-       }
-
-       if (isShareholdingQuarterChip(cleanPart)) {
-           hasQuarter = true;
-       }
-
-       if (isShareholdingLegendLabel(cleanPart)) {
-           hasLegend = true;
-       }
-
-       if (cleanPart.equals("Type") || cleanPart.contains("Type")) {
-           hasTypeHeader = true;
-       }
-
-       if (cleanPart.equals("Percentage (%)")
-               || cleanPart.contains("Percentage (%)")
-               || cleanPart.contains("Percentage")) {
-           hasPercentageHeader = true;
-       }
-
-       if (isValidShareholdingPercentageNumber(cleanPart)) {
-           hasNumericValue = true;
-       }
-   }
-}
-
-/*
-* Stable rule:
-* Shareholding title + quarter chips is not enough. The body/table must be visible.
-*/
-return hasHeading && hasQuarter && hasTypeHeader && hasPercentageHeader && hasLegend && hasNumericValue;
-}
-
-
-private void stabilizeShareholdingBody() {
-  ReportLogger.step("Stabilizing Shareholding body");
-
-  for (int i = 1; i <= 12; i++) {
-      if (isShareholdingBodyReady()) {
-          ReportLogger.pass("Shareholding body stabilized with Type, Percentage, labels and numeric values");
-          return;
-      }
-
-      if (isCompanyProfileVisible()) {
-          ReportLogger.debug("Shareholding body overscrolled into Company Profile. Tiny swipe down attempt=" + i);
-          shareholdingTinySwipeDown();
-      } else {
-          ReportLogger.debug("Shareholding heading/chips visible but body not ready. Tiny swipe up attempt=" + i);
-          shareholdingTinySwipeUp();
-      }
-
-      sleep(750);
-  }
-
-  if (!isShareholdingBodyReady()) {
-      throw new AssertionError("Shareholding body not visible after alignment. Type / Percentage / holder rows missing"
-              + " | snapshot=" + getShareholdingCurrentSectionSnapshot());
-  }
-}
-
-private boolean isShareholdingBodyReady() {
-  List<String> values = collectShareholdingVisibleStrings();
-
-  boolean hasShareholding = false;
-  boolean hasQuarter = false;
-  boolean hasType = false;
-  boolean hasPercentage = false;
-  boolean hasHolderLabel = false;
-  boolean hasNumericValue = false;
-
-  for (String value : values) {
-      String clean = normalizeSpaces(value);
-
-      if (clean.isEmpty()) {
-          continue;
-      }
-
-      if (clean.equals("Shareholding") || clean.startsWith("Shareholding ")) {
-          hasShareholding = true;
-      }
-
-      if (isShareholdingQuarterChip(clean)) {
-          hasQuarter = true;
-      }
-
-      if (clean.equals("Type") || clean.contains("Type")) {
-          hasType = true;
-      }
-
-      if (clean.equals("Percentage (%)")
-              || clean.contains("Percentage (%)")
-              || clean.contains("Percentage")) {
-          hasPercentage = true;
-      }
-
-      if (isShareholdingLegendLabel(clean)) {
-          hasHolderLabel = true;
-      }
-
-      if (isValidShareholdingPercentageNumber(clean)) {
-          hasNumericValue = true;
-      }
-
-      String[] parts = value.split("\\n|\\s{2,}|\\|");
-
-      for (String part : parts) {
-          String cleanPart = normalizeSpaces(part);
-
-          if (cleanPart.isEmpty()) {
-              continue;
-          }
-
-          if (isShareholdingQuarterChip(cleanPart)) {
-              hasQuarter = true;
-          }
-
-          if (cleanPart.equals("Type") || cleanPart.contains("Type")) {
-              hasType = true;
-          }
-
-          if (cleanPart.equals("Percentage (%)")
-                  || cleanPart.contains("Percentage (%)")
-                  || cleanPart.contains("Percentage")) {
-              hasPercentage = true;
-          }
-
-          if (isShareholdingLegendLabel(cleanPart)) {
-              hasHolderLabel = true;
-          }
-
-          if (isValidShareholdingPercentageNumber(cleanPart)) {
-              hasNumericValue = true;
-          }
-      }
-  }
-
-  return hasShareholding && hasQuarter && hasType && hasPercentage && hasHolderLabel && hasNumericValue;
-}
-
-private void validateShareholdingSectionContent() {
-ReportLogger.step("Validating Shareholding section content dynamically for all available quarter chips");
-
-stabilizeShareholdingBody();
-
-java.util.LinkedHashSet<String> capturedQuarters = collectShareholdingQuarterChipsWithHorizontalScan();
-
-/*
- * The application currently exposes the latest four reporting quarters.
- * Quarter names change over time, so hardcoding Mar/Jun/Sep/Dec years makes the
- * test expire every quarter and incorrectly treats unavailable history as a bug.
- */
-final int minimumExpectedQuarterCount = 4;
-
-if (capturedQuarters.size() < minimumExpectedQuarterCount) {
-   throw new AssertionError("Too few Shareholding quarter chips"
-           + " | expectedAtLeast=" + minimumExpectedQuarterCount
-           + " | captured=" + capturedQuarters);
-}
-
-Pattern quarterPattern = Pattern.compile(
-       "^(Mar|Jun|Sep|Dec)\\s+'\\d{2}$"
-);
-
-for (String quarter : capturedQuarters) {
-   if (!quarterPattern.matcher(quarter).matches()) {
-       throw new AssertionError("Invalid Shareholding quarter format"
-               + " | quarter=" + quarter
-               + " | captured=" + capturedQuarters);
-   }
-}
-
-/*
- * Validate every quarter actually supplied by the app. This supports four or
- * more chips without weakening the labels and percentage-value assertions.
- */
-for (String quarter : capturedQuarters) {
-   openShareholdingQuarterChipSafely(quarter);
-   stabilizeShareholdingBody();
-   validateShareholdingChipData(quarter);
-}
-
-logValidatedText("Shareholding quarter chips", capturedQuarters.toString());
-
-ReportLogger.pass("Shareholding section validated successfully for all available chips, labels and numeric percentage values"
-       + " | quarterCount=" + capturedQuarters.size()
-       + " | quarters=" + capturedQuarters);
-}
-
-private void openShareholdingQuarterChipSafely(String quarter) {
-ReportLogger.step("Opening Shareholding quarter chip: " + quarter);
-
-if (tapShareholdingQuarterIfVisible(quarter)) {
-   sleep(900);
-   ReportLogger.pass("Shareholding quarter opened: " + quarter);
-   return;
-}
-
-for (int i = 1; i <= 6; i++) {
-   shareholdingQuarterSwipeLeft();
-   sleep(500);
-
-   if (tapShareholdingQuarterIfVisible(quarter)) {
-       sleep(900);
-       ReportLogger.pass("Shareholding quarter opened after left swipe " + i + ": " + quarter);
-       return;
-   }
-}
-
-for (int i = 1; i <= 6; i++) {
-   shareholdingQuarterSwipeRight();
-   sleep(500);
-
-   if (tapShareholdingQuarterIfVisible(quarter)) {
-       sleep(900);
-       ReportLogger.pass("Shareholding quarter opened after right swipe " + i + ": " + quarter);
-       return;
-   }
-}
-
-throw new AssertionError("Shareholding quarter chip not found/opened: " + quarter);
-}
-
-private boolean tapShareholdingQuarterIfVisible(String quarter) {
-String[] quarterVariants = new String[]{
-       quarter,
-       quarter.replace("'", "’"),
-       quarter.replace("'", "‘"),
-       quarter.replace(" '", " ")
-};
-
-for (String quarterVariant : quarterVariants) {
-   WebElement chip = findVisibleElement(byDesc(quarterVariant));
-
-   if (chip == null) {
-       chip = findVisibleElement(byDescContains(quarterVariant));
-   }
-
-   if (chip == null) {
-       chip = findShareholdingTextElement(quarterVariant);
-   }
-
-   if (chip != null) {
-       tapElementCenter(chip);
-       return true;
-   }
-}
-
-return false;
-}
-
-private WebElement findShareholdingTextElement(String textToFind) {
-    /*
-     * Fast scan first.
-     */
-    List<WebElement> fastElements = getVisibleViewElementsFast();
-
-    WebElement matchedElement = findTextElementInList(fastElements, textToFind);
-
-    if (matchedElement != null) {
-        return matchedElement;
+    NativeSnapshot snapshot = readNativeSnapshot();
+    String previous = "";
+    int unchanged = 0;
+    long deadline = System.nanoTime() + ExecutionProfile.longWait().toNanos();
+    for (int attempt = 0; attempt < 28; attempt++) {
+        if (shareholdingBodyReady(snapshot)) return;
+        if (System.nanoTime() >= deadline || unchanged >= 3) break;
+        List<String> values = nativeStrings(shareholdingNodes(snapshot));
+        boolean tableWithoutChips = shareholdingQuarterNodes(snapshot).isEmpty()
+                && values.contains("Type") && values.stream().anyMatch(v -> v.contains("Percentage"));
+        boolean below = tableWithoutChips || (!snapshot.has("Shareholding")
+                && (snapshot.has("Company Profile") || snapshot.has("Business") || snapshot.has("News") || snapshot.has("Analysis")));
+        swipeStockSectionBody(!below, snapshot.has("Shareholding") || tableWithoutChips, "shareholding");
+        sleep(400);
+        snapshot = readNativeSnapshot();
+        String current = nativeSignature(snapshot.nodes);
+        unchanged = current.equals(previous) ? unchanged + 1 : 0;
+        previous = current;
     }
-
-    /*
-     * Slow XPath fallback only if fast scan failed.
-     */
-    List<WebElement> fallbackElements = getVisibleElementsFallbackSlow();
-
-    matchedElement = findTextElementInList(fallbackElements, textToFind);
-
-    if (matchedElement != null) {
-        return matchedElement;
-    }
-
-    return null;
+    if (shareholdingBodyReady(snapshot)) return;
+    throw new AssertionError("Shareholding chips and table not ready after bounded alignment | values=" + nativeStrings(shareholdingNodes(snapshot)));
 }
-private void validateShareholdingChipData(String quarter) {
-    ReportLogger.step("Validating Shareholding data for quarter: " + quarter);
 
-    stabilizeShareholdingBody();
+private java.util.LinkedHashSet<String> collectShareholdingQuarters() {
+    java.util.LinkedHashSet<String> quarters = new java.util.LinkedHashSet<>();
+    NativeSnapshot snapshot = readNativeSnapshot();
+    // Find both ends, also supporting a test that starts in the middle of history.
+    snapshot = scanShareholdingQuarterStrip(snapshot, false, quarters);
+    scanShareholdingQuarterStrip(snapshot, true, quarters);
+    ReportLogger.pass("Captured available Shareholding quarters: " + quarters);
+    return quarters;
+}
 
-    java.util.LinkedHashSet<String> headers = new java.util.LinkedHashSet<>();
+private NativeSnapshot scanShareholdingQuarterStrip(NativeSnapshot snapshot, boolean forward,
+        java.util.LinkedHashSet<String> quarters) {
+    String previous = "";
+    int unchanged = 0;
+    for (int attempt = 0; attempt <= 10; attempt++) {
+        List<NativeNode> chips = shareholdingQuarterNodes(snapshot);
+        if (chips.isEmpty()) throw new AssertionError("Shareholding quarter strip is not visible; capture its native XML");
+        for (NativeNode chip : chips) quarters.add(canonicalShareholdingQuarter(chip.text));
+        String signature = nativeSignature(chips);
+        unchanged = signature.equals(previous) ? unchanged + 1 : 0;
+        if (unchanged >= 2) return snapshot;
+        if (attempt == 10) break;
+        previous = signature;
+        swipeShareholdingQuarterStrip(snapshot, forward);
+        sleep(350);
+        snapshot = readNativeSnapshot();
+    }
+    throw new AssertionError("Shareholding history did not reach its end after 10 bounded swipes | captured=" + quarters);
+}
+
+private void swipeShareholdingQuarterStrip(NativeSnapshot snapshot, boolean forward) {
+    List<NativeNode> chips = shareholdingQuarterNodes(snapshot);
+    if (chips.isEmpty()) throw new AssertionError("No visible Shareholding quarter chip to anchor the horizontal swipe");
+    NativeNode anchor = chips.get(0);
+    int y = anchor.visible.getY() + anchor.visible.getHeight() / 2;
+    int startX = (int) (snapshot.screen.getWidth() * (forward ? 0.84 : 0.16));
+    int endX = (int) (snapshot.screen.getWidth() * (forward ? 0.16 : 0.84));
+    PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "shareholding-quarter");
+    Sequence swipe = new Sequence(finger, 0);
+    swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, y));
+    swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+    swipe.addAction(finger.createPointerMove(Duration.ofMillis(450), PointerInput.Origin.viewport(), endX, y));
+    swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+    driver.perform(Collections.singletonList(swipe));
+}
+
+private void openShareholdingQuarter(String quarter) {
+    NativeSnapshot snapshot = readNativeSnapshot();
+    for (int direction = 0; direction < 2; direction++) {
+        String previous = "";
+        for (int attempt = 0; attempt <= 10; attempt++) {
+            List<NativeNode> chips = shareholdingQuarterNodes(snapshot);
+            for (NativeNode chip : chips) {
+                if (!quarter.equals(canonicalShareholdingQuarter(chip.text))) continue;
+                // A clipped neighbour is not a reliable tap target.
+                if (chip.visible.getWidth() < chip.bounds.getWidth() * 0.85) continue;
+                tapShareholdingQuarterNode(chip);
+                sleep(500);
+                waitForShareholdingQuarterBody(quarter);
+                return;
+            }
+            String signature = nativeSignature(chips);
+            if (signature.equals(previous) || attempt == 10) break;
+            previous = signature;
+            swipeShareholdingQuarterStrip(snapshot, direction == 0);
+            sleep(350);
+            snapshot = readNativeSnapshot();
+        }
+    }
+    throw new AssertionError("Shareholding quarter could not be brought fully into view: " + quarter);
+}
+
+private void tapShareholdingQuarterNode(NativeNode chip) {
+    int x = chip.visible.getX() + chip.visible.getWidth() / 2;
+    int y = chip.visible.getY() + chip.visible.getHeight() / 2;
+    PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "shareholding-quarter-tap");
+    Sequence tap = new Sequence(finger, 0);
+    tap.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, y));
+    tap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+    tap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+    driver.perform(Collections.singletonList(tap));
+}
+
+private void waitForShareholdingQuarterBody(String quarter) {
+    final String[] previous = {null};
+    keyRatioWait(ExecutionProfile.defaultWait()).until(d -> {
+        NativeSnapshot snapshot = readNativeSnapshot();
+        boolean selectedExposed = false, targetSelected = false;
+        for (NativeNode chip : shareholdingQuarterNodes(snapshot)) {
+            if ("true".equals(chip.element.getAttribute("selected")) || "true".equals(chip.element.getAttribute("checked"))) {
+                selectedExposed = true;
+                targetSelected |= quarter.equals(canonicalShareholdingQuarter(chip.text));
+            }
+        }
+        if (selectedExposed && !targetSelected) return false;
+        if (!shareholdingBodyReady(snapshot)) return false;
+        String current = nativeSignature(shareholdingNodes(snapshot));
+        boolean stable = current.equals(previous[0]);
+        previous[0] = current;
+        return stable;
+    });
+}
+
+private String shareholdingPercentage(String raw) {
+    String clean = normalizeSpaces(raw).replace("%", "").trim();
+    if (!clean.matches("\\d{1,3}(?:\\.\\d{1,2})?")) return null;
+    double number = Double.parseDouble(clean);
+    return number >= 0 && number <= 100 ? clean : null;
+}
+
+private void validateShareholdingQuarter(String quarter) {
     java.util.LinkedHashSet<String> labels = new java.util.LinkedHashSet<>();
-    List<String> numericValues = new ArrayList<>();
-
-    int stableCount = 0;
-    int previousLabelCount = 0;
-    int previousNumberCount = 0;
-
-    for (int attempt = 1; attempt <= 8; attempt++) {
-        List<String> values = getShareholdingCurrentSectionSnapshot();
-
-        for (String value : values) {
-            collectShareholdingHeaderLabelAndNumbers(value, headers, labels, numericValues);
-
-            if (value != null) {
-                String[] parts = value.split("\\n|\\s{2,}|\\|");
-
-                for (String part : parts) {
-                    collectShareholdingHeaderLabelAndNumbers(part, headers, labels, numericValues);
+    java.util.LinkedHashSet<String> headers = new java.util.LinkedHashSet<>();
+    Map<String, String> percentages = new java.util.LinkedHashMap<>();
+    String previous = "";
+    int unchanged = 0;
+    for (int attempt = 0; attempt < 8; attempt++) {
+        NativeSnapshot snapshot = readNativeSnapshot();
+        List<NativeNode> nodes = shareholdingNodes(snapshot);
+        int headerY = Integer.MAX_VALUE;
+        for (NativeNode node : nodes) {
+            for (String part : node.text.split("\\n")) {
+                String clean = normalizeSpaces(part);
+                if (clean.equals("Type")) { headers.add("Type"); headerY = Math.min(headerY, node.visible.getY()); }
+                if (clean.contains("Percentage")) { headers.add("Percentage (%)"); headerY = Math.min(headerY, node.visible.getY()); }
+            }
+        }
+        // Once the header scrolls above the viewport, continue collecting the
+        // same quarter's rows; never read the preceding Peers numbers or years.
+        if (headerY == Integer.MAX_VALUE && headers.size() == 2) headerY = (int) (snapshot.screen.getHeight() * 0.08);
+        for (NativeNode node : nodes) {
+            if (node.visible.getY() < headerY) continue;
+            String[] parts = node.text.split("\\n");
+            for (int i = 0; i < parts.length; i++) {
+                String clean = normalizeSpaces(parts[i]);
+                if (!SHAREHOLDING_HOLDERS.contains(clean)) continue;
+                labels.add(clean);
+                if (i + 1 < parts.length && shareholdingPercentage(parts[i + 1]) != null) {
+                    percentages.put(clean, shareholdingPercentage(parts[i + 1]));
+                    continue;
+                }
+                // Separate native text nodes: associate the number in the same
+                // table row, rather than counting unrelated chart values.
+                if (parts.length == 1) {
+                    NativeNode best = null;
+                    int distance = Integer.MAX_VALUE;
+                    int labelCenter = node.visible.getY() + node.visible.getHeight() / 2;
+                    for (NativeNode candidate : nodes) {
+                        if (shareholdingPercentage(candidate.text) == null) continue;
+                        if (candidate.visible.getX() <= node.visible.getX()) continue;
+                        int candidateCenter = candidate.visible.getY() + candidate.visible.getHeight() / 2;
+                        int delta = Math.abs(candidateCenter - labelCenter);
+                        int tolerance = Math.max(8, Math.min(node.visible.getHeight(), candidate.visible.getHeight()) / 2);
+                        if (delta <= tolerance && delta < distance) { best = candidate; distance = delta; }
+                    }
+                    if (best != null) percentages.put(clean, shareholdingPercentage(best.text));
                 }
             }
-        }
-
-        /*
-         * Fast element-level bounded scan.
-         * Avoid global XPath here.
-         */
-        collectShareholdingHeaderLabelAndNumbersFromVisibleFastElements(headers, labels, numericValues);
-
-        boolean allExpectedLabelsCaptured =
-                labels.contains("FIIs")
-                        && labels.contains("DIIs")
-                        && labels.contains("Others")
-                        && labels.contains("Mutual Fund");
-
-        if (allExpectedLabelsCaptured) {
-            ReportLogger.pass("All expected Shareholding labels captured for quarter: " + quarter);
-            break;
-        }
-
-        boolean noNewData =
-                labels.size() == previousLabelCount
-                        && numericValues.size() == previousNumberCount;
-
-        if (noNewData) {
-            stableCount++;
-        } else {
-            stableCount = 0;
-            previousLabelCount = labels.size();
-            previousNumberCount = numericValues.size();
-        }
-
-        if (isCompanyProfileVisible()) {
-            ReportLogger.debug("Reached Company Profile while collecting Shareholding rows. Stopping row capture.");
-            break;
-        }
-
-        if (stableCount >= 2 && labels.size() >= 2 && numericValues.size() >= 2) {
-            ReportLogger.debug("No new Shareholding rows after repeated attempts. Stopping capture.");
-            break;
-        }
-
-        shareholdingTinySwipeUp();
-        sleep(650);
-    }
-
-    if (!headers.contains("Type")) {
-        throw new AssertionError("Shareholding Type header missing"
-                + " | quarter=" + quarter
-                + " | headers=" + headers
-                + " | labels=" + labels
-                + " | numbers=" + numericValues);
-    }
-
-    if (!headers.contains("Percentage (%)")) {
-        throw new AssertionError("Shareholding Percentage (%) header missing"
-                + " | quarter=" + quarter
-                + " | headers=" + headers
-                + " | labels=" + labels
-                + " | numbers=" + numericValues);
-    }
-
-    List<String> expectedLabels = Arrays.asList(
-            "FIIs",
-            "DIIs",
-            "Others",
-            "Mutual Fund"
-    );
-
-    List<String> missingLabels = new ArrayList<>();
-
-    for (String expectedLabel : expectedLabels) {
-        if (!labels.contains(expectedLabel)) {
-            missingLabels.add(expectedLabel);
-        }
-    }
-
-    if (!missingLabels.isEmpty()) {
-        throw new AssertionError("Shareholding labels missing"
-                + " | quarter=" + quarter
-                + " | missing=" + missingLabels
-                + " | captured=" + labels
-                + " | numbers=" + numericValues
-                + " | snapshot=" + getShareholdingCurrentSectionSnapshot());
-    }
-
-    if (numericValues.size() < expectedLabels.size()) {
-        throw new AssertionError("Shareholding percentage numeric values incomplete"
-                + " | quarter=" + quarter
-                + " | expectedAtLeast=" + expectedLabels.size()
-                + " | actual=" + numericValues.size()
-                + " | numbers=" + numericValues
-                + " | labels=" + labels);
-    }
-
-    for (String number : numericValues) {
-        if (!isValidShareholdingPercentageNumber(number)) {
-            throw new AssertionError("Invalid Shareholding percentage value"
-                    + " | quarter=" + quarter
-                    + " | invalidValue=" + number
-                    + " | allNumbers=" + numericValues);
-        }
-    }
-
-    logValidatedText("Shareholding " + quarter + " headers", headers.toString());
-    logValidatedText("Shareholding " + quarter + " labels", labels.toString());
-    logValidatedText("Shareholding " + quarter + " percentage values", numericValues.toString());
-
-    ReportLogger.pass("Shareholding quarter validated successfully"
-            + " | quarter=" + quarter
-            + " | headers=" + headers
-            + " | labels=" + labels
-            + " | numericValues=" + numericValues);
-}
-
-private void collectShareholdingHeaderLabelAndNumbersFromVisibleFastElements(
-        java.util.LinkedHashSet<String> headers,
-        java.util.LinkedHashSet<String> labels,
-        List<String> numericValues
-) {
-    List<WebElement> fastElements = getVisibleViewElementsFast();
-
-    for (WebElement element : fastElements) {
-        try {
-            if (element == null || !element.isDisplayed()) {
-                continue;
-            }
-
-            Rectangle rect = element.getRect();
-
-            if (!isInsideShareholdingViewport(rect)) {
-                continue;
-            }
-
-            collectShareholdingHeaderLabelAndNumbers(element.getAttribute("content-desc"), headers, labels, numericValues);
-            collectShareholdingHeaderLabelAndNumbers(element.getText(), headers, labels, numericValues);
-            collectShareholdingHeaderLabelAndNumbers(element.getAttribute("text"), headers, labels, numericValues);
-            collectShareholdingHeaderLabelAndNumbers(element.getAttribute("name"), headers, labels, numericValues);
-
-        } catch (Exception ignored) {
-            // Ignore stale/inaccessible elements
-        }
-    }
-}
-private List<String> getShareholdingCurrentSectionSnapshot() {
-    List<String> values = collectShareholdingVisibleStrings();
-    List<String> snapshot = new ArrayList<>();
-
-    boolean insideShareholding = false;
-
-    for (String value : values) {
-        String clean = normalizeSpaces(value);
-
-        if (clean.equals("Shareholding") || clean.startsWith("Shareholding ")) {
-            insideShareholding = true;
-            addUniqueShareholdingString(snapshot, value);
-            continue;
-        }
-
-        if (!insideShareholding) {
-            continue;
-        }
-
-        /*
-         * Stop before next sections.
-         * Report showed Shareholding collection was crossing into:
-         * Company, Market Cap, Revenue, Net Profit.
-         */
-        if (isShareholdingNextSectionMarker(clean)) {
-            break;
-        }
-
-        addUniqueShareholdingString(snapshot, value);
-    }
-
-    /*
-     * Fallback if exact heading disappears but chart/table content is visible.
-     * Still stop before next section markers.
-     */
-    if (snapshot.isEmpty()) {
-        for (String value : values) {
-            String clean = normalizeSpaces(value);
-
-            if (isShareholdingNextSectionMarker(clean)) {
-                break;
-            }
-
-            if (isShareholdingQuarterChip(clean)
-                    || isShareholdingLegendLabel(clean)
-                    || isShareholdingTableHeader(clean)
-                    || isValidShareholdingPercentageNumber(clean)) {
-                addUniqueShareholdingString(snapshot, value);
-            }
-        }
-    }
-
-    return snapshot;
-}
-private boolean isShareholdingNextSectionMarker(String value) {
-    if (value == null) {
-        return false;
-    }
-
-    String clean = normalizeSpaces(value);
-
-    return clean.equals("Company Profile")
-            || clean.contains("Company Profile")
-            || clean.equals("Company")
-            || clean.equals("Market Cap (₹ Cr)")
-            || clean.equals("Revenue (TTM)")
-            || clean.equals("Net Profit (TTM)")
-            || clean.equals("Business")
-            || clean.equals("News")
-            || clean.equals("Analysis")
-            || clean.equals("Documents")
-            || clean.equals("Incorporated")
-            || clean.equals("Chairman")
-            || clean.equals("Managing Director");
-}
-private void collectShareholdingHeaderLabelAndNumbers(
-   String text,
-   java.util.LinkedHashSet<String> headers,
-   java.util.LinkedHashSet<String> labels,
-   List<String> numericValues
-) {
-if (text == null) {
-   return;
-}
-
-String clean = normalizeSpaces(text);
-
-if (clean.isEmpty()) {
-   return;
-}
-
-if (clean.equals("Type") || clean.contains("Type")) {
-   headers.add("Type");
-}
-
-if (clean.equals("Percentage (%)")
-       || clean.contains("Percentage (%)")
-       || clean.contains("Percentage")) {
-   headers.add("Percentage (%)");
-}
-
-if (clean.equals("FIIs") || clean.contains("FIIs")) {
-   labels.add("FIIs");
-}
-
-if (clean.equals("DIIs") || clean.contains("DIIs")) {
-   labels.add("DIIs");
-}
-
-if (clean.equals("Others") || clean.contains("Others")) {
-   labels.add("Others");
-}
-
-if (clean.equals("Mutual Fund") || clean.contains("Mutual Fund")) {
-   labels.add("Mutual Fund");
-}
-
-extractShareholdingPercentageNumbers(clean, numericValues);
-}
-
-private void extractShareholdingPercentageNumbers(String text, List<String> numericValues) {
-if (text == null) {
-   return;
-}
-
-String clean = normalizeSpaces(text)
-       .replace("%", " ")
-       .trim();
-
-java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("\\b\\d{1,3}(?:\\.\\d{1,2})?\\b");
-java.util.regex.Matcher matcher = pattern.matcher(clean);
-
-while (matcher.find()) {
-   String number = matcher.group();
-
-   if (!isValidShareholdingPercentageNumber(number)) {
-       continue;
-   }
-
-   /*
-    * Avoid quarter/date fragments like 24/25/26.
-    */
-   if ("24".equals(number)
-           || "25".equals(number)
-           || "26".equals(number)) {
-       continue;
-   }
-
-   if (!numericValues.contains(number)) {
-       numericValues.add(number);
-   }
-}
-}
-
-private boolean isValidShareholdingPercentageNumber(String value) {
-if (value == null) {
-   return false;
-}
-
-String clean = normalizeSpaces(value)
-       .replace("%", "")
-       .trim();
-
-if (!clean.matches("^\\d{1,3}(\\.\\d{1,2})?$")) {
-   return false;
-}
-
-try {
-   double parsed = Double.parseDouble(clean);
-   return parsed >= 0.0 && parsed <= 100.0;
-} catch (Exception e) {
-   return false;
-}
-}
-
-private boolean isInsideShareholdingViewport(Rectangle rect) {
-if (rect == null) {
-   return false;
-}
-
-WebElement heading = findVisibleElement(byDescContains("Shareholding"));
-WebElement companyProfile = findVisibleElement(byDescContains("Company Profile"));
-
-int minY = 0;
-int maxY = driver.manage().window().getSize().getHeight();
-
-if (heading != null) {
-   Rectangle headingRect = heading.getRect();
-   minY = headingRect.getY();
-}
-
-if (companyProfile != null) {
-   Rectangle profileRect = companyProfile.getRect();
-   maxY = profileRect.getY();
-}
-
-int centerY = rect.getY() + rect.getHeight() / 2;
-
-return centerY >= minY && centerY <= maxY;
-}
-
-private java.util.LinkedHashSet<String> collectShareholdingQuarterChipsWithHorizontalScan() {
-ReportLogger.step("Collecting Shareholding quarter chips dynamically");
-
-java.util.LinkedHashSet<String> quarters = new java.util.LinkedHashSet<>();
-
-collectShareholdingQuarterChipsFromCurrentViewport(quarters);
-
-int stableScans = 0;
-
-/*
- * Scan the horizontal chip strip until repeated swipes produce no new chips.
- * Do not wait for a hardcoded count because the product may expose four, five,
- * or more historical quarters depending on API data.
- */
-for (int i = 1; i <= 8; i++) {
-   int beforeCount = quarters.size();
-
-   shareholdingQuarterSwipeLeft();
-   sleep(500);
-
-   collectShareholdingQuarterChipsFromCurrentViewport(quarters);
-
-   if (quarters.size() > beforeCount) {
-       stableScans = 0;
-       ReportLogger.pass("Captured new Shareholding quarter chip(s)"
-               + " | scan=" + i
-               + " | quarters=" + quarters);
-   } else {
-       stableScans++;
-       ReportLogger.debug("No new Shareholding quarter chip found"
-               + " | scan=" + i
-               + " | stableScans=" + stableScans
-               + " | quarters=" + quarters);
-   }
-
-   if (stableScans >= 3) {
-       break;
-   }
-}
-
-/*
- * Restore the strip towards its initial/latest-quarter position. Continue
- * collecting during restoration in case a left-side chip was initially clipped.
- */
-for (int i = 1; i <= 6; i++) {
-   shareholdingQuarterSwipeRight();
-   sleep(350);
-   collectShareholdingQuarterChipsFromCurrentViewport(quarters);
-}
-
-ReportLogger.pass("Shareholding quarter chips captured dynamically: " + quarters);
-
-return quarters;
-}
-
-private void collectShareholdingQuarterChipsFromCurrentViewport(
-        java.util.LinkedHashSet<String> quarters
-) {
-    List<String> values = collectShareholdingVisibleStrings();
-
-    for (String value : values) {
-        addShareholdingQuarterIfMatched(value, quarters);
-
-        if (value != null) {
-            String[] parts = value.split("\\n|\\s{2,}|\\|");
-
+            // Flutter can also merge a whole column-major table into one node.
+            // Pair its actual labels and values in the order exposed by that node.
+            List<String> mergedLabels = new ArrayList<>(), mergedNumbers = new ArrayList<>();
             for (String part : parts) {
-                addShareholdingQuarterIfMatched(part, quarters);
+                String clean = normalizeSpaces(part);
+                if (SHAREHOLDING_HOLDERS.contains(clean)) mergedLabels.add(clean);
+                else if (shareholdingPercentage(clean) != null) mergedNumbers.add(shareholdingPercentage(clean));
+            }
+            if (mergedLabels.size() >= 2 && mergedNumbers.size() == mergedLabels.size()) {
+                for (int i = 0; i < mergedLabels.size(); i++) percentages.put(mergedLabels.get(i), mergedNumbers.get(i));
             }
         }
-    }
-
-    /*
-     * No direct By.xpath("//*") here.
-     * collectShareholdingVisibleStrings() already handles fast scan + controlled fallback.
-     */
-}
-private void addShareholdingQuarterIfMatched(
-   String value,
-   java.util.LinkedHashSet<String> quarters
-) {
-if (value == null) {
-   return;
-}
-
-for (String quarter : extractShareholdingQuarterLabels(value)) {
-   quarters.add(quarter);
-}
-}
-
-private List<String> extractShareholdingQuarterLabels(String value) {
-List<String> quarters = new ArrayList<>();
-
-if (value == null) {
-   return quarters;
-}
-
-String clean = normalizeSpaces(value);
-
-if (clean.isEmpty()) {
-   return quarters;
-}
-
-/*
- * Supports ASCII and curly apostrophes:
- * Mar '26, Mar ’26, Mar ‘26, or Mar 26.
- * Every captured label is normalized to the app-facing ASCII form.
- */
-Pattern pattern = Pattern.compile(
-       "\\b(Mar|Jun|Sep|Dec)\\s*['’‘]?\\s*(\\d{2})\\b"
-);
-java.util.regex.Matcher matcher = pattern.matcher(clean);
-
-while (matcher.find()) {
-   String quarter = matcher.group(1) + " '" + matcher.group(2);
-
-   if (!quarters.contains(quarter)) {
-       quarters.add(quarter);
-   }
-}
-
-return quarters;
-}
-
-private boolean isShareholdingQuarterChip(String value) {
-return !extractShareholdingQuarterLabels(value).isEmpty();
-}
-
-private boolean isShareholdingLegendLabel(String value) {
-if (value == null) {
-   return false;
-}
-
-String clean = normalizeSpaces(value);
-
-return clean.contains("FIIs")
-       || clean.contains("DIIs")
-       || clean.contains("Others")
-       || clean.contains("Mutual Fund");
-}
-
-private boolean isShareholdingTableHeader(String value) {
-if (value == null) {
-   return false;
-}
-
-String clean = normalizeSpaces(value);
-
-return clean.equals("Type")
-       || clean.contains("Type")
-       || clean.equals("Percentage (%)")
-       || clean.contains("Percentage");
-}
-
-private boolean isCompanyProfileVisible() {
-List<String> values = collectShareholdingVisibleStrings();
-
-for (String value : values) {
-   String clean = normalizeSpaces(value);
-
-   if (clean.equals("Company Profile")
-           || clean.contains("Company Profile")
-           || clean.equals("Incorporated")
-           || clean.equals("Chairman")
-           || clean.equals("Managing Director")) {
-       return true;
-   }
-}
-
-return false;
-}
-
-private List<String> collectShareholdingVisibleStrings() {
-    List<String> values = new ArrayList<>();
-
-    /*
-     * Fast source first.
-     */
-    List<String> descValues = collectVisibleContentDescriptions();
-
-    for (String value : descValues) {
-        addUniqueShareholdingString(values, value);
-    }
-
-    /*
-     * Fast android.view.View scan.
-     */
-    List<WebElement> fastElements = getVisibleViewElementsFast();
-
-    for (WebElement element : fastElements) {
-        try {
-            addUniqueShareholdingString(values, element.getAttribute("content-desc"));
-            addUniqueShareholdingString(values, element.getText());
-            addUniqueShareholdingString(values, element.getAttribute("text"));
-            addUniqueShareholdingString(values, element.getAttribute("name"));
-        } catch (Exception ignored) {
-            // Ignore stale/inaccessible Appium elements
+        if (headers.size() == 2 && labels.containsAll(SHAREHOLDING_HOLDERS) && percentages.keySet().containsAll(SHAREHOLDING_HOLDERS)) {
+            logValidatedText("Shareholding " + quarter + " labels", labels.toString());
+            logValidatedText("Shareholding " + quarter + " percentage values", percentages.values().toString());
+            return;
         }
+        String signature = nativeSignature(nodes);
+        unchanged = signature.equals(previous) ? unchanged + 1 : 0;
+        if (unchanged >= 2 || snapshot.has("Company Profile")) break;
+        previous = signature;
+        swipeStockSectionBody(true, true, "shareholding-rows");
+        sleep(400);
     }
-
-    /*
-     * Slow XPath fallback only when fast scan captured too little.
-     */
-    if (values.size() < 4) {
-        List<WebElement> fallbackElements = getVisibleElementsFallbackSlow();
-
-        for (WebElement element : fallbackElements) {
-            try {
-                addUniqueShareholdingString(values, element.getAttribute("content-desc"));
-                addUniqueShareholdingString(values, element.getText());
-                addUniqueShareholdingString(values, element.getAttribute("text"));
-                addUniqueShareholdingString(values, element.getAttribute("name"));
-            } catch (Exception ignored) {
-                // Ignore stale/inaccessible Appium elements
-            }
-        }
-    }
-
-    return values;
+    throw new AssertionError("Shareholding table incomplete | quarter=" + quarter + " | headers=" + headers
+            + " | labels=" + labels + " | percentages=" + percentages.values()
+            + " | expectedLabels=" + SHAREHOLDING_HOLDERS + "; capture this quarter's native XML if rows are exposed differently");
 }
 
-private void addUniqueShareholdingString(List<String> values, String rawValue) {
-if (rawValue == null) {
-   return;
-}
-
-String clean = normalizeSpaces(rawValue);
-
-if (clean.isEmpty()) {
-   return;
-}
-
-if (!values.contains(clean)) {
-   values.add(clean);
-}
-
-String[] parts = rawValue.split("\\n");
-
-for (String part : parts) {
-   String cleanPart = normalizeSpaces(part);
-
-   if (!cleanPart.isEmpty() && !values.contains(cleanPart)) {
-       values.add(cleanPart);
-   }
-}
-}
-
-private void shareholdingPageSwipeUp() {
-try {
-   Dimension size = driver.manage().window().getSize();
-
-   int x = (int) (size.getWidth() * 0.88);
-   int startY = (int) (size.getHeight() * 0.78);
-   int endY = (int) (size.getHeight() * 0.40);
-
-   PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-   Sequence swipe = new Sequence(finger, 1);
-
-   swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-   swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-   swipe.addAction(finger.createPointerMove(Duration.ofMillis(620), PointerInput.Origin.viewport(), x, endY));
-   swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-   driver.perform(Collections.singletonList(swipe));
-
-} catch (Exception firstError) {
-   Map<String, Object> params = new HashMap<>();
-   params.put("left", 760);
-   params.put("top", 760);
-   params.put("width", 260);
-   params.put("height", 980);
-   params.put("direction", "up");
-   params.put("percent", 0.42);
-
-   driver.executeScript("mobile: scrollGesture", params);
-}
-}
-
-private void shareholdingPageSwipeDown() {
-try {
-   Dimension size = driver.manage().window().getSize();
-
-   int x = (int) (size.getWidth() * 0.88);
-   int startY = (int) (size.getHeight() * 0.40);
-   int endY = (int) (size.getHeight() * 0.78);
-
-   PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-   Sequence swipe = new Sequence(finger, 1);
-
-   swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-   swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-   swipe.addAction(finger.createPointerMove(Duration.ofMillis(620), PointerInput.Origin.viewport(), x, endY));
-   swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-   driver.perform(Collections.singletonList(swipe));
-
-} catch (Exception firstError) {
-   Map<String, Object> params = new HashMap<>();
-   params.put("left", 760);
-   params.put("top", 760);
-   params.put("width", 260);
-   params.put("height", 980);
-   params.put("direction", "down");
-   params.put("percent", 0.42);
-
-   driver.executeScript("mobile: scrollGesture", params);
-}
-}
-
-private void shareholdingTinySwipeUp() {
-try {
-   Dimension size = driver.manage().window().getSize();
-
-   int x = (int) (size.getWidth() * 0.88);
-   int startY = (int) (size.getHeight() * 0.66);
-   int endY = (int) (size.getHeight() * 0.56);
-
-   PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-   Sequence swipe = new Sequence(finger, 1);
-
-   swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-   swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-   swipe.addAction(finger.createPointerMove(Duration.ofMillis(300), PointerInput.Origin.viewport(), x, endY));
-   swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-   driver.perform(Collections.singletonList(swipe));
-
-} catch (Exception e) {
-   ReportLogger.debug("Shareholding tiny swipe up skipped: " + cleanError(e.getMessage()));
-}
-}
-
-private void shareholdingTinySwipeDown() {
-try {
-   Dimension size = driver.manage().window().getSize();
-
-   int x = (int) (size.getWidth() * 0.88);
-   int startY = (int) (size.getHeight() * 0.56);
-   int endY = (int) (size.getHeight() * 0.66);
-
-   PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-   Sequence swipe = new Sequence(finger, 1);
-
-   swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, startY));
-   swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-   swipe.addAction(finger.createPointerMove(Duration.ofMillis(300), PointerInput.Origin.viewport(), x, endY));
-   swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-   driver.perform(Collections.singletonList(swipe));
-
-} catch (Exception e) {
-   ReportLogger.debug("Shareholding tiny swipe down skipped: " + cleanError(e.getMessage()));
-}
-}
-
-private void shareholdingQuarterSwipeLeft() {
-swipeShareholdingQuarterArea(true);
-}
-
-private void shareholdingQuarterSwipeRight() {
-swipeShareholdingQuarterArea(false);
-}
-
-private void swipeShareholdingQuarterArea(boolean left) {
-try {
-   Dimension size = driver.manage().window().getSize();
-
-   int y = getShareholdingQuarterCenterY();
-
-   int startX = left ? (int) (size.getWidth() * 0.84) : (int) (size.getWidth() * 0.18);
-   int endX = left ? (int) (size.getWidth() * 0.18) : (int) (size.getWidth() * 0.84);
-
-   PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-   Sequence swipe = new Sequence(finger, 1);
-
-   swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, y));
-   swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-   swipe.addAction(finger.createPointerMove(Duration.ofMillis(480), PointerInput.Origin.viewport(), endX, y));
-   swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-   driver.perform(Collections.singletonList(swipe));
-
-} catch (Exception firstError) {
-   Map<String, Object> params = new HashMap<>();
-   params.put("left", 90);
-   params.put("top", 780);
-   params.put("width", 880);
-   params.put("height", 180);
-   params.put("direction", left ? "left" : "right");
-   params.put("percent", 0.60);
-
-   driver.executeScript("mobile: scrollGesture", params);
-}
-}
-
-private int getShareholdingQuarterCenterY() {
-/*
- * Detect any visible quarter dynamically instead of hardcoding current years.
- */
-for (WebElement element : getVisibleViewElementsFast()) {
-   try {
-       if (element == null || !element.isDisplayed()) {
-           continue;
-       }
-
-       List<String> readableValues = new ArrayList<>();
-       addElementReadableValuesToList(readableValues, element);
-
-       boolean containsQuarter = false;
-
-       for (String value : readableValues) {
-           if (isShareholdingQuarterChip(value)) {
-               containsQuarter = true;
-               break;
-           }
-       }
-
-       if (containsQuarter) {
-           Rectangle rect = element.getRect();
-           return rect.getY() + rect.getHeight() / 2;
-       }
-
-   } catch (Exception ignored) {
-       // Ignore stale Flutter elements and continue scanning.
-   }
-}
-
-WebElement shareholding = findVisibleElement(byDescContains("Shareholding"));
-
-if (shareholding != null) {
-   Rectangle rect = shareholding.getRect();
-   return rect.getY() + 130;
-}
-
-Dimension size = driver.manage().window().getSize();
-return (int) (size.getHeight() * 0.47);
-}
   // GLOBAL SEARCH FLOW
   // =========================================================
 
@@ -9652,7 +7978,7 @@ return (int) (size.getHeight() * 0.47);
                   return;
               }
           }
-      
+
 
       throw new RuntimeException("Unable to open global search from home/dashboard.");
 }
@@ -10031,7 +8357,7 @@ return (int) (size.getHeight() * 0.47);
 
           return null;
 
-      } catch (Exception e) {
+      } catch (StaleElementReferenceException | NoSuchElementException e) {
           return null;
       }
   }
@@ -10768,5 +9094,496 @@ private void alignBottomSectionHeadingByDownwardScrollOnly(String sectionName) {
           throw new RuntimeException("Thread interrupted", e);
       }
   }
+
+    private void validateHeaderExchangeSelector() {
+        // The current header exposes one selected exchange beside the price.
+        // Older builds expose both chips; keep supporting that layout as well.
+        if (findHeaderExchange("NSE") != null && findHeaderExchange("BSE") != null) {
+            assertHeaderExchangeVisible("NSE");
+            assertHeaderExchangeVisible("BSE");
+            return;
+        }
+        String original = findHeaderExchange("NSE") != null ? "NSE"
+                : findHeaderExchange("BSE") != null ? "BSE" : null;
+        if (original == null) throw new AssertionError("No exchange selector is exposed beside the stock price."
+                + " Capture Inspector XML of the Stock Details header.");
+        final boolean[] menuOpened = {false};
+        runWithChildScreenCleanup(() -> {
+            selectHeaderExchange("NSE", menuOpened);
+            selectHeaderExchange("BSE", menuOpened);
+        }, () -> {
+            boolean anyOption = visibleExactLabel("NSE") != null || visibleExactLabel("BSE") != null;
+            boolean headerMissing = findHeaderExchange("NSE") == null && findHeaderExchange("BSE") == null;
+            if (menuOpened[0] && ((visibleExactLabel("NSE") != null && visibleExactLabel("BSE") != null)
+                    || (anyOption && (headerMissing || visibleExactLabel("Scrim") != null)))) {
+                driver.navigate().back();
+                keyRatioWait(ExecutionProfile.shortWait()).until(d ->
+                        findHeaderExchange("NSE") != null || findHeaderExchange("BSE") != null);
+            }
+            if (findHeaderExchange(original) == null
+                    && findHeaderExchange("NSE".equals(original) ? "BSE" : "NSE") != null) {
+                selectHeaderExchange(original, menuOpened);
+            }
+        });
+    }
+
+    private void selectHeaderExchange(String exchange, boolean[] menuOpened) {
+        if (findHeaderExchange(exchange) != null) {
+            assertHeaderExchangeVisible(exchange);
+            return;
+        }
+        String other = "NSE".equals(exchange) ? "BSE" : "NSE";
+        WebElement selector = findHeaderExchange(other);
+        if (selector == null) throw new AssertionError("Cannot locate the current header exchange selector"
+                + " before selecting " + exchange + ". Capture header Inspector XML.");
+        ReportLogger.step("Opening header exchange selector: " + other + " -> " + exchange);
+        menuOpened[0] = true;
+        selector.click();
+        try {
+            WebElement choice = keyRatioWait(ExecutionProfile.shortWait()).until(d -> visibleExactLabel(exchange));
+            // A direct toggle can switch immediately; a dropdown keeps both options visible.
+            if (visibleExactLabel(other) != null) choice.click();
+            keyRatioWait(ExecutionProfile.defaultWait()).until(d ->
+                    findHeaderExchange(exchange) != null && visibleExactLabel(other) == null);
+            menuOpened[0] = false;
+            assertHeaderExchangeVisible(exchange);
+        } catch (TimeoutException timeout) {
+            throw new AssertionError("Header exchange selection did not complete | requested=" + exchange
+                    + ". Capture Inspector XML with the NSE/BSE selector open; the exact option labels"
+                    + " and the selected exchange must be accessible.", timeout);
+        }
+    }
+
+    private WebElement visibleExactLabel(String label) {
+        for (By locator : new By[]{byDesc(label), byText(label)}) {
+            for (WebElement element : driver.findElements(locator)) {
+                if (element.isDisplayed() && element.isEnabled() && isFullyOnValuationScreen(element.getRect())) return element;
+            }
+        }
+        return null;
+    }
+
+    private WebElement findHeaderExchange(String exchange) {
+        WebElement stock = findVisibleElement(byDesc(STOCK_HEADER));
+        if (stock == null) return null;
+        int bottom = driver.manage().window().getSize().getHeight();
+        for (String marker : new String[]{"Stock Chart", "Price", "Stock Rating"}) {
+            WebElement boundary = findVisibleElement(byDesc(marker));
+            if (boundary != null) bottom = Math.min(bottom, boundary.getRect().getY());
+        }
+        for (By locator : new By[]{byDesc(exchange), byText(exchange)}) {
+            for (WebElement element : driver.findElements(locator)) {
+                if (!element.isDisplayed()) continue;
+                Rectangle bounds = element.getRect();
+                int y = bounds.getY() + bounds.getHeight() / 2;
+                if (isFullyOnValuationScreen(bounds) && y >= stock.getRect().getY() && y < bottom) return element;
+            }
+        }
+        return null;
+    }
+
+    private void assertHeaderExchangeVisible(String exchange) {
+        try {
+            WebElement chip = keyRatioWait(ExecutionProfile.shortWait()).until(d -> findHeaderExchange(exchange));
+            logValidatedText(exchange + " chip", getElementReadableText(chip));
+        } catch (TimeoutException missing) {
+            throw new AssertionError(exchange + " exchange is not exposed in the Stock Details header"
+                    + " as text or content-desc. Capture Inspector XML of the header; the assertion is retained.", missing);
+        }
+    }
+
+    private boolean hasCapturedRatioBlock(java.util.LinkedHashMap<String, String> captured, String expected) {
+        for (String title : captured.keySet()) {
+            if (titlesMatchKeyRatiosMoreExpectedBlock(title, expected)) return true;
+        }
+        return false;
+    }
+
+    private boolean isKeyRatiosMoreScreenVisible() {
+        return isVisible(byDesc("Profitability")) || isVisible(byDesc("Solvency"))
+                || isVisible(byDesc("Operating Efficiency"));
+    }
+
+    private boolean isFinancialsMoreScreenVisible() {
+        return isVisible(byDesc("Annual Consolidated")) || isVisible(byDesc("Annual Standalone"))
+                || isVisible(byDesc("Quarterly Consolidated")) || isVisible(byDesc("Quarterly Standalone"));
+    }
+
+    private void runWithChildScreenCleanup(Runnable validation, Runnable cleanup) {
+        Throwable original = null;
+        try {
+            validation.run();
+        } catch (RuntimeException | AssertionError failure) {
+            original = failure;
+            throw failure;
+        } finally {
+            try {
+                cleanup.run();
+            } catch (RuntimeException | AssertionError cleanupFailure) {
+                if (original != null) original.addSuppressed(cleanupFailure);
+                else throw cleanupFailure;
+            }
+        }
+    }
+
+    /** Align the requested control; seeing Annual is not proof that Quarterly is available. */
+    private void alignFinancialsPeriodControls(String optionName) {
+        ReportLogger.step("Aligning Financials period control: " + optionName);
+        Duration settle = ExecutionProfile.pollingInterval().multipliedBy(3);
+        for (int attempt = 0; attempt < 14; attempt++) {
+            if (isFinancialsPeriodOptionVisible(optionName)) return;
+            // Annual also belongs to Stock Performance. From there, move forward
+            // through Essential Checks to Financials, never back toward the header.
+            boolean earlierSection = visibleExactLabel("Stock Performance") != null
+                    || visibleExactLabel("Essential Checks") != null;
+            boolean financialsTop = visibleExactLabel("Financials") != null
+                    || visibleExactLabel("Income Statement") != null || visibleExactLabel("Balance Sheet") != null
+                    || visibleExactLabel("Cash Flow") != null;
+            boolean belowFinancials = visibleExactLabel("Key Ratios") != null && !financialsTop;
+            boolean forward = earlierSection || financialsTop || (!belowFinancials && attempt < 9);
+            financialsPeriodAlignmentSwipe(forward);
+            try {
+                keyRatioWait(settle).until(d -> isFinancialsPeriodOptionVisible(optionName));
+                return;
+            } catch (TimeoutException outsideViewport) {
+                ReportLogger.debug("Scoped Financials " + optionName + " not visible | alignment=" + (attempt + 1)
+                        + " | direction=" + (forward ? "forward" : "back"));
+            }
+        }
+        throw new AssertionError("Financials " + optionName + " was not exposed inside the Financials section"
+                + " after bounded alignment. Stock Performance's Annual is excluded. Capture Inspector XML"
+                + " showing the Financials chart and Annual/Quarterly row.");
+    }
+
+    private WebElement findFinancialsPeriodOption(String optionName) {
+        int top = -1;
+        int bottom = driver.manage().window().getSize().getHeight();
+        for (String marker : new String[]{"Financials", "Income Statement", "Balance Sheet", "Cash Flow",
+                "Sales", "PAT", "Equity", "Debt", "Operating Cash Flow", "Free Cash Flow"}) {
+            WebElement anchor = findVisibleElement(byDesc(marker));
+            if (anchor != null && isFullyOnValuationScreen(anchor.getRect())) {
+                Rectangle r = anchor.getRect();
+                top = Math.max(top, r.getY() + r.getHeight());
+            }
+        }
+        WebElement nextSection = findVisibleElement(byDesc("Key Ratios"));
+        if (nextSection != null) bottom = Math.min(bottom, nextSection.getRect().getY());
+        for (By locator : new By[]{byDesc(optionName), byText(optionName)}) {
+            for (WebElement option : driver.findElements(locator)) {
+                if (!option.isDisplayed() || !option.isEnabled()) continue;
+                Rectangle bounds = option.getRect();
+                if (!isFullyOnValuationScreen(bounds)) continue;
+                int y = bounds.getY() + bounds.getHeight() / 2;
+                if (y >= bottom) continue;
+                if (top >= 0 && y > top) return option;
+                // A lower chart view may hide all headings/legends; its adjacent
+                // Quarterly control still distinguishes this row from Stock Performance.
+                if (top < 0) {
+                    String sibling = "Annual".equals(optionName) ? "Quarterly" : "Annual";
+                    for (By siblingLocator : new By[]{byDesc(sibling), byText(sibling)}) {
+                        for (WebElement peer : driver.findElements(siblingLocator)) {
+                            if (!peer.isDisplayed()) continue;
+                            Rectangle other = peer.getRect();
+                            if (isFullyOnValuationScreen(other)
+                                    && bounds.getY() < other.getY() + other.getHeight()
+                                    && bounds.getY() + bounds.getHeight() > other.getY()) return option;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    private void financialsPeriodAlignmentSwipe(boolean forward) {
+        Dimension screen = driver.manage().window().getSize();
+        int x = (int) (screen.getWidth() * 0.88);
+        int from = (int) (screen.getHeight() * (forward ? 0.74 : 0.58));
+        int to = (int) (screen.getHeight() * (forward ? 0.58 : 0.74));
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "financials-period-align");
+        Sequence swipe = new Sequence(finger, 0);
+        swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, from));
+        swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        swipe.addAction(finger.createPointerMove(Duration.ofMillis(300), PointerInput.Origin.viewport(), x, to));
+        swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        driver.perform(Collections.singletonList(swipe));
+    }
+
+    /** Period controls are siblings of the chart semantics on this Flutter screen. */
+    private boolean isInValuationSection(Rectangle chip, Rectangle card) {
+        Dimension screen = driver.manage().window().getSize();
+        int x = chip.getX() + chip.getWidth() / 2;
+        int y = chip.getY() + chip.getHeight() / 2;
+        if (chip.getWidth() <= 0 || chip.getHeight() <= 0 || chip.getX() < 0 || chip.getY() < 0
+                || chip.getX() + chip.getWidth() > screen.getWidth()
+                || chip.getY() + chip.getHeight() > screen.getHeight()) return false;
+        if (x < Math.max(0, card.getX()) || x >= Math.min(screen.getWidth(), card.getX() + card.getWidth())) return false;
+        int sectionTop = -1;
+        for (String label : new String[]{"Key Ratios", "Efficiency", "Valuation", "Growth"}) {
+            for (WebElement marker : driver.findElements(byDesc(label))) {
+                if (!marker.isDisplayed()) continue;
+                Rectangle r = marker.getRect();
+                // Ignore a same-named marker below this card or outside the viewport.
+                if (r.getY() >= 0 && r.getY() < card.getY() + card.getHeight() / 2) {
+                    sectionTop = Math.max(sectionTop, r.getY() + r.getHeight());
+                }
+            }
+        }
+        if (sectionTop < 0) return isInsideVisibleValuationCard(chip, card);
+        int sectionBottom = screen.getHeight();
+        for (String label : new String[]{"Peers", "Shareholding", "Company Profile"}) {
+            for (WebElement marker : driver.findElements(byDesc(label))) {
+                if (!marker.isDisplayed()) continue;
+                Rectangle r = marker.getRect();
+                if (r.getY() > card.getY()) sectionBottom = Math.min(sectionBottom, r.getY());
+            }
+        }
+        return y > sectionTop && y < sectionBottom;
+    }
+
+    private String describeBounds(Rectangle r) {
+        return "[x=" + r.getX() + ", y=" + r.getY() + ", width=" + r.getWidth() + ", height=" + r.getHeight() + "]";
+    }
+
+    private static final String[] ESSENTIAL_CARD_TITLES = {"Altman Z-Score", "Modified C-Score", "Piotroski F-Score"};
+
+    private EssentialCardSnapshot readActiveEssentialChecksCard() {
+        Dimension screen = driver.manage().window().getSize();
+        EssentialCardSnapshot best = null;
+        long area = 0;
+        for (String title : ESSENTIAL_CARD_TITLES) {
+            for (WebElement element : driver.findElements(byDescContains(title))) {
+                try {
+                    if (!element.isDisplayed()) continue;
+                    String text = element.getAttribute("content-desc");
+                    if (text == null || !hasEssentialChecksDynamicScore(normalizeSpaces(text))) continue;
+                    Rectangle r = element.getRect();
+                    int width = Math.max(0, Math.min(screen.getWidth(), r.getX() + r.getWidth()) - Math.max(0, r.getX()));
+                    int height = Math.max(0, Math.min(screen.getHeight(), r.getY() + r.getHeight()) - Math.max(0, r.getY()));
+                    long visibleArea = (long) width * height;
+                    if (visibleArea > area) {
+                        best = new EssentialCardSnapshot(title, text, r);
+                        area = visibleArea;
+                    }
+                } catch (StaleElementReferenceException replacedCard) {
+                    // Reacquire the current card during the explicit wait.
+                }
+            }
+        }
+        return best;
+    }
+
+    private EssentialCardSnapshot openEssentialChecksCard(String expected, boolean forward) {
+        for (int attempt = 0; attempt < 4; attempt++) {
+            EssentialCardSnapshot card = keyRatioWait(ExecutionProfile.shortWait()).until(d -> readActiveEssentialChecksCard());
+            if (expected.equals(card.title)) return card;
+            if (attempt == 3) break;
+            ReportLogger.step("Swiping Essential Checks card towards " + expected + " | attempt=" + (attempt + 1));
+            swipeInBounds(card.bounds, true, forward);
+            try {
+                return keyRatioWait(ExecutionProfile.shortWait()).until(d -> {
+                    EssentialCardSnapshot current = readActiveEssentialChecksCard();
+                    return current != null && expected.equals(current.title) ? current : null;
+                });
+            } catch (TimeoutException nextCardNotReached) {
+                // Three bounded swipes also support an initially non-default card.
+            }
+        }
+        throw new AssertionError("Essential Checks carousel did not expose the expected active card: " + expected);
+    }
+
+    private static final class EssentialCardSnapshot {
+        private final String title;
+        private final String text;
+        private final Rectangle bounds;
+        private EssentialCardSnapshot(String title, String text, Rectangle bounds) {
+            this.title = title;
+            this.text = text;
+            this.bounds = bounds;
+        }
+    }
+
+    private void swipeVisibleBody(boolean up, String context) {
+        Dimension screen = driver.manage().window().getSize();
+        Rectangle body = new Rectangle(new org.openqa.selenium.Point(0, 0), screen);
+        long area = 0;
+        for (WebElement element : driver.findElements(AppiumBy.className("android.widget.ScrollView"))) {
+            if (!element.isDisplayed()) continue;
+            Rectangle bounds = element.getRect();
+            long currentArea = (long) bounds.getWidth() * bounds.getHeight();
+            if (currentArea > area) { body = bounds; area = currentArea; }
+        }
+        ReportLogger.debug("Scrolling visible " + context + " body " + (up ? "up" : "down"));
+        swipeInBounds(body, false, up);
+    }
+
+    /** Coordinates come from the visible component; never retry a dead driver via another gesture API. */
+    private void swipeInBounds(Rectangle bounds, boolean horizontal, boolean forward) {
+        Dimension screen = driver.manage().window().getSize();
+        int left = Math.max(0, bounds.getX());
+        int right = Math.min(screen.getWidth(), bounds.getX() + bounds.getWidth());
+        int top = Math.max((int) (screen.getHeight() * 0.08), bounds.getY());
+        int bottom = Math.min((int) (screen.getHeight() * 0.92), bounds.getY() + bounds.getHeight());
+        if (right - left < 80 || bottom - top < 80) throw new IllegalStateException("No safe visible gesture area: " + describeBounds(bounds));
+        int startX = horizontal ? left + (int) ((right - left) * (forward ? 0.82 : 0.18)) : left + (int) ((right - left) * 0.88);
+        int endX = horizontal ? left + (int) ((right - left) * (forward ? 0.18 : 0.82)) : startX;
+        int startY = horizontal ? (top + bottom) / 2 : top + (int) ((bottom - top) * (forward ? 0.78 : 0.30));
+        int endY = horizontal ? startY : top + (int) ((bottom - top) * (forward ? 0.30 : 0.78));
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "stock-details-body");
+        Sequence swipe = new Sequence(finger, 0);
+        swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY));
+        swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        swipe.addAction(finger.createPointerMove(Duration.ofMillis(450), PointerInput.Origin.viewport(), endX, endY));
+        swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        driver.perform(Collections.singletonList(swipe));
+    }
+
+    // Read a native hierarchy once per scan, rather than issuing several commands
+    // for every node. A transport/instrumentation failure must reach the runner.
+    private NativeSnapshot readNativeSnapshot() {
+        String xml = driver.getPageSource();
+        Dimension viewport = driver.manage().window().getSize();
+        try {
+            javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+            factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+            factory.setXIncludeAware(false);
+            factory.setExpandEntityReferences(false);
+            org.w3c.dom.Document document = factory.newDocumentBuilder().parse(
+                    new org.xml.sax.InputSource(new java.io.StringReader(xml)));
+            NativeSnapshot snapshot = new NativeSnapshot(viewport);
+            readNativeNodes(document.getDocumentElement(), snapshot,
+                    new Rectangle(0, 0, viewport.getHeight(), viewport.getWidth()), false);
+            return snapshot;
+        } catch (javax.xml.parsers.ParserConfigurationException | org.xml.sax.SAXException | java.io.IOException error) {
+            throw new IllegalStateException("Cannot parse the native page hierarchy for Stock Details", error);
+        }
+    }
+
+    private void readNativeNodes(org.w3c.dom.Element element, NativeSnapshot snapshot,
+                                 Rectangle clip, boolean hiddenParent) {
+        boolean hidden = hiddenParent || "false".equals(element.getAttribute("displayed"))
+                || "false".equals(element.getAttribute("visible-to-user"));
+        if (hidden) return;
+        Rectangle bounds = nativeBounds(element.getAttribute("bounds"));
+        Rectangle visible = bounds == null ? null : intersectNativeBounds(bounds, clip);
+        String description = element.getAttribute("content-desc");
+        String text = element.getAttribute("text");
+        if (visible != null && visible.getWidth() > 0 && visible.getHeight() > 0) {
+            if (!normalizeSpaces(description).isEmpty()) snapshot.nodes.add(new NativeNode(description, bounds, visible, element));
+            if (!normalizeSpaces(text).isEmpty() && !text.equals(description)) snapshot.nodes.add(new NativeNode(text, bounds, visible, element));
+        }
+        Rectangle childClip = clip;
+        String className = element.getAttribute("class") + element.getTagName();
+        if (visible != null && (className.contains("ScrollView") || "true".equals(element.getAttribute("scrollable")))) {
+            childClip = visible;
+        }
+        org.w3c.dom.NodeList children = element.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            if (children.item(i) instanceof org.w3c.dom.Element) {
+                readNativeNodes((org.w3c.dom.Element) children.item(i), snapshot, childClip, hidden);
+            }
+        }
+    }
+
+    private Rectangle nativeBounds(String raw) {
+        java.util.regex.Matcher matcher = Pattern.compile("\\[(-?\\d+),(-?\\d+)\\]\\[(-?\\d+),(-?\\d+)\\]").matcher(raw);
+        if (!matcher.matches()) return null;
+        int x = Integer.parseInt(matcher.group(1)), y = Integer.parseInt(matcher.group(2));
+        int right = Integer.parseInt(matcher.group(3)), bottom = Integer.parseInt(matcher.group(4));
+        return right > x && bottom > y ? new Rectangle(x, y, bottom - y, right - x) : null;
+    }
+
+    private Rectangle intersectNativeBounds(Rectangle a, Rectangle b) {
+        int x = Math.max(a.getX(), b.getX()), y = Math.max(a.getY(), b.getY());
+        int right = Math.min(a.getX() + a.getWidth(), b.getX() + b.getWidth());
+        int bottom = Math.min(a.getY() + a.getHeight(), b.getY() + b.getHeight());
+        return new Rectangle(x, y, Math.max(0, bottom - y), Math.max(0, right - x));
+    }
+
+    private final class NativeSnapshot {
+        final Dimension screen;
+        final List<NativeNode> nodes = new ArrayList<>();
+        NativeSnapshot(Dimension screen) { this.screen = screen; }
+        NativeNode exact(String label) {
+            for (NativeNode node : nodes) if (normalizeSpaces(node.text).equals(label)) return node;
+            return null;
+        }
+        boolean has(String label) { return exact(label) != null; }
+        List<NativeNode> section(String heading, String... endHeadings) {
+            NativeNode start = exact(heading);
+            int top = start == null ? (int) (screen.getHeight() * 0.08) : start.visible.getY();
+            int bottom = (int) (screen.getHeight() * 0.94);
+            for (String end : endHeadings) {
+                NativeNode node = exact(end);
+                if (node != null && node.visible.getY() > top) bottom = Math.min(bottom, node.visible.getY());
+            }
+            List<NativeNode> result = new ArrayList<>();
+            for (NativeNode node : nodes) {
+                int centerY = node.visible.getY() + node.visible.getHeight() / 2;
+                if (centerY >= top && centerY < bottom) result.add(node);
+            }
+            return result;
+        }
+    }
+
+    private static final class NativeNode {
+        final String text;
+        final Rectangle bounds, visible;
+        final org.w3c.dom.Element element;
+        NativeNode(String text, Rectangle bounds, Rectangle visible, org.w3c.dom.Element element) {
+            this.text = text; this.bounds = bounds; this.visible = visible; this.element = element;
+        }
+    }
+
+    private List<String> nativeStrings(List<NativeNode> nodes) {
+        java.util.LinkedHashSet<String> values = new java.util.LinkedHashSet<>();
+        for (NativeNode node : nodes) {
+            values.add(normalizeSpaces(node.text));
+            for (String part : node.text.split("\\n")) {
+                if (!normalizeSpaces(part).isEmpty()) values.add(normalizeSpaces(part));
+            }
+        }
+        return new ArrayList<>(values);
+    }
+
+    private String nativeSignature(List<NativeNode> nodes) {
+        StringBuilder signature = new StringBuilder();
+        for (NativeNode node : nodes) signature.append(node.text).append('@')
+                .append(node.visible.getX()).append(',').append(node.visible.getY()).append(';');
+        return signature.toString();
+    }
+
+    private void validateHeaderChartControls() {
+        NativeSnapshot snapshot = readNativeSnapshot();
+        // Older builds offered three chart modes. Current builds show Stock Chart
+        // and duration chips instead; validate the controls actually shipped.
+        List<NativeNode> chartNodes = snapshot.section("Stock Chart", "Stock Rating", "Stock Range", "Fundamentals");
+        List<String> chartValues = nativeStrings(chartNodes);
+        if (chartValues.contains("Price") || chartValues.contains("P/E Ratio") || chartValues.contains("P/B Ratio")) {
+            for (String mode : new String[]{"Price", "P/E Ratio", "P/B Ratio"}) {
+                if (!chartValues.contains(mode)) throw new AssertionError("Chart mode missing: " + mode);
+            }
+            return;
+        }
+        if (!snapshot.has("Stock Chart")) throw new AssertionError("Stock Chart heading is missing; capture its native XML");
+        List<String> values = nativeStrings(snapshot.section("Stock Chart", "Stock Rating"));
+        StringBuilder rawBody = new StringBuilder();
+        for (NativeNode node : chartNodes) rawBody.append(node.text).append(' ');
+        String body = rawBody.toString();
+        for (String label : new String[]{"High", "Low", "Returns", "1D", "1M", "3M", "1Y", "3Y", "5Y", "10Y", "All"}) {
+            if (!Pattern.compile("(?<![\\p{L}\\p{N}])" + Pattern.quote(label) + "(?![\\p{L}\\p{N}])").matcher(body).find()) {
+                throw new AssertionError("Stock Chart control/summary missing: " + label + " | values=" + values);
+            }
+        }
+        java.util.regex.Matcher prices = Pattern.compile("₹\\s*([\\d,]+(?:\\.\\d+)?)").matcher(body);
+        int count = 0;
+        while (prices.find()) count++;
+        if (count < 2 || !Pattern.compile("[-+]?\\d+(?:\\.\\d+)?\\s*%").matcher(body).find()) {
+            throw new AssertionError("Stock Chart High, Low and Returns numeric values missing | values=" + values);
+        }
+        logValidatedText("Stock Chart controls and live summary", values.toString());
+    }
 
 }

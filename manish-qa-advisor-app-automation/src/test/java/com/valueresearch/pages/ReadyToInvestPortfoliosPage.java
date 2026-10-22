@@ -1,1556 +1,957 @@
 package com.valueresearch.pages;
 
 import com.valueresearch.utils.AuthHelper;
+import com.valueresearch.utils.ConfigReader;
+import com.valueresearch.utils.ExecutionProfile;
 import com.valueresearch.utils.ReportLogger;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.imageio.ImageIO;
+import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.DefaultHandler;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.StringReader;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * VRSA Hub -> Stocks -> Ready to invest portfolios -> Analyst Picks.
- *
- * Stability design based on the 04-Sep-2026 Appium Inspector hierarchy and
- * screencast supplied for this module:
- *
- * - Uses the exact Hub tile semantic: "Open ready to invest portfolio".
- * - Uses live top-tab semantics in the form "<label>, tab X of Y".
- * - Discovers the top-tab labels/count at runtime instead of hardcoding Buy/Hold/Sell data.
- * - Discovers secondary filter chips dynamically from their live geometry between
- *   the top-tab band and table header instead of maintaining a fixed chip list.
- * - Never hardcodes stock names, recommendation dates, prices or returns.
- * - Reads live table semantics and supports explicit empty states, including
- *   long-list states where the table header has scrolled offscreen.
- * - Uses bounded W3C scrolling with progress detection; no absolute XPath or
- *   UiSelector instance locators are used.
- * - Uses the live table HorizontalScrollView when available and restores it after validation.
- * - Preserves Hub scroll position and avoids tapping the already-selected Hub tab,
- *   preventing the unnecessary Hub refresh/rebuild seen in earlier modules.
- * - Recovery is local and bounded; infrastructure recovery remains owned by DriverManager/listener.
- * - Reuses resolved table states instead of repeating identical waits after tab/filter taps.
+ * Legacy class name retained for existing RTI suite references.
+ * Current product: Hub > Stocks > Stock Analyst's Choice.
+ * Authentication and Hub navigation reuse the installed, working SAC page/AuthHelper.
+ * Stock names, row values, top tabs and secondary filters remain runtime data.
  */
 public class ReadyToInvestPortfoliosPage {
+    public static final String BUILD_VERSION = "READY_TO_INVEST_SAC_V8_FILTER_SNAPSHOTS_20261022";
 
-    public static final String BUILD_VERSION = "READY_TO_INVEST_DYNAMIC_V2_20260904";
-
-    private static final long SHORT_WAIT_MS = 8_000L;
-    private static final long PAGE_READY_WAIT_MS = 18_000L;
-    private static final long DATA_WAIT_MS = 25_000L;
-    private static final long POLL_MS = 280L;
-
-    private static final By HUB = AppiumBy.accessibilityId("Hub");
-    private static final By READY_TO_INVEST_TILE = AppiumBy.accessibilityId("Open ready to invest portfolio");
-    private static final By ANALYST_PICKS_TITLE = AppiumBy.accessibilityId("Analyst Picks");
-    private static final By STOCKS_HEADER = AppiumBy.accessibilityId("Stocks");
-    private static final By PORTFOLIO_PLANNER_CTA = AppiumBy.accessibilityId("Take me there");
-    private static final By INVESTMENT_PLANNER_TITLE = AppiumBy.accessibilityId("Investment Planner");
-
-    private static final By VIEW = AppiumBy.className("android.view.View");
-    private static final By IMAGE_VIEW = AppiumBy.className("android.widget.ImageView");
-    private static final By BUTTON = AppiumBy.className("android.widget.Button");
-    private static final By HORIZONTAL_SCROLL_VIEW = AppiumBy.className("android.widget.HorizontalScrollView");
-
-    private static final By HUB_OPEN_BUTTONS = AppiumBy.androidUIAutomator(
-            "new UiSelector().descriptionStartsWith(\"Open \")"
-    );
-
-    private static final Pattern TAB_PATTERN = Pattern.compile(
-            "^(.+?),\\s*tab\\s+(\\d+)\\s+of\\s+(\\d+)$",
-            Pattern.CASE_INSENSITIVE
-    );
-
-    private static final String[] EMPTY_STATE_MARKERS = new String[]{
-            "no data available",
-            "no stocks available",
-            "no recommendations",
-            "no recommendation",
-            "nothing to show",
-            "underlying data is unavailable",
-            "underlying data unavailable",
-            "no result found",
-            "no results found"
-    };
+    private static final By TITLE = AppiumBy.accessibilityId("Analyst's Choice");
+    private static final By STOCKS = AppiumBy.androidUIAutomator(
+            "new UiSelector().className(\"android.widget.ImageView\").description(\"Stocks\")");
+    private static final By BACK = AppiumBy.accessibilityId("Go back");
+    private static final By SCROLL = AppiumBy.className("android.widget.ScrollView");
+    private static final By HORIZONTAL = AppiumBy.className("android.widget.HorizontalScrollView");
+    private static final By VALUES = AppiumBy.androidUIAutomator(
+            "new UiSelector().className(\"android.view.View\").descriptionMatches(\"(?s).+\")");
+    private static final By DATE_CELLS = AppiumBy.androidUIAutomator(
+            "new UiSelector().className(\"android.view.View\").descriptionMatches(\"[0-9]{2}-[A-Za-z]{3}-[0-9]{2}\")");
+    private static final By HEADERS = AppiumBy.androidUIAutomator(
+            "new UiSelector().className(\"android.widget.ImageView\").descriptionMatches(\"(?s).+\")");
+    private static final By TABS = AppiumBy.androidUIAutomator(
+            "new UiSelector().descriptionMatches(\"^.+, tab [0-9]+ of [0-9]+$\")");
+    private static final By NAVIGATION_BAR = By.id("android:id/navigationBarBackground");
+    private static final By PLANNER_HEADLINE = AppiumBy.accessibilityId("Need a hand deciding?");
+    private static final By PLANNER_SUBTITLE = AppiumBy.accessibilityId(
+            "Our Investment Planner picks the stocks and split for you");
+    private static final By PLANNER_CTA = AppiumBy.accessibilityId("Take me there");
+    private static final By INVESTMENT_PLANNER = AppiumBy.accessibilityId("Investment Planner");
+    private static final String LAST_COLUMN = "Vs BSE 500 TRI Return";
+    private static final Pattern TAB = Pattern.compile("^(.+?),\\s*tab\\s+(\\d+)\\s+of\\s+(\\d+)$");
+    private static final Pattern DATE = Pattern.compile("[0-9]{2}-[A-Za-z]{3}-[0-9]{2}");
+    private static final Pattern NUMBER = Pattern.compile("[-+₹%0-9,. ]+");
+    private static final String[] EMPTY = {"no data available", "no stocks available", "no recommendations",
+            "no recommendation", "nothing to show", "underlying data is unavailable",
+            "underlying data unavailable", "no result found", "no results found"};
 
     private final AndroidDriver driver;
+    private final StockAnalystsChoiceChangebyProPage navigation;
+    private boolean prepared;
+    private final int maxHorizontal = positiveInt("stockAnalystsChoiceMaxHorizontalSwipes", 20);
+    private final int maxVertical = positiveInt("stockAnalystsChoiceMaxListScrolls", 40);
 
     public ReadyToInvestPortfoliosPage(AndroidDriver driver) {
-        this.driver = driver;
+        this(driver, AuthHelper.configuredLoginMethod());
     }
 
-    // =========================================================
-    // Public navigation / cleanup
-    // =========================================================
+    public ReadyToInvestPortfoliosPage(AndroidDriver driver, AuthHelper.LoginMethod method) {
+        this.driver = Objects.requireNonNull(driver, "An active AndroidDriver is required");
+        this.navigation = new StockAnalystsChoiceChangebyProPage(driver, method);
+    }
+
+    /** Called from common setup. A verified cache belongs to the current driver/session only. */
+    public void prepareActiveAccount(boolean sameVerifiedSession) {
+        prepared = false;
+        if (!sameVerifiedSession || !navigation.reuseVerifiedAccountSession(
+                StockAnalystsChoiceChangebyProPage.Persona.ACTIVE_SUBSCRIBER)) {
+            navigation.ensureRequiredAccount(StockAnalystsChoiceChangebyProPage.Persona.ACTIVE_SUBSCRIBER);
+        }
+        navigation.assertHubVisible();
+        prepared = true;
+    }
 
     public void openFromHub() {
-        ReportLogger.step("[" + BUILD_VERSION + "] Opening Ready to invest portfolios from Hub");
-        assertDriverAlive("before Ready to invest navigation");
-
-        if (isAnalystPicksOpen()) {
-            ReportLogger.pass("Analyst Picks is already open - navigation skipped");
-            return;
-        }
-
-        // If Hub is already visibly ready, the user is necessarily inside the logged-in
-        // app shell. Skip AuthHelper as well as the Hub tap; this keeps repeated testcases
-        // fast and avoids unnecessary recovery/session probing.
-        if (isHubScreenReady()) {
-            ReportLogger.debug("Hub is already active - skipping redundant auth recovery and Hub tab refresh");
-        } else {
-            new AuthHelper(driver).ensureLoggedIn();
-        }
-
-        if (isHubScreenReady()) {
-            ReportLogger.debug("Hub navigation tiles are already ready - no Hub tap required");
-        } else {
-            WebElement hub = bottomMostVisible(HUB);
-            if (hub == null) {
-                throw new AssertionError("Hub bottom-navigation tab is not visible");
-            }
-            safeClick(hub, "Hub bottom-navigation tab");
-            if (!waitForHubScreenReady(SHORT_WAIT_MS)) {
-                throw new AssertionError(
-                        "Hub was tapped but Hub navigation tiles did not become ready. visible="
-                                + collectVisibleValues()
-                );
-            }
-        }
-
-        WebElement tile = findReadyToInvestTileWithBoundedScroll();
-        if (tile == null) {
-            throw new AssertionError(
-                    "Ready to invest portfolio Hub tile was not found after bounded scrolling. visible="
-                            + collectVisibleValues()
-            );
-        }
-
-        safeClick(tile, "Ready to invest portfolio Hub tile");
-        waitForAnalystPicksReady();
-        ReportLogger.pass("Ready to invest portfolios / Analyst Picks opened successfully");
+        if (!prepared) prepareActiveAccount(false); // Preserve standalone page-object callers.
+        if (visible(TITLE) && visible(BACK)) return;
+        navigation.openFromHub(); // Exact current tile: Open Stock Analyst's Choice screen.
+        waitFor(ExecutionProfile.defaultWait()).withMessage("Analyst's Choice did not open")
+                .until(d -> visible(TITLE) && visible(BACK) && complete(discoverTabsOnce()));
     }
 
-    /**
-     * Cleanup deliberately prefers one Android Back because the module is opened from Hub.
-     * This preserves the existing Hub scroll position. It does not tap Hub again when Hub
-     * is already active, so the Hub page is not unnecessarily refreshed.
-     */
     public void recoverToHubSafely() {
-        try {
-            if (isHubScreenReady()) {
-                ReportLogger.debug("Ready-to-invest cleanup is already at Hub - no action required");
-                return;
-            }
-
-            // If a testcase ended on Investment Planner, return to Analyst Picks first.
-            if (isInvestmentPlannerOpen()) {
-                driver.navigate().back();
-                waitForVisibleOptional(ANALYST_PICKS_TITLE, 6_000L);
-            }
-
-            if (isAnalystPicksOpen()) {
-                driver.navigate().back();
-                if (waitForHubScreenReady(7_000L)) {
-                    ReportLogger.debug("Ready-to-invest cleanup returned to Hub with one controlled Back");
-                    return;
-                }
-            }
-
-            if (!isHubScreenReady()) {
-                WebElement hub = bottomMostVisible(HUB);
-                if (hub != null) {
-                    safeClick(hub, "Hub bottom-navigation fallback during ready-to-invest cleanup");
-                    waitForHubScreenReady(7_000L);
-                }
-            }
-        } catch (Exception e) {
-            ReportLogger.debug("Ready-to-invest cleanup ignored: " + clean(e.getMessage()));
-        } catch (AssertionError e) {
-            ReportLogger.debug("Ready-to-invest cleanup assertion ignored: " + clean(e.getMessage()));
-        }
+        navigation.returnToHub();
+        navigation.assertHubVisible(); // Cleanup failure must remain visible to TestNG.
     }
 
-    // =========================================================
-    // Public validations
-    // =========================================================
+    public void restoreTimingSettings() { navigation.restoreTimingSettings(); }
 
     public void validateLandingPageDynamically() {
         openFromHub();
-
-        requireVisible(ANALYST_PICKS_TITLE, "Analyst Picks title");
-
-        List<RuntimeTab> topTabs = discoverTopTabs();
-        assertCompleteTabGroup(topTabs, "Analyst Picks top-level tabs");
-
-        TableState table = waitForTableResolved("Analyst Picks landing");
-        logTableState("Analyst Picks landing", table);
-
-        List<String> filters = discoverSecondaryFilters();
-        ReportLogger.pass(
-                "Analyst Picks landing ready | topTabs=" + labels(topTabs)
-                        + " | secondaryFilters=" + filters
-                        + " | live table data captured dynamically"
-        );
+        List<RuntimeTab> tabs = discoverTabs();
+        RuntimeTab selected = selectedTab(tabs);
+        TableState state = waitForTable(selected);
+        ReportLogger.pass("Analyst's Choice landing | tabs=" + tabLabels(tabs)
+                + " | filters=" + visibleFilters(selected).keySet() + " | " + state.describe());
     }
 
-    /**
-     * Walks every runtime-discovered top tab and every secondary chip exposed by that
-     * tab. Nothing in this method assumes fixed stock names or fixed secondary labels.
-     */
     public void validateEveryTopSectionAndSecondaryFilterDynamically() {
         openFromHub();
-
-        List<RuntimeTab> topTabs = discoverTopTabs();
-        assertCompleteTabGroup(topTabs, "Analyst Picks top-level tabs");
-
-        for (RuntimeTab tab : topTabs) {
-            ReportLogger.step(
-                    "Validating runtime top tab " + tab.index + "/" + tab.total + ": " + tab.label
-            );
-
-            TableState initial = switchTopTab(tab);
-            logTableState(tab.label, initial);
-
-            List<String> filters = discoverSecondaryFilters();
-            if (filters.isEmpty()) {
-                ReportLogger.pass(
-                        tab.label + " exposes no secondary chips; live table/empty-state validation completed"
-                );
-                continue;
-            }
-
-            ReportLogger.info(tab.label + " runtime secondary filters: " + filters);
-
-            for (String filter : filters) {
-                ReportLogger.step("Validating " + tab.label + " secondary filter: " + filter);
-                TableState filtered = tapSecondaryFilter(filter);
-                logTableState(tab.label + " / " + filter, filtered);
-            }
+        for (RuntimeTab tab : discoverTabs()) {
+            if (!selected(tab.locator())) tap(tab.locator());
+            waitFor(ExecutionProfile.defaultWait()).withMessage("Requested top tab did not become selected: " + tab.label)
+                    .until(d -> selected(tab.locator()));
+            waitForFilterTable(tab);
+            validateFilters(tab);
         }
-
-        ReportLogger.pass("Every runtime top tab and discovered secondary filter validated");
     }
 
-    /**
-     * Validates the horizontally scrollable table using the live HorizontalScrollView
-     * shown by Appium Inspector. The validation uses semantic/header progress when the
-     * shifted columns are accessibility-exposed, while the scroll container itself is
-     * used as the stable gesture anchor.
-     */
+    /** Prove the named final column and return to the starting column on every runtime tab. */
     public void validateHorizontalTableScroll() {
         openFromHub();
-
-        List<RuntimeTab> tabs = discoverTopTabs();
-        assertCompleteTabGroup(tabs, "Analyst Picks top-level tabs");
-        TableState start = switchTopTab(tabs.get(0));
-
-        List<String> filters = discoverSecondaryFilters();
-        if (!filters.isEmpty()) {
-            start = tapSecondaryFilter(filters.get(0));
-        }
-        Rectangle rail = findTableHorizontalScrollRect();
-        if (rail == null) {
-            throw new AssertionError(
-                    "Analyst Picks table does not expose a usable horizontal scroll container. visible="
-                            + collectVisibleValues()
-            );
-        }
-
-        String startFingerprint = horizontalTableFingerprint();
-        boolean progressed = false;
-        String progressedFingerprint = startFingerprint;
-
-        for (int attempt = 1; attempt <= 4; attempt++) {
-            swipeHorizontal(rail, true);
-            sleep(320L);
-
-            String now = horizontalTableFingerprint();
-            if (!now.isEmpty() && !now.equals(startFingerprint)) {
-                progressed = true;
-                progressedFingerprint = now;
-                ReportLogger.pass(
-                        "Table horizontal content advanced after swipe attempt " + attempt
-                                + " | visibleHeaders=" + collectVisibleHeaderValues()
-                );
-                break;
+        for (RuntimeTab tab : discoverTabs()) {
+            TableState state = switchTab(tab);
+            if (state.empty.length() > 0) {
+                throw new AssertionError(tab.label + " is empty; horizontal movement cannot be verified");
             }
-        }
-
-        if (!progressed) {
-            // Some Flutter builds expose stock names but not the shifted numeric cells as
-            // accessibility semantics. Appium Inspector nevertheless exposes the table as
-            // android.widget.HorizontalScrollView. In that case treat the live scroll
-            // container plus successful bounded gestures as the structural scroll proof,
-            // and report the semantic limitation explicitly instead of raising a false fail.
-            WebElement liveHorizontal = findTableHorizontalScrollView();
-            if (liveHorizontal == null) {
-                throw new AssertionError(
-                        "Horizontal swipes produced no semantic progress and the live HorizontalScrollView disappeared"
-                );
+            Map<String, Rectangle> initial = settledHeaders(tab);
+            String first = firstFullHeader(initial);
+            if (first == null) {
+                throw new AssertionError(tab.label + " has no visible starting table column");
             }
-            ReportLogger.pass(
-                    "Live android.widget.HorizontalScrollView remained available and bounded horizontal gestures executed; shifted numeric cells are not fully accessibility-exposed on this build"
-            );
-        }
-
-        // Restore toward the starting horizontal position so later tests do not inherit it.
-        String previous = progressedFingerprint;
-        int noProgress = 0;
-        for (int i = 0; i < 5; i++) {
-            swipeHorizontal(rail, false);
-            sleep(260L);
-            String now = horizontalTableFingerprint();
-
-            if (!startFingerprint.isEmpty() && now.equals(startFingerprint)) {
-                ReportLogger.debug("Horizontal table restored to its starting semantic fingerprint");
-                break;
+            if (fullColumn(initial.get(LAST_COLUMN))) {
+                // A retained right-edge offset still needs a real round trip, not a zero-movement PASS.
+                String dateColumn = tab.label.equalsIgnoreCase("Sell") ? "Exit Date" : "Reco Date";
+                panTableTo(tab, dateColumn, false);
+                panTableTo(tab, LAST_COLUMN, true);
+                ReportLogger.pass(tab.label + " table moved from its retained right edge to '" + dateColumn + "' and back");
+                continue;
             }
-
-            if (!now.isEmpty() && now.equals(previous)) {
-                noProgress++;
-            } else {
-                noProgress = 0;
-            }
-            previous = now;
-
-            if (noProgress >= 2) {
-                break;
-            }
-        }
-
-        if (!start.isResolved()) {
-            throw new AssertionError("Baseline table unexpectedly stopped being resolved during horizontal validation");
+            panTableTo(tab, LAST_COLUMN, true);
+            panTableTo(tab, first, false);
+            ReportLogger.pass(tab.label + " table reached '" + LAST_COLUMN + "' and returned to '" + first + "'");
         }
     }
 
-    /**
-     * Exercises the long-list vertical behavior with progress detection, finds the
-     * bottom Portfolio Planner CTA shown in the screencast, validates navigation to
-     * Investment Planner, and then returns to Analyst Picks without refreshing Hub.
-     */
+    /** Legacy method name retained; the current widget opens Investment Planner. */
     public void validateVerticalScrollAndPortfolioPlannerCta() {
         openFromHub();
-
-        List<RuntimeTab> tabs = discoverTopTabs();
-        assertCompleteTabGroup(tabs, "Analyst Picks top-level tabs");
-
-        RuntimeTab lastTab = tabs.get(tabs.size() - 1);
-        TableState baseline = switchTopTab(lastTab);
-
-        if (baseline.hasLiveContent()) {
-            String before = baseline.fingerprint();
-            swipeVerticalInModule(true);
-            TableState after = waitForTableResolved(lastTab.label + " after vertical swipe");
-
-            if (!after.fingerprint().equals(before)) {
-                ReportLogger.pass(lastTab.label + " table content advanced after bounded vertical swipe");
-            } else {
-                ReportLogger.info(
-                        lastTab.label + " first vertical swipe kept the same visible semantic fingerprint; continuing bounded bottom search"
-                );
+        List<RuntimeTab> tabs = discoverTabs();
+        RuntimeTab tab = tabs.get(tabs.size() - 1);
+        switchTab(tab);
+        ReportLogger.step("RTI_004: " + tab.label + " - scrolling to the Investment Planner widget");
+        boolean found = false;
+        for (int swipe = 0; swipe <= maxVertical; swipe++) {
+            assertSelected(tab);
+            if (!plannerWidgetBounds().isEmpty()) {
+                ReportLogger.step("RTI_004: Widget is fully visible after " + swipe + " list scrolls");
+                found = true;
+                break;
             }
+            if (swipe == maxVertical) break;
+            Rectangle viewport = moduleViewport();
+            int x = viewport.getX() + viewport.getWidth() / 2;
+            int from = viewport.getY() + (int) (viewport.getHeight() * 0.82);
+            int to = viewport.getY() + (int) (viewport.getHeight() * 0.22);
+            performSwipe(x, from, x, to);
+            settleRows(tab);
         }
-
-        WebElement cta = scrollToPortfolioPlannerCta();
-        if (cta == null) {
-            throw new AssertionError(
-                    "Portfolio Planner CTA was not found at the end of the Analyst Picks list after bounded scrolling"
-            );
-        }
-
-        safeClick(cta, "Portfolio Planner 'Take me there' CTA");
-        waitForVisible(INVESTMENT_PLANNER_TITLE, PAGE_READY_WAIT_MS);
-        ReportLogger.pass("Portfolio Planner CTA navigated successfully to Investment Planner");
-
-        // Return immediately so module cleanup stays one Back away from Hub.
-        driver.navigate().back();
-        waitForVisible(ANALYST_PICKS_TITLE, PAGE_READY_WAIT_MS);
-        ReportLogger.debug("Returned from Investment Planner to Analyst Picks without touching Hub");
+        if (!found) throw new AssertionError("Current Investment Planner widget/CTA was not fully visible within "
+                + maxVertical + " list scrolls");
+        waitForPlannerCtaToSettle(tab);
+        ReportLogger.step("RTI_004: Opening Investment Planner using Take me there");
+        tap(PLANNER_CTA);
+        waitFor(ExecutionProfile.longWait()).withMessage("Take me there did not open Investment Planner")
+                .until(d -> visible(INVESTMENT_PLANNER) && !visible(TITLE));
+        returnFromInvestmentPlanner(tab);
+        ReportLogger.pass("Current widget copy and Investment Planner navigation verified");
     }
 
-    /**
-     * Fast top-level transition smoke: every runtime tab is opened once and resolved,
-     * then the first tab is opened again. It intentionally does not repeat the deep
-     * secondary-filter validation from the main dynamic testcase.
-     */
+    private void returnFromInvestmentPlanner(RuntimeTab tab) {
+        if (driver.isKeyboardShown()) {
+            driver.hideKeyboard();
+            waitFor(ExecutionProfile.shortWait()).withMessage("Investment Planner keyboard did not close")
+                    .until(d -> !driver.isKeyboardShown());
+        }
+        ReportLogger.step("RTI_004: Returning from Investment Planner to Analyst's Choice");
+        boolean usedAppBack = visible(BACK);
+        if (usedAppBack) tap(BACK); else driver.navigate().back();
+        try {
+            waitFor(ExecutionProfile.shortWait()).withMessage("Waiting for the destination after Investment Planner Back")
+                    .until(d -> plannerReturnDestination() != null);
+        } catch (TimeoutException firstBackWait) {
+            // Use the working SAC fallback only while Planner is still open.
+            // Never issue another Back on a partially restored module or on Hub.
+            if (usedAppBack && visible(INVESTMENT_PLANNER) && !visible(TITLE)) {
+                ReportLogger.step("RTI_004: Investment Planner is still open; using Android Back once");
+                driver.navigate().back();
+            }
+            try {
+                waitFor(ExecutionProfile.defaultWait()).withMessage(
+                        "Investment Planner Back reached neither Analyst's Choice nor Hub")
+                        .until(d -> plannerReturnDestination() != null);
+            } catch (TimeoutException returnFailure) {
+                returnFailure.addSuppressed(firstBackWait);
+                throw returnFailure;
+            }
+        }
+        if ("HUB".equals(plannerReturnDestination())) {
+            ReportLogger.step("RTI_004: Planner returned to Hub; reopening Analyst's Choice");
+            navigation.openFromHub();
+        }
+        waitFor(ExecutionProfile.defaultWait()).withMessage("Analyst's Choice did not finish restoring after Planner")
+                .until(d -> "MODULE".equals(plannerReturnDestination()));
+        if (!selected(tab.locator())) switchTab(tab);
+        assertSelected(tab);
+    }
+
+    private String plannerReturnDestination() {
+        if (visible(TITLE)) {
+            return visible(BACK) && !visible(INVESTMENT_PLANNER) && complete(discoverTabsOnce()) ? "MODULE" : null;
+        }
+        if (visible(INVESTMENT_PLANNER)) return null;
+        return navigation.isHubScreenVisible() ? "HUB" : null;
+    }
+
     public void validateTopLevelSwitchingFast() {
         openFromHub();
-
-        List<RuntimeTab> tabs = discoverTopTabs();
-        assertCompleteTabGroup(tabs, "Analyst Picks top-level tabs");
-
-        String previousSignature = "";
-        for (RuntimeTab tab : tabs) {
-            TableState state = switchTopTab(tab);
-            String signature = sectionSignature(state);
-
-            if (!previousSignature.isEmpty() && signature.equals(previousSignature)) {
-                ReportLogger.debug(
-                        "Top-tab signature remained equal after switching to " + tab.label
-                                + "; this is allowed because live stock datasets may overlap"
-                );
-            }
-            previousSignature = signature;
-        }
-
-        switchTopTab(tabs.get(0));
-
-        ReportLogger.pass("Runtime top-level tab switching and return-to-first-tab completed successfully");
+        List<RuntimeTab> tabs = discoverTabs();
+        for (RuntimeTab tab : tabs) switchTab(tab);
+        switchTab(tabs.get(0));
+        ReportLogger.pass("Every runtime top tab loaded; returned to " + tabs.get(0).label);
     }
 
-    // =========================================================
-    // Top-level runtime tabs
-    // =========================================================
+    private List<RuntimeTab> discoverTabs() {
+        return waitFor(ExecutionProfile.defaultWait()).withMessage("The runtime top-tab group is incomplete")
+                .until(d -> {
+                    List<RuntimeTab> tabs = discoverTabsOnce();
+                    return complete(tabs) ? tabs : null;
+                });
+    }
 
-    private List<RuntimeTab> discoverTopTabs() {
-        long endAt = System.currentTimeMillis() + PAGE_READY_WAIT_MS;
-        List<RuntimeTab> best = Collections.emptyList();
-
-        while (System.currentTimeMillis() < endAt) {
-            List<RuntimeTab> current = discoverTopTabsOnce();
-            if (isCompleteTabGroup(current)) {
-                return current;
+    private List<RuntimeTab> discoverTabsOnce() {
+        Map<Integer, Map<Integer, RuntimeTab>> groups = new LinkedHashMap<>();
+        for (WebElement element : driver.findElements(TABS)) {
+            if (!element.isDisplayed()) continue;
+            String semantic = element.getAttribute("content-desc");
+            Matcher match = TAB.matcher(normalize(semantic));
+            if (!match.matches()) continue;
+            int index = Integer.parseInt(match.group(2)), total = Integer.parseInt(match.group(3));
+            if (index < 1 || total < 2 || index > total) continue;
+            Rectangle r = element.getRect();
+            Map<Integer, RuntimeTab> group = groups.computeIfAbsent(total, k -> new LinkedHashMap<>());
+            RuntimeTab previous = group.get(index);
+            if (previous == null || r.getY() < previous.bounds.getY()) {
+                group.put(index, new RuntimeTab(index, total, match.group(1), semantic, r));
             }
-            if (current.size() > best.size()) {
-                best = current;
-            }
-            sleep(POLL_MS);
         }
-
+        List<RuntimeTab> best = List.of();
+        for (Map<Integer, RuntimeTab> group : groups.values()) {
+            List<RuntimeTab> current = new ArrayList<>(group.values());
+            current.sort(Comparator.comparingInt(t -> t.index));
+            if (complete(current) && (!complete(best) || current.get(0).bounds.getY() < best.get(0).bounds.getY())) best = current;
+        }
         return best;
     }
 
-    private List<RuntimeTab> discoverTopTabsOnce() {
-        Map<Integer, Map<Integer, RuntimeTab>> byTotal = new HashMap<>();
-
-        for (WebElement element : contentSemanticElements()) {
-            if (!isDisplayed(element)) {
-                continue;
-            }
-
-            String value = normalizeWhitespace(semanticValue(element));
-            Matcher matcher = TAB_PATTERN.matcher(value);
-            if (!matcher.matches()) {
-                continue;
-            }
-
-            int index = parseInt(matcher.group(2), -1);
-            int total = parseInt(matcher.group(3), -1);
-            String label = normalizeWhitespace(matcher.group(1));
-            Rectangle rect = safeRect(element);
-
-            if (index < 1 || total < 2 || index > total || label.isEmpty() || rect == null) {
-                continue;
-            }
-
-            RuntimeTab tab = new RuntimeTab(index, total, label, rect.getY(), rect.getY() + rect.getHeight());
-            Map<Integer, RuntimeTab> group = byTotal.get(total);
-            if (group == null) {
-                group = new LinkedHashMap<>();
-                byTotal.put(total, group);
-            }
-
-            RuntimeTab existing = group.get(index);
-            if (existing == null || tab.topY < existing.topY) {
-                group.put(index, tab);
-            }
-        }
-
-        List<RuntimeTab> selected = Collections.emptyList();
-        double selectedAverageY = Double.MAX_VALUE;
-        int selectedCompleteness = -1;
-
-        for (Map.Entry<Integer, Map<Integer, RuntimeTab>> entry : byTotal.entrySet()) {
-            int total = entry.getKey();
-            List<RuntimeTab> tabs = new ArrayList<>(entry.getValue().values());
-            tabs.sort(Comparator.comparingInt(t -> t.index));
-
-            int completeness = tabs.size() == total ? 2 : 1;
-            double averageY = averageTopY(tabs);
-
-            if (completeness > selectedCompleteness
-                    || (completeness == selectedCompleteness && averageY < selectedAverageY)) {
-                selected = tabs;
-                selectedAverageY = averageY;
-                selectedCompleteness = completeness;
-            }
-        }
-
-        return selected;
-    }
-
-    private TableState switchTopTab(RuntimeTab tab) {
-        String before = sectionSignature(captureTableState());
-        WebElement element = findTopTabElement(tab);
-
-        if (element != null) {
-            safeClick(element, "runtime top tab " + tab.index + "/" + tab.total + " - " + tab.label);
-        } else {
-            tapTopTabByLiveGeometry(tab);
-            ReportLogger.debug(
-                    "Tapped " + tab.label + " using live top-tab geometry after semantic refind was unavailable"
-            );
-        }
-
-        TableState resolved = waitForTableResolved("Top tab " + tab.label);
-        String after = sectionSignature(resolved);
-
-        if (!before.isEmpty() && before.equals(after)) {
-            ReportLogger.debug(
-                    "Top tab " + tab.label + " resolved with the same live section signature as before; dataset overlap is permitted"
-            );
-        }
-        return resolved;
-    }
-
-    private WebElement findTopTabElement(RuntimeTab target) {
-        long endAt = System.currentTimeMillis() + 4_000L;
-
-        while (System.currentTimeMillis() < endAt) {
-            for (WebElement element : safeFindElements(VIEW)) {
-                if (!isDisplayed(element)) {
-                    continue;
-                }
-                String value = normalizeWhitespace(semanticValue(element));
-                Matcher matcher = TAB_PATTERN.matcher(value);
-                if (!matcher.matches()) {
-                    continue;
-                }
-
-                int index = parseInt(matcher.group(2), -1);
-                int total = parseInt(matcher.group(3), -1);
-                String label = normalizeWhitespace(matcher.group(1));
-
-                if (index == target.index
-                        && total == target.total
-                        && label.equalsIgnoreCase(target.label)) {
-                    return element;
-                }
-            }
-            sleep(220L);
-        }
-
-        return null;
-    }
-
-    private void tapTopTabByLiveGeometry(RuntimeTab target) {
-        List<RuntimeTab> current = discoverTopTabsOnce();
-        if (current.isEmpty()) {
-            throw new AssertionError("No live top-tab geometry is available for fallback tap: " + target.label);
-        }
-
-        RuntimeTab geometry = null;
-        for (RuntimeTab tab : current) {
-            if (tab.index == target.index && tab.total == target.total) {
-                geometry = tab;
-                break;
-            }
-        }
-
-        if (geometry == null) {
-            throw new AssertionError("Target top-tab geometry not found: " + target.label);
-        }
-
-        // Re-find a matching semantic element only for its current rectangle. If it
-        // disappeared, derive X from the complete top-band bounds instead of fixed pixels.
-        WebElement live = findTopTabElement(geometry);
-        if (live != null) {
-            Rectangle rect = safeRect(live);
-            if (rect != null) {
-                performTap(rect.getX() + rect.getWidth() / 2, rect.getY() + rect.getHeight() / 2);
-                return;
-            }
-        }
-
-        int minX = Integer.MAX_VALUE;
-        int maxX = Integer.MIN_VALUE;
-        int centerY = -1;
-        for (RuntimeTab tab : current) {
-            WebElement e = findTopTabElement(tab);
-            Rectangle rect = safeRect(e);
-            if (rect == null) {
-                continue;
-            }
-            minX = Math.min(minX, rect.getX());
-            maxX = Math.max(maxX, rect.getX() + rect.getWidth());
-            centerY = rect.getY() + rect.getHeight() / 2;
-        }
-
-        if (centerY < 0 || minX == Integer.MAX_VALUE || maxX <= minX) {
-            throw new AssertionError("Unable to derive top-tab band geometry for " + target.label);
-        }
-
-        double slotWidth = (maxX - minX) / (double) target.total;
-        int tapX = (int) Math.round(minX + ((target.index - 0.5) * slotWidth));
-        performTap(tapX, centerY);
-    }
-
-    private void assertCompleteTabGroup(List<RuntimeTab> tabs, String label) {
-        if (!isCompleteTabGroup(tabs)) {
-            throw new AssertionError(
-                    label + " is incomplete. discovered=" + labels(tabs)
-                            + " | visible=" + collectVisibleValues()
-            );
-        }
-    }
-
-    private boolean isCompleteTabGroup(List<RuntimeTab> tabs) {
-        if (tabs == null || tabs.isEmpty()) {
-            return false;
-        }
-        int total = tabs.get(0).total;
-        if (tabs.size() != total) {
-            return false;
-        }
-        for (int i = 0; i < tabs.size(); i++) {
-            RuntimeTab tab = tabs.get(i);
-            if (tab.total != total || tab.index != i + 1) {
-                return false;
-            }
-        }
+    private boolean complete(List<RuntimeTab> tabs) {
+        if (tabs.isEmpty() || tabs.size() != tabs.get(0).total) return false;
+        for (int i = 0; i < tabs.size(); i++) if (tabs.get(i).index != i + 1) return false;
         return true;
     }
 
-    // =========================================================
-    // Dynamic secondary filter discovery
-    // =========================================================
+    private RuntimeTab selectedTab(List<RuntimeTab> tabs) {
+        for (RuntimeTab tab : tabs) if (selected(tab.locator())) return tab;
+        throw new AssertionError("No runtime recommendation tab is selected");
+    }
 
-    private List<String> discoverSecondaryFilters() {
-        List<RuntimeTab> topTabs = discoverTopTabsOnce();
-        WebElement stocks = firstDisplayed(STOCKS_HEADER);
-        Rectangle stocksRect = safeRect(stocks);
+    private TableState switchTab(RuntimeTab tab) {
+        if (!selected(tab.locator())) tap(tab.locator());
+        waitFor(ExecutionProfile.defaultWait()).withMessage("Requested top tab did not become selected: " + tab.label)
+                .until(d -> selected(tab.locator()));
+        return waitForTable(tab);
+    }
 
-        if (topTabs.isEmpty() || stocksRect == null) {
-            return Collections.emptyList();
-        }
+    private void assertSelected(RuntimeTab tab) {
+        if (!selected(tab.locator())) throw new AssertionError("Expected " + tab.label
+                + " to remain selected; a gesture changed recommendation tabs instead of table content");
+    }
 
-        int topBottom = 0;
-        for (RuntimeTab tab : topTabs) {
-            topBottom = Math.max(topBottom, tab.bottomY);
-        }
-        int tableTop = stocksRect.getY();
-
-        Map<String, Rectangle> candidates = new LinkedHashMap<>();
-        for (WebElement element : safeFindElements(VIEW)) {
-            if (!isDisplayed(element) || !safeClickable(element)) {
-                continue;
-            }
-
-            String value = normalizeWhitespace(semanticValue(element));
-            if (value.isEmpty() || TAB_PATTERN.matcher(value).matches()) {
-                continue;
-            }
-
-            Rectangle rect = safeRect(element);
-            if (rect == null || rect.getWidth() < 35 || rect.getHeight() < 20 || rect.getHeight() > 160) {
-                continue;
-            }
-
-            int centerY = rect.getY() + rect.getHeight() / 2;
-            if (centerY <= topBottom + 4 || centerY >= tableTop - 2) {
-                continue;
-            }
-
-            String lower = value.toLowerCase(Locale.ENGLISH);
-            if (lower.equals("analyst picks")
-                    || lower.equals("customise")
-                    || lower.equals("stocks")
-                    || lower.equals("funds")
-                    || lower.equals("portfolio")
-                    || lower.equals("hub")) {
-                continue;
-            }
-
-            if (!candidates.containsKey(value)) {
-                candidates.put(value, rect);
+    private Map<String, Filter> visibleFilters(RuntimeTab tab) {
+        assertSelected(tab);
+        Rectangle stocks = bounds(STOCKS);
+        if (stocks == null) return Map.of();
+        int top = 0;
+        for (RuntimeTab live : discoverTabsOnce()) top = Math.max(top, live.bounds.getY() + live.bounds.getHeight());
+        List<Filter> candidates = new ArrayList<>();
+        for (WebElement element : driver.findElements(VALUES)) {
+            if (!element.isDisplayed() || !element.isEnabled()) continue;
+            Rectangle r = element.getRect();
+            String semantic = element.getAttribute("content-desc"), label = normalize(semantic);
+            int y = r.getY() + r.getHeight() / 2;
+            if (y > top && y < stocks.getY() && r.getWidth() > 30 && r.getHeight() > 15
+                    && r.getHeight() <= stocks.getHeight() && !label.isEmpty() && !TAB.matcher(label).matches()
+                    && !label.equals("Customise") && !label.equals("?") && !label.equals("Analyst's Choice")) {
+                candidates.add(new Filter(label, semantic, r));
             }
         }
-
-        List<Map.Entry<String, Rectangle>> ordered = new ArrayList<>(candidates.entrySet());
-        ordered.sort(Comparator.comparingInt(e -> e.getValue().getX()));
-
-        List<String> result = new ArrayList<>();
-        for (Map.Entry<String, Rectangle> entry : ordered) {
-            result.add(entry.getKey());
-        }
+        candidates.sort(Comparator.comparingInt(c -> c.bounds.getX()));
+        Map<String, Filter> result = new LinkedHashMap<>();
+        for (Filter filter : candidates) result.putIfAbsent(filter.label, filter);
         return result;
     }
 
-    private TableState tapSecondaryFilter(String label) {
-        WebElement target = firstDisplayed(AppiumBy.accessibilityId(label));
-        if (target == null) {
-            for (WebElement element : safeFindElements(VIEW)) {
-                if (isDisplayed(element)
-                        && normalizeWhitespace(semanticValue(element)).equals(label)) {
-                    target = element;
-                    break;
-                }
-            }
-        }
-
-        if (target == null) {
-            throw new AssertionError("Runtime secondary filter disappeared before tap: " + label);
-        }
-
-        safeClick(target, "secondary filter " + label);
-
-        // Wait through skeleton/rebuild once and return the resolved state to the caller.
-        // This avoids the duplicate data wait that V1 performed after every chip tap.
-        return waitForTableResolved("Secondary filter " + label);
-    }
-
-    // =========================================================
-    // Table state / live data
-    // =========================================================
-
-    private TableState waitForTableResolved(String context) {
-        long endAt = System.currentTimeMillis() + DATA_WAIT_MS;
-        String previous = "";
-        int stableReads = 0;
-        TableState last = new TableState(false, false, "", new LinkedHashSet<String>(), new LinkedHashSet<String>());
-
-        while (System.currentTimeMillis() < endAt) {
-            TableState state = captureTableState();
-            last = state;
-
-            if (state.isResolved()) {
-                String fingerprint = state.fingerprint();
-                if (!fingerprint.isEmpty() && fingerprint.equals(previous)) {
-                    stableReads++;
-                } else {
-                    stableReads = 0;
-                }
-                previous = fingerprint;
-
-                if (state.hasExplicitEmptyState() || stableReads >= 1) {
-                    return state;
-                }
-            } else {
-                stableReads = 0;
-                previous = "";
-            }
-
-            sleep(POLL_MS);
-        }
-
-        throw new AssertionError(
-                context + " did not resolve to live table data or an explicit empty state. last="
-                        + last.describe() + " | visible=" + collectVisibleValues()
-        );
-    }
-
-    private TableState captureTableState() {
-        WebElement header = firstDisplayed(STOCKS_HEADER);
-        Rectangle headerRect = safeRect(header);
-        String emptyMessage = "";
-
-        for (WebElement element : contentSemanticElements()) {
-            if (!isDisplayed(element)) {
-                continue;
-            }
-            String value = normalizeWhitespace(semanticValue(element));
-            if (value.isEmpty()) {
-                continue;
-            }
-
-            String lower = value.toLowerCase(Locale.ENGLISH);
-            if (containsAny(lower, EMPTY_STATE_MARKERS)) {
-                emptyMessage = value;
-            }
-        }
-
-        Set<String> headers = collectVisibleHeaderValuesSet(headerRect);
-        Set<String> tableValues = collectVisibleTableBodyValues(headerRect);
-
-        boolean headerVisible = headerRect != null;
-        boolean hasLive = tableValues.size() >= 2;
-        return new TableState(headerVisible, hasLive, emptyMessage, headers, tableValues);
-    }
-
-    /**
-     * Captures visible table-body semantics even after the sticky table header has
-     * scrolled out of the viewport. V1 only collected rows when the "Stocks"
-     * header was visible, which produced false failures on long Sell lists.
-     *
-     * When the header is visible, it remains the strongest upper bound. Once it
-     * leaves the screen, the live top-tab band becomes the fallback upper bound.
-     * This keeps row detection dynamic and avoids stock/date/price hardcoding.
-     */
-    private Set<String> collectVisibleTableBodyValues(Rectangle headerRect) {
-        Set<String> tableValues = new LinkedHashSet<>();
-        Dimension screen = driver.manage().window().getSize();
-
-        int tableStartY;
-        if (headerRect != null) {
-            tableStartY = headerRect.getY() + headerRect.getHeight();
-        } else {
-            int topTabsBottom = 0;
-            for (RuntimeTab tab : discoverTopTabsOnce()) {
-                topTabsBottom = Math.max(topTabsBottom, tab.bottomY);
-            }
-
-            if (topTabsBottom > 0) {
-                tableStartY = topTabsBottom + 4;
-            } else {
-                Rectangle titleRect = safeRect(firstDisplayed(ANALYST_PICKS_TITLE));
-                tableStartY = titleRect == null
-                        ? (int) Math.round(screen.getHeight() * 0.12)
-                        : titleRect.getY() + titleRect.getHeight();
-            }
-        }
-
-        int tableEndY = (int) Math.round(screen.getHeight() * 0.91);
-
-        for (WebElement element : contentSemanticElements()) {
-            if (!isDisplayed(element)) {
-                continue;
-            }
-
-            Rectangle rect = safeRect(element);
-            String value = normalizeWhitespace(semanticValue(element));
-            if (rect == null || value.isEmpty()) {
-                continue;
-            }
-
-            int centerY = rect.getY() + rect.getHeight() / 2;
-            if (centerY <= tableStartY || centerY >= tableEndY) {
-                continue;
-            }
-
-            if (isBottomNavigationValue(value) || TAB_PATTERN.matcher(value).matches()) {
-                continue;
-            }
-
-            String lower = value.toLowerCase(Locale.ENGLISH);
-            if (lower.equals("analyst picks")
-                    || lower.equals("customise")
-                    || lower.equals("?")
-                    || lower.equals("take me there")
-                    || lower.contains("confused? use our portfolio planner")) {
-                continue;
-            }
-
-            tableValues.add(value);
-        }
-
-        return tableValues;
-    }
-
-    private Set<String> collectVisibleHeaderValuesSet(Rectangle stocksRect) {
-        Set<String> values = new LinkedHashSet<>();
-        if (stocksRect == null) {
-            return values;
-        }
-
-        int rowCenter = stocksRect.getY() + stocksRect.getHeight() / 2;
-        int tolerance = Math.max(45, stocksRect.getHeight());
-
-        for (WebElement element : contentSemanticElements()) {
-            if (!isDisplayed(element)) {
-                continue;
-            }
-            Rectangle rect = safeRect(element);
-            String value = normalizeWhitespace(semanticValue(element));
-            if (rect == null || value.isEmpty() || TAB_PATTERN.matcher(value).matches()) {
-                continue;
-            }
-
-            int center = rect.getY() + rect.getHeight() / 2;
-            if (Math.abs(center - rowCenter) <= tolerance) {
-                values.add(value);
-            }
-        }
-        return values;
-    }
-
-    private List<String> collectVisibleHeaderValues() {
-        Rectangle stocksRect = safeRect(firstDisplayed(STOCKS_HEADER));
-        return new ArrayList<>(collectVisibleHeaderValuesSet(stocksRect));
-    }
-
-    private String horizontalTableFingerprint() {
-        TableState state = captureTableState();
-        StringBuilder sb = new StringBuilder();
-        for (String header : state.headers) {
-            sb.append("H:").append(header).append('|');
-        }
-        int count = 0;
-        for (String value : state.values) {
-            sb.append("V:").append(value).append('|');
-            count++;
-            if (count >= 12) {
-                break;
-            }
-        }
-        return sb.toString();
-    }
-
-    private String sectionSignature(TableState state) {
-        List<String> filters = discoverSecondaryFilters();
-        return filters.toString() + "||" + state.fingerprint();
-    }
-
-    private void logTableState(String context, TableState state) {
-        if (state.hasExplicitEmptyState()) {
-            ReportLogger.pass(context + " resolved to explicit empty state: " + state.emptyMessage);
+    private void validateFilters(RuntimeTab tab) {
+        Map<String, Filter> initial = readFilters(tab);
+        if (initial.isEmpty()) {
+            ReportLogger.pass(tab.label + " has no secondary filter rail; its live table/empty state was verified");
             return;
         }
-
-        ReportLogger.pass(
-                context + " resolved with " + state.values.size() + " live semantic table values"
-                        + " | headers=" + firstValues(state.headers, 5)
-                        + " | sample=" + firstValues(state.values, 5)
-        );
+        ReportLogger.step("RTI_002: " + tab.label + " - discovering the secondary filter rail");
+        panFiltersToBoundary(tab, false);
+        Set<String> checked = new LinkedHashSet<>();
+        boolean reachedEnd = false;
+        for (int swipe = 0; swipe <= maxHorizontal; swipe++) {
+            Map<String, Filter> filters = readFilters(tab);
+            for (Filter filter : filters.values()) {
+                if (!fullyVisible(filter.bounds) || checked.contains(filter.label)) continue;
+                ReportLogger.step("RTI_002: " + tab.label + " - validating filter '" + filter.label + "'");
+                // Once another filter was confirmed, each newly discovered label
+                // needs one tap. Avoid screenshotting a known inactive chip first.
+                if (!checked.isEmpty() || !filterSelected(tab, filter)) tapFilter(tab, filter);
+                waitFor(ExecutionProfile.shortWait()).withMessage("RTI_002: " + tab.label + " filter '"
+                        + filter.label + "' has neither native selection nor a visible active fill")
+                        .until(d -> filterSelected(tab, filter));
+                waitForFilterTable(tab);
+                checked.add(filter.label);
+            }
+            if (swipe == maxHorizontal) break;
+            Map<String, Rectangle> before = filterPositions(tab);
+            if (!swipeFilters(tab, true)) { reachedEnd = true; break; }
+            if (settledFilterPositions(tab).equals(before)) { reachedEnd = true; break; }
+        }
+        if (!reachedEnd) throw new AssertionError(tab.label + " secondary filters did not reach their horizontal end");
+        if (checked.isEmpty()) throw new AssertionError(tab.label + " exposed filter chips but none were validated");
+        panFiltersToBoundary(tab, false);
+        ReportLogger.pass(tab.label + " validated runtime secondary filters: " + checked);
     }
 
-    // =========================================================
-    // Horizontal / vertical scrolling
-    // =========================================================
-
-    private WebElement findTableHorizontalScrollView() {
-        WebElement stocks = firstDisplayed(STOCKS_HEADER);
-        Rectangle stocksRect = safeRect(stocks);
-        if (stocksRect == null) {
-            return null;
+    private void panFiltersToBoundary(RuntimeTab tab, boolean later) {
+        for (int i = 0; i < maxHorizontal; i++) {
+            Map<String, Rectangle> before = filterPositions(tab);
+            if (!swipeFilters(tab, later) || settledFilterPositions(tab).equals(before)) return;
         }
+        throw new AssertionError(tab.label + " secondary filter rail did not reach its boundary");
+    }
 
-        Dimension screen = driver.manage().window().getSize();
-        WebElement best = null;
-        long bestArea = -1L;
-
-        for (WebElement element : safeFindElements(HORIZONTAL_SCROLL_VIEW)) {
-            if (!isDisplayed(element)) {
-                continue;
-            }
-            Rectangle rect = safeRect(element);
-            if (rect == null) {
-                continue;
-            }
-
-            int centerY = rect.getY() + rect.getHeight() / 2;
-            if (centerY <= stocksRect.getY()) {
-                continue;
-            }
-            if (rect.getWidth() < screen.getWidth() * 0.45
-                    || rect.getHeight() < screen.getHeight() * 0.15) {
-                continue;
-            }
-
-            long area = (long) rect.getWidth() * rect.getHeight();
-            if (area > bestArea) {
-                bestArea = area;
-                best = element;
+    private boolean swipeFilters(RuntimeTab tab, boolean later) {
+        Map<String, Filter> filters = readFilters(tab);
+        Rectangle viewport = screen();
+        Filter anchor = visibleFilterAnchor(filters, viewport);
+        if (anchor == null) throw new AssertionError("RTI_002: " + tab.label + " has no visible filter row to scroll");
+        int y = anchor.bounds.getY() + anchor.bounds.getHeight() / 2;
+        Rectangle rail = null;
+        for (WebElement element : driver.findElements(HORIZONTAL)) {
+            if (!element.isDisplayed()) continue;
+            Rectangle r = element.getRect();
+            int left = Math.max(viewport.getX(), r.getX());
+            int right = Math.min(viewport.getX() + viewport.getWidth(), r.getX() + r.getWidth());
+            int anchorX = anchor.bounds.getX() + anchor.bounds.getWidth() / 2;
+            // Flutter can give this parent the height of the entire table. The
+            // chip's Y, not the parent's centre, identifies the actual gesture lane.
+            if (y >= r.getY() && y < r.getY() + r.getHeight() && anchorX >= left && anchorX < right
+                    && right - left > 80 && (rail == null || right - left > rail.getWidth())) {
+                rail = rect(left, anchor.bounds.getY(), right - left, anchor.bounds.getHeight());
             }
         }
+        if (rail == null) {
+            for (Filter filter : filters.values()) {
+                if (!inside(filter.bounds, viewport)) throw new AssertionError("RTI_002: " + tab.label
+                        + " clipped secondary filter has no native rail at its visible row: " + filter.label);
+            }
+            return false; // A static, fully visible chip row needs no panning.
+        }
+        int left = rail.getX() + (int) (rail.getWidth() * 0.15);
+        int right = rail.getX() + rail.getWidth() - (int) (rail.getWidth() * 0.15);
+        if (right - left < 60) throw new AssertionError("Secondary filter rail is too narrow to pan safely");
+        performSwipe(later ? right : left, y, later ? left : right, y);
+        assertSelected(tab);
+        return true;
+    }
 
+    private Filter visibleFilterAnchor(Map<String, Filter> filters, Rectangle viewport) {
+        Filter anchor = null;
+        int middle = viewport.getX() + viewport.getWidth() / 2;
+        for (Filter filter : filters.values()) {
+            if (!inside(filter.bounds, viewport)) continue;
+            if (anchor == null || Math.abs(filter.bounds.getX() + filter.bounds.getWidth() / 2 - middle)
+                    < Math.abs(anchor.bounds.getX() + anchor.bounds.getWidth() / 2 - middle)) anchor = filter;
+        }
+        return anchor;
+    }
+
+    /** Resolve the exact semantic again, excluding matching text in the table/body. */
+    private WebElement filterElement(RuntimeTab tab, Filter filter) {
+        assertSelected(tab);
+        Rectangle stocks = bounds(STOCKS), viewport = screen();
+        if (stocks == null) return null;
+        WebElement match = null;
+        int top = tab.bounds.getY() + tab.bounds.getHeight();
+        for (WebElement element : driver.findElements(filter.locator())) {
+            if (!element.isDisplayed() || !element.isEnabled()) continue;
+            Rectangle r = element.getRect();
+            if (!inside(r, viewport) || r.getY() < top || r.getY() + r.getHeight() > stocks.getY()) continue;
+            if (match != null) throw new AssertionError("RTI_002: " + tab.label
+                    + " has more than one visible filter named '" + filter.label + "' above Stocks");
+            match = element;
+        }
+        return match;
+    }
+
+    private boolean filterSelected(RuntimeTab tab, Filter filter) {
+        WebElement element = filterElement(tab, filter);
+        if (element == null) return false;
+        if (element.isSelected()) return true;
+        // Flutter exposes these chips as plain android.view.View controls. On
+        // this build even the visibly active All chip reports selected=false.
+        // Verify the actual filled pill rather than treating a successful tap
+        // or an unchanged stock list as proof of selection.
+        Rectangle before = element.getRect();
+        Rectangle stocks = bounds(STOCKS);
+        if (stocks == null) return false;
+        int nativeWidth = driver.manage().window().getSize().getWidth();
+        BufferedImage frame;
+        try {
+            frame = ImageIO.read(new ByteArrayInputStream(driver.getScreenshotAs(OutputType.BYTES)));
+        } catch (IOException invalidImage) {
+            throw new IllegalStateException("RTI_002: Could not decode the filter-state screenshot", invalidImage);
+        }
+        if (frame == null) throw new IllegalStateException("RTI_002: Appium returned an unreadable filter-state screenshot");
+        WebElement current = filterElement(tab, filter);
+        if (current == null || !before.equals(current.getRect())) return false;
+        return ChipAppearance.isFilled(frame, before.getX(), before.getY(), before.getWidth(), before.getHeight(),
+                nativeWidth, tab.bounds.getY() + tab.bounds.getHeight(), stocks.getY());
+    }
+
+    /** Style fallback for the supplied filled-active / outlined-inactive chip UI. */
+    private static final class ChipAppearance {
+        private static final double[] SAMPLE_X = {0.20, 0.30, 0.70, 0.80};
+        private static final double[] SAMPLE_Y = {0.25, 0.50, 0.75};
+
+        static boolean isFilled(BufferedImage image, int x, int y, int width, int height,
+                                int nativeWidth, int bandTop, int bandBottom) {
+            if (nativeWidth <= 0 || width <= 0 || height <= 0 || y < bandTop || y + height > bandBottom) return false;
+            // Native bounds and screenshots can use different densities. Use
+            // uniform width scaling; stretching Y would misplace status-bar coordinates.
+            double scale = image.getWidth() / (double) nativeWidth;
+            if (x < 0 || (x + width) * scale > image.getWidth() || (y + height) * scale >= image.getHeight()) return false;
+            double[] background = new double[6];
+            int count = 0;
+            int[] outsideY = {bandTop + (y - bandTop) / 2, y + height + (bandBottom - y - height) / 2};
+            for (int outside : outsideY) {
+                if (outside >= y && outside <= y + height) continue;
+                if (outside * scale < 0 || outside * scale >= image.getHeight()) continue;
+                for (double fraction : new double[]{0.20, 0.50, 0.80}) {
+                    background[count++] = luminance(image.getRGB((int) ((x + width * fraction) * scale), (int) (outside * scale)));
+                }
+            }
+            if (count == 0) return false;
+            Arrays.sort(background, 0, count);
+            double surrounding = background[count / 2];
+            int contrasted = 0, upper = 0, lower = 0;
+            for (int row = 0; row < SAMPLE_Y.length; row++) {
+                for (double fraction : SAMPLE_X) {
+                    double value = luminance(image.getRGB((int) ((x + width * fraction) * scale),
+                            (int) ((y + height * SAMPLE_Y[row]) * scale)));
+                    double contrast = (Math.max(value, surrounding) + 0.05) / (Math.min(value, surrounding) + 0.05);
+                    if (contrast >= 2.0) {
+                        contrasted++;
+                        if (row == 0) upper++;
+                        if (row == SAMPLE_Y.length - 1) lower++;
+                    }
+                }
+            }
+            // Text/outline pixels alone cannot satisfy this: the fill must also
+            // cover the upper and lower chip interior. No fixed theme colour is used.
+            return contrasted >= 8 && upper >= 2 && lower >= 2;
+        }
+
+        private static double luminance(int rgb) {
+            return 0.2126 * linear((rgb >> 16) & 255) + 0.7152 * linear((rgb >> 8) & 255) + 0.0722 * linear(rgb & 255);
+        }
+
+        private static double linear(int channel) {
+            double value = channel / 255.0;
+            return value <= 0.04045 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4);
+        }
+    }
+
+    private void tapFilter(RuntimeTab tab, Filter filter) {
+        for (int attempt = 0; attempt < 3; attempt++) {
+            try {
+                Rectangle r = waitFor(ExecutionProfile.shortWait()).withMessage("RTI_002: " + tab.label
+                        + " filter '" + filter.label + "' is not fully visible above Stocks").until(d -> {
+                    WebElement element = filterElement(tab, filter);
+                    return element == null ? null : element.getRect();
+                });
+                driver.executeScript("mobile: clickGesture", Map.of(
+                        "x", r.getX() + r.getWidth() / 2, "y", r.getY() + r.getHeight() / 2));
+                assertSelected(tab);
+                return;
+            } catch (StaleElementReferenceException replacedChip) {
+                if (attempt == 2) throw replacedChip;
+            }
+        }
+    }
+
+    private Map<String, Rectangle> filterPositions(RuntimeTab tab) {
+        Map<String, Rectangle> result = new LinkedHashMap<>();
+        for (Filter filter : readFilters(tab).values()) result.put(filter.label, filter.bounds);
+        return result;
+    }
+
+    private Map<String, Rectangle> settledFilterPositions(RuntimeTab tab) {
+        // Discover once outside the short animation wait. A full table semantic
+        // scan per poll can consume the entire wait on a physical device.
+        Map<String, Filter> filters = readFilters(tab);
+        Rectangle viewport = screen();
+        Filter anchor = visibleFilterAnchor(filters, viewport);
+        if (anchor == null) throw new AssertionError("RTI_002: " + tab.label
+                + " has no fully visible secondary filter after a rail swipe");
+        final Filter observed = anchor;
+        final Rectangle[] previous = {anchor.bounds};
+        waitFor(ExecutionProfile.shortWait()).withMessage("RTI_002: " + tab.label
+                + " secondary filter '" + anchor.label + "' did not stop moving").until(d -> {
+            assertSelected(tab);
+            WebElement chip = filterElement(tab, observed);
+            Rectangle current = chip == null ? null : chip.getRect();
+            boolean stable = current != null && inside(current, viewport) && current.equals(previous[0]);
+            previous[0] = current;
+            return stable;
+        });
+        return filterPositions(tab); // Still compare the rail's before/after positions to prove its boundary.
+    }
+
+    /** One hierarchy request replaces hundreds of remote per-element reads in RTI_002. */
+    private UiSnapshot filterSnapshot(RuntimeTab tab) {
+        assertSelected(tab);
+        String source = driver.getPageSource();
+        if (source == null || source.trim().isEmpty()) throw new IllegalStateException("RTI_002: UiAutomator2 returned empty UI source");
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+            factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+            factory.setXIncludeAware(false);
+            factory.setExpandEntityReferences(false);
+            var builder = factory.newDocumentBuilder();
+            builder.setErrorHandler(new DefaultHandler() {
+                @Override public void error(SAXParseException e) throws SAXParseException { throw e; }
+                @Override public void fatalError(SAXParseException e) throws SAXParseException { throw e; }
+            });
+            NodeList elements = builder.parse(new InputSource(new StringReader(source))).getElementsByTagName("*");
+            List<UiNode> nodes = new ArrayList<>();
+            Pattern boundsPattern = Pattern.compile("\\[(-?\\d+),(-?\\d+)\\]\\[(-?\\d+),(-?\\d+)\\]");
+            for (int i = 0; i < elements.getLength(); i++) {
+                Element element = (Element) elements.item(i);
+                if ("false".equals(element.getAttribute("displayed"))) continue;
+                Matcher match = boundsPattern.matcher(element.getAttribute("bounds"));
+                if (!match.matches()) continue;
+                int left = Integer.parseInt(match.group(1)), top = Integer.parseInt(match.group(2));
+                int right = Integer.parseInt(match.group(3)), bottom = Integer.parseInt(match.group(4));
+                if (right <= left || bottom <= top) continue;
+                String type = element.getAttribute("class");
+                nodes.add(new UiNode(type.isEmpty() ? element.getTagName() : type, element.getAttribute("content-desc"),
+                        element.getAttribute("resource-id"), !"false".equals(element.getAttribute("enabled")),
+                        rect(left, top, right - left, bottom - top)));
+            }
+            return new UiSnapshot(nodes, driver.manage().window().getSize());
+        } catch (org.xml.sax.SAXException | javax.xml.parsers.ParserConfigurationException | IOException malformed) {
+            throw new IllegalStateException("RTI_002: Could not read the native UI snapshot", malformed);
+        }
+    }
+
+    private Map<String, Filter> readFilters(RuntimeTab tab) {
+        UiSnapshot snapshot = filterSnapshot(tab);
+        if (snapshot.stocks == null) throw new AssertionError("RTI_002: " + tab.label + " Stocks header is unavailable while reading filters");
+        int top = tab.bounds.getY() + tab.bounds.getHeight();
+        List<Filter> candidates = new ArrayList<>();
+        for (UiNode node : snapshot.nodes) {
+            Rectangle r = node.bounds;
+            String label = normalize(node.semantic);
+            int y = r.getY() + r.getHeight() / 2;
+            if (node.type.equals("android.view.View") && node.enabled && y > top && y < snapshot.stocks.getY()
+                    && r.getWidth() > 30 && r.getHeight() > 15 && r.getHeight() <= snapshot.stocks.getHeight()
+                    && r.getX() < snapshot.viewport.getWidth() && r.getX() + r.getWidth() > 0
+                    && !label.isEmpty() && !excluded(label)) candidates.add(new Filter(label, node.semantic, r));
+        }
+        candidates.sort(Comparator.comparingInt(f -> f.bounds.getX()));
+        Map<String, Filter> result = new LinkedHashMap<>();
+        for (Filter filter : candidates) result.putIfAbsent(filter.label, filter);
+        return result;
+    }
+
+    private TableState waitForFilterTable(RuntimeTab tab) {
+        final String[] previous = {null};
+        return waitFor(ExecutionProfile.defaultWait()).withMessage("RTI_002: " + tab.label
+                + " did not resolve to live rows or an explicit empty state").until(d -> {
+            UiSnapshot snapshot = filterSnapshot(tab);
+            if (snapshot.stocks == null || snapshot.content == null) { previous[0] = null; return null; }
+            int top = snapshot.stocks.getY() + snapshot.stocks.getHeight();
+            String empty = "";
+            Set<String> names = new LinkedHashSet<>(), data = new LinkedHashSet<>();
+            for (UiNode node : snapshot.nodes) {
+                if (!node.type.equals("android.view.View") || !inside(node.bounds, snapshot.content)) continue;
+                String value = normalize(node.semantic), lower = value.toLowerCase(Locale.ROOT);
+                for (String marker : EMPTY) if (lower.contains(marker)) empty = value;
+                if (node.bounds.getY() < top || excluded(value) || value.isEmpty()) continue;
+                if (DATE.matcher(value).matches() || NUMBER.matcher(value).matches()) data.add(value);
+                else if (!lower.startsWith("no ") && !lower.startsWith("underlying data") && !lower.equals("nothing to show")) names.add(value);
+            }
+            TableState current = new TableState(names, data, empty);
+            if (!current.resolved()) { previous[0] = null; return null; }
+            String key = current.stableKey();
+            boolean stable = key.equals(previous[0]); previous[0] = key;
+            return stable ? current : null;
+        });
+    }
+
+    private static final class UiNode {
+        final String type, semantic, resourceId;
+        final boolean enabled;
+        final Rectangle bounds;
+        UiNode(String type, String semantic, String resourceId, boolean enabled, Rectangle bounds) {
+            this.type = type; this.semantic = semantic; this.resourceId = resourceId; this.enabled = enabled; this.bounds = bounds;
+        }
+    }
+
+    private final class UiSnapshot {
+        final List<UiNode> nodes;
+        final Rectangle viewport, stocks, content;
+        UiSnapshot(List<UiNode> nodes, Dimension size) {
+            this.nodes = nodes;
+            int bottom = size.getHeight();
+            Rectangle header = null, scroll = null;
+            for (UiNode node : nodes) {
+                if (node.resourceId.equals("android:id/navigationBarBackground") && node.bounds.getY() > 0) bottom = Math.min(bottom, node.bounds.getY());
+                if (node.type.equals("android.widget.ImageView") && normalize(node.semantic).equals("Stocks")
+                        && (header == null || node.bounds.getY() < header.getY())) header = node.bounds;
+            }
+            viewport = rect(0, 0, size.getWidth(), bottom);
+            for (UiNode node : nodes) if (node.type.equals("android.widget.ScrollView")) {
+                Rectangle r = node.bounds;
+                int left = Math.max(0, r.getX()), right = Math.min(size.getWidth(), r.getX() + r.getWidth());
+                int top = Math.max(0, r.getY()), end = Math.min(bottom, r.getY() + r.getHeight());
+                if (right - left >= size.getWidth() * 0.8 && end - top > 160
+                        && (scroll == null || end - top > scroll.getHeight())) scroll = rect(left, top, right - left, end - top);
+            }
+            stocks = header; content = scroll;
+        }
+    }
+
+    private TableState waitForTable(RuntimeTab tab) {
+        final String[] previous = {null};
+        return waitFor(ExecutionProfile.defaultWait()).withMessage(tab.label
+                + " did not resolve to live rows or an explicit empty state").until(d -> {
+            assertSelected(tab);
+            TableState current = readTable(tab);
+            if (!current.resolved()) { previous[0] = null; return null; }
+            String key = current.stableKey();
+            boolean stable = key.equals(previous[0]); previous[0] = key;
+            return stable ? current : null;
+        });
+    }
+
+    private TableState readTable(RuntimeTab tab) {
+        Rectangle stocks = bounds(STOCKS), viewport = moduleViewport();
+        int top = stocks == null ? tab.bounds.getY() + tab.bounds.getHeight() : stocks.getY() + stocks.getHeight();
+        String empty = "";
+        Set<String> names = new LinkedHashSet<>(), data = new LinkedHashSet<>();
+        for (WebElement element : driver.findElements(VALUES)) {
+            if (!element.isDisplayed()) continue;
+            Rectangle r = element.getRect();
+            if (!inside(r, viewport)) continue;
+            String value = normalize(element.getAttribute("content-desc"));
+            String lower = value.toLowerCase(Locale.ROOT);
+            for (String marker : EMPTY) if (lower.contains(marker)) empty = value;
+            if (r.getY() < top || excluded(value) || value.isEmpty()) continue;
+            if (DATE.matcher(value).matches() || NUMBER.matcher(value).matches()) data.add(value);
+            else if (!lower.startsWith("no ") && !lower.startsWith("underlying data") && !lower.equals("nothing to show")) names.add(value);
+        }
+        return new TableState(names, data, empty);
+    }
+
+    private boolean excluded(String value) {
+        return TAB.matcher(value).matches() || value.equals("Analyst's Choice") || value.equals("Customise")
+                || value.equals("Stocks") || value.equals("#") || value.equals("?") || value.equals("Go back")
+                || value.equals("Take me there") || value.equals("Need a hand deciding?")
+                || value.equals("Our Investment Planner picks the stocks and split for you")
+                || value.contains("Get Stock Advisor") || value.equals("Unlock now");
+    }
+
+    private void settleRows(RuntimeTab tab) {
+        final Map<?, ?>[] previous = {null};
+        waitFor(ExecutionProfile.shortWait()).withMessage(
+                "RTI_004: No stable visible date-row position after scrolling " + tab.label).until(d -> {
+            assertSelected(tab);
+            if (!plannerWidgetBounds().isEmpty()) return true;
+            Rectangle viewport = moduleViewport();
+            // One fresh row is enough to observe the end of a scroll. Reading every
+            // name/date/price on every poll can exhaust the short wait on a device.
+            for (WebElement cell : driver.findElements(DATE_CELLS)) {
+                if (!cell.isDisplayed()) continue;
+                Rectangle r = cell.getRect();
+                if (!inside(r, viewport)) continue;
+                Map<String, Rectangle> current = Map.of(normalize(cell.getAttribute("content-desc")), r);
+                boolean stable = current.equals(previous[0]); previous[0] = current;
+                return stable;
+            }
+            // The viewport can contain only footer/empty-state content. Continue
+            // the bounded search; success still requires all three widget controls.
+            Map<String, Rectangle> current = Map.of("viewport", viewport);
+            boolean stable = current.equals(previous[0]); previous[0] = current;
+            return stable;
+        });
+    }
+
+    private Map<String, Rectangle> plannerWidgetBounds() {
+        try {
+            Rectangle headline = bounds(PLANNER_HEADLINE);
+            if (headline == null) return Map.of();
+            Rectangle subtitle = bounds(PLANNER_SUBTITLE);
+            if (subtitle == null) return Map.of();
+            Rectangle cta = bounds(PLANNER_CTA);
+            if (cta == null) return Map.of();
+            Rectangle viewport = screen();
+            if (!inside(headline, viewport) || !inside(subtitle, viewport) || !inside(cta, viewport)) return Map.of();
+            return Map.of("headline", headline, "subtitle", subtitle, "cta", cta);
+        } catch (StaleElementReferenceException replacedWidget) {
+            return Map.of(); // Query fresh controls on the next bounded search/poll.
+        }
+    }
+
+    /** Wait on the actual click target once the widget is visible. */
+    private void waitForPlannerCtaToSettle(RuntimeTab tab) {
+        final Rectangle[] previous = {null};
+        waitFor(ExecutionProfile.shortWait()).withMessage("RTI_004: The visible planner CTA did not stop moving")
+                .until(d -> {
+                    assertSelected(tab);
+                    Rectangle cta = plannerWidgetBounds().get("cta");
+                    if (cta == null) { previous[0] = null; return false; }
+                    boolean stable = cta.equals(previous[0]); previous[0] = cta;
+                    return stable;
+                });
+    }
+
+    private Map<String, Rectangle> settledHeaders(RuntimeTab tab) {
+        final Map<?, ?>[] previous = {null};
+        return waitFor(ExecutionProfile.defaultWait()).withMessage("Live table headings are unavailable").until(d -> {
+            assertSelected(tab);
+            Rectangle stocks = bounds(STOCKS);
+            if (stocks == null) { previous[0] = null; return null; }
+            Map<String, Rectangle> current = new LinkedHashMap<>();
+            List<WebElement> elements = new ArrayList<>(driver.findElements(HEADERS));
+            elements.sort(Comparator.comparingInt(e -> e.getRect().getX()));
+            for (WebElement element : elements) {
+                Rectangle r = element.getRect(); int y = r.getY() + r.getHeight() / 2;
+                if (element.isDisplayed() && y >= stocks.getY() && y <= stocks.getY() + stocks.getHeight()
+                        && r.getX() + r.getWidth() > stocks.getX() + stocks.getWidth()
+                        && r.getX() < screen().getWidth()) current.put(normalize(element.getAttribute("content-desc")), r);
+            }
+            if (current.isEmpty()) { previous[0] = null; return null; }
+            boolean stable = current.equals(previous[0]); previous[0] = current;
+            return stable ? current : null;
+        });
+    }
+
+    private String firstFullHeader(Map<String, Rectangle> headers) {
+        for (Map.Entry<String, Rectangle> header : headers.entrySet()) if (fullColumn(header.getValue())) return header.getKey();
+        return null;
+    }
+
+    private boolean fullColumn(Rectangle r) {
+        Rectangle stocks = bounds(STOCKS);
+        return r != null && stocks != null && fullyVisible(r) && r.getX() >= stocks.getX() + stocks.getWidth();
+    }
+
+    private void panTableTo(RuntimeTab tab, String target, boolean later) {
+        Map<String, Rectangle> before = settledHeaders(tab);
+        int stalled = 0;
+        for (int swipe = 0; swipe < maxHorizontal; swipe++) {
+            assertSelected(tab);
+            Rectangle stocks = bounds(STOCKS), rail = tableRail(stocks);
+            int left = rail.getX() + Math.max(24, (int) (rail.getWidth() * 0.12));
+            int right = rail.getX() + rail.getWidth() - Math.max(24, (int) (rail.getWidth() * 0.12));
+            int y = rail.getY() + Math.min((int) (stocks.getHeight() * (stalled > 0 ? 0.80 : 0.55)), rail.getHeight() / 4);
+            if (right - left < 60 || y <= stocks.getY() + stocks.getHeight()) throw new AssertionError("No usable first-row horizontal data lane");
+            performSwipe(later ? right : left, y, later ? left : right, y);
+            Map<String, Rectangle> after = settledHeaders(tab);
+            if (fullColumn(after.get(target))) return;
+            stalled = after.equals(before) ? stalled + 1 : 0;
+            if (stalled >= 2) throw new AssertionError(tab.label + " table did not move to column '" + target + "'");
+            before = after;
+        }
+        throw new AssertionError(tab.label + " did not reach '" + target + "' within " + maxHorizontal + " horizontal swipes");
+    }
+
+    private Rectangle tableRail(Rectangle stocks) {
+        if (stocks == null) throw new AssertionError("Stocks table header is unavailable");
+        Rectangle screen = screen(), best = null;
+        for (WebElement element : driver.findElements(HORIZONTAL)) {
+            Rectangle r = element.getRect();
+            int left = Math.max(stocks.getX() + stocks.getWidth(), r.getX());
+            int right = Math.min(screen.getWidth(), r.getX() + r.getWidth());
+            int top = Math.max(stocks.getY() + stocks.getHeight(), r.getY());
+            int bottom = Math.min(screen.getHeight(), r.getY() + r.getHeight());
+            if (element.isDisplayed() && right - left > 80 && bottom - top > screen.getHeight() * 0.15
+                    && (best == null || bottom - top > best.getHeight())) best = rect(left, top, right - left, bottom - top);
+        }
+        if (best == null) throw new AssertionError("Native horizontal table scroll container is unavailable");
         return best;
     }
 
-    private Rectangle findTableHorizontalScrollRect() {
-        return safeRect(findTableHorizontalScrollView());
+    private Rectangle moduleViewport() {
+        Rectangle screen = screen(), best = null;
+        for (WebElement element : driver.findElements(SCROLL)) {
+            Rectangle r = element.getRect();
+            int left = Math.max(0, r.getX()), right = Math.min(screen.getWidth(), r.getX() + r.getWidth());
+            int top = Math.max(0, r.getY()), bottom = Math.min(screen.getHeight(), r.getY() + r.getHeight());
+            if (element.isDisplayed() && right - left >= screen.getWidth() * 0.8 && bottom - top > 160
+                    && (best == null || bottom - top > best.getHeight())) best = rect(left, top, right - left, bottom - top);
+        }
+        if (best == null) throw new AssertionError("Analyst's Choice has no usable content ScrollView");
+        return best;
     }
 
-    private void swipeHorizontal(Rectangle rect, boolean toLaterColumns) {
-        if (rect == null) {
-            throw new AssertionError("Horizontal swipe requested without a table scroll rectangle");
-        }
-
-        int y = rect.getY() + Math.max(30, Math.min(rect.getHeight() - 25, rect.getHeight() / 3));
-        int left = rect.getX() + Math.max(18, (int) Math.round(rect.getWidth() * 0.18));
-        int right = rect.getX() + Math.min(rect.getWidth() - 18, (int) Math.round(rect.getWidth() * 0.84));
-
-        if (toLaterColumns) {
-            performSwipe(right, y, left, y, 420L);
-        } else {
-            performSwipe(left, y, right, y, 420L);
-        }
-    }
-
-    private void swipeVerticalInModule(boolean downFeed) {
-        Dimension size = driver.manage().window().getSize();
-        int x = (int) Math.round(size.getWidth() * 0.82);
-        int top = (int) Math.round(size.getHeight() * 0.34);
-        int bottom = (int) Math.round(size.getHeight() * 0.79);
-
-        if (downFeed) {
-            performSwipe(x, bottom, x, top, 440L);
-        } else {
-            performSwipe(x, top, x, bottom, 440L);
-        }
-    }
-
-    private void swipeHub(boolean downHub) {
-        Dimension size = driver.manage().window().getSize();
-        int x = (int) Math.round(size.getWidth() * 0.82);
-        int top = (int) Math.round(size.getHeight() * 0.28);
-        int bottom = (int) Math.round(size.getHeight() * 0.78);
-
-        if (downHub) {
-            performSwipe(x, bottom, x, top, 420L);
-        } else {
-            performSwipe(x, top, x, bottom, 420L);
-        }
-    }
-
-    private WebElement scrollToPortfolioPlannerCta() {
-        WebElement direct = firstDisplayed(PORTFOLIO_PLANNER_CTA);
-        if (direct != null) {
-            return direct;
-        }
-
-        String previous = captureTableState().fingerprint();
-        int noProgress = 0;
-
-        for (int i = 0; i < 12; i++) {
-            swipeVerticalInModule(true);
-            sleep(300L);
-
-            direct = firstDisplayed(PORTFOLIO_PLANNER_CTA);
-            if (direct != null) {
-                ReportLogger.step("Portfolio Planner CTA found after bounded vertical scroll attempt " + (i + 1));
-                return direct;
-            }
-
-            String current = captureTableState().fingerprint();
-            if (!current.isEmpty() && current.equals(previous)) {
-                noProgress++;
-            } else {
-                noProgress = 0;
-            }
-            previous = current;
-
-            if (noProgress >= 3) {
-                break;
+    private void tap(By locator) {
+        for (int attempt = 0; attempt < 3; attempt++) {
+            try {
+                Rectangle r = waitFor(ExecutionProfile.shortWait()).withMessage("Control is unavailable: " + locator).until(d -> {
+                    WebElement current = first(locator);
+                    return current != null && current.isEnabled() && fullyVisible(current.getRect()) ? current.getRect() : null;
+                });
+                driver.executeScript("mobile: clickGesture", Map.of("x", r.getX() + r.getWidth() / 2, "y", r.getY() + r.getHeight() / 2));
+                return;
+            } catch (StaleElementReferenceException stale) {
+                if (attempt == 2) throw stale;
             }
         }
-
-        return null;
     }
 
-    private void performSwipe(int startX, int startY, int endX, int endY, long durationMs) {
-        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "readyInvestFinger");
-        Sequence swipe = new Sequence(finger, 1);
+    private void performSwipe(int startX, int startY, int endX, int endY) {
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "ready-invest-current-sac");
+        Sequence swipe = new Sequence(finger, 0);
         swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY));
         swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-        swipe.addAction(new Pause(finger, Duration.ofMillis(70L)));
-        swipe.addAction(
-                finger.createPointerMove(
-                        Duration.ofMillis(durationMs),
-                        PointerInput.Origin.viewport(),
-                        endX,
-                        endY
-                )
-        );
+        swipe.addAction(new Pause(finger, Duration.ofMillis(100)));
+        swipe.addAction(finger.createPointerMove(Duration.ofMillis(250), PointerInput.Origin.viewport(), endX, endY));
         swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-        driver.perform(Collections.singletonList(swipe));
+        try { driver.perform(List.of(swipe)); }
+        catch (WebDriverException failure) {
+            try { driver.resetInputState(); } catch (WebDriverException release) { failure.addSuppressed(release); }
+            throw failure;
+        }
     }
 
-    // =========================================================
-    // Hub / page readiness
-    // =========================================================
+    private WebDriverWait waitFor(Duration timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        wait.pollingEvery(ExecutionProfile.pollingInterval());
+        wait.ignoring(NoSuchElementException.class).ignoring(StaleElementReferenceException.class);
+        return wait;
+    }
 
-    private WebElement findReadyToInvestTileWithBoundedScroll() {
-        WebElement direct = firstDisplayed(READY_TO_INVEST_TILE);
-        if (direct != null) {
-            ReportLogger.debug("Ready to invest portfolio Hub tile already visible - no Hub scroll required");
-            return direct;
-        }
-
-        String previous = hubOpenTileFingerprint();
-        int noProgress = 0;
-
-        for (int i = 0; i < 7; i++) {
-            swipeHub(true);
-            sleep(240L);
-
-            direct = firstDisplayed(READY_TO_INVEST_TILE);
-            if (direct != null) {
-                ReportLogger.step("Ready to invest Hub tile found after downward Hub scroll attempt " + (i + 1));
-                return direct;
-            }
-
-            String current = hubOpenTileFingerprint();
-            if (!current.isEmpty() && current.equals(previous)) {
-                noProgress++;
-            } else {
-                noProgress = 0;
-            }
-            previous = current;
-
-            if (noProgress >= 2) {
-                break;
-            }
-        }
-
-        previous = hubOpenTileFingerprint();
-        noProgress = 0;
-
-        for (int i = 0; i < 6; i++) {
-            swipeHub(false);
-            sleep(230L);
-
-            direct = firstDisplayed(READY_TO_INVEST_TILE);
-            if (direct != null) {
-                ReportLogger.step("Ready to invest Hub tile found after upward Hub recovery attempt " + (i + 1));
-                return direct;
-            }
-
-            String current = hubOpenTileFingerprint();
-            if (!current.isEmpty() && current.equals(previous)) {
-                noProgress++;
-            } else {
-                noProgress = 0;
-            }
-            previous = current;
-
-            if (noProgress >= 2) {
-                break;
-            }
-        }
-
+    private WebElement first(By locator) {
+        for (WebElement element : driver.findElements(locator)) if (element.isDisplayed()) return element;
         return null;
     }
-
-    private void waitForAnalystPicksReady() {
-        waitForVisible(ANALYST_PICKS_TITLE, PAGE_READY_WAIT_MS);
-
-        long endAt = System.currentTimeMillis() + PAGE_READY_WAIT_MS;
-        while (System.currentTimeMillis() < endAt) {
-            List<RuntimeTab> tabs = discoverTopTabsOnce();
-            TableState state = captureTableState();
-
-            if (isCompleteTabGroup(tabs) && state.isResolved()) {
-                ReportLogger.info("Analyst Picks top tabs discovered live: " + labels(tabs));
-                return;
-            }
-            sleep(POLL_MS);
-        }
-
-        throw new AssertionError(
-                "Analyst Picks title appeared but top tabs/table did not become ready. visible="
-                        + collectVisibleValues()
-        );
+    private Rectangle bounds(By locator) { WebElement e = first(locator); return e == null ? null : e.getRect(); }
+    private boolean visible(By locator) { return first(locator) != null; }
+    private boolean selected(By locator) { WebElement e = first(locator); return e != null && e.isSelected(); }
+    private boolean full(By locator) { Rectangle r = bounds(locator); return r != null && fullyVisible(r); }
+    private boolean fullyVisible(Rectangle r) { return inside(r, screen()); }
+    private boolean inside(Rectangle r, Rectangle area) {
+        return r.getWidth() > 0 && r.getHeight() > 0 && r.getX() >= area.getX() && r.getY() >= area.getY()
+                && r.getX() + r.getWidth() <= area.getX() + area.getWidth() && r.getY() + r.getHeight() <= area.getY() + area.getHeight();
     }
-
-    private boolean isAnalystPicksOpen() {
-        return isVisible(ANALYST_PICKS_TITLE) && !discoverTopTabsOnce().isEmpty();
+    private Rectangle screen() {
+        Dimension size = driver.manage().window().getSize(); int bottom = size.getHeight();
+        for (WebElement bar : driver.findElements(NAVIGATION_BAR)) if (bar.getRect().getY() > 0) bottom = Math.min(bottom, bar.getRect().getY());
+        return rect(0, 0, size.getWidth(), bottom);
     }
-
-    private boolean isInvestmentPlannerOpen() {
-        return isVisible(INVESTMENT_PLANNER_TITLE);
+    private Rectangle rect(int x, int y, int width, int height) { return new Rectangle(new Point(x, y), new Dimension(width, height)); }
+    private String normalize(String value) { return value == null ? "" : value.replaceAll("\\s+", " ").trim(); }
+    private List<String> tabLabels(List<RuntimeTab> tabs) {
+        List<String> result = new ArrayList<>(); for (RuntimeTab tab : tabs) result.add(tab.label); return result;
     }
-
-    private boolean isHubScreenReady() {
-        if (firstDisplayed(READY_TO_INVEST_TILE) != null) {
-            return true;
-        }
-
-        int openTiles = 0;
-        for (WebElement element : safeFindElements(HUB_OPEN_BUTTONS)) {
-            if (isDisplayed(element)) {
-                openTiles++;
-                if (openTiles >= 3) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    private int positiveInt(String key, int fallback) {
+        String raw = ConfigReader.getOptional(key, String.valueOf(fallback));
+        try { int value = Integer.parseInt(raw.trim()); if (value > 0) return value; }
+        catch (NumberFormatException invalid) { throw new IllegalArgumentException(key + " must be a positive integer", invalid); }
+        throw new IllegalArgumentException(key + " must be a positive integer");
     }
-
-    private boolean waitForHubScreenReady(long timeoutMs) {
-        long endAt = System.currentTimeMillis() + timeoutMs;
-        while (System.currentTimeMillis() < endAt) {
-            if (isHubScreenReady()) {
-                return true;
-            }
-            sleep(POLL_MS);
-        }
-        return false;
-    }
-
-    private String hubOpenTileFingerprint() {
-        Set<String> values = new LinkedHashSet<>();
-        for (WebElement element : safeFindElements(HUB_OPEN_BUTTONS)) {
-            if (!isDisplayed(element)) {
-                continue;
-            }
-            String value = normalizeWhitespace(semanticValue(element));
-            if (!value.isEmpty()) {
-                values.add(value);
-            }
-        }
-        return values.toString();
-    }
-
-    // =========================================================
-    // Generic helpers
-    // =========================================================
-
-    private List<WebElement> contentSemanticElements() {
-        List<WebElement> elements = new ArrayList<>();
-        elements.addAll(safeFindElements(VIEW));
-        elements.addAll(safeFindElements(IMAGE_VIEW));
-        elements.addAll(safeFindElements(BUTTON));
-        return elements;
-    }
-
-    private void assertDriverAlive(String context) {
-        try {
-            String pkg = driver.getCurrentPackage();
-            if (pkg == null || pkg.trim().isEmpty()) {
-                throw new AssertionError("Driver returned no current package " + context);
-            }
-        } catch (Exception e) {
-            throw new AssertionError("Appium driver is not healthy " + context + ": " + clean(e.getMessage()), e);
-        }
-    }
-
-    private WebElement waitForVisible(By locator, long timeoutMs) {
-        long endAt = System.currentTimeMillis() + timeoutMs;
-        while (System.currentTimeMillis() < endAt) {
-            WebElement element = firstDisplayed(locator);
-            if (element != null) {
-                return element;
-            }
-            sleep(POLL_MS);
-        }
-        throw new AssertionError("Timed out waiting for visible locator: " + locator);
-    }
-
-    private WebElement waitForVisibleOptional(By locator, long timeoutMs) {
-        long endAt = System.currentTimeMillis() + timeoutMs;
-        while (System.currentTimeMillis() < endAt) {
-            WebElement element = firstDisplayed(locator);
-            if (element != null) {
-                return element;
-            }
-            sleep(POLL_MS);
-        }
-        return null;
-    }
-
-    private void requireVisible(By locator, String label) {
-        WebElement element = waitForVisible(locator, SHORT_WAIT_MS);
-        if (!isDisplayed(element)) {
-            throw new AssertionError(label + " is not displayed");
-        }
-    }
-
-    private boolean isVisible(By locator) {
-        return firstDisplayed(locator) != null;
-    }
-
-    private WebElement firstDisplayed(By locator) {
-        for (WebElement element : safeFindElements(locator)) {
-            if (isDisplayed(element)) {
-                return element;
-            }
-        }
-        return null;
-    }
-
-    private WebElement bottomMostVisible(By locator) {
-        return safeFindElements(locator).stream()
-                .filter(this::isDisplayed)
-                .max(Comparator.comparingInt(this::centerY))
-                .orElse(null);
-    }
-
-    private List<WebElement> safeFindElements(By locator) {
-        try {
-            return driver.findElements(locator);
-        } catch (Exception e) {
-            return Collections.emptyList();
-        }
-    }
-
-    private boolean isDisplayed(WebElement element) {
-        try {
-            return element != null && element.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private boolean safeClickable(WebElement element) {
-        return "true".equalsIgnoreCase(safeAttribute(element, "clickable"));
-    }
-
-    private void safeClick(WebElement element, String label) {
-        try {
-            element.click();
-        } catch (Exception first) {
-            Rectangle rect = safeRect(element);
-            if (rect == null) {
-                throw new AssertionError("Unable to click " + label + ": " + clean(first.getMessage()), first);
-            }
-            performTap(
-                    rect.getX() + rect.getWidth() / 2,
-                    rect.getY() + rect.getHeight() / 2
-            );
-        }
-        ReportLogger.debug("Tapped " + label);
-    }
-
-    private void performTap(int x, int y) {
-        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "readyInvestTap");
-        Sequence tap = new Sequence(finger, 1);
-        tap.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), x, y));
-        tap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-        tap.addAction(new Pause(finger, Duration.ofMillis(65L)));
-        tap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-        driver.perform(Collections.singletonList(tap));
-    }
-
-    private Rectangle safeRect(WebElement element) {
-        try {
-            return element == null ? null : element.getRect();
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    private int centerY(WebElement element) {
-        Rectangle rect = safeRect(element);
-        return rect == null ? -1 : rect.getY() + rect.getHeight() / 2;
-    }
-
-    private String semanticValue(WebElement element) {
-        String desc = safeAttribute(element, "content-desc");
-        if (!desc.isEmpty()) {
-            return desc;
-        }
-        try {
-            return sanitizeSemanticValue(element.getText());
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
-    private String safeAttribute(WebElement element, String name) {
-        try {
-            return sanitizeSemanticValue(element.getAttribute(name));
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
-    private String sanitizeSemanticValue(String value) {
-        if (value == null) {
-            return "";
-        }
-        String cleaned = value.trim();
-        if (cleaned.isEmpty()
-                || cleaned.equalsIgnoreCase("null")
-                || cleaned.equalsIgnoreCase("none")
-                || cleaned.equalsIgnoreCase("undefined")) {
-            return "";
-        }
-        return cleaned;
-    }
-
-    private boolean isBottomNavigationValue(String value) {
-        String lower = normalizeWhitespace(value).toLowerCase(Locale.ENGLISH);
-        return lower.equals("funds")
-                || lower.equals("stocks")
-                || lower.equals("portfolio")
-                || lower.equals("hub");
-    }
-
-    private String collectVisibleValues() {
-        Set<String> values = new LinkedHashSet<>();
-        for (WebElement element : contentSemanticElements()) {
-            if (!isDisplayed(element)) {
-                continue;
-            }
-            String value = normalizeWhitespace(semanticValue(element));
-            if (!value.isEmpty()) {
-                values.add(value);
-            }
-            if (values.size() >= 35) {
-                break;
-            }
-        }
-        return values.toString();
-    }
-
-    private List<String> firstValues(Set<String> values, int limit) {
-        List<String> result = new ArrayList<>();
-        for (String value : values) {
-            result.add(value);
-            if (result.size() >= limit) {
-                break;
-            }
-        }
-        return result;
-    }
-
-    private List<String> labels(List<RuntimeTab> tabs) {
-        List<String> result = new ArrayList<>();
-        for (RuntimeTab tab : tabs) {
-            result.add(tab.index + "/" + tab.total + " " + tab.label);
-        }
-        return result;
-    }
-
-    private boolean containsAny(String value, String[] tokens) {
-        for (String token : tokens) {
-            if (value.contains(token)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private double averageTopY(List<RuntimeTab> tabs) {
-        if (tabs.isEmpty()) {
-            return Double.MAX_VALUE;
-        }
-        long total = 0L;
-        for (RuntimeTab tab : tabs) {
-            total += tab.topY;
-        }
-        return total / (double) tabs.size();
-    }
-
-    private String normalizeWhitespace(String value) {
-        return value == null ? "" : value.replaceAll("\\s+", " ").trim();
-    }
-
-    private int parseInt(String value, int fallback) {
-        try {
-            return Integer.parseInt(value);
-        } catch (Exception e) {
-            return fallback;
-        }
-    }
-
-    private String clean(String value) {
-        return value == null ? "" : value.replaceAll("[\\r\\n]+", " ").trim();
-    }
-
-    private void sleep(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new AssertionError("Thread interrupted while waiting", e);
-        }
-    }
-
-    // =========================================================
-    // Immutable runtime state
-    // =========================================================
 
     private static final class RuntimeTab {
-        private final int index;
-        private final int total;
-        private final String label;
-        private final int topY;
-        private final int bottomY;
-
-        private RuntimeTab(int index, int total, String label, int topY, int bottomY) {
-            this.index = index;
-            this.total = total;
-            this.label = label;
-            this.topY = topY;
-            this.bottomY = bottomY;
+        final int index, total; final String label, semantic; final Rectangle bounds;
+        RuntimeTab(int index, int total, String label, String semantic, Rectangle bounds) {
+            this.index = index; this.total = total; this.label = label; this.semantic = semantic; this.bounds = bounds;
         }
+        By locator() { return AppiumBy.accessibilityId(semantic); }
     }
-
+    private static final class Filter {
+        final String label, semantic; final Rectangle bounds;
+        Filter(String label, String semantic, Rectangle bounds) { this.label = label; this.semantic = semantic; this.bounds = bounds; }
+        By locator() { return AppiumBy.accessibilityId(semantic); }
+    }
     private static final class TableState {
-        private final boolean headerVisible;
-        private final boolean liveContent;
-        private final String emptyMessage;
-        private final Set<String> headers;
-        private final Set<String> values;
-
-        private TableState(
-                boolean headerVisible,
-                boolean liveContent,
-                String emptyMessage,
-                Set<String> headers,
-                Set<String> values
-        ) {
-            this.headerVisible = headerVisible;
-            this.liveContent = liveContent;
-            this.emptyMessage = emptyMessage == null ? "" : emptyMessage;
-            this.headers = headers == null ? new LinkedHashSet<String>() : headers;
-            this.values = values == null ? new LinkedHashSet<String>() : values;
+        final Set<String> names, data; final String empty;
+        TableState(Set<String> names, Set<String> data, String empty) { this.names = names; this.data = data; this.empty = empty; }
+        boolean resolved() { return !empty.isEmpty() || !names.isEmpty() && !data.isEmpty(); }
+        String stableKey() {
+            List<String> dates = new ArrayList<>(); for (String value : data) if (DATE.matcher(value).matches()) dates.add(value);
+            return empty.isEmpty() ? names + ":dates=" + dates : "EMPTY:" + empty;
         }
-
-        private boolean hasLiveContent() {
-            // The table header is allowed to scroll out of view on long lists.
-            // Visible row semantics alone are sufficient proof that live table content remains present.
-            return liveContent;
-        }
-
-        private boolean hasExplicitEmptyState() {
-            return !emptyMessage.isEmpty();
-        }
-
-        private boolean isResolved() {
-            return hasLiveContent() || hasExplicitEmptyState();
-        }
-
-        private String fingerprint() {
-            if (hasExplicitEmptyState()) {
-                return "EMPTY:" + emptyMessage;
-            }
-            StringBuilder sb = new StringBuilder();
-            int headerCount = 0;
-            for (String header : headers) {
-                sb.append("H:").append(header).append('|');
-                headerCount++;
-                if (headerCount >= 6) {
-                    break;
-                }
-            }
-            int valueCount = 0;
-            for (String value : values) {
-                sb.append("V:").append(value).append('|');
-                valueCount++;
-                if (valueCount >= 10) {
-                    break;
-                }
-            }
-            return sb.toString();
-        }
-
-        private String describe() {
-            return "headerVisible=" + headerVisible
-                    + ", liveContent=" + liveContent
-                    + ", emptyMessage=" + emptyMessage
-                    + ", headers=" + headers
-                    + ", values=" + firstStatic(values, 8);
-        }
-
-        private static List<String> firstStatic(Set<String> values, int limit) {
-            List<String> result = new ArrayList<>();
-            for (String value : values) {
-                result.add(value);
-                if (result.size() >= limit) {
-                    break;
-                }
-            }
-            return result;
-        }
+        String describe() { return empty.isEmpty() ? names.size() + " live stock semantics; " + data.size() + " date/numeric semantics" : "empty state: " + empty; }
     }
 }
