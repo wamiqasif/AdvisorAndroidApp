@@ -17,3 +17,15 @@ screenshots/ ScreenShot/
 appium.log
 # Extent Reports
 ExtentReports/
+# Maven build output
+target/
+
+# TestNG output
+test-output/
+
+# Automation reports
+reports/
+
+# IDE files
+.idea/
+*.iml

@@ -34,6 +34,12 @@ public class FundHub_Page extends BasePage {
     private final By mutualFundsSectionLabel = AppiumBy.accessibilityId("Mutual Funds");
     private final By moreSectionLabel = AppiumBy.accessibilityId("More");
 
+    // "Profile" and "Investor Accounts" sections now render above Mutual
+    // Funds/Transactions/More, pushing those below the fold on load — include
+    // them so Hub detection doesn't require a scroll to succeed instantly.
+    private final By profileSectionLabel = AppiumBy.accessibilityId("Profile");
+    private final By investorAccountsSectionLabel = AppiumBy.accessibilityId("Investor Accounts");
+
     // Text-attribute fallbacks (used when content-desc locators don't match)
     private final By mutualFundsSectionText = AppiumBy
             .androidUIAutomator("new UiSelector().textContains(\"Mutual Funds\")");
@@ -148,6 +154,19 @@ public class FundHub_Page extends BasePage {
             new HubLink("ODR Portal", odrPortalButton, odrPortalText),
             new HubLink("Audit Status", auditStatusButton, auditStatusText));
 
+    // ====================================================================
+    // BOTTOM NAVIGATION LINKS (Funds / Stocks / Portfolio tabs)
+    // Kept separate from hubLinks — these are persistent tab switches, not
+    // scrollable content links, and returning to Hub must tap the Hub tab
+    // directly rather than press back (a root tab has no back-stack entry
+    // to unwind, so back-press risks exiting the app).
+    // ====================================================================
+
+    private final List<HubLink> bottomNavLinks = Arrays.asList(
+            new HubLink("Funds Tab", fundsTab, null),
+            new HubLink("Stocks Tab", stocksTab, null),
+            new HubLink("Portfolio Tab", portfolioTab, null));
+
     public FundHub_Page(AndroidDriver driver) {
         super(driver);
     }
@@ -202,8 +221,12 @@ public class FundHub_Page extends BasePage {
      * Flutter Text widgets that have no explicit Semantics wrapper.</p>
      */
     public boolean isHubScreenDisplayed() {
-        // Fast path: content-desc based (set by Flutter Semantics annotations)
-        if (isAnyDisplayed(mutualFundsSectionLabel, viewAllTransactionsButton, moreSectionLabel)) {
+        // Fast path: content-desc based (set by Flutter Semantics annotations).
+        // Profile/Investor Accounts are checked first since they're the
+        // above-the-fold sections on load; Mutual Funds/Transactions/More
+        // are below the fold and only visible after scrolling.
+        if (isAnyDisplayed(profileSectionLabel, investorAccountsSectionLabel,
+                mutualFundsSectionLabel, viewAllTransactionsButton, moreSectionLabel)) {
             return true;
         }
         // Fallback: text-attribute based (Flutter Text widget without Semantics)
@@ -213,6 +236,21 @@ public class FundHub_Page extends BasePage {
     /** Returns {@code true} when the Hub bottom-nav tab is visible. */
     public boolean isHubTabVisible() {
         return isDisplayed(hubTab);
+    }
+
+    /** Returns {@code true} when the Funds bottom-nav tab is visible. */
+    public boolean isFundsTabDisplayed() {
+        return isDisplayed(fundsTab);
+    }
+
+    /** Returns {@code true} when the Stocks bottom-nav tab is visible. */
+    public boolean isStocksTabDisplayed() {
+        return isDisplayed(stocksTab);
+    }
+
+    /** Returns {@code true} when the Portfolio bottom-nav tab is visible. */
+    public boolean isPortfolioTabDisplayed() {
+        return isDisplayed(portfolioTab);
     }
 
     public boolean isBottomNavigationDisplayed() {
@@ -383,6 +421,33 @@ public class FundHub_Page extends BasePage {
     }
 
     // ====================================================================
+    // BOTTOM NAV TAP + VALIDATE (Funds / Stocks / Portfolio tabs)
+    // ====================================================================
+
+    public boolean tapFundsTabAndValidate() {
+        return tapBottomNavLinkAndValidate(bottomNavLinks.get(0));
+    }
+
+    public boolean tapStocksTabAndValidate() {
+        return tapBottomNavLinkAndValidate(bottomNavLinks.get(1));
+    }
+
+    public boolean tapPortfolioTabAndValidate() {
+        return tapBottomNavLinkAndValidate(bottomNavLinks.get(2));
+    }
+
+    public List<LinkResult> tapAllBottomNavTabsAndValidateScreens() {
+        logger.info("=== Hub: validating all {} bottom navigation tabs ===", bottomNavLinks.size());
+        List<LinkResult> results = new ArrayList<>();
+        for (HubLink link : bottomNavLinks) {
+            boolean passed = tapBottomNavLinkAndValidate(link);
+            results.add(new LinkResult(link.name, passed));
+        }
+        logger.info("=== Hub bottom nav tab validation complete: {} ===", results);
+        return results;
+    }
+
+    // ====================================================================
     // BULK VALIDATE — taps every link and records pass/fail
     // ====================================================================
 
@@ -440,6 +505,38 @@ public class FundHub_Page extends BasePage {
         logger.info("Hub link '{}' — openedScreen:{}, returned:{}, passed:{}",
                 link.name, openedScreen, returned, passed);
         logger.info("=== Hub link test: {} — done ===", link.name);
+        return passed;
+    }
+
+    private boolean tapBottomNavLinkAndValidate(HubLink link) {
+        logger.info("=== Hub bottom nav test: {} ===", link.name);
+
+        openHubScreen();
+
+        if (!isDisplayed(link.locator)) {
+            logger.warn("Bottom nav tab not visible: {}", link.name);
+            return false;
+        }
+
+        String pageSourceBefore = driver.getPageSource();
+        safeClick(link.locator);
+        waitForUiToSettle();
+
+        boolean openedScreen = waitForDestinationScreen(pageSourceBefore);
+
+        // Root tab switches have no back-stack entry to unwind — tap the
+        // Hub tab directly instead of pressing back (which risks exiting
+        // the app from a root screen).
+        boolean returned = false;
+        if (isDisplayed(hubTab, 5)) {
+            safeClick(hubTab);
+            returned = waitForHubScreen();
+        }
+
+        boolean passed = openedScreen && returned;
+        logger.info("Hub bottom nav '{}' — openedScreen:{}, returned:{}, passed:{}",
+                link.name, openedScreen, returned, passed);
+        logger.info("=== Hub bottom nav test: {} — done ===", link.name);
         return passed;
     }
 

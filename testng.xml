@@ -12,9 +12,8 @@
     <test name="Android - Emulator Run">
         <parameter name="executionType" value="emulator"/>
         <classes>
-            <class name="tests.LoginTest"/>
-            <class name="tests.PortfolioPlannerTest"/>
-            <class name="tests.PortfolioPlannerInvestorTest"/>
+            <class name="tests.SIFInPortfolioTest"/>
+
         </classes>
     </test>
 

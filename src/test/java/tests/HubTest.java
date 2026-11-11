@@ -27,7 +27,9 @@ import pages.FundHub_Page.LinkResult;
  * <p>Structure tests (TC_HUB_001 – TC_HUB_003) verify the Hub screen itself loads
  * correctly. Link-navigation tests (TC_HUB_004 – TC_HUB_021) each exercise one of
  * the 18 navigable links across all Hub sections. TC_HUB_022 is a comprehensive
- * bulk run that exercises all links in one pass.</p>
+ * bulk run that exercises all 18 links in one pass. TC_HUB_023 – TC_HUB_025 each
+ * exercise one bottom-nav tab (Funds / Stocks / Portfolio); TC_HUB_026 is the
+ * comprehensive bulk run for all three tabs.</p>
  */
 public class HubTest extends BaseTest {
 
@@ -330,5 +332,63 @@ public class HubTest extends BaseTest {
         }
 
         logger.info("TC_HUB_022 — All Hub link journeys verified: {}", results);
+    }
+
+    // ============================================================
+    // SECTION 7 — BOTTOM NAVIGATION TABS
+    // Journey: Hub → tap tab → validate destination screen → back to Hub
+    // ============================================================
+
+    @Test(description = "TC_HUB_023 — Hub → Funds tab → validate screen → back to Hub")
+    public void tc_hub_023_verifyFundsTabNavigation() {
+
+        Assert.assertTrue(
+                hubPage.tapFundsTabAndValidate(),
+                "'Funds' tab must open a valid screen from Hub");
+
+        logger.info("TC_HUB_023 — Funds tab navigation journey verified");
+    }
+
+    @Test(description = "TC_HUB_024 — Hub → Stocks tab → validate screen → back to Hub")
+    public void tc_hub_024_verifyStocksTabNavigation() {
+
+        Assert.assertTrue(
+                hubPage.tapStocksTabAndValidate(),
+                "'Stocks' tab must open a valid screen from Hub");
+
+        logger.info("TC_HUB_024 — Stocks tab navigation journey verified");
+    }
+
+    @Test(description = "TC_HUB_025 — Hub → Portfolio tab → validate screen → back to Hub")
+    public void tc_hub_025_verifyPortfolioTabNavigation() {
+
+        Assert.assertTrue(
+                hubPage.tapPortfolioTabAndValidate(),
+                "'Portfolio' tab must open a valid screen from Hub");
+
+        logger.info("TC_HUB_025 — Portfolio tab navigation journey verified");
+    }
+
+    // ============================================================
+    // SECTION 8 — COMPREHENSIVE BOTTOM NAV BULK VALIDATION
+    // Journey: Hub → each bottom-nav tab in order → validate → back to Hub → repeat
+    // ============================================================
+
+    @Test(description = "TC_HUB_026 — Hub → every bottom-nav tab (one by one) → validate → back to Hub")
+    public void tc_hub_026_verifyAllBottomNavTabsOpenValidScreens() {
+
+        List<LinkResult> results = hubPage.tapAllBottomNavTabsAndValidateScreens();
+
+        Assert.assertFalse(
+                results.isEmpty(),
+                "At least one bottom-nav tab must be present to validate");
+
+        for (LinkResult result : results) {
+            Assert.assertTrue(
+                    result.passed,
+                    "Bottom-nav tab must open a valid screen: " + result.name);
+        }
+
+        logger.info("TC_HUB_026 — All bottom-nav tab journeys verified: {}", results);
     }
 }
