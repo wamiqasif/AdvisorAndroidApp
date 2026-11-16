@@ -129,18 +129,83 @@ public class AdvisorAccountSession {
                 logoutFromAccountDetails();
             }
             auth.loginFromLoginScreen(account, method);
-            returnToHub();
-            openAccountDetails();
-            if (!readAccountEmail().equalsIgnoreCase(requiredEmail)) {
-                throw new AssertionError("Logged-in email does not match the configured " + account);
-            }
-            backFromAccountDetails();
-            remember(account, requiredEmail);
-            ReportLogger.pass("Logged-in account email verified for " + account);
+            verifyCurrentAccount(account);
         } catch (RuntimeException | AssertionError | LinkageError failure) {
             invalidate();
             throw failure;
         }
+    }
+
+    /** Run a routing assertion before any account-verification navigation can change the landing tab. */
+    public void loginAndVerifyLanding(AuthHelper.Account account, AuthHelper.LoginMethod method,
+                                      Runnable landingAssertion) {
+        Objects.requireNonNull(landingAssertion, "A post-login landing assertion is required");
+        AuthHelper.validateLoginConfiguration(account, method);
+        beginImmediateSelectors();
+        if (!"NATIVE_APP".equals(driver.getContext())) driver.context("NATIVE_APP");
+        if (!auth.isEmailLoginVisible()) {
+            throw new IllegalStateException("Fresh landing verification must start from the email login screen");
+        }
+        invalidate();
+        auth.loginFromLoginScreen(account, method);
+        landingAssertion.run();
+        verifyCurrentAccount(account);
+    }
+
+    /** Reuse the account-details email verification and finish on Hub. */
+    public void verifyCurrentAccount(AuthHelper.Account account) {
+        String requiredEmail = AuthHelper.configuredEmail(account);
+        beginImmediateSelectors();
+        if (!"NATIVE_APP".equals(driver.getContext())) driver.context("NATIVE_APP");
+        returnToHub();
+        openAccountDetails();
+        String actualEmail;
+        try {
+            actualEmail = readAccountEmail();
+        } catch (RuntimeException | AssertionError failure) {
+            try {
+                backFromAccountDetails();
+            } catch (RuntimeException | AssertionError backFailure) {
+                failure.addSuppressed(backFailure);
+            }
+            invalidate();
+            throw failure;
+        }
+        backFromAccountDetails();
+        if (!actualEmail.equalsIgnoreCase(requiredEmail)) {
+            invalidate();
+            throw new AssertionError("Logged-in email does not match the configured " + account);
+        }
+        remember(account, requiredEmail);
+        ReportLogger.pass("Logged-in account email verified for " + account + "; returned to Hub");
+    }
+
+    /** Explicit fresh-login scenarios must log out even when the current account already matches. */
+    public void logoutCurrentAccount() {
+        beginImmediateSelectors();
+        if (!"NATIVE_APP".equals(driver.getContext())) driver.context("NATIVE_APP");
+        invalidate();
+        if (auth.isEmailLoginVisible()) return;
+        returnToHub();
+        openAccountDetails();
+        readAccountEmail();
+        logoutFromAccountDetails();
+    }
+
+    /** Subscription screens expose a Logout button; share confirmation handling with Account Details. */
+    public void logoutFromScreen(By logoutControl) {
+        Objects.requireNonNull(logoutControl, "A screen-specific Logout locator is required");
+        beginImmediateSelectors();
+        if (!"NATIVE_APP".equals(driver.getContext())) driver.context("NATIVE_APP");
+        invalidate();
+        if (auth.isEmailLoginVisible()) return;
+        tap(logoutControl);
+        waitUntil(() -> auth.isEmailLoginVisible() || visible(LOGOUT_CONFIRMATION),
+                ExecutionProfile.defaultWait(), "Logout did not reach login or its confirmation dialog");
+        if (visible(LOGOUT_CONFIRMATION)) tap(CONFIRM_LOGOUT);
+        waitUntil(() -> !visible(LOGOUT_CONFIRMATION) && auth.isEmailLoginVisible(),
+                ExecutionProfile.longWait(), "Confirmed Logout did not reach email login");
+        ReportLogger.pass("Logout completed and email login is visible");
     }
 
     /** Page objects with common setup use this instead of starting another login. */
@@ -181,7 +246,7 @@ public class AdvisorAccountSession {
         waitUntil(this::hubVisible, ExecutionProfile.defaultWait(), "Expected the Hub screen");
     }
 
-    private void returnToHub() {
+    public void returnToHub() {
         for (int attempt = 0; attempt < 5; attempt++) {
             if (hubVisible()) return;
             if (securityVisible() || auth.isEmailLoginVisible()) {
@@ -303,12 +368,7 @@ public class AdvisorAccountSession {
     }
 
     private void logoutFromAccountDetails() {
-        tap(LOGOUT);
-        waitUntil(() -> visible(LOGOUT_CONFIRMATION) && visible(CONFIRM_LOGOUT),
-                ExecutionProfile.defaultWait(), "Logout confirmation did not open");
-        tap(CONFIRM_LOGOUT);
-        waitUntil(() -> !visible(LOGOUT_CONFIRMATION) && auth.isEmailLoginVisible(),
-                ExecutionProfile.longWait(), "Confirmed Logout did not reach email login");
+        logoutFromScreen(LOGOUT);
     }
 
     private void backFromAccountDetails() {

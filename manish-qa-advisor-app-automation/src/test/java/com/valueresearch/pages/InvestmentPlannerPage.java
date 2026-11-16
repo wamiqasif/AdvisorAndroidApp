@@ -1,5 +1,6 @@
 package com.valueresearch.pages;
 
+import com.valueresearch.utils.AdvisorAccountSession;
 import com.valueresearch.utils.AuthHelper;
 import com.valueresearch.utils.ConfigReader;
 import com.valueresearch.utils.ExecutionProfile;
@@ -41,7 +42,7 @@ import java.util.Map;
  */
 public class InvestmentPlannerPage {
 
-    public static final String BUILD_VERSION = "VRSA-IP-2026-10-13-15.6";
+    public static final String BUILD_VERSION = "VRSA-IP-2026-11-02-16.2";
 
     private static final String DEFAULT_APP_PACKAGE = "com.valueresearch.advisor";
 
@@ -60,6 +61,12 @@ public class InvestmentPlannerPage {
 
     private final AndroidDriver driver;
     private final String appPackage;
+
+    // Optional shared account session. When present, login/PIN/biometric go through
+    // AdvisorAccountSession for this account; when absent the original behaviour is kept.
+    private final AdvisorAccountSession accountSession;
+    private final AuthHelper.Account account;
+    private final AuthHelper.LoginMethod loginMethod;
 
     // =========================================================
     // CONFIRMED STABLE LOCATORS FROM APPIUM INSPECTOR
@@ -168,8 +175,34 @@ public class InvestmentPlannerPage {
     private static final By HORIZONTAL_SCROLL_VIEW =
             AppiumBy.className("android.widget.HorizontalScrollView");
 
+    /** Original constructor: keeps the existing AuthHelper.ensureLoggedIn() behaviour. */
     public InvestmentPlannerPage(AndroidDriver driver) {
+        this(driver, null, null, null);
+    }
+
+    /**
+     * Account-aware constructor. Session recovery uses AdvisorAccountSession.prepare(), which
+     * handles the PIN/biometric screen and logs in with the given account and method, so an
+     * expired session can never fall back to the default testEmail account.
+     */
+    public InvestmentPlannerPage(
+            AndroidDriver driver,
+            AdvisorAccountSession accountSession,
+            AuthHelper.Account account,
+            AuthHelper.LoginMethod loginMethod
+    ) {
         this.driver = driver;
+        boolean anySet = accountSession != null || account != null || loginMethod != null;
+        if (anySet && (accountSession == null || account == null || loginMethod == null)) {
+            throw new IllegalArgumentException(
+                    "AdvisorAccountSession, account and login method must be supplied together");
+        }
+        if (accountSession != null && !accountSession.isForDriver(driver)) {
+            throw new IllegalArgumentException("Prepared account session belongs to another driver");
+        }
+        this.accountSession = accountSession;
+        this.account = account;
+        this.loginMethod = loginMethod;
         this.appPackage = resolveAdvisorAppPackage();
     }
 
@@ -236,10 +269,20 @@ public class InvestmentPlannerPage {
          * Fallback path: resolve login/session state and enter through Hub only
          * when local planner recovery is not possible.
          */
-        recoverKnownPlannerScreenBeforeAuth();
+        if (accountSession != null) {
+            // PIN/biometric + verified account (password login if needed); finishes on Hub.
+            try {
+                accountSession.prepare(account, loginMethod);
+            } finally {
+                accountSession.restoreTimingSettings();
+            }
+            ReportLogger.pass("Advisor " + account + " session confirmed (" + loginMethod + " + app PIN)");
+        } else {
+            recoverKnownPlannerScreenBeforeAuth();
 
-        new AuthHelper(driver).ensureLoggedIn();
-        ReportLogger.pass("Advisor app login/session confirmed");
+            new AuthHelper(driver).ensureLoggedIn();
+            ReportLogger.pass("Advisor app login/session confirmed");
+        }
 
         WebElement hub = ensureHubTabReachable();
         if (hub == null) {
@@ -293,7 +336,12 @@ public class InvestmentPlannerPage {
             throw new AssertionError("Portfolio option not visible: " + portfolioName);
         }
 
-        clickElement(option, portfolioName + " portfolio option");
+        /*
+         * Run evidence (2026-11-01): element.click() on the All Weather / Aggressive button was
+         * accepted but Flutter kept the default Long Term selection, so the order was generated for
+         * Long Term. Use a real touch gesture on the exact element, as for the own-list control.
+         */
+        clickElementWithMobileGesture(option, portfolioName + " portfolio option");
 
         /*
          * Flutter updates the visual selection immediately but can rebuild the
@@ -723,21 +771,33 @@ public class InvestmentPlannerPage {
 
         long deadline = System.currentTimeMillis() + 9000L;
         String actual = "";
+        List<String> lastSeen = new ArrayList<>();
 
+        /*
+         * Right after Generate my order Flutter can still expose the planner route
+         * (whose default "Long Term" button sits under Your Orders) for a moment.
+         * Read only the title inside the Your Orders summary card and keep polling
+         * until it is the selected portfolio alone, or the deadline passes.
+         */
         while (System.currentTimeMillis() < deadline) {
-            actual = readGeneratedPortfolioTitle();
-            if (expectedTitle.equalsIgnoreCase(actual)) {
+            lastSeen = readGeneratedPortfolioTitlesInSummaryCard();
+            if (lastSeen.size() == 1 && expectedTitle.equalsIgnoreCase(lastSeen.get(0))) {
                 ReportLogger.pass("Generated portfolio title matched: " + expectedTitle);
                 return;
             }
 
-            if (!actual.isEmpty()) {
-                break;
-            }
-
             assertDriverAlive("while reading generated portfolio title");
-            sleep(250);
+            sleep(300);
         }
+
+        for (String seen : lastSeen) {
+            if (expectedTitle.equalsIgnoreCase(seen)) {
+                ReportLogger.pass("Generated portfolio title matched: " + expectedTitle
+                        + " (another route still exposes " + lastSeen + ")");
+                return;
+            }
+        }
+        actual = lastSeen.isEmpty() ? readGeneratedPortfolioTitle() : String.join(",", lastSeen);
 
         throw new AssertionError(
                 "Generated portfolio category does not match selected portfolio"
@@ -747,9 +807,56 @@ public class InvestmentPlannerPage {
         );
     }
 
+    /**
+     * Portfolio titles shown inside the Your Orders summary card: below the "Your Orders"
+     * heading, above "Amount invested" and left-aligned with it. Nodes of a route still
+     * rebuilding underneath (e.g. the planner's "Long Term" button) fall outside that box.
+     */
+    private List<String> readGeneratedPortfolioTitlesInSummaryCard() {
+        List<String> found = new ArrayList<>();
+        WebElement ordersTitle = firstDisplayed(YOUR_ORDERS);
+        WebElement amountMarker = firstDisplayed(AMOUNT_INVESTED);
+        if (ordersTitle == null || amountMarker == null) {
+            return found;
+        }
+
+        try {
+            Rectangle top = ordersTitle.getRect();
+            Rectangle amount = amountMarker.getRect();
+            int minY = top.getY() + top.getHeight() / 2;
+            int maxY = amount.getY() + amount.getHeight() / 2;
+            int alignTolerance = Math.max(40, driver.manage().window().getSize().getWidth() / 12);
+
+            for (String title : new String[]{"Long Term", "All Weather", "Aggressive"}) {
+                for (WebElement element : displayedElements(AppiumBy.accessibilityId(title))) {
+                    try {
+                        Rectangle rect = element.getRect();
+                        int centerY = rect.getY() + rect.getHeight() / 2;
+                        if (centerY > minY && centerY < maxY
+                                && Math.abs(rect.getX() - amount.getX()) <= alignTolerance) {
+                            found.add(title);
+                            break;
+                        }
+                    } catch (StaleElementReferenceException ignored) {
+                    }
+                }
+            }
+        } catch (StaleElementReferenceException ignored) {
+            found.clear();
+        }
+
+        return found;
+    }
+
     public String readGeneratedPortfolioTitle() {
         if (firstDisplayed(YOUR_ORDERS) == null) {
             return "";
+        }
+
+        List<String> inCard = readGeneratedPortfolioTitlesInSummaryCard();
+        if (inCard.size() == 1) {
+            ReportLogger.info("Generated portfolio title detected in the summary card: " + inCard.get(0));
+            return inCard.get(0);
         }
 
         String[] knownTitles = {

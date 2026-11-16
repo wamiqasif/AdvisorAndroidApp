@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Stock Home Module"
+       verbose="1" parallel="false" preserve-order="true" configfailurepolicy="continue">
+    <parameter name="loginMethod" value="PASSWORD"/>
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+    <test name="Stock Home - TC_001 to TC_015" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.StockHomeTest">
+                <methods>
+                    <!-- Active VRSA subscriber: testEmail / testEmailPass from config.properties -->
+                    <include name="SH_001_FundsTabThenOpenStocksHome"/>
+                    <include name="SH_002_VerifyPortfolioValueAndOneDayChange"/>
+                    <include name="SH_003_VerifyEyeButtonHidesAndShowsValues"/>
+                    <include name="SH_004_VerifyNotificationPanelAndSearch"/>
+                    <include name="SH_005_VerifyUpdateStocksPortfolioCard"/>
+                    <include name="SH_006_VerifyLatestRecommendations"/>
+                    <include name="SH_007_VerifyBigMoves"/>
+                    <include name="SH_008_VerifyCoverageOnYourStocks"/>
+                    <include name="SH_009_VerifyReadyToInvestPortfolios"/>
+                    <include name="SH_010_VerifyCoverageAndInsights"/>
+                    <include name="SH_011_VerifyShortTermAndNeedCashCards"/>
+                    <include name="SH_012_VerifyOurPerformance"/>
+                    <include name="SH_013_VerifyBonusReports"/>
+                    <include name="SH_014_VerifyUsersGuide"/>
+                    <include name="SH_015_VerifyScrollToTopArrow"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

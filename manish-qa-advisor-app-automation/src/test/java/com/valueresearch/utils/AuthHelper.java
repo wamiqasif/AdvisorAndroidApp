@@ -26,7 +26,16 @@ public class AuthHelper {
     public enum Account {
         DEFAULT("", ""), REGRESSION("Regression", "REGRESSION"),
         ACTIVE_SUBSCRIBER("ActiveSubscriber", "ACTIVE_SUBSCRIBER"),
-        LAPSED_USER("LapsedUser", "LAPSED_USER"), NON_SUBSCRIBER("NonSubscriber", "NON_SUBSCRIBER");
+        LAPSED_USER("LapsedUser", "LAPSED_USER"), NON_SUBSCRIBER("NonSubscriber", "NON_SUBSCRIBER"),
+        // Fund Advisor (VRFA) subscriber without Stock Advisor: free-user access in Stock Advisor.
+        VRFA_ACTIVE_SUBSCRIBER("ActiveSubscriberVRFA", "VRFA_ACTIVE_SUBSCRIBER"),
+        // Fund Advisor (VRFA) lapsed user without Stock Advisor (config: LapsedUserVRFAEmail / LapsedUserVRFAPass).
+        VRFA_LAPSED_USER("LapsedUserVRFA", "VRFA_LAPSED_USER"),
+        // My Subscription dev-provided accounts (config keys in config.properties, "My Subscription" block).
+        RENEW_WINDOW_USER("RenewWindowUser", "RENEW_WINDOW_USER"),
+        VRFA_REBUY_VRSA_LAPSED("VrfaRebuyVrsaLapsed", "VRFA_REBUY_VRSA_LAPSED"),
+        VRSA_ACTIVE_VRFA_LAPSED("VrsaActiveVrfaLapsed", "VRSA_ACTIVE_VRFA_LAPSED"),
+        BOTH_LAPSED("BothLapsed", "BOTH_LAPSED");
         private final String suffix;
         private final String environmentSuffix;
         Account(String suffix, String environmentSuffix) { this.suffix = suffix; this.environmentSuffix = environmentSuffix; }
@@ -101,7 +110,8 @@ public class AuthHelper {
     /** Explicit suite selection overrides global/default configuration for this login only. */
     public void loginFromLoginScreen(Account account, LoginMethod method) { loginFromLoginScreen(account, method, null); }
 
-    private void loginFromLoginScreen(Account account, LoginMethod method, By[] additional) {
+    /** Allow modules without the tab bar to supply their post-login screen markers. */
+    public void loginFromLoginScreen(Account account, LoginMethod method, By[] additional) {
         Objects.requireNonNull(account, "A target account is required for login");
         Objects.requireNonNull(method, "An explicit login method is required");
         nativeContext();
@@ -130,6 +140,12 @@ public class AuthHelper {
             case ACTIVE_SUBSCRIBER: value = accountValue(account, false, "ActiveSubscriberEmail"); break;
             case LAPSED_USER: value = accountValue(account, false, "LapsedUserEmail"); break;
             case NON_SUBSCRIBER: value = accountValue(account, false, "NonSubscriberEmail"); break;
+            case VRFA_ACTIVE_SUBSCRIBER: value = accountValue(account, false, "ActiveSubscriberVRFAEmail"); break;
+            case VRFA_LAPSED_USER: value = accountValue(account, false, "LapsedUserVRFAEmail"); break;
+            case RENEW_WINDOW_USER: value = accountValue(account, false, "RenewWindowUserEmail"); break;
+            case VRFA_REBUY_VRSA_LAPSED: value = accountValue(account, false, "VrfaRebuyVrsaLapsedEmail"); break;
+            case VRSA_ACTIVE_VRFA_LAPSED: value = accountValue(account, false, "VrsaActiveVrfaLapsedEmail"); break;
+            case BOTH_LAPSED: value = accountValue(account, false, "BothLapsedEmail"); break;
             case REGRESSION: value = configured("TEST_EMAIL_REGRESSION", "testEmailRegression"); break;
             default: value = configured("TEST_EMAIL", "testEmail", "email", "otpEmail", "OtpEmail");
         }
@@ -146,6 +162,12 @@ public class AuthHelper {
             case ACTIVE_SUBSCRIBER: key = "ActiveUserPass"; value = accountValue(account, true, key); break;
             case LAPSED_USER: key = "LapsedUserPass"; value = accountValue(account, true, key); break;
             case NON_SUBSCRIBER: key = "NonSubscriberPass"; value = accountValue(account, true, key); break;
+            case VRFA_ACTIVE_SUBSCRIBER: key = "ActiveUserVRFAPass"; value = accountValue(account, true, key); break;
+            case VRFA_LAPSED_USER: key = "LapsedUserVRFAPass"; value = accountValue(account, true, key); break;
+            case RENEW_WINDOW_USER: key = "RenewWindowUserPass"; value = accountValue(account, true, key); break;
+            case VRFA_REBUY_VRSA_LAPSED: key = "VrfaRebuyVrsaLapsedPass"; value = accountValue(account, true, key); break;
+            case VRSA_ACTIVE_VRFA_LAPSED: key = "VrsaActiveVrfaLapsedPass"; value = accountValue(account, true, key); break;
+            case BOTH_LAPSED: key = "BothLapsedPass"; value = accountValue(account, true, key); break;
             case REGRESSION: key = "testEmailPassRegression"; value = secret(new String[]{"TEST_EMAIL_PASS_REGRESSION"}, key); break;
             default: key = "testEmailPass"; value = secret(new String[]{"TEST_EMAIL_PASS"}, key);
         }
@@ -255,7 +277,8 @@ public class AuthHelper {
 
     public void finishSecurityAuthentication(Account account) { finishSecurityAuthentication(account, null); }
 
-    private void finishSecurityAuthentication(Account account, By[] additional) {
+    /** Complete PIN/biometric authentication for a module-specific post-login destination. */
+    public void finishSecurityAuthentication(Account account, By[] additional) {
         boolean[] pinEntered = {false};
         waitUntil(() -> {
             assertInfrastructureHealthy("during security authentication", 1500L);

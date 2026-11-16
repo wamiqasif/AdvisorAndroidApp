@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Stock Screener - VRFA-only User"
+       verbose="1" parallel="false" preserve-order="true" configfailurepolicy="continue">
+    <parameter name="loginMethod" value="PASSWORD"/>
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+    <!-- VRFA-only account (Fund Advisor subscriber without Stock Advisor = free-user access; switched automatically, once). -->
+    <test name="VRFA-only user - SS_031 to SS_035" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.StockScreenerTest">
+                <methods>
+                    <include name="SS_031_VrfaCreateNewScreenShowsSubscriptionPage"/>
+                    <include name="SS_032_VrfaSavedTabShowsSubscriptionNudge"/>
+                    <include name="SS_033_VrfaCustomViewShowsSubscriptionNudge"/>
+                    <include name="SS_034_VrfaSaveScreenOpensSubscriptionPage"/>
+                    <include name="SS_035_VrfaSeasonalOnlyCustomViewLocked"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

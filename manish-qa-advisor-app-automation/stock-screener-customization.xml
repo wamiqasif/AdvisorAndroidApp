@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Stock Screener - Customisation"
+       verbose="1" parallel="false" preserve-order="true" configfailurepolicy="continue">
+    <parameter name="loginMethod" value="PASSWORD"/>
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+    <!-- Active account. SS_037 leaves one saved screen per run (the app has no delete). -->
+    <test name="Customisation - SS_036 to SS_038" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.StockScreenerTest">
+                <methods>
+                    <include name="SS_036_ResetAllRestoresDefaultFilters"/>
+                    <include name="SS_037_SavedScreenRestoresFiltersAndColumns"/>
+                    <include name="SS_038_ExportToExcel"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

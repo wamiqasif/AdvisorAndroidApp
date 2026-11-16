@@ -3,11 +3,18 @@ package com.valueresearch.tests;
 import com.aventstack.extentreports.ExtentTest;
 import com.valueresearch.base.BaseTest;
 import com.valueresearch.pages.InvestmentPlannerPage;
+import com.valueresearch.utils.AdvisorAccountSession;
+import com.valueresearch.utils.AuthHelper;
 import com.valueresearch.utils.ExtentManager;
 import com.valueresearch.utils.ExtentTestManager;
 import com.valueresearch.utils.ReportLogger;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import java.util.Locale;
 
 /**
  * VRSA Investment Planner automation.
@@ -17,6 +24,9 @@ import org.testng.annotations.Test;
  * case uses InvestmentPlannerPage pre-auth deep-screen recovery before starting
  * the common AuthHelper + Hub flow. Dynamic market data is read at runtime;
  * current stock names/prices/weights are not hardcoded.
+ *
+ * Account: testEmailRegression / testEmailPassRegression (AuthHelper.Account.REGRESSION),
+ * logged in with the suite loginMethod (default PASSWORD) and the configured appPin.
  */
 public class InvestmentPlannerTest extends BaseTest {
 
@@ -26,9 +36,52 @@ public class InvestmentPlannerTest extends BaseTest {
             System.getProperty("ip.amount", "50000")
     );
 
+    private static final AuthHelper.Account MODULE_ACCOUNT = AuthHelper.Account.REGRESSION;
+
+    private AdvisorAccountSession accountSession;
+
+    @BeforeClass(alwaysRun = true)
+    public void resetAccountSession() {
+        accountSession = null;
+    }
+
+    /**
+     * Verifies the regression account once per driver session (Account Details email check),
+     * completes the app PIN/biometric screen and logs in with password when required.
+     * Timing settings are restored immediately so the existing IP waits behave as before.
+     */
     @BeforeMethod(alwaysRun = true)
-    public void setUpInvestmentPlannerPage() {
-        investmentPlannerPage = new InvestmentPlannerPage(driver);
+    @Parameters("loginMethod")
+    public void setUpInvestmentPlannerPage(@Optional("PASSWORD") String loginMethod) {
+        investmentPlannerPage = null;
+        AuthHelper.LoginMethod method;
+        try {
+            method = AuthHelper.LoginMethod.valueOf(loginMethod.trim().toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException invalid) {
+            throw new IllegalArgumentException("Suite loginMethod must be OTP or PASSWORD");
+        }
+        if (accountSession == null || !accountSession.isForDriver(driver)) {
+            accountSession = new AdvisorAccountSession(driver);
+        }
+        try {
+            try {
+                accountSession.prepare(MODULE_ACCOUNT, method);
+            } catch (IllegalStateException lateSecurityPrompt) {
+                // After a driver recovery the PIN/biometric screen can appear late; prepare once more.
+                if (!String.valueOf(lateSecurityPrompt.getMessage()).contains("authentication screen")) {
+                    throw lateSecurityPrompt;
+                }
+                ReportLogger.info("Security screen appeared late after app relaunch; preparing the account once more");
+                accountSession.invalidate();
+                accountSession.prepare(MODULE_ACCOUNT, method);
+            }
+        } catch (RuntimeException | AssertionError failure) {
+            accountSession.invalidate();
+            throw failure;
+        } finally {
+            accountSession.restoreTimingSettings();
+        }
+        investmentPlannerPage = new InvestmentPlannerPage(driver, accountSession, MODULE_ACCOUNT, method);
     }
 
     @Test(
@@ -289,6 +342,7 @@ public class InvestmentPlannerTest extends BaseTest {
                 + "Case ID: " + caseId + "<br>"
                 + "Page Build: " + InvestmentPlannerPage.BUILD_VERSION + "<br>"
                 + "Validation: " + validation + "<br>"
+                + "Account: " + MODULE_ACCOUNT + " (testEmailRegression)<br>"
                 + "Test Amount: ₹" + DEFAULT_TEST_AMOUNT);
 
         ExtentTestManager.setTest(test);

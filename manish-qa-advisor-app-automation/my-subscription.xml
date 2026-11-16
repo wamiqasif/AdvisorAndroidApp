@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="My Subscription" verbose="1" parallel="false" preserve-order="true" configfailurepolicy="continue">
+    <parameter name="loginMethod" value="PASSWORD"/>
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <!-- One <test> per account so each account is logged in once (AdvisorAccountSession switches only when needed). -->
+    <test name="My Subscription - Both active (testEmail)" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.MySubscriptionTest">
+                <methods>
+                    <include name="MS_001_BothActive_PageOpensAndCardOrder"/>
+                    <include name="MS_002_BothActive_FundAdvisorActiveCard"/>
+                    <include name="MS_003_BothActive_StockAdvisorActiveCard"/>
+                    <include name="MS_004_BothActive_FundAdvisorInvoiceList"/>
+                    <include name="MS_005_BothActive_StockAdvisorInvoiceList"/>
+                    <include name="MS_006_BothActive_PastSectionStructure"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="My Subscription - VRSA active, VRFA free" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.MySubscriptionTest">
+                <methods>
+                    <include name="MS_011_VrsaOnly_CardOrder"/>
+                    <include name="MS_012_VrsaOnly_StockAdvisorActiveCard"/>
+                    <include name="MS_013_VrsaOnly_FundAdvisorFreeCard"/>
+                    <include name="MS_014_VrsaOnly_StockAdvisorInvoiceList"/>
+                    <include name="MS_015_VrsaOnly_PastSectionAndTabsRule"/>
+                    <include name="MS_016_VrsaOnly_FundAdvisorSubscribeNowNavigation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="My Subscription - VRFA active, VRSA free" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.MySubscriptionTest">
+                <methods>
+                    <include name="MS_021_VrfaOnly_CardOrder"/>
+                    <include name="MS_022_VrfaOnly_FundAdvisorActiveCard"/>
+                    <include name="MS_023_VrfaOnly_StockAdvisorFreeCard"/>
+                    <include name="MS_024_VrfaOnly_FundAdvisorInvoiceList"/>
+                    <include name="MS_025_VrfaOnly_PastSectionAndTabsRule"/>
+                    <include name="MS_026_VrfaOnly_StockAdvisorSubscribeNowNavigation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="My Subscription - VRFA lapsed, VRSA free" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.MySubscriptionTest">
+                <methods>
+                    <include name="MS_031_VrfaLapsed_CardOrder"/>
+                    <include name="MS_032_VrfaLapsed_ExpiredAndFreeCardContent"/>
+                    <include name="MS_033_VrfaLapsed_PastSubscriptions"/>
+                    <include name="MS_034_VrfaLapsed_PastCardInvoiceList"/>
+                    <include name="MS_035_VrfaLapsed_FundAdvisorRenewNavigation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="My Subscription - VRSA lapsed, VRFA free" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.MySubscriptionTest">
+                <methods>
+                    <include name="MS_041_VrsaLapsed_CardOrder"/>
+                    <include name="MS_042_VrsaLapsed_ExpiredAndFreeCardContent"/>
+                    <include name="MS_043_VrsaLapsed_PastSubscriptions"/>
+                    <include name="MS_044_VrsaLapsed_PastCardInvoiceList"/>
+                    <include name="MS_045_VrsaLapsed_StockAdvisorRenewNavigation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="My Subscription - Active, autopay OFF, expiry within 30 days" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.MySubscriptionTest">
+                <methods>
+                    <include name="MS_051_RenewWindow_PlacementRule"/>
+                    <include name="MS_052_RenewWindow_ExpiringOnAndRenewButton"/>
+                    <include name="MS_053_RenewWindow_RenewOpensRenewalPage"/>
+                    <include name="MS_054_RenewWindow_InvoiceList"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="My Subscription - VRFA re-bought after a break, VRSA lapsed" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.MySubscriptionTest">
+                <methods>
+                    <include name="MS_061_VrfaRebuy_CardOrder"/>
+                    <include name="MS_062_VrfaRebuy_ActiveAndExpiredCards"/>
+                    <include name="MS_063_VrfaRebuy_PastSubscriptionsBothProducts"/>
+                    <include name="MS_064_VrfaRebuy_ActiveInvoiceList"/>
+                    <include name="MS_065_VrfaRebuy_PastInvoiceList"/>
+                    <include name="MS_066_VrfaRebuy_StockAdvisorRenewNavigation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="My Subscription - VRSA active, VRFA lapsed" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.MySubscriptionTest">
+                <methods>
+                    <include name="MS_071_VrsaActiveVrfaLapsed_CardOrder"/>
+                    <include name="MS_072_VrsaActiveVrfaLapsed_ActiveAndExpiredCards"/>
+                    <include name="MS_073_VrsaActiveVrfaLapsed_PastSubscriptions"/>
+                    <include name="MS_074_VrsaActiveVrfaLapsed_ActiveInvoiceList"/>
+                    <include name="MS_075_VrsaActiveVrfaLapsed_FundAdvisorRenewNavigation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="My Subscription - VRFA and VRSA both lapsed" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.MySubscriptionTest">
+                <methods>
+                    <include name="MS_081_BothLapsed_TwoExpiredCards"/>
+                    <include name="MS_082_BothLapsed_ExpiredCardContent"/>
+                    <include name="MS_083_BothLapsed_PastSubscriptionsBothProducts"/>
+                    <include name="MS_084_BothLapsed_FundPastInvoiceList"/>
+                    <include name="MS_085_BothLapsed_StockPastInvoiceList"/>
+                    <include name="MS_086_BothLapsed_FundAdvisorRenewNavigation"/>
+                    <include name="MS_087_BothLapsed_StockAdvisorRenewNavigation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

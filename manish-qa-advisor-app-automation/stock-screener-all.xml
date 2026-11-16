@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Stock Screener - Full Regression"
+       verbose="1" parallel="false" preserve-order="true" configfailurepolicy="continue">
+    <parameter name="loginMethod" value="PASSWORD"/>
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+    <!-- Same methods as the three suite files; keep them in sync when a test is added. -->
+    <!-- Active account. Every case added -->
+    <test name="Navigation - SS_001 to SS_008, SS_021 to SS_024" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.StockScreenerTest">
+                <methods>
+                    <include name="SS_001_OpenStockScreenerAndVerifyHeading"/>
+                    <include name="SS_002_VerifyPredefinedSavedTabsAndCreateScreen"/>
+                    <include name="SS_003_VerifyAllPredefinedScreenHeadings"/>
+                    <include name="SS_004_VerifyAttractiveBluechipsTabsAndFilters"/>
+                    <include name="SS_005_VerifyValueResearchRatingsScreens"/>
+                    <include name="SS_006_VerifyMomentumPicksScreens"/>
+                    <include name="SS_007_VerifyInvestmentIdeasScreens"/>
+                    <include name="SS_008_VerifyValueGuruScreens"/>
+                    <include name="SS_021_OpenStockDetailFromTopRatedStocks"/>
+                    <include name="SS_022_AttractiveBluechipsHeadingAfterRefresh"/>
+                    <include name="SS_023_CreateAndVerifySavedScreen"/>
+                    <include name="SS_024_SavedTabKeepsOwnScrollPosition"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!-- Active account. Every case added -->
+    <test name="Data - SS_009 to SS_016, SS_025 to SS_029" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.StockScreenerTest">
+                <methods>
+                    <include name="SS_009_VerifyTopRatedStocksColumns"/>
+                    <include name="SS_010_VerifyMomentumPicksColumns"/>
+                    <include name="SS_011_VerifyInvestmentIdeasColumns"/>
+                    <include name="SS_012_VerifyValueGuruColumns"/>
+                    <include name="SS_013_VerifyValueResearchRatingsDefaultFilters"/>
+                    <include name="SS_014_VerifyMomentumPicksDefaultFilters"/>
+                    <include name="SS_015_VerifyInvestmentIdeasDefaultFilters"/>
+                    <include name="SS_016_VerifyValueGuruDefaultFilters"/>
+                    <include name="SS_025_VerifySeasonalColumns"/>
+                    <include name="SS_026_StockRatingShowsUnrated"/>
+                    <include name="SS_027_VerifyCustomViewColumns"/>
+                    <include name="SS_028_AddColumnsOffersEps"/>
+                    <include name="SS_029_AddColumnsListsAllColumns"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!-- Active account. SS_037 leaves one saved screen per run (the app has no delete). -->
+    <test name="Customisation - SS_036 to SS_038" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.StockScreenerTest">
+                <methods>
+                    <include name="SS_036_ResetAllRestoresDefaultFilters"/>
+                    <include name="SS_037_SavedScreenRestoresFiltersAndColumns"/>
+                    <include name="SS_038_ExportToExcel"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!-- Lapsed (switched automatically, once) account. Every case added -->
+    <test name="Lapsed user - SS_017 to SS_020, SS_030" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.StockScreenerTest">
+                <methods>
+                    <include name="SS_017_LapsedCreateNewScreenShowsSubscriptionPage"/>
+                    <include name="SS_018_LapsedSavedTabShowsSubscriptionNudge"/>
+                    <include name="SS_019_LapsedCustomViewShowsSubscriptionNudge"/>
+                    <include name="SS_020_LapsedSaveScreenOpensSubscriptionPage"/>
+                    <include name="SS_030_LapsedSeasonalOnlyCustomViewLocked"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!-- VRFA-only account (Fund Advisor subscriber without Stock Advisor = free-user access; switched automatically, once). -->
+    <test name="VRFA-only user - SS_031 to SS_035" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.StockScreenerTest">
+                <methods>
+                    <include name="SS_031_VrfaCreateNewScreenShowsSubscriptionPage"/>
+                    <include name="SS_032_VrfaSavedTabShowsSubscriptionNudge"/>
+                    <include name="SS_033_VrfaCustomViewShowsSubscriptionNudge"/>
+                    <include name="SS_034_VrfaSaveScreenOpensSubscriptionPage"/>
+                    <include name="SS_035_VrfaSeasonalOnlyCustomViewLocked"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Stock Screener - Navigation"
+       verbose="1" parallel="false" preserve-order="true" configfailurepolicy="continue">
+    <parameter name="loginMethod" value="PASSWORD"/>
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+    <!-- Active account. Every case added -->
+    <test name="Navigation - SS_001 to SS_008, SS_021 to SS_024" preserve-order="true">
+        <classes>
+            <class name="com.valueresearch.tests.StockScreenerTest">
+                <methods>
+                    <include name="SS_001_OpenStockScreenerAndVerifyHeading"/>
+                    <include name="SS_002_VerifyPredefinedSavedTabsAndCreateScreen"/>
+                    <include name="SS_003_VerifyAllPredefinedScreenHeadings"/>
+                    <include name="SS_004_VerifyAttractiveBluechipsTabsAndFilters"/>
+                    <include name="SS_005_VerifyValueResearchRatingsScreens"/>
+                    <include name="SS_006_VerifyMomentumPicksScreens"/>
+                    <include name="SS_007_VerifyInvestmentIdeasScreens"/>
+                    <include name="SS_008_VerifyValueGuruScreens"/>
+                    <include name="SS_021_OpenStockDetailFromTopRatedStocks"/>
+                    <include name="SS_022_AttractiveBluechipsHeadingAfterRefresh"/>
+                    <include name="SS_023_CreateAndVerifySavedScreen"/>
+                    <include name="SS_024_SavedTabKeepsOwnScrollPosition"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

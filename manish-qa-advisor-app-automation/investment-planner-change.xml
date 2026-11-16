@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  VRSA Investment Planner - Customize / Adjust Weightage
+  Account: testEmailRegression / testEmailPassRegression + appPin (config.properties).
+
+  Coverage plan (shorter run, nothing untested):
+  - All Weather runs all 12 cases: every Adjust Weightage behaviour (locks, Unlock all, the three
+    "Please note" messages, Cancel, Confirm, Equal Weightage, and IPC_012: after Confirm the adjusted
+    weights stay while reopened Adjust Weightage starts with no locks).
+  - Long Term, Aggressive, Recommendation All and Watchlist 1 run the source-specific core:
+      IPC_001 order layout, row count, unticked rows, equal weights
+      IPC_003 redistribution + auto-lock on that source's data
+      IPC_010 Confirm recalculation (shares, values, amount invested) on that source's prices
+    The lock / message logic itself is the same app code for every source.
+  - The order is generated once per source and reused between cases (see InvestmentPlannerChangeTest).
+
+  Full matrix (all 11 cases x 5 sources, e.g. before a release): delete the <methods> block
+  inside each <class> below.
+  orderSource: PRESET:<All Weather|Long Term|Aggressive> | RECOMMENDATION:<All|All Weather|Latest> | WATCHLIST:<saved watchlist name>
+-->
+<suite
+        name="VRSA Investment Planner - Adjust Weightage Suite"
+        verbose="1"
+        parallel="false"
+        preserve-order="true"
+        configfailurepolicy="continue">
+
+    <parameter name="loginMethod" value="PASSWORD"/>
+
+    <listeners>
+        <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
+    </listeners>
+
+    <!-- Full coverage of every Adjust Weightage behaviour -->
+    <test name="Adjust Weightage - All Weather (all 12 cases)" preserve-order="true">
+        <parameter name="orderSource" value="PRESET:All Weather"/>
+        <classes>
+            <class name="com.valueresearch.tests.InvestmentPlannerChangeTest"/>
+        </classes>
+    </test>
+
+    <!-- Source-specific core on every other order source -->
+    <test name="Adjust Weightage - Long Term (core)" preserve-order="true">
+        <parameter name="orderSource" value="PRESET:Long Term"/>
+        <classes>
+            <class name="com.valueresearch.tests.InvestmentPlannerChangeTest">
+                <methods>
+                    <include name="IPC_001_OpenAdjustWeightageAndVerifyEditMode"/>
+                    <include name="IPC_003_StepperRedistributesAndAutoLocks"/>
+                    <include name="IPC_010_ConfirmAppliesWeightsAndRecalculatesOrder"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Adjust Weightage - Aggressive (core)" preserve-order="true">
+        <parameter name="orderSource" value="PRESET:Aggressive"/>
+        <classes>
+            <class name="com.valueresearch.tests.InvestmentPlannerChangeTest">
+                <methods>
+                    <include name="IPC_001_OpenAdjustWeightageAndVerifyEditMode"/>
+                    <include name="IPC_003_StepperRedistributesAndAutoLocks"/>
+                    <include name="IPC_010_ConfirmAppliesWeightsAndRecalculatesOrder"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Adjust Weightage - Watchlist 1 (core)" preserve-order="true">
+        <parameter name="orderSource" value="WATCHLIST:Watchlist 1"/>
+        <classes>
+            <class name="com.valueresearch.tests.InvestmentPlannerChangeTest">
+                <methods>
+                    <include name="IPC_001_OpenAdjustWeightageAndVerifyEditMode"/>
+                    <include name="IPC_003_StepperRedistributesAndAutoLocks"/>
+                    <include name="IPC_010_ConfirmAppliesWeightsAndRecalculatesOrder"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Adjust Weightage - Recommendation All (core)" preserve-order="true">
+        <parameter name="orderSource" value="RECOMMENDATION:All"/>
+        <classes>
+            <class name="com.valueresearch.tests.InvestmentPlannerChangeTest">
+                <methods>
+                    <include name="IPC_001_OpenAdjustWeightageAndVerifyEditMode"/>
+                    <include name="IPC_003_StepperRedistributesAndAutoLocks"/>
+                    <include name="IPC_010_ConfirmAppliesWeightsAndRecalculatesOrder"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

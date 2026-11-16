@@ -8,6 +8,9 @@
         preserve-order="true"
         configfailurepolicy="continue">
 
+    <!-- Account: testEmailRegression / testEmailPassRegression + appPin (config.properties) -->
+    <parameter name="loginMethod" value="PASSWORD"/>
+
     <listeners>
         <listener class-name="com.valueresearch.listeners.ExtentTestListener"/>
     </listeners>

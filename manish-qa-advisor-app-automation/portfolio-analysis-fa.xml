@@ -17,8 +17,8 @@
         preserve-order="true">
 
         <classes>
-            <class name="com.valueresearch.tests.PortfolioAnalysisFaTest">
                 <methods>
+            <class name="com.valueresearch.tests.PortfolioAnalysisFaTest">
                     <include name="PAFA_000_VerifyFundReviewEntryPointsAcrossSummaryAndFundsSifs"/>
                     <include name="PAFA_001_VerifyOptimizeCalculationTriggersAndDrawersAcrossFunds"/>
                     <include name="PAFA_002_VerifyGoodStartAdviceAcrossGoodFunds"/>
